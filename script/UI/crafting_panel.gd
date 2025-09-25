@@ -34,39 +34,42 @@ func _process(_delta):
 
 
 # Hàm "vẽ" các công thức lên lưới
-func _populate_recipe_grid(recipes: Array):
+# THAY THẾ TOÀN BỘ HÀM CŨ BẰNG PHIÊN BẢN NÀY
+func _populate_recipe_grid():
 	# Dọn dẹp các slot cũ
 	for child in recipe_grid.get_children():
 		child.queue_free()
 
-	# BƯỚC 1: Đặt ra số lượng slot cố định
-	var total_slots = 100
-	var num_recipes = recipes.size()
+	# Lấy danh sách ID của các công thức
+	var recipe_ids = GameDataManager.get_recipes_for_station(_station_type)
 
-	# BƯỚC 2: Chạy một vòng lặp cố định 100 lần để tạo slot
-	for i in range(total_slots):
+	for recipe_id in recipe_ids:
+		# Lấy dữ liệu đầy đủ của công thức từ ID
+		var recipe_data = GameDataManager.get_recipe_data(recipe_id)
+		if recipe_data.is_empty(): continue
+
+		var result_item_id = recipe_data["result_id"]
 		var recipe_slot = preload("res://Scene/UI/item_slot.tscn").instantiate()
 		recipe_grid.add_child(recipe_slot)
+		recipe_slot.display_item(ItemDatabase.get_item_icon(result_item_id), 1)
 
-		# BƯỚC 3: Kiểm tra xem có công thức tương ứng cho ô này không
-		if i < num_recipes:
-			# NẾU CÓ: Lấp đầy ô bằng dữ liệu công thức
-			var recipe = recipes[i]
-			var result_item_id = recipe["result"]["item_id"]
-			recipe_slot.display_item(ItemDatabase.get_item_icon(result_item_id), 1)
+		# --- LOGIC MỚI ĐÃ SỬA LỖI ---
+		# 1. Luôn luôn kết nối tín hiệu cho tooltip, bất kể có chế được hay không
+		recipe_slot.mouse_entered.connect(_on_recipe_mouse_entered.bind(recipe_id))
+		recipe_slot.mouse_exited.connect(_on_recipe_mouse_exited)
 
-			if PlayerStats.can_craft(recipe):
-				recipe_slot.modulate = Color(1, 1, 1)
-				recipe_slot.pressed.connect(recipe_selected.emit.bind(recipe))
-			else:
-				recipe_slot.modulate = Color(0.5, 0.5, 0.5)
-				recipe_slot.disabled = true
-				recipe_slot.mouse_entered.connect(_on_locked_recipe_mouse_entered.bind(recipe))
-				recipe_slot.mouse_exited.connect(_on_locked_recipe_mouse_exited)
+		# 2. Dùng dữ liệu đầy đủ của công thức để kiểm tra
+		var can_craft = PlayerStats.can_craft_recipe(recipe_id)
+
+		if can_craft:
+			# 3. Nếu chế được, làm nó sáng lên VÀ kết nối nút bấm
+			recipe_slot.modulate = Color(1, 1, 1)
+			recipe_slot.pressed.connect(_on_craftable_recipe_pressed.bind(recipe_id))
 		else:
-			# NẾU KHÔNG: Đây là một ô trống
-			recipe_slot.display_item(null, 0) # Hiển thị ô trống
-			recipe_slot.disabled = true # Vô hiệu hóa để không click vào được
+			# 4. Nếu không chế được, chỉ làm nó mờ đi. Click sẽ không có tác dụng.
+			recipe_slot.modulate = Color(0.5, 0.5, 0.5)
+
+
 
 func _on_close_button_pressed():
 	panel_closed.emit()
