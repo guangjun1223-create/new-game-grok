@@ -1,0 +1,168 @@
+[gd_scene load_steps=11 format=3 uid="uid://bjkgb0bhv623o"]
+
+[ext_resource type="Script" uid="uid://dapf6qgq6qtmo" path="res://script/hero.gd" id="1_w7uy6"]
+[ext_resource type="SpriteFrames" uid="uid://che4y5nxx38ii" path="res://Data/novice.tres" id="2_w7uy6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w7uy6"]
+radius = 80.0
+height = 261.333
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iyggp"]
+radius = 1000.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w7uy6"]
+radius = 300.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w7uy6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a28pf"]
+bg_color = Color(1, 0.215686, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_w7uy6"]
+font_size = 24
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_s6j1m"]
+font_size = 30
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s6j1m"]
+radius = 1000.0
+
+[node name="Hero" type="CharacterBody2D" groups=["heroes"]]
+y_sort_enabled = true
+scale = Vector2(0.6, 0.6)
+collision_layer = 2
+collision_mask = 4
+input_pickable = true
+script = ExtResource("1_w7uy6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -120)
+scale = Vector2(10, 10)
+sprite_frames = ExtResource("2_w7uy6")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -129)
+shape = SubResource("CapsuleShape2D_w7uy6")
+debug_color = Color(0.600141, 0.920824, 1, 0.42)
+
+[node name="DetectionRadius" type="Area2D" parent="."]
+position = Vector2(0, -64)
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRadius"]
+shape = SubResource("CircleShape2D_iyggp")
+debug_color = Color(0.25882354, 0.61960787, 0, 0.07058824)
+
+[node name="RespawnLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -158.0
+offset_top = -335.0
+offset_right = 161.0
+offset_bottom = -268.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 48
+text = "Respawning..."
+horizontal_alignment = 1
+
+[node name="StateTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 300.0
+target_desired_distance = 50.0
+path_max_distance = 1000.0
+avoidance_enabled = true
+radius = 300.0
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 100.0
+carve_navigation_mesh = true
+
+[node name="TargetScanTimer" type="Timer" parent="."]
+
+[node name="TargetingTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, -63.3333)
+shape = SubResource("CircleShape2D_w7uy6")
+debug_color = Color(0.39607844, 0.39607844, 0.39607844, 0.23529412)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = -121.666664
+offset_top = 11.666666
+offset_right = 128.33334
+offset_bottom = 111.66667
+alignment = 1
+
+[node name="HPBar" type="ProgressBar" parent="VBoxContainer"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_w7uy6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_a28pf")
+value = 20.0
+show_percentage = false
+
+[node name="HPLabel" type="Label" parent="VBoxContainer/HPBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "aaaa"
+label_settings = SubResource("LabelSettings_w7uy6")
+horizontal_alignment = 1
+
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "aaaaa"
+label_settings = SubResource("LabelSettings_s6j1m")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="AttackRangeArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRangeArea"]
+shape = SubResource("CircleShape2D_s6j1m")
+debug_color = Color(0.8666667, 0.07058824, 0, 0.41960785)
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_frame_changed"]
+[connection signal="body_entered" from="DetectionRadius" to="." method="_on_detection_radius_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

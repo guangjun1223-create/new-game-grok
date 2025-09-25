@@ -1,0 +1,880 @@
+[gd_resource type="SpriteFrames" load_steps=211 format=3 uid="uid://d1kei4sn1o5wp"]
+
+[ext_resource type="Texture2D" uid="uid://b3syyhx6at8fb" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_000.png" id="1_rwc7a"]
+[ext_resource type="Texture2D" uid="uid://b8saxidd8m3rn" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_001.png" id="2_p52jx"]
+[ext_resource type="Texture2D" uid="uid://45c6bvmkplm8" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_002.png" id="3_4x1gs"]
+[ext_resource type="Texture2D" uid="uid://do0oc11qhu5qw" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_003.png" id="4_ng0e5"]
+[ext_resource type="Texture2D" uid="uid://cdcpkanno6m2h" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_004.png" id="5_k5mul"]
+[ext_resource type="Texture2D" uid="uid://c28b5e8h1o3fc" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_005.png" id="6_8f7lk"]
+[ext_resource type="Texture2D" uid="uid://cw66mr043654h" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_006.png" id="7_b1wke"]
+[ext_resource type="Texture2D" uid="uid://c5sxnew6hsfmf" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_007.png" id="8_rn6wr"]
+[ext_resource type="Texture2D" uid="uid://dbvupngrb2hpr" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_008.png" id="9_ubu0q"]
+[ext_resource type="Texture2D" uid="uid://cvmxrmu34ccb2" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_009.png" id="10_u31rp"]
+[ext_resource type="Texture2D" uid="uid://bwomak0viuf4b" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_010.png" id="11_baes5"]
+[ext_resource type="Texture2D" uid="uid://c3ou5hv2xuthb" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_011.png" id="12_45gld"]
+[ext_resource type="Texture2D" uid="uid://xsp6wgxnyff7" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_012.png" id="13_sh1qc"]
+[ext_resource type="Texture2D" uid="uid://6jgs0weehy6m" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_013.png" id="14_xsd4d"]
+[ext_resource type="Texture2D" uid="uid://ssq05hcf167" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_014.png" id="15_lq48c"]
+[ext_resource type="Texture2D" uid="uid://clak34c62cue6" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_015.png" id="16_wiuw6"]
+[ext_resource type="Texture2D" uid="uid://d1cv3gf4he8wv" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_016.png" id="17_dpvwc"]
+[ext_resource type="Texture2D" uid="uid://ckp0imghtdgsu" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_017.png" id="18_ceqt8"]
+[ext_resource type="Texture2D" uid="uid://cttup2etefk07" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_018.png" id="19_af5ms"]
+[ext_resource type="Texture2D" uid="uid://bgqqwxpd3i7n7" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_019.png" id="20_ryfy7"]
+[ext_resource type="Texture2D" uid="uid://dr6o3jwkefulo" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_020.png" id="21_d041u"]
+[ext_resource type="Texture2D" uid="uid://dwuy1jgfwfal6" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_021.png" id="22_qa3ks"]
+[ext_resource type="Texture2D" uid="uid://bd6taqcewrp75" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_022.png" id="23_gyeic"]
+[ext_resource type="Texture2D" uid="uid://dcr7akscnklsw" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_023.png" id="24_w4uoa"]
+[ext_resource type="Texture2D" uid="uid://dxoqunhyiwhqu" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_024.png" id="25_iyino"]
+[ext_resource type="Texture2D" uid="uid://c7f3grtwd40qe" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_025.png" id="26_uocot"]
+[ext_resource type="Texture2D" uid="uid://csot5bt65yj3e" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_026.png" id="27_pbqr0"]
+[ext_resource type="Texture2D" uid="uid://iprxmsbywfxp" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_027.png" id="28_svkgs"]
+[ext_resource type="Texture2D" uid="uid://dfwqorfu5nubb" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_028.png" id="29_5r245"]
+[ext_resource type="Texture2D" uid="uid://oq5dg1pw718n" path="res://texture/data/NPC/Hunter/Chagrin/0_Hunter_Chagrin_029.png" id="30_3ka2m"]
+[ext_resource type="Texture2D" uid="uid://dmaj17kdyy465" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_000.png" id="31_7g1wv"]
+[ext_resource type="Texture2D" uid="uid://bonp4vp8jwcvw" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_001.png" id="32_0ovq4"]
+[ext_resource type="Texture2D" uid="uid://dik5ya6ge56af" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_002.png" id="33_2jt8e"]
+[ext_resource type="Texture2D" uid="uid://c00ciy83bkwag" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_003.png" id="34_2h1te"]
+[ext_resource type="Texture2D" uid="uid://bgbj3u2x4t7iu" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_004.png" id="35_nxomv"]
+[ext_resource type="Texture2D" uid="uid://c8cjr0avklwxl" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_005.png" id="36_s5jay"]
+[ext_resource type="Texture2D" uid="uid://cb8f2ima3hqho" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_006.png" id="37_sknbx"]
+[ext_resource type="Texture2D" uid="uid://r7cp3uv3q6hx" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_007.png" id="38_xo23v"]
+[ext_resource type="Texture2D" uid="uid://cdy05ncet1d8" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_008.png" id="39_15cpx"]
+[ext_resource type="Texture2D" uid="uid://uomtwv28q53h" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_009.png" id="40_u7gxv"]
+[ext_resource type="Texture2D" uid="uid://dlwota6a61i6v" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_010.png" id="41_n5bqt"]
+[ext_resource type="Texture2D" uid="uid://d3nqlsfrpsmcg" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_011.png" id="42_5aldg"]
+[ext_resource type="Texture2D" uid="uid://clw7ox3oeu78w" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_012.png" id="43_1a783"]
+[ext_resource type="Texture2D" uid="uid://8hrmo250ci2v" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_013.png" id="44_ic4l6"]
+[ext_resource type="Texture2D" uid="uid://bpv1f7jsx7s1w" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_014.png" id="45_6c2ax"]
+[ext_resource type="Texture2D" uid="uid://cqnprqrcwmlgo" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_015.png" id="46_gmp3n"]
+[ext_resource type="Texture2D" uid="uid://bs7ctsb8wudws" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_016.png" id="47_00ied"]
+[ext_resource type="Texture2D" uid="uid://botm5cibo78p1" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_017.png" id="48_tigpv"]
+[ext_resource type="Texture2D" uid="uid://dedph5p6opxye" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_018.png" id="49_lm5hq"]
+[ext_resource type="Texture2D" uid="uid://w355r0kra4s5" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_019.png" id="50_l11ji"]
+[ext_resource type="Texture2D" uid="uid://gmhpn10i7epp" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_020.png" id="51_1dugi"]
+[ext_resource type="Texture2D" uid="uid://c3mh2kkbn2hyk" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_021.png" id="52_wd8lt"]
+[ext_resource type="Texture2D" uid="uid://c0sxqykih6vt4" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_022.png" id="53_7y85m"]
+[ext_resource type="Texture2D" uid="uid://cyeu2fbgkb8w3" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_023.png" id="54_8uvax"]
+[ext_resource type="Texture2D" uid="uid://dpr4l7what61i" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_024.png" id="55_se5jc"]
+[ext_resource type="Texture2D" uid="uid://4tm3bnsjctxb" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_025.png" id="56_ovdd8"]
+[ext_resource type="Texture2D" uid="uid://byqrbc0bq3ege" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_026.png" id="57_swmqm"]
+[ext_resource type="Texture2D" uid="uid://driixlk60thmr" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_027.png" id="58_b0wk6"]
+[ext_resource type="Texture2D" uid="uid://b2rg3t0ii1vgp" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_028.png" id="59_h1tm8"]
+[ext_resource type="Texture2D" uid="uid://3scyccpr8ho3" path="res://texture/data/NPC/Hunter/Communication/0_Hunter_Communication_029.png" id="60_tsrvq"]
+[ext_resource type="Texture2D" uid="uid://bwcwseus4ieox" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_000.png" id="61_05wc0"]
+[ext_resource type="Texture2D" uid="uid://c5rnh3mjln0am" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_001.png" id="62_eu2e0"]
+[ext_resource type="Texture2D" uid="uid://d3y7gb21pp7dx" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_002.png" id="63_r8nam"]
+[ext_resource type="Texture2D" uid="uid://b8kqd3y1oqw4k" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_003.png" id="64_t6igv"]
+[ext_resource type="Texture2D" uid="uid://bg4tua6u0kkmt" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_004.png" id="65_fmkfr"]
+[ext_resource type="Texture2D" uid="uid://duawtbe4icbqr" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_005.png" id="66_llv74"]
+[ext_resource type="Texture2D" uid="uid://u0rja6sor8rk" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_006.png" id="67_ykj3m"]
+[ext_resource type="Texture2D" uid="uid://bd4r8bvemtc0t" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_007.png" id="68_8y5ih"]
+[ext_resource type="Texture2D" uid="uid://cstfsuoqfbgtt" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_008.png" id="69_6kho6"]
+[ext_resource type="Texture2D" uid="uid://cl3uiwb2o7mea" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_009.png" id="70_dtrnb"]
+[ext_resource type="Texture2D" uid="uid://bvbwgt3tmqtex" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_010.png" id="71_bybwa"]
+[ext_resource type="Texture2D" uid="uid://dtbsbmjx0wwdg" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_011.png" id="72_ktqyg"]
+[ext_resource type="Texture2D" uid="uid://cluynhm0visds" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_012.png" id="73_p443u"]
+[ext_resource type="Texture2D" uid="uid://cabakci24lufd" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_013.png" id="74_p3dfy"]
+[ext_resource type="Texture2D" uid="uid://c7i6arpmt22u0" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_014.png" id="75_j85mn"]
+[ext_resource type="Texture2D" uid="uid://xea0avb5m87o" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_015.png" id="76_mkcb4"]
+[ext_resource type="Texture2D" uid="uid://lpnfcvjcjdbt" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_016.png" id="77_q20ik"]
+[ext_resource type="Texture2D" uid="uid://cwkmxgvyyl5gk" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_017.png" id="78_xte52"]
+[ext_resource type="Texture2D" uid="uid://ev4w6fq11x6" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_018.png" id="79_vh757"]
+[ext_resource type="Texture2D" uid="uid://c08bctnaylq6c" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_019.png" id="80_mibc1"]
+[ext_resource type="Texture2D" uid="uid://cbhxum65qetis" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_020.png" id="81_7yiyn"]
+[ext_resource type="Texture2D" uid="uid://dqhrhj52da4w3" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_021.png" id="82_a5yd0"]
+[ext_resource type="Texture2D" uid="uid://ba86r3re3yy6g" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_022.png" id="83_0ya84"]
+[ext_resource type="Texture2D" uid="uid://brnxq87gwf2hg" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_023.png" id="84_frm03"]
+[ext_resource type="Texture2D" uid="uid://bs0r72b0dwbsm" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_024.png" id="85_losdj"]
+[ext_resource type="Texture2D" uid="uid://cajraq3bpcejo" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_025.png" id="86_74i5t"]
+[ext_resource type="Texture2D" uid="uid://cedahn3107xhk" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_026.png" id="87_rkrg6"]
+[ext_resource type="Texture2D" uid="uid://cmch27kuday4j" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_027.png" id="88_m7xxk"]
+[ext_resource type="Texture2D" uid="uid://ck5v5x2abt5jn" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_028.png" id="89_gkl4j"]
+[ext_resource type="Texture2D" uid="uid://dpadafupsb2y4" path="res://texture/data/NPC/Hunter/Greeting/0_Hunter_Greeting_029.png" id="90_1hwt4"]
+[ext_resource type="Texture2D" uid="uid://c7r8ethy8oe25" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_000.png" id="91_rr3cq"]
+[ext_resource type="Texture2D" uid="uid://yyu627vqfbpy" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_001.png" id="92_k4cki"]
+[ext_resource type="Texture2D" uid="uid://cokfe4hp1jrrp" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_002.png" id="93_rsnoc"]
+[ext_resource type="Texture2D" uid="uid://chux2yxod6den" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_003.png" id="94_tjp5u"]
+[ext_resource type="Texture2D" uid="uid://c6qgspmiyyo5r" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_004.png" id="95_suiyw"]
+[ext_resource type="Texture2D" uid="uid://cj0hcciw08fqu" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_005.png" id="96_fa5rt"]
+[ext_resource type="Texture2D" uid="uid://cqk5intnsswvd" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_006.png" id="97_3joeq"]
+[ext_resource type="Texture2D" uid="uid://dj1k8ggg64d31" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_007.png" id="98_706o4"]
+[ext_resource type="Texture2D" uid="uid://busci52jtqjlr" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_008.png" id="99_qraux"]
+[ext_resource type="Texture2D" uid="uid://dvov70bweremn" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_009.png" id="100_gv35a"]
+[ext_resource type="Texture2D" uid="uid://618n1qnb5tuy" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_010.png" id="101_0t6kf"]
+[ext_resource type="Texture2D" uid="uid://cgqgvm35sfgsh" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_011.png" id="102_ixtmg"]
+[ext_resource type="Texture2D" uid="uid://bjrnjr6ekhuoq" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_012.png" id="103_ux1tu"]
+[ext_resource type="Texture2D" uid="uid://dsrohvfossyou" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_013.png" id="104_qoqum"]
+[ext_resource type="Texture2D" uid="uid://dnf6uqhem8ugn" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_014.png" id="105_x4dtn"]
+[ext_resource type="Texture2D" uid="uid://ddi2pigmtm60v" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_015.png" id="106_oibft"]
+[ext_resource type="Texture2D" uid="uid://dwblicfnonn0j" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_016.png" id="107_e0d87"]
+[ext_resource type="Texture2D" uid="uid://bjvj6hjb8hovr" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_017.png" id="108_qv36a"]
+[ext_resource type="Texture2D" uid="uid://dei345wsjey1o" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_018.png" id="109_2la3o"]
+[ext_resource type="Texture2D" uid="uid://udjx3ji1pxo6" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_019.png" id="110_6are3"]
+[ext_resource type="Texture2D" uid="uid://blc67asxho53h" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_020.png" id="111_di4tx"]
+[ext_resource type="Texture2D" uid="uid://c7o28xngrogyy" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_021.png" id="112_xdyfn"]
+[ext_resource type="Texture2D" uid="uid://dsuuchx8gdpth" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_022.png" id="113_y3v76"]
+[ext_resource type="Texture2D" uid="uid://dbjruhqr2dt7q" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_023.png" id="114_v3oy4"]
+[ext_resource type="Texture2D" uid="uid://luorswtfvh7p" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_024.png" id="115_x3ykc"]
+[ext_resource type="Texture2D" uid="uid://wy7ffkkbcqaq" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_025.png" id="116_tx1vb"]
+[ext_resource type="Texture2D" uid="uid://b6oi757anfqbk" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_026.png" id="117_vlwhl"]
+[ext_resource type="Texture2D" uid="uid://cop2ksa4oqybf" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_027.png" id="118_10wep"]
+[ext_resource type="Texture2D" uid="uid://b147vyhk506uj" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_028.png" id="119_7ktlw"]
+[ext_resource type="Texture2D" uid="uid://c30u1ifkln3yc" path="res://texture/data/NPC/Hunter/Greeting_2/0_Hunter_Greeting_2_029.png" id="120_qhhb6"]
+[ext_resource type="Texture2D" uid="uid://uwiyobbt0j8e" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_000.png" id="121_tsj5p"]
+[ext_resource type="Texture2D" uid="uid://cjxk54hmu2gbh" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_001.png" id="122_i0axa"]
+[ext_resource type="Texture2D" uid="uid://cp4o2ea86i18f" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_002.png" id="123_m2unr"]
+[ext_resource type="Texture2D" uid="uid://ca1to0fi6t5vb" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_003.png" id="124_wbue3"]
+[ext_resource type="Texture2D" uid="uid://cohr2kmqr7tsy" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_004.png" id="125_g086d"]
+[ext_resource type="Texture2D" uid="uid://cuu0mjqm73bvp" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_005.png" id="126_1vs6t"]
+[ext_resource type="Texture2D" uid="uid://dmfyi504g7ixj" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_006.png" id="127_faxta"]
+[ext_resource type="Texture2D" uid="uid://p8d672tijiy4" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_007.png" id="128_vaubu"]
+[ext_resource type="Texture2D" uid="uid://da61wana8mr1o" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_008.png" id="129_anssh"]
+[ext_resource type="Texture2D" uid="uid://brxn5ckark55w" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_009.png" id="130_tpijf"]
+[ext_resource type="Texture2D" uid="uid://c8ko60xrjwugs" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_010.png" id="131_qvrqt"]
+[ext_resource type="Texture2D" uid="uid://ccb46jfovwycq" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_011.png" id="132_guqpy"]
+[ext_resource type="Texture2D" uid="uid://b3iqkk8jn5unh" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_012.png" id="133_egsgb"]
+[ext_resource type="Texture2D" uid="uid://btyx3f1ukm68y" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_013.png" id="134_40lp2"]
+[ext_resource type="Texture2D" uid="uid://bc4rp52t8o7gt" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_014.png" id="135_p273b"]
+[ext_resource type="Texture2D" uid="uid://reacinl0t312" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_015.png" id="136_415w0"]
+[ext_resource type="Texture2D" uid="uid://bpp1vtims2a0n" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_016.png" id="137_ixvfd"]
+[ext_resource type="Texture2D" uid="uid://cnuyoo6nwdsyt" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_017.png" id="138_sqsrj"]
+[ext_resource type="Texture2D" uid="uid://fk8ffm6moqh2" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_018.png" id="139_n2wlh"]
+[ext_resource type="Texture2D" uid="uid://drnb4o26h05uq" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_019.png" id="140_nkvdw"]
+[ext_resource type="Texture2D" uid="uid://bjg6l5kb17vhn" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_020.png" id="141_xurni"]
+[ext_resource type="Texture2D" uid="uid://l7nsv1adq243" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_021.png" id="142_hktst"]
+[ext_resource type="Texture2D" uid="uid://c6il4jomi4biw" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_022.png" id="143_apsgt"]
+[ext_resource type="Texture2D" uid="uid://bth873kpyq6m4" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_023.png" id="144_tgjiu"]
+[ext_resource type="Texture2D" uid="uid://bc0mwqsowfl6w" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_024.png" id="145_1d880"]
+[ext_resource type="Texture2D" uid="uid://c8oss238tu76" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_025.png" id="146_4gfab"]
+[ext_resource type="Texture2D" uid="uid://cdorsy8e1w6t6" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_026.png" id="147_43wim"]
+[ext_resource type="Texture2D" uid="uid://bnvcqwcbyp0sv" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_027.png" id="148_jq75m"]
+[ext_resource type="Texture2D" uid="uid://veyh25boq184" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_028.png" id="149_rtyou"]
+[ext_resource type="Texture2D" uid="uid://bxmxxcwgg8v8b" path="res://texture/data/NPC/Hunter/Idle/0_Hunter_Idle_029.png" id="150_lloh6"]
+[ext_resource type="Texture2D" uid="uid://cqgfjgqbipfm" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_000.png" id="151_6mrhq"]
+[ext_resource type="Texture2D" uid="uid://cya2ea65r72gr" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_001.png" id="152_5rihp"]
+[ext_resource type="Texture2D" uid="uid://bmr7cffer47kt" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_002.png" id="153_gaphy"]
+[ext_resource type="Texture2D" uid="uid://0u4mnxv4k1fh" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_003.png" id="154_emdxr"]
+[ext_resource type="Texture2D" uid="uid://chinbya7noh4n" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_004.png" id="155_ku850"]
+[ext_resource type="Texture2D" uid="uid://dbx2dux0qduc2" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_005.png" id="156_io52e"]
+[ext_resource type="Texture2D" uid="uid://cqgn2aq5lw34a" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_006.png" id="157_kmo2h"]
+[ext_resource type="Texture2D" uid="uid://kfnjvlniwef" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_007.png" id="158_01qua"]
+[ext_resource type="Texture2D" uid="uid://cnhi27kf82d4o" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_008.png" id="159_6bsm3"]
+[ext_resource type="Texture2D" uid="uid://dav8ydiv3y1dv" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_009.png" id="160_jjf0t"]
+[ext_resource type="Texture2D" uid="uid://cpe5or7ebwmpd" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_010.png" id="161_du4ai"]
+[ext_resource type="Texture2D" uid="uid://cxg24di2a4swg" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_011.png" id="162_cfxfx"]
+[ext_resource type="Texture2D" uid="uid://4kjy12liaf05" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_012.png" id="163_ohnfk"]
+[ext_resource type="Texture2D" uid="uid://0a7xbprgsafr" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_013.png" id="164_o671a"]
+[ext_resource type="Texture2D" uid="uid://d0keyi0pm0con" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_014.png" id="165_h2jon"]
+[ext_resource type="Texture2D" uid="uid://bqshjl8e52tj2" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_015.png" id="166_lkrpl"]
+[ext_resource type="Texture2D" uid="uid://d0577pisql33x" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_016.png" id="167_osuc5"]
+[ext_resource type="Texture2D" uid="uid://dxberaau1l6vo" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_017.png" id="168_7gl3d"]
+[ext_resource type="Texture2D" uid="uid://b71o2q830b460" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_018.png" id="169_ekotp"]
+[ext_resource type="Texture2D" uid="uid://4xsisaoskf45" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_019.png" id="170_cl4j4"]
+[ext_resource type="Texture2D" uid="uid://d3taeandeqdtv" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_020.png" id="171_3q8bu"]
+[ext_resource type="Texture2D" uid="uid://c03n7olxfxk0m" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_021.png" id="172_5e8g0"]
+[ext_resource type="Texture2D" uid="uid://bbsv4rnd5dl86" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_022.png" id="173_2wvn5"]
+[ext_resource type="Texture2D" uid="uid://bg62eeqydajaa" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_023.png" id="174_4bok4"]
+[ext_resource type="Texture2D" uid="uid://nqhk6bw46em0" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_024.png" id="175_w1gj3"]
+[ext_resource type="Texture2D" uid="uid://bxkvr6pfanasb" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_025.png" id="176_dqq6d"]
+[ext_resource type="Texture2D" uid="uid://3xyxt3imujm7" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_026.png" id="177_jomyl"]
+[ext_resource type="Texture2D" uid="uid://bu2c72ljhfyct" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_027.png" id="178_dm76j"]
+[ext_resource type="Texture2D" uid="uid://coq4vqxcaoqku" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_028.png" id="179_x58dg"]
+[ext_resource type="Texture2D" uid="uid://7mmff3l5lge8" path="res://texture/data/NPC/Hunter/Idle Blinking/0_Hunter_Idle Blinking_029.png" id="180_0c5qq"]
+[ext_resource type="Texture2D" uid="uid://d4ldpbx46rspt" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_000.png" id="181_bip8f"]
+[ext_resource type="Texture2D" uid="uid://cfv3k4rf0i85j" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_001.png" id="182_nkree"]
+[ext_resource type="Texture2D" uid="uid://cln6f23k6g5ql" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_002.png" id="183_fh6os"]
+[ext_resource type="Texture2D" uid="uid://baxghq2wylkde" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_003.png" id="184_e6ujw"]
+[ext_resource type="Texture2D" uid="uid://bpwyi8twlhg0j" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_004.png" id="185_u0jmg"]
+[ext_resource type="Texture2D" uid="uid://bthxliplp818j" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_005.png" id="186_37he4"]
+[ext_resource type="Texture2D" uid="uid://rscjyx7q5y5k" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_006.png" id="187_3163y"]
+[ext_resource type="Texture2D" uid="uid://btxd13dckwbmo" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_007.png" id="188_gwh53"]
+[ext_resource type="Texture2D" uid="uid://crswlncachl34" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_008.png" id="189_ct8wy"]
+[ext_resource type="Texture2D" uid="uid://clqi06uvkn8py" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_009.png" id="190_v1qjj"]
+[ext_resource type="Texture2D" uid="uid://k6vn55jmxbph" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_010.png" id="191_u7fgs"]
+[ext_resource type="Texture2D" uid="uid://dkqdk1q8nsqig" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_011.png" id="192_pr16s"]
+[ext_resource type="Texture2D" uid="uid://d268upey33mmp" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_012.png" id="193_qg6ut"]
+[ext_resource type="Texture2D" uid="uid://dj8pxnfs3lafu" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_013.png" id="194_ucdpg"]
+[ext_resource type="Texture2D" uid="uid://c00yor3vtxi48" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_014.png" id="195_gcus1"]
+[ext_resource type="Texture2D" uid="uid://so75hhmbrihv" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_015.png" id="196_nathl"]
+[ext_resource type="Texture2D" uid="uid://byit1gk7qi4r1" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_016.png" id="197_5mj45"]
+[ext_resource type="Texture2D" uid="uid://bpp1i6yoa88sn" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_017.png" id="198_0tg5n"]
+[ext_resource type="Texture2D" uid="uid://c1v5um41datjj" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_018.png" id="199_gtxtc"]
+[ext_resource type="Texture2D" uid="uid://du2trdcidf6ag" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_019.png" id="200_sm0ns"]
+[ext_resource type="Texture2D" uid="uid://gjhsnh6b0yj5" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_020.png" id="201_8ukgc"]
+[ext_resource type="Texture2D" uid="uid://djlcyfkayph5" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_021.png" id="202_i32c6"]
+[ext_resource type="Texture2D" uid="uid://yah0h0swlx57" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_022.png" id="203_stq1b"]
+[ext_resource type="Texture2D" uid="uid://bvjdt6onvqelx" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_023.png" id="204_0oxsa"]
+[ext_resource type="Texture2D" uid="uid://dt12sldf0yg4r" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_024.png" id="205_hayjw"]
+[ext_resource type="Texture2D" uid="uid://br8fsw764esn5" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_025.png" id="206_gdgtm"]
+[ext_resource type="Texture2D" uid="uid://rn8h7ar5nyh7" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_026.png" id="207_o5l05"]
+[ext_resource type="Texture2D" uid="uid://drflsodcw3f5q" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_027.png" id="208_eyabk"]
+[ext_resource type="Texture2D" uid="uid://bax7i05h4kmfs" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_028.png" id="209_1exvh"]
+[ext_resource type="Texture2D" uid="uid://cq7csg7q1kq4f" path="res://texture/data/NPC/Hunter/Joy/0_Hunter_Joy_029.png" id="210_ej283"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rwc7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_p52jx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4x1gs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ng0e5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_k5mul")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8f7lk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_b1wke")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rn6wr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ubu0q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_u31rp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_baes5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_45gld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_sh1qc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_xsd4d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_lq48c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_wiuw6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_dpvwc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ceqt8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_af5ms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ryfy7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_d041u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_qa3ks")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_gyeic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_w4uoa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_iyino")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_uocot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_pbqr0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_svkgs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_5r245")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_3ka2m")
+}],
+"loop": true,
+"name": &"Chagrin",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_7g1wv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_0ovq4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_2jt8e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_2h1te")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_nxomv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_s5jay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_sknbx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_xo23v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_15cpx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_u7gxv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_n5bqt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_5aldg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_1a783")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_ic4l6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_6c2ax")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_gmp3n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_00ied")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_tigpv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_lm5hq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_l11ji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_1dugi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_wd8lt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_7y85m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_8uvax")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_se5jc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_ovdd8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_swmqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_b0wk6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_h1tm8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_tsrvq")
+}],
+"loop": true,
+"name": &"Communication",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("61_05wc0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_eu2e0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_r8nam")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_t6igv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_fmkfr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_llv74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_ykj3m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_8y5ih")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_6kho6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_dtrnb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_bybwa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_ktqyg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_p443u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_p3dfy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_j85mn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_mkcb4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_q20ik")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_xte52")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_vh757")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_mibc1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_7yiyn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_a5yd0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_0ya84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_frm03")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_losdj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_74i5t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_rkrg6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_m7xxk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_gkl4j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90_1hwt4")
+}],
+"loop": true,
+"name": &"Greeting",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("91_rr3cq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_k4cki")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_rsnoc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("94_tjp5u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("95_suiyw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("96_fa5rt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("97_3joeq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_706o4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("99_qraux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("100_gv35a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("101_0t6kf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("102_ixtmg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("103_ux1tu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("104_qoqum")
+}, {
+"duration": 1.0,
+"texture": ExtResource("105_x4dtn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("106_oibft")
+}, {
+"duration": 1.0,
+"texture": ExtResource("107_e0d87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("108_qv36a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("109_2la3o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("110_6are3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("111_di4tx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("112_xdyfn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("113_y3v76")
+}, {
+"duration": 1.0,
+"texture": ExtResource("114_v3oy4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("115_x3ykc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("116_tx1vb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("117_vlwhl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("118_10wep")
+}, {
+"duration": 1.0,
+"texture": ExtResource("119_7ktlw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("120_qhhb6")
+}],
+"loop": true,
+"name": &"Greeting_2",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("121_tsj5p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("122_i0axa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("123_m2unr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("124_wbue3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("125_g086d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("126_1vs6t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("127_faxta")
+}, {
+"duration": 1.0,
+"texture": ExtResource("128_vaubu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("129_anssh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("130_tpijf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("131_qvrqt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("132_guqpy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("133_egsgb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("134_40lp2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("135_p273b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("136_415w0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("137_ixvfd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("138_sqsrj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("139_n2wlh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("140_nkvdw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("141_xurni")
+}, {
+"duration": 1.0,
+"texture": ExtResource("142_hktst")
+}, {
+"duration": 1.0,
+"texture": ExtResource("143_apsgt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("144_tgjiu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("145_1d880")
+}, {
+"duration": 1.0,
+"texture": ExtResource("146_4gfab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("147_43wim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("148_jq75m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("149_rtyou")
+}, {
+"duration": 1.0,
+"texture": ExtResource("150_lloh6")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("151_6mrhq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("152_5rihp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("153_gaphy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("154_emdxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("155_ku850")
+}, {
+"duration": 1.0,
+"texture": ExtResource("156_io52e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("157_kmo2h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("158_01qua")
+}, {
+"duration": 1.0,
+"texture": ExtResource("159_6bsm3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("160_jjf0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("161_du4ai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("162_cfxfx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("163_ohnfk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("164_o671a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("165_h2jon")
+}, {
+"duration": 1.0,
+"texture": ExtResource("166_lkrpl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("167_osuc5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("168_7gl3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("169_ekotp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("170_cl4j4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("171_3q8bu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("172_5e8g0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("173_2wvn5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("174_4bok4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("175_w1gj3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("176_dqq6d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("177_jomyl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("178_dm76j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("179_x58dg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("180_0c5qq")
+}],
+"loop": true,
+"name": &"Idle Blinking",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("181_bip8f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("182_nkree")
+}, {
+"duration": 1.0,
+"texture": ExtResource("183_fh6os")
+}, {
+"duration": 1.0,
+"texture": ExtResource("184_e6ujw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("185_u0jmg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("186_37he4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("187_3163y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("188_gwh53")
+}, {
+"duration": 1.0,
+"texture": ExtResource("189_ct8wy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("190_v1qjj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("191_u7fgs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("192_pr16s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("193_qg6ut")
+}, {
+"duration": 1.0,
+"texture": ExtResource("194_ucdpg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("195_gcus1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("196_nathl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("197_5mj45")
+}, {
+"duration": 1.0,
+"texture": ExtResource("198_0tg5n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("199_gtxtc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("200_sm0ns")
+}, {
+"duration": 1.0,
+"texture": ExtResource("201_8ukgc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("202_i32c6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("203_stq1b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("204_0oxsa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("205_hayjw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("206_gdgtm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("207_o5l05")
+}, {
+"duration": 1.0,
+"texture": ExtResource("208_eyabk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("209_1exvh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("210_ej283")
+}],
+"loop": true,
+"name": &"Joy",
+"speed": 15.0
+}]

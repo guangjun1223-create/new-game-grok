@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://dy41s80be7fag"]
+
+[ext_resource type="Texture2D" uid="uid://b57j0ufgdhtc" path="res://texture/UI/RectangleBox_96x96.png" id="1_70op4"]
+[ext_resource type="Script" uid="uid://b66vutypx0mt" path="res://script/UI/crafting_panel.gd" id="2_abdwn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_abdwn"]
+texture = ExtResource("1_70op4")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+
+[node name="CraftingPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(400, 400)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_abdwn")
+script = ExtResource("2_abdwn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "CHẾ TẠO TRANG BỊ"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RecipeGrid" type="GridContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 5
+
+[node name="CloseButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Đóng"

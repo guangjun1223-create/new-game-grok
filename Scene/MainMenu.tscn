@@ -1,0 +1,117 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0mip1yswyx7s"]
+
+[ext_resource type="Script" uid="uid://bukqnrhx5g7oc" path="res://script/main_menu.gd" id="1_rrxvj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p6s6u"]
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rrxvj"]
+outline_size = 4
+outline_color = Color(0.11858138, 0.11858139, 0.11858136, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.85490197)
+shadow_offset = Vector2(3, 3)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rrxvj")
+
+[node name="MainButtons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="NewGameButton" type="Button" parent="MainButtons"]
+layout_mode = 2
+text = "New game"
+
+[node name="ContinueButton" type="Button" parent="MainButtons"]
+layout_mode = 2
+text = "Continue Game"
+
+[node name="QuitButton" type="Button" parent="MainButtons"]
+layout_mode = 2
+text = "Quit Game"
+
+[node name="NameInput" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="NameInput"]
+layout_mode = 2
+text = "Nhap ten nguoi choi:"
+label_settings = SubResource("LabelSettings_p6s6u")
+
+[node name="NameLineEdit" type="LineEdit" parent="NameInput"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NameInput"]
+layout_mode = 2
+
+[node name="AcceptNameButton" type="Button" parent="NameInput/HBoxContainer"]
+layout_mode = 2
+text = "Xac Nhan"
+
+[node name="BackButton" type="Button" parent="NameInput/HBoxContainer"]
+layout_mode = 2
+text = "Quay Lại"
+
+[node name="LoadingScreen" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LoadingScreen"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="LoadingScreen/VBoxContainer"]
+layout_mode = 2
+text = "Tạo game mới..."
+label_settings = SubResource("LabelSettings_rrxvj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoadingBar" type="ProgressBar" parent="LoadingScreen/VBoxContainer"]
+layout_mode = 2
+
+[connection signal="pressed" from="MainButtons/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="MainButtons/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MainButtons/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="text_submitted" from="NameInput/NameLineEdit" to="." method="_on_accept_name_button_pressed"]
+[connection signal="pressed" from="NameInput/HBoxContainer/AcceptNameButton" to="." method="_on_accept_name_button_pressed"]
+[connection signal="pressed" from="NameInput/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

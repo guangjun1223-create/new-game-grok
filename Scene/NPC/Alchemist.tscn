@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://etbu0tg4tfri"]
+
+[ext_resource type="Script" uid="uid://ckr4aymus2b8k" path="res://script/NPC/alchemist.gd" id="1_3p4iy"]
+[ext_resource type="SpriteFrames" uid="uid://cmyrfaouw32n0" path="res://Data/CraftingNPC.tres" id="2_3p4iy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3p4iy"]
+radius = 54.28572
+height = 154.28574
+
+[sub_resource type="LabelSettings" id="LabelSettings_3p4iy"]
+line_spacing = 0.0
+font_size = 24
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="AlchemistNPC" type="StaticBody2D"]
+scale = Vector2(0.7, 0.7)
+input_pickable = true
+script = ExtResource("1_3p4iy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -84.286)
+sprite_frames = ExtResource("2_3p4iy")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.4285715, -71.42857)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CapsuleShape2D_3p4iy")
+
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = -125.714294
+offset_top = 5.714287
+offset_right = 122.285706
+offset_bottom = 73.71429
+text = "điều chế 
+thuốc"
+label_settings = SubResource("LabelSettings_3p4iy")
+horizontal_alignment = 1
+vertical_alignment = 3

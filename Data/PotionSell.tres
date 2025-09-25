@@ -1,0 +1,880 @@
+[gd_resource type="SpriteFrames" load_steps=211 format=3 uid="uid://m3l5nrjjoauv"]
+
+[ext_resource type="Texture2D" uid="uid://cqq24grbnwesp" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_000.png" id="1_450kc"]
+[ext_resource type="Texture2D" uid="uid://b0dqw3s2v1hxx" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_001.png" id="2_1ptdu"]
+[ext_resource type="Texture2D" uid="uid://krcniudlkorh" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_002.png" id="3_yr02n"]
+[ext_resource type="Texture2D" uid="uid://c88ki3hx3ibtf" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_003.png" id="4_n8gt0"]
+[ext_resource type="Texture2D" uid="uid://cqlprhfegdhmi" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_004.png" id="5_w73cx"]
+[ext_resource type="Texture2D" uid="uid://bpfguq76g0t3s" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_005.png" id="6_o3yrv"]
+[ext_resource type="Texture2D" uid="uid://bbh0ib6asxeuw" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_006.png" id="7_i8wrx"]
+[ext_resource type="Texture2D" uid="uid://bql0botv6hw46" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_007.png" id="8_3jinr"]
+[ext_resource type="Texture2D" uid="uid://i2plh5joolb2" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_008.png" id="9_kjxfp"]
+[ext_resource type="Texture2D" uid="uid://bxuc4vda7yual" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_009.png" id="10_0cjqr"]
+[ext_resource type="Texture2D" uid="uid://c6drcw7h8gv8l" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_010.png" id="11_ii4mn"]
+[ext_resource type="Texture2D" uid="uid://chee0hgilo30p" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_011.png" id="12_6qxhm"]
+[ext_resource type="Texture2D" uid="uid://b4h0yqqekbgoi" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_012.png" id="13_ved5s"]
+[ext_resource type="Texture2D" uid="uid://dfitckinub8rg" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_013.png" id="14_3jdoh"]
+[ext_resource type="Texture2D" uid="uid://b6m16coyh8uae" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_014.png" id="15_y6jlt"]
+[ext_resource type="Texture2D" uid="uid://dcyqb0pav2c5g" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_015.png" id="16_p3yey"]
+[ext_resource type="Texture2D" uid="uid://cv1ryrmxntjpe" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_016.png" id="17_ggx0t"]
+[ext_resource type="Texture2D" uid="uid://chpppsyvjpuef" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_017.png" id="18_1d2l5"]
+[ext_resource type="Texture2D" uid="uid://c1yp0ijl8lgb7" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_018.png" id="19_edouy"]
+[ext_resource type="Texture2D" uid="uid://cig5vrwrl5io5" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_019.png" id="20_r1gfd"]
+[ext_resource type="Texture2D" uid="uid://bskepskmk407c" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_020.png" id="21_3wy50"]
+[ext_resource type="Texture2D" uid="uid://dxjm6fyang4v4" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_021.png" id="22_ci8a6"]
+[ext_resource type="Texture2D" uid="uid://bjvqj1br8uhq" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_022.png" id="23_mas6a"]
+[ext_resource type="Texture2D" uid="uid://ds6keyphhyx7g" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_023.png" id="24_20i1v"]
+[ext_resource type="Texture2D" uid="uid://c70ynca1e66f" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_024.png" id="25_w1qq2"]
+[ext_resource type="Texture2D" uid="uid://dw7smj61tnp83" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_025.png" id="26_lmxb4"]
+[ext_resource type="Texture2D" uid="uid://b0dyv0q3u5em2" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_026.png" id="27_k038y"]
+[ext_resource type="Texture2D" uid="uid://1u4uijfqno55" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_027.png" id="28_uyyli"]
+[ext_resource type="Texture2D" uid="uid://b2jh58npxo86j" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_028.png" id="29_fyadk"]
+[ext_resource type="Texture2D" uid="uid://c1cwg1ynsega" path="res://texture/data/NPC/Herbalist/Chagrin/0_Herbalist_Chagrin_029.png" id="30_dtxdt"]
+[ext_resource type="Texture2D" uid="uid://cyfjh3gj35jgx" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_000.png" id="31_2q60v"]
+[ext_resource type="Texture2D" uid="uid://6kpcweywa64f" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_001.png" id="32_a7yn2"]
+[ext_resource type="Texture2D" uid="uid://nkhg2sfcq0ik" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_002.png" id="33_jtih3"]
+[ext_resource type="Texture2D" uid="uid://bacsoxho363cc" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_003.png" id="34_yp2d1"]
+[ext_resource type="Texture2D" uid="uid://b0pio4qxeac6h" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_004.png" id="35_ynid3"]
+[ext_resource type="Texture2D" uid="uid://cd8rjjfq04se" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_005.png" id="36_5y0q3"]
+[ext_resource type="Texture2D" uid="uid://dy27qoj6gp4bh" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_006.png" id="37_dbm17"]
+[ext_resource type="Texture2D" uid="uid://djest8hu1xcd3" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_007.png" id="38_362qt"]
+[ext_resource type="Texture2D" uid="uid://be8e7i6qtx28y" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_008.png" id="39_py446"]
+[ext_resource type="Texture2D" uid="uid://q8vodu0h1aal" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_009.png" id="40_fekkf"]
+[ext_resource type="Texture2D" uid="uid://cqoo1vg87tksu" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_010.png" id="41_ghjri"]
+[ext_resource type="Texture2D" uid="uid://dc0pacnj06dkb" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_011.png" id="42_33axk"]
+[ext_resource type="Texture2D" uid="uid://cpe1lgfc86e2e" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_012.png" id="43_j14u0"]
+[ext_resource type="Texture2D" uid="uid://b3ojqh8fpe8dl" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_013.png" id="44_pjxiw"]
+[ext_resource type="Texture2D" uid="uid://bdik2rh00he0q" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_014.png" id="45_1c6eo"]
+[ext_resource type="Texture2D" uid="uid://dy8vg61heygbf" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_015.png" id="46_wxofr"]
+[ext_resource type="Texture2D" uid="uid://dhgbk1uhm57se" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_016.png" id="47_i5dsd"]
+[ext_resource type="Texture2D" uid="uid://d140va0ccou2s" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_017.png" id="48_cef8k"]
+[ext_resource type="Texture2D" uid="uid://cicu8u6txoki5" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_018.png" id="49_xdq1m"]
+[ext_resource type="Texture2D" uid="uid://dtstb0lw1mnx3" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_019.png" id="50_n2c8c"]
+[ext_resource type="Texture2D" uid="uid://dbjvktd273mdb" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_020.png" id="51_i6f0n"]
+[ext_resource type="Texture2D" uid="uid://dx6c0uyu3naw1" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_021.png" id="52_qqn3t"]
+[ext_resource type="Texture2D" uid="uid://c3jgol7wkay7y" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_022.png" id="53_7p5jw"]
+[ext_resource type="Texture2D" uid="uid://c0tudi1l1uc3t" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_023.png" id="54_4rjsk"]
+[ext_resource type="Texture2D" uid="uid://bwx50dg56vu8v" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_024.png" id="55_djbga"]
+[ext_resource type="Texture2D" uid="uid://bk46xmv0715lt" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_025.png" id="56_vclyl"]
+[ext_resource type="Texture2D" uid="uid://pnku60pwybri" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_026.png" id="57_5c3qe"]
+[ext_resource type="Texture2D" uid="uid://cjklbl13v7x0q" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_027.png" id="58_aoa2h"]
+[ext_resource type="Texture2D" uid="uid://chodfvkgmllxr" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_028.png" id="59_dylr0"]
+[ext_resource type="Texture2D" uid="uid://d1jnkydcsj2g4" path="res://texture/data/NPC/Herbalist/Communication/0_Herbalist_Communication_029.png" id="60_ckdtb"]
+[ext_resource type="Texture2D" uid="uid://cg3pr0kvboqxl" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_000.png" id="61_to3b0"]
+[ext_resource type="Texture2D" uid="uid://cw3fs3s8ifej5" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_001.png" id="62_pdhgf"]
+[ext_resource type="Texture2D" uid="uid://bsm42j5fr5lyb" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_002.png" id="63_4ykkk"]
+[ext_resource type="Texture2D" uid="uid://bs3o3va0odjp8" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_003.png" id="64_w2l61"]
+[ext_resource type="Texture2D" uid="uid://rv5mgcehn5bc" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_004.png" id="65_gtclo"]
+[ext_resource type="Texture2D" uid="uid://sstit0nix38l" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_005.png" id="66_sysfv"]
+[ext_resource type="Texture2D" uid="uid://yd8p8ia6iegw" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_006.png" id="67_sso5f"]
+[ext_resource type="Texture2D" uid="uid://b2djjqjd2ehe2" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_007.png" id="68_pbg7c"]
+[ext_resource type="Texture2D" uid="uid://cghdqupeh55kd" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_008.png" id="69_d285c"]
+[ext_resource type="Texture2D" uid="uid://cr63o8t0ev4kh" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_009.png" id="70_qatfc"]
+[ext_resource type="Texture2D" uid="uid://dr2e22h4k6a2m" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_010.png" id="71_ryssc"]
+[ext_resource type="Texture2D" uid="uid://crl4ub8oe6gqa" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_011.png" id="72_jpe82"]
+[ext_resource type="Texture2D" uid="uid://c12epv6280o4a" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_012.png" id="73_avbdw"]
+[ext_resource type="Texture2D" uid="uid://7qowr5evi1ta" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_013.png" id="74_mcotx"]
+[ext_resource type="Texture2D" uid="uid://dn8liwxmjl3mh" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_014.png" id="75_tqryi"]
+[ext_resource type="Texture2D" uid="uid://coymx4lu1fbqn" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_015.png" id="76_skg0k"]
+[ext_resource type="Texture2D" uid="uid://b3t756okw1wi0" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_016.png" id="77_6cvm1"]
+[ext_resource type="Texture2D" uid="uid://b8yl3r12lh7rm" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_017.png" id="78_u6cno"]
+[ext_resource type="Texture2D" uid="uid://dtew5qra4wwtd" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_018.png" id="79_w1kbq"]
+[ext_resource type="Texture2D" uid="uid://cww8gvphy4i0n" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_019.png" id="80_3xu2i"]
+[ext_resource type="Texture2D" uid="uid://btabx5p8ts46u" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_020.png" id="81_lmx4p"]
+[ext_resource type="Texture2D" uid="uid://gv5s0tbufr6l" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_021.png" id="82_qq5mt"]
+[ext_resource type="Texture2D" uid="uid://d35wqxdwd6ic2" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_022.png" id="83_fcsk3"]
+[ext_resource type="Texture2D" uid="uid://caodst43pwtpe" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_023.png" id="84_6oxts"]
+[ext_resource type="Texture2D" uid="uid://doo3smw35m8j0" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_024.png" id="85_bm25r"]
+[ext_resource type="Texture2D" uid="uid://drp5fojter7wk" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_025.png" id="86_iwq51"]
+[ext_resource type="Texture2D" uid="uid://p4nvsq3wehwn" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_026.png" id="87_2vq4d"]
+[ext_resource type="Texture2D" uid="uid://7ualcn2wrfq7" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_027.png" id="88_lvs2o"]
+[ext_resource type="Texture2D" uid="uid://bdnk622s2438x" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_028.png" id="89_7lo1r"]
+[ext_resource type="Texture2D" uid="uid://df6bd7sir0vof" path="res://texture/data/NPC/Herbalist/Greeting/0_Herbalist_Greeting_029.png" id="90_a0ypa"]
+[ext_resource type="Texture2D" uid="uid://dlqnuwso38gwx" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_000.png" id="91_u8fnl"]
+[ext_resource type="Texture2D" uid="uid://caksgki6uyujc" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_001.png" id="92_12a20"]
+[ext_resource type="Texture2D" uid="uid://cval26785hx2l" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_002.png" id="93_w2wb8"]
+[ext_resource type="Texture2D" uid="uid://camtbhbbmflgp" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_003.png" id="94_n2ewg"]
+[ext_resource type="Texture2D" uid="uid://blifrntf5v6gr" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_004.png" id="95_m8nsd"]
+[ext_resource type="Texture2D" uid="uid://ti6aw85s0m6e" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_005.png" id="96_yg32o"]
+[ext_resource type="Texture2D" uid="uid://dwhk8wc2pderl" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_006.png" id="97_00ml5"]
+[ext_resource type="Texture2D" uid="uid://b2577hsjysjfr" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_007.png" id="98_vvkie"]
+[ext_resource type="Texture2D" uid="uid://dm0mn7d0resca" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_008.png" id="99_juass"]
+[ext_resource type="Texture2D" uid="uid://dw81kq5vf0jkr" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_009.png" id="100_owt8t"]
+[ext_resource type="Texture2D" uid="uid://cwlnk76vivxti" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_010.png" id="101_p5vcw"]
+[ext_resource type="Texture2D" uid="uid://doga0x1pq60ku" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_011.png" id="102_t6753"]
+[ext_resource type="Texture2D" uid="uid://b1yff2ipkb1rq" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_012.png" id="103_ibgs5"]
+[ext_resource type="Texture2D" uid="uid://ds17yhyniijp8" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_013.png" id="104_xllsr"]
+[ext_resource type="Texture2D" uid="uid://p4ikl8omy442" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_014.png" id="105_4by4q"]
+[ext_resource type="Texture2D" uid="uid://cqyj1hjrou37y" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_015.png" id="106_s5kra"]
+[ext_resource type="Texture2D" uid="uid://xfq718n0m0nd" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_016.png" id="107_yyxe4"]
+[ext_resource type="Texture2D" uid="uid://buuipjc1lp7lm" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_017.png" id="108_ypjw5"]
+[ext_resource type="Texture2D" uid="uid://ll8cwthbai8h" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_018.png" id="109_fuvo2"]
+[ext_resource type="Texture2D" uid="uid://dujd7f6o4m2l" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_019.png" id="110_7tp5d"]
+[ext_resource type="Texture2D" uid="uid://cmqvsyr402lfg" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_020.png" id="111_ty1ly"]
+[ext_resource type="Texture2D" uid="uid://tffjfohoxp75" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_021.png" id="112_sh578"]
+[ext_resource type="Texture2D" uid="uid://b2i6y4qygolb6" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_022.png" id="113_ro45a"]
+[ext_resource type="Texture2D" uid="uid://blpb6ey7xbyf6" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_023.png" id="114_swfh3"]
+[ext_resource type="Texture2D" uid="uid://doj2peiu5pn50" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_024.png" id="115_i7pn2"]
+[ext_resource type="Texture2D" uid="uid://oru855j7xqhg" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_025.png" id="116_7yvlp"]
+[ext_resource type="Texture2D" uid="uid://ci7jc8ifjou8q" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_026.png" id="117_sru70"]
+[ext_resource type="Texture2D" uid="uid://budvdfkob712l" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_027.png" id="118_cma12"]
+[ext_resource type="Texture2D" uid="uid://dhkadyqxcxxm7" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_028.png" id="119_yw0w7"]
+[ext_resource type="Texture2D" uid="uid://bv2tlmupfkv7n" path="res://texture/data/NPC/Herbalist/Greeting_2/0_Herbalist_Greeting_2_029.png" id="120_m4a4v"]
+[ext_resource type="Texture2D" uid="uid://dkdchy1v4q227" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_000.png" id="121_naivj"]
+[ext_resource type="Texture2D" uid="uid://coy2n4306x54m" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_001.png" id="122_2u3m2"]
+[ext_resource type="Texture2D" uid="uid://dfhj7akrmcwdo" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_002.png" id="123_srkxl"]
+[ext_resource type="Texture2D" uid="uid://7gq6b41i2ci3" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_003.png" id="124_beaq0"]
+[ext_resource type="Texture2D" uid="uid://bgctj0jg5364e" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_004.png" id="125_3ide1"]
+[ext_resource type="Texture2D" uid="uid://dwykvdnqys8hj" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_005.png" id="126_w405t"]
+[ext_resource type="Texture2D" uid="uid://dim0f4cdns75e" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_006.png" id="127_hkfxo"]
+[ext_resource type="Texture2D" uid="uid://b7s1ik57m6g0l" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_007.png" id="128_ocl8k"]
+[ext_resource type="Texture2D" uid="uid://d4muj0lc61tlb" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_008.png" id="129_38l8p"]
+[ext_resource type="Texture2D" uid="uid://dswtpydbn85rd" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_009.png" id="130_bycde"]
+[ext_resource type="Texture2D" uid="uid://p15h2cmyqkdb" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_010.png" id="131_3ndmi"]
+[ext_resource type="Texture2D" uid="uid://cinwcs63gywcv" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_011.png" id="132_lxqxb"]
+[ext_resource type="Texture2D" uid="uid://vgujpu432lf0" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_012.png" id="133_qj77r"]
+[ext_resource type="Texture2D" uid="uid://cxrir15iwkvp0" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_013.png" id="134_tqda1"]
+[ext_resource type="Texture2D" uid="uid://c4wwqbmmyofhc" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_014.png" id="135_3lkxi"]
+[ext_resource type="Texture2D" uid="uid://ystohnohd8rd" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_015.png" id="136_0vnhf"]
+[ext_resource type="Texture2D" uid="uid://p2wancvhna3a" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_016.png" id="137_jctkc"]
+[ext_resource type="Texture2D" uid="uid://dwglgphiix00s" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_017.png" id="138_1xa62"]
+[ext_resource type="Texture2D" uid="uid://ccnmh20h2r41b" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_018.png" id="139_dlp2h"]
+[ext_resource type="Texture2D" uid="uid://14wglskljt2v" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_019.png" id="140_v8d1d"]
+[ext_resource type="Texture2D" uid="uid://cy8ah2agxory5" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_020.png" id="141_s02ib"]
+[ext_resource type="Texture2D" uid="uid://bqk23xwrib33k" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_021.png" id="142_oy0au"]
+[ext_resource type="Texture2D" uid="uid://dqql4b0tm8e7g" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_022.png" id="143_5p4su"]
+[ext_resource type="Texture2D" uid="uid://bby8d14vj3l" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_023.png" id="144_4llmq"]
+[ext_resource type="Texture2D" uid="uid://b4rnemtg8bim0" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_024.png" id="145_a5m4v"]
+[ext_resource type="Texture2D" uid="uid://fxnw4ci1qx4n" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_025.png" id="146_3hiwr"]
+[ext_resource type="Texture2D" uid="uid://cookl86j22ui2" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_026.png" id="147_w1nis"]
+[ext_resource type="Texture2D" uid="uid://dx2d6noofujak" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_027.png" id="148_c67tj"]
+[ext_resource type="Texture2D" uid="uid://kk3an75aigpx" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_028.png" id="149_vhv3m"]
+[ext_resource type="Texture2D" uid="uid://b55yaiccx5wf8" path="res://texture/data/NPC/Herbalist/Idle/0_Herbalist_Idle_029.png" id="150_os8m6"]
+[ext_resource type="Texture2D" uid="uid://dld3vr21fl1sj" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_000.png" id="151_dh1ab"]
+[ext_resource type="Texture2D" uid="uid://dr1oj2sdonry7" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_001.png" id="152_rjdyg"]
+[ext_resource type="Texture2D" uid="uid://mbu7xnx1j7ub" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_002.png" id="153_vbf1o"]
+[ext_resource type="Texture2D" uid="uid://bo4gyg1geoiwv" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_003.png" id="154_ojcvr"]
+[ext_resource type="Texture2D" uid="uid://b305ul4u84yrl" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_004.png" id="155_s6ru6"]
+[ext_resource type="Texture2D" uid="uid://ct5sa88oioitw" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_005.png" id="156_s5c5g"]
+[ext_resource type="Texture2D" uid="uid://cxodkpwn1h2sl" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_006.png" id="157_tejt6"]
+[ext_resource type="Texture2D" uid="uid://b21oebfy74cgb" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_007.png" id="158_0tmrv"]
+[ext_resource type="Texture2D" uid="uid://b2gwpmytdj206" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_008.png" id="159_rl0g0"]
+[ext_resource type="Texture2D" uid="uid://cny4lp636wy51" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_009.png" id="160_j63n1"]
+[ext_resource type="Texture2D" uid="uid://b4fyuabueoqdi" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_010.png" id="161_bqpb0"]
+[ext_resource type="Texture2D" uid="uid://ca04apl7ayb75" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_011.png" id="162_up46u"]
+[ext_resource type="Texture2D" uid="uid://0twvtg71gmdx" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_012.png" id="163_at600"]
+[ext_resource type="Texture2D" uid="uid://becmil5n2uuwh" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_013.png" id="164_8ddxn"]
+[ext_resource type="Texture2D" uid="uid://ddet6ns8xvp0" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_014.png" id="165_fvp6r"]
+[ext_resource type="Texture2D" uid="uid://bonr5aq2uiert" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_015.png" id="166_ppfqj"]
+[ext_resource type="Texture2D" uid="uid://b10etq01pp35r" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_016.png" id="167_3cljy"]
+[ext_resource type="Texture2D" uid="uid://c4cs5k2qavp1d" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_017.png" id="168_ekix3"]
+[ext_resource type="Texture2D" uid="uid://dpmyy7di2lsnf" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_018.png" id="169_jhrfl"]
+[ext_resource type="Texture2D" uid="uid://ecqjkur8o3m8" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_019.png" id="170_l0duv"]
+[ext_resource type="Texture2D" uid="uid://gf7j60lp8gu" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_020.png" id="171_lhe3m"]
+[ext_resource type="Texture2D" uid="uid://bxxbav1tl40lj" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_021.png" id="172_6xwsh"]
+[ext_resource type="Texture2D" uid="uid://wec0ljk7ew21" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_022.png" id="173_3ct50"]
+[ext_resource type="Texture2D" uid="uid://dyld2oxy777he" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_023.png" id="174_f15ur"]
+[ext_resource type="Texture2D" uid="uid://skfg7o3lkvit" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_024.png" id="175_ls26p"]
+[ext_resource type="Texture2D" uid="uid://bt5hxhcaqtork" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_025.png" id="176_cbp4d"]
+[ext_resource type="Texture2D" uid="uid://cex8ad1d1lcto" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_026.png" id="177_dg00b"]
+[ext_resource type="Texture2D" uid="uid://b5yl61tm74okl" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_027.png" id="178_ry0jy"]
+[ext_resource type="Texture2D" uid="uid://bvs4n507vjunj" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_028.png" id="179_absjb"]
+[ext_resource type="Texture2D" uid="uid://ffn20bspq17x" path="res://texture/data/NPC/Herbalist/Idle Blinking/0_Herbalist_Idle Blinking_029.png" id="180_4fu33"]
+[ext_resource type="Texture2D" uid="uid://dcqc75xfn2vuw" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_000.png" id="181_0dw6o"]
+[ext_resource type="Texture2D" uid="uid://ca8ee4bvycf8" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_001.png" id="182_23ude"]
+[ext_resource type="Texture2D" uid="uid://ctyr15s5qpsiv" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_002.png" id="183_ufdkv"]
+[ext_resource type="Texture2D" uid="uid://bu1sqgfl0wxun" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_003.png" id="184_mbk2r"]
+[ext_resource type="Texture2D" uid="uid://c7oekugbshut8" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_004.png" id="185_pvt1m"]
+[ext_resource type="Texture2D" uid="uid://22qi8x7g8db1" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_005.png" id="186_v4fbr"]
+[ext_resource type="Texture2D" uid="uid://dauch6tffprju" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_006.png" id="187_pkb2o"]
+[ext_resource type="Texture2D" uid="uid://nepbxg4kg0pn" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_007.png" id="188_mlrmq"]
+[ext_resource type="Texture2D" uid="uid://br3vw8aw2xbwe" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_008.png" id="189_hfqrb"]
+[ext_resource type="Texture2D" uid="uid://cnljriqrfa6yu" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_009.png" id="190_8h88a"]
+[ext_resource type="Texture2D" uid="uid://bl422brqn2b3j" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_010.png" id="191_dhp7v"]
+[ext_resource type="Texture2D" uid="uid://cq3fdpuxyjbyn" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_011.png" id="192_5vk3s"]
+[ext_resource type="Texture2D" uid="uid://ci42hqujfdlfn" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_012.png" id="193_8h2yu"]
+[ext_resource type="Texture2D" uid="uid://cm6im7wcao1r1" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_013.png" id="194_8g0us"]
+[ext_resource type="Texture2D" uid="uid://coqyx1vnpdr4s" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_014.png" id="195_x68gm"]
+[ext_resource type="Texture2D" uid="uid://dir5ahx2dog6v" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_015.png" id="196_uglhr"]
+[ext_resource type="Texture2D" uid="uid://b4s0i7e5mwfa5" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_016.png" id="197_mhivi"]
+[ext_resource type="Texture2D" uid="uid://b7vongdpol885" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_017.png" id="198_a0yj1"]
+[ext_resource type="Texture2D" uid="uid://dub5po0seture" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_018.png" id="199_u1axn"]
+[ext_resource type="Texture2D" uid="uid://c77hneyli7tg1" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_019.png" id="200_181lx"]
+[ext_resource type="Texture2D" uid="uid://p54aqqust3l0" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_020.png" id="201_27i1x"]
+[ext_resource type="Texture2D" uid="uid://cg7vdmn86vjuj" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_021.png" id="202_x37d8"]
+[ext_resource type="Texture2D" uid="uid://ccwhwohue7dgf" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_022.png" id="203_baufi"]
+[ext_resource type="Texture2D" uid="uid://ciht5p5jntfya" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_023.png" id="204_bc2gi"]
+[ext_resource type="Texture2D" uid="uid://2x0615qoy3hk" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_024.png" id="205_y6snf"]
+[ext_resource type="Texture2D" uid="uid://nxddo82io2tc" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_025.png" id="206_82jre"]
+[ext_resource type="Texture2D" uid="uid://bfcumbfficdgq" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_026.png" id="207_hr8xf"]
+[ext_resource type="Texture2D" uid="uid://b8k73gady3pos" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_027.png" id="208_xthri"]
+[ext_resource type="Texture2D" uid="uid://uosr3onxrwbc" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_028.png" id="209_x1aa4"]
+[ext_resource type="Texture2D" uid="uid://cr31q6bjrpo1" path="res://texture/data/NPC/Herbalist/Joy/0_Herbalist_Joy_029.png" id="210_p3yx5"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_450kc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_1ptdu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yr02n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_n8gt0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_w73cx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_o3yrv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_i8wrx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_3jinr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_kjxfp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_0cjqr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ii4mn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_6qxhm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ved5s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_3jdoh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_y6jlt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_p3yey")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ggx0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_1d2l5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_edouy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_r1gfd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_3wy50")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_ci8a6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_mas6a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_20i1v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_w1qq2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_lmxb4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_k038y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_uyyli")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_fyadk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_dtxdt")
+}],
+"loop": true,
+"name": &"Chagrin",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_2q60v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_a7yn2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_jtih3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_yp2d1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_ynid3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_5y0q3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_dbm17")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_362qt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_py446")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_fekkf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_ghjri")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_33axk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_j14u0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_pjxiw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_1c6eo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_wxofr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_i5dsd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_cef8k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_xdq1m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_n2c8c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_i6f0n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_qqn3t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_7p5jw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_4rjsk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_djbga")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_vclyl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_5c3qe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_aoa2h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_dylr0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_ckdtb")
+}],
+"loop": true,
+"name": &"Communication",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("61_to3b0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_pdhgf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_4ykkk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_w2l61")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_gtclo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_sysfv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_sso5f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_pbg7c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_d285c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_qatfc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_ryssc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_jpe82")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_avbdw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_mcotx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_tqryi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_skg0k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_6cvm1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_u6cno")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_w1kbq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_3xu2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_lmx4p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_qq5mt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_fcsk3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_6oxts")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_bm25r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_iwq51")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_2vq4d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_lvs2o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_7lo1r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90_a0ypa")
+}],
+"loop": true,
+"name": &"Greeting",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("91_u8fnl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_12a20")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_w2wb8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("94_n2ewg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("95_m8nsd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("96_yg32o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("97_00ml5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_vvkie")
+}, {
+"duration": 1.0,
+"texture": ExtResource("99_juass")
+}, {
+"duration": 1.0,
+"texture": ExtResource("100_owt8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("101_p5vcw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("102_t6753")
+}, {
+"duration": 1.0,
+"texture": ExtResource("103_ibgs5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("104_xllsr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("105_4by4q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("106_s5kra")
+}, {
+"duration": 1.0,
+"texture": ExtResource("107_yyxe4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("108_ypjw5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("109_fuvo2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("110_7tp5d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("111_ty1ly")
+}, {
+"duration": 1.0,
+"texture": ExtResource("112_sh578")
+}, {
+"duration": 1.0,
+"texture": ExtResource("113_ro45a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("114_swfh3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("115_i7pn2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("116_7yvlp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("117_sru70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("118_cma12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("119_yw0w7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("120_m4a4v")
+}],
+"loop": true,
+"name": &"Greeting_2",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("121_naivj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("122_2u3m2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("123_srkxl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("124_beaq0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("125_3ide1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("126_w405t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("127_hkfxo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("128_ocl8k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("129_38l8p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("130_bycde")
+}, {
+"duration": 1.0,
+"texture": ExtResource("131_3ndmi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("132_lxqxb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("133_qj77r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("134_tqda1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("135_3lkxi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("136_0vnhf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("137_jctkc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("138_1xa62")
+}, {
+"duration": 1.0,
+"texture": ExtResource("139_dlp2h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("140_v8d1d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("141_s02ib")
+}, {
+"duration": 1.0,
+"texture": ExtResource("142_oy0au")
+}, {
+"duration": 1.0,
+"texture": ExtResource("143_5p4su")
+}, {
+"duration": 1.0,
+"texture": ExtResource("144_4llmq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("145_a5m4v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("146_3hiwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("147_w1nis")
+}, {
+"duration": 1.0,
+"texture": ExtResource("148_c67tj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("149_vhv3m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("150_os8m6")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("151_dh1ab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("152_rjdyg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("153_vbf1o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("154_ojcvr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("155_s6ru6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("156_s5c5g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("157_tejt6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("158_0tmrv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("159_rl0g0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("160_j63n1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("161_bqpb0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("162_up46u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("163_at600")
+}, {
+"duration": 1.0,
+"texture": ExtResource("164_8ddxn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("165_fvp6r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("166_ppfqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("167_3cljy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("168_ekix3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("169_jhrfl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("170_l0duv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("171_lhe3m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("172_6xwsh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("173_3ct50")
+}, {
+"duration": 1.0,
+"texture": ExtResource("174_f15ur")
+}, {
+"duration": 1.0,
+"texture": ExtResource("175_ls26p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("176_cbp4d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("177_dg00b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("178_ry0jy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("179_absjb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("180_4fu33")
+}],
+"loop": true,
+"name": &"Idle Blinking",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("181_0dw6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("182_23ude")
+}, {
+"duration": 1.0,
+"texture": ExtResource("183_ufdkv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("184_mbk2r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("185_pvt1m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("186_v4fbr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("187_pkb2o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("188_mlrmq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("189_hfqrb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("190_8h88a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("191_dhp7v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("192_5vk3s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("193_8h2yu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("194_8g0us")
+}, {
+"duration": 1.0,
+"texture": ExtResource("195_x68gm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("196_uglhr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("197_mhivi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("198_a0yj1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("199_u1axn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("200_181lx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("201_27i1x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("202_x37d8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("203_baufi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("204_bc2gi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("205_y6snf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("206_82jre")
+}, {
+"duration": 1.0,
+"texture": ExtResource("207_hr8xf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("208_xthri")
+}, {
+"duration": 1.0,
+"texture": ExtResource("209_x1aa4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("210_p3yx5")
+}],
+"loop": true,
+"name": &"Joy",
+"speed": 15.0
+}]

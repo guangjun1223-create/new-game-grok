@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bodk8e45mem8o"]
+
+[ext_resource type="Texture2D" uid="uid://etgovlgmjhfu" path="res://texture/data/Hero/arrow.png" id="1_327fr"]
+[ext_resource type="Script" uid="uid://ckhntptc20swg" path="res://script/UI/arow.gd" id="1_y26dh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y26dh"]
+radius = 5.0
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_y26dh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.38397244
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_327fr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(35, 0)
+shape = SubResource("CircleShape2D_y26dh")
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true

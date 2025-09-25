@@ -1,0 +1,880 @@
+[gd_resource type="SpriteFrames" load_steps=211 format=3 uid="uid://cmyrfaouw32n0"]
+
+[ext_resource type="Texture2D" uid="uid://dia8coygp4dv1" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_000.png" id="1_y4kuf"]
+[ext_resource type="Texture2D" uid="uid://b3xufqq4xv6pn" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_001.png" id="2_gto4v"]
+[ext_resource type="Texture2D" uid="uid://s35343ecp7oj" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_002.png" id="3_rjx3s"]
+[ext_resource type="Texture2D" uid="uid://d06cqw7im3x6b" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_003.png" id="4_y1bho"]
+[ext_resource type="Texture2D" uid="uid://bg1csejn1j36d" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_004.png" id="5_naos8"]
+[ext_resource type="Texture2D" uid="uid://ywblmhagfrwg" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_005.png" id="6_p6eg8"]
+[ext_resource type="Texture2D" uid="uid://rm22fyyjjppu" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_006.png" id="7_dcvxv"]
+[ext_resource type="Texture2D" uid="uid://bopcvyvktdh08" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_007.png" id="8_t2062"]
+[ext_resource type="Texture2D" uid="uid://c0q6t4pokrrpr" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_008.png" id="9_282ab"]
+[ext_resource type="Texture2D" uid="uid://dftlahp6eehjq" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_009.png" id="10_ydsdi"]
+[ext_resource type="Texture2D" uid="uid://riclgnuc0dve" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_010.png" id="11_ar3hx"]
+[ext_resource type="Texture2D" uid="uid://4c7m5maao5dk" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_011.png" id="12_ggj7t"]
+[ext_resource type="Texture2D" uid="uid://b7oj8ho4uqxa" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_012.png" id="13_lo4eg"]
+[ext_resource type="Texture2D" uid="uid://b8al6s773ammd" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_013.png" id="14_vvywj"]
+[ext_resource type="Texture2D" uid="uid://bb3ie14aqfasp" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_014.png" id="15_o2jdu"]
+[ext_resource type="Texture2D" uid="uid://bcjltiugascte" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_015.png" id="16_d35pj"]
+[ext_resource type="Texture2D" uid="uid://vnup3l0mama7" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_016.png" id="17_qv0og"]
+[ext_resource type="Texture2D" uid="uid://bq5iiw7hi654j" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_017.png" id="18_ejk3y"]
+[ext_resource type="Texture2D" uid="uid://qstfp61s1tnw" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_018.png" id="19_es2qc"]
+[ext_resource type="Texture2D" uid="uid://tywdllma2nmt" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_019.png" id="20_kckvb"]
+[ext_resource type="Texture2D" uid="uid://bejpx6jeolq7p" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_020.png" id="21_0nmuw"]
+[ext_resource type="Texture2D" uid="uid://cm41tkwa7dnfh" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_021.png" id="22_60ylq"]
+[ext_resource type="Texture2D" uid="uid://bey21ehuopvp2" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_022.png" id="23_fvpmb"]
+[ext_resource type="Texture2D" uid="uid://upmax7vm0cav" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_023.png" id="24_2sjg5"]
+[ext_resource type="Texture2D" uid="uid://clcebagqdnr56" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_024.png" id="25_cmwmb"]
+[ext_resource type="Texture2D" uid="uid://c5g12vyi08yyu" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_025.png" id="26_isoft"]
+[ext_resource type="Texture2D" uid="uid://cmwn2kex3b4ic" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_026.png" id="27_3c2d8"]
+[ext_resource type="Texture2D" uid="uid://berrtgorcf5cy" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_027.png" id="28_3e2rk"]
+[ext_resource type="Texture2D" uid="uid://tfbo3rhe16jl" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_028.png" id="29_2ibi0"]
+[ext_resource type="Texture2D" uid="uid://c6a73akfsqox5" path="res://texture/data/NPC/Warlord/Chagrin/0_Warlord_Chagrin_029.png" id="30_toodl"]
+[ext_resource type="Texture2D" uid="uid://bywsh1qulge87" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_000.png" id="31_awkn1"]
+[ext_resource type="Texture2D" uid="uid://4y81oi3577yj" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_001.png" id="32_stjhi"]
+[ext_resource type="Texture2D" uid="uid://ctsje5b1vwy76" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_002.png" id="33_jblqm"]
+[ext_resource type="Texture2D" uid="uid://t3v3e1golch8" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_003.png" id="34_rocb3"]
+[ext_resource type="Texture2D" uid="uid://cjfu67r1wk6n5" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_004.png" id="35_3i46v"]
+[ext_resource type="Texture2D" uid="uid://byvggsarpwp2" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_005.png" id="36_a6fh0"]
+[ext_resource type="Texture2D" uid="uid://nopjd85o5ae1" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_006.png" id="37_kovob"]
+[ext_resource type="Texture2D" uid="uid://bp2j0ce7eipsa" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_007.png" id="38_n5fln"]
+[ext_resource type="Texture2D" uid="uid://37iel4wy2g2m" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_008.png" id="39_n2i7r"]
+[ext_resource type="Texture2D" uid="uid://mghwed5ndsib" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_009.png" id="40_my5jn"]
+[ext_resource type="Texture2D" uid="uid://bvdmyvyvku844" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_010.png" id="41_07jbl"]
+[ext_resource type="Texture2D" uid="uid://b4gd5ryt4fg3c" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_011.png" id="42_iljf5"]
+[ext_resource type="Texture2D" uid="uid://206r5l2qgcf4" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_012.png" id="43_of50e"]
+[ext_resource type="Texture2D" uid="uid://byn7bg25uxusu" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_013.png" id="44_yd5os"]
+[ext_resource type="Texture2D" uid="uid://csrrxdou1hbwf" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_014.png" id="45_sp78f"]
+[ext_resource type="Texture2D" uid="uid://c6eqwqs8wup8e" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_015.png" id="46_oa4pt"]
+[ext_resource type="Texture2D" uid="uid://dgax7fxwoloxe" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_016.png" id="47_ishqn"]
+[ext_resource type="Texture2D" uid="uid://diffdkuh7wan4" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_017.png" id="48_id87a"]
+[ext_resource type="Texture2D" uid="uid://bj34h623atb6e" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_018.png" id="49_7txr7"]
+[ext_resource type="Texture2D" uid="uid://dwn21ektlfwmq" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_019.png" id="50_6ugll"]
+[ext_resource type="Texture2D" uid="uid://rfmamt7d74mv" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_020.png" id="51_x7b4q"]
+[ext_resource type="Texture2D" uid="uid://duxs1clfmebqw" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_021.png" id="52_3qsh1"]
+[ext_resource type="Texture2D" uid="uid://4v5ssdsewta" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_022.png" id="53_utcd5"]
+[ext_resource type="Texture2D" uid="uid://ck7804sd8kcox" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_023.png" id="54_l7tb1"]
+[ext_resource type="Texture2D" uid="uid://b1j2gmokoo3oe" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_024.png" id="55_ipk20"]
+[ext_resource type="Texture2D" uid="uid://bqv3l6acnlbqx" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_025.png" id="56_lvad1"]
+[ext_resource type="Texture2D" uid="uid://dptg5fsob62cy" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_026.png" id="57_h3jmq"]
+[ext_resource type="Texture2D" uid="uid://c3syych0wc3hv" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_027.png" id="58_odf3y"]
+[ext_resource type="Texture2D" uid="uid://d4carm1jh5b04" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_028.png" id="59_b4547"]
+[ext_resource type="Texture2D" uid="uid://bjbjxmmxpkqyu" path="res://texture/data/NPC/Warlord/Communication/0_Warlord_Communication_029.png" id="60_iafvt"]
+[ext_resource type="Texture2D" uid="uid://byx5fyfshbisg" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_000.png" id="61_w7s3c"]
+[ext_resource type="Texture2D" uid="uid://clfscgvspwety" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_001.png" id="62_n30eq"]
+[ext_resource type="Texture2D" uid="uid://cvgdhgpx1am7h" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_002.png" id="63_0wn8j"]
+[ext_resource type="Texture2D" uid="uid://7i5qgwkjq1d" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_003.png" id="64_beljw"]
+[ext_resource type="Texture2D" uid="uid://bn0nferm4vl20" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_004.png" id="65_8cnsl"]
+[ext_resource type="Texture2D" uid="uid://qpyxplro27vr" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_005.png" id="66_20ii2"]
+[ext_resource type="Texture2D" uid="uid://fqxmvclg0wov" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_006.png" id="67_re5fq"]
+[ext_resource type="Texture2D" uid="uid://dn4hsyjmxtnux" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_007.png" id="68_h5thx"]
+[ext_resource type="Texture2D" uid="uid://b80w3xcl0flue" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_008.png" id="69_1onlg"]
+[ext_resource type="Texture2D" uid="uid://dcvgsy5icr56m" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_009.png" id="70_ryyh3"]
+[ext_resource type="Texture2D" uid="uid://bqiil362p1a0g" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_010.png" id="71_34pdd"]
+[ext_resource type="Texture2D" uid="uid://fpwlh1j7v5i1" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_011.png" id="72_3gr8c"]
+[ext_resource type="Texture2D" uid="uid://c4crdcjrsyluc" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_012.png" id="73_flyuw"]
+[ext_resource type="Texture2D" uid="uid://baccypyoxlkjq" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_013.png" id="74_cwyo7"]
+[ext_resource type="Texture2D" uid="uid://de5wkt3ffsysc" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_014.png" id="75_jp2nd"]
+[ext_resource type="Texture2D" uid="uid://cvyn38w1jlydx" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_015.png" id="76_mmljn"]
+[ext_resource type="Texture2D" uid="uid://bff872p8rlvun" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_016.png" id="77_63ifd"]
+[ext_resource type="Texture2D" uid="uid://b8mnjr84w6dbu" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_017.png" id="78_hta66"]
+[ext_resource type="Texture2D" uid="uid://lriv8755ju65" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_018.png" id="79_73aep"]
+[ext_resource type="Texture2D" uid="uid://dyununwuun14t" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_019.png" id="80_aju8v"]
+[ext_resource type="Texture2D" uid="uid://d2nqw4p0nvgyx" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_020.png" id="81_gjp8n"]
+[ext_resource type="Texture2D" uid="uid://bjspmryrpvswm" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_021.png" id="82_emxcq"]
+[ext_resource type="Texture2D" uid="uid://dyh8ny8m6ig4m" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_022.png" id="83_oongt"]
+[ext_resource type="Texture2D" uid="uid://cdcq5vaxxi7x0" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_023.png" id="84_lfbvj"]
+[ext_resource type="Texture2D" uid="uid://jd3ivexr2nq1" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_024.png" id="85_btje6"]
+[ext_resource type="Texture2D" uid="uid://dr8u2m2oj8bvr" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_025.png" id="86_2vblg"]
+[ext_resource type="Texture2D" uid="uid://d4gfrvt51jabp" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_026.png" id="87_n6ko3"]
+[ext_resource type="Texture2D" uid="uid://cyyvj3lkvp13e" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_027.png" id="88_qlqpo"]
+[ext_resource type="Texture2D" uid="uid://c501djtnffcb5" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_028.png" id="89_he6bu"]
+[ext_resource type="Texture2D" uid="uid://d14ll7aiac6ta" path="res://texture/data/NPC/Warlord/Greeting/0_Warlord_Greeting_029.png" id="90_f0n8y"]
+[ext_resource type="Texture2D" uid="uid://q4our6j17yem" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_000.png" id="91_jtg4e"]
+[ext_resource type="Texture2D" uid="uid://c8iy6yfxyo5b8" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_001.png" id="92_pt4mr"]
+[ext_resource type="Texture2D" uid="uid://cs7jfjp8nkne2" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_002.png" id="93_iw8sa"]
+[ext_resource type="Texture2D" uid="uid://cc7a7mtp2bgxq" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_003.png" id="94_6bymy"]
+[ext_resource type="Texture2D" uid="uid://cvk0mnrmk2gs0" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_004.png" id="95_3kvjm"]
+[ext_resource type="Texture2D" uid="uid://pov44bephm7h" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_005.png" id="96_sdjon"]
+[ext_resource type="Texture2D" uid="uid://dkk54q0vy6ops" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_006.png" id="97_8urx0"]
+[ext_resource type="Texture2D" uid="uid://5h81c1bfrxif" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_007.png" id="98_wt4kd"]
+[ext_resource type="Texture2D" uid="uid://mjtee00yybxt" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_008.png" id="99_36e50"]
+[ext_resource type="Texture2D" uid="uid://mamo3m7w5c6q" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_009.png" id="100_2233r"]
+[ext_resource type="Texture2D" uid="uid://dbhusvj8hb1uv" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_010.png" id="101_ax5tk"]
+[ext_resource type="Texture2D" uid="uid://cq3ky7xcwcw76" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_011.png" id="102_fqe0x"]
+[ext_resource type="Texture2D" uid="uid://qcyr2xy3cxqy" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_012.png" id="103_sqxet"]
+[ext_resource type="Texture2D" uid="uid://bb5ti5esx3jeh" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_013.png" id="104_oc64g"]
+[ext_resource type="Texture2D" uid="uid://cu3kcm50g7rxb" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_014.png" id="105_u5k4m"]
+[ext_resource type="Texture2D" uid="uid://b56rxwkgm70o3" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_015.png" id="106_7mdau"]
+[ext_resource type="Texture2D" uid="uid://bv0pd5wuhhdr5" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_016.png" id="107_2e53k"]
+[ext_resource type="Texture2D" uid="uid://ca0aegwlq8xx2" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_017.png" id="108_5lu5p"]
+[ext_resource type="Texture2D" uid="uid://dgkvs3yhocth7" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_018.png" id="109_arpnw"]
+[ext_resource type="Texture2D" uid="uid://d0dupylh0xasb" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_019.png" id="110_ul8gb"]
+[ext_resource type="Texture2D" uid="uid://btqdb5ku8hl1r" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_020.png" id="111_hr3we"]
+[ext_resource type="Texture2D" uid="uid://dujl2x3s0njcn" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_021.png" id="112_1mraj"]
+[ext_resource type="Texture2D" uid="uid://cwc5d4ncvdfr2" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_022.png" id="113_c1ira"]
+[ext_resource type="Texture2D" uid="uid://bsvyrj44l35qh" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_023.png" id="114_osleu"]
+[ext_resource type="Texture2D" uid="uid://dddhg1qvd5hhv" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_024.png" id="115_5wun7"]
+[ext_resource type="Texture2D" uid="uid://c1c6kpimptj87" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_025.png" id="116_jeevb"]
+[ext_resource type="Texture2D" uid="uid://d1htk71hv2j7k" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_026.png" id="117_w2hmd"]
+[ext_resource type="Texture2D" uid="uid://dmec5uckxe3pd" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_027.png" id="118_ehu3k"]
+[ext_resource type="Texture2D" uid="uid://cbk6lyn4dp80a" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_028.png" id="119_v2gvh"]
+[ext_resource type="Texture2D" uid="uid://8i1kcww144iy" path="res://texture/data/NPC/Warlord/Greeting_2/0_Warlord_Greeting_2_029.png" id="120_x00n0"]
+[ext_resource type="Texture2D" uid="uid://4yjd5lqd7n8f" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_000.png" id="121_8o7dd"]
+[ext_resource type="Texture2D" uid="uid://cmajm1tm2gst1" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_001.png" id="122_vu42o"]
+[ext_resource type="Texture2D" uid="uid://b2v8dpj366k1w" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_002.png" id="123_jdv3b"]
+[ext_resource type="Texture2D" uid="uid://dks0gq06rilva" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_003.png" id="124_q2o1r"]
+[ext_resource type="Texture2D" uid="uid://d1ogiqtuh0sh0" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_004.png" id="125_i4m74"]
+[ext_resource type="Texture2D" uid="uid://cr875vxltdbmi" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_005.png" id="126_hfo8v"]
+[ext_resource type="Texture2D" uid="uid://d2frl1vy10b5l" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_006.png" id="127_82uwl"]
+[ext_resource type="Texture2D" uid="uid://bbqfsx68mjxf1" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_007.png" id="128_i1k74"]
+[ext_resource type="Texture2D" uid="uid://brevfvki7ofs1" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_008.png" id="129_grj72"]
+[ext_resource type="Texture2D" uid="uid://bapqwaew2yqg1" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_009.png" id="130_pamwn"]
+[ext_resource type="Texture2D" uid="uid://c10unn3smtl2f" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_010.png" id="131_q6rht"]
+[ext_resource type="Texture2D" uid="uid://dwxk26rfo7sfv" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_011.png" id="132_7rdsx"]
+[ext_resource type="Texture2D" uid="uid://c4f8bidr00ilu" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_012.png" id="133_4oypb"]
+[ext_resource type="Texture2D" uid="uid://bpgn83rkmt1wb" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_013.png" id="134_uukic"]
+[ext_resource type="Texture2D" uid="uid://cio5ogtexi14h" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_014.png" id="135_xp5n8"]
+[ext_resource type="Texture2D" uid="uid://f82ry8k828ei" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_015.png" id="136_17fb3"]
+[ext_resource type="Texture2D" uid="uid://b32b7qvhs4bjh" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_016.png" id="137_x05hs"]
+[ext_resource type="Texture2D" uid="uid://brbhawxwg582w" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_017.png" id="138_xn4th"]
+[ext_resource type="Texture2D" uid="uid://oeqgq3ym2h31" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_018.png" id="139_2atcc"]
+[ext_resource type="Texture2D" uid="uid://cstunlcu0hteq" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_019.png" id="140_kpxts"]
+[ext_resource type="Texture2D" uid="uid://cwg8pyabxw3og" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_020.png" id="141_jmxx8"]
+[ext_resource type="Texture2D" uid="uid://ck0wpdereihgi" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_021.png" id="142_fn0mg"]
+[ext_resource type="Texture2D" uid="uid://c57lcr3b4qpyc" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_022.png" id="143_pfegg"]
+[ext_resource type="Texture2D" uid="uid://yk68evnxmq1u" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_023.png" id="144_00a26"]
+[ext_resource type="Texture2D" uid="uid://tw0ouchjv0op" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_024.png" id="145_faovc"]
+[ext_resource type="Texture2D" uid="uid://datxsqnb4hj7" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_025.png" id="146_jxxr2"]
+[ext_resource type="Texture2D" uid="uid://bmk0q108eaxgx" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_026.png" id="147_g5ina"]
+[ext_resource type="Texture2D" uid="uid://d37qotiaj46ya" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_027.png" id="148_t332r"]
+[ext_resource type="Texture2D" uid="uid://d0q3uvb7hu244" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_028.png" id="149_v4i3d"]
+[ext_resource type="Texture2D" uid="uid://dvqu87uj6nirq" path="res://texture/data/NPC/Warlord/Idle/0_Warlord_Idle_029.png" id="150_juk1g"]
+[ext_resource type="Texture2D" uid="uid://b8y6p43f842ck" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_000.png" id="151_ag72f"]
+[ext_resource type="Texture2D" uid="uid://1uph7o0sej17" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_001.png" id="152_1eyco"]
+[ext_resource type="Texture2D" uid="uid://cy5qom0c5l8y6" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_002.png" id="153_1ir4u"]
+[ext_resource type="Texture2D" uid="uid://b0bk7dt3farip" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_003.png" id="154_rwcld"]
+[ext_resource type="Texture2D" uid="uid://vfo0u246ckc" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_004.png" id="155_xye1x"]
+[ext_resource type="Texture2D" uid="uid://cvqygtnd12alx" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_005.png" id="156_r1m8r"]
+[ext_resource type="Texture2D" uid="uid://ccb3j3rop3p2o" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_006.png" id="157_o8kvw"]
+[ext_resource type="Texture2D" uid="uid://b0g4kou186dnn" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_007.png" id="158_ko2gm"]
+[ext_resource type="Texture2D" uid="uid://sycvgqqwbty7" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_008.png" id="159_6gxaq"]
+[ext_resource type="Texture2D" uid="uid://dkv73ji47gka5" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_009.png" id="160_nwtjp"]
+[ext_resource type="Texture2D" uid="uid://baxew0fewiq3r" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_010.png" id="161_kxmp2"]
+[ext_resource type="Texture2D" uid="uid://ck0r360o1x1nf" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_011.png" id="162_q7nmi"]
+[ext_resource type="Texture2D" uid="uid://cm0ilbdkfiahn" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_012.png" id="163_s0k5y"]
+[ext_resource type="Texture2D" uid="uid://d4v26ci746vh" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_013.png" id="164_hm1e5"]
+[ext_resource type="Texture2D" uid="uid://cf1itu6wew7hw" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_014.png" id="165_8cn1b"]
+[ext_resource type="Texture2D" uid="uid://d0gfw13ggokf3" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_015.png" id="166_mirfx"]
+[ext_resource type="Texture2D" uid="uid://coxth3nj1p7x" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_016.png" id="167_s6nbg"]
+[ext_resource type="Texture2D" uid="uid://bun4fky3xtbwq" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_017.png" id="168_5iv3x"]
+[ext_resource type="Texture2D" uid="uid://ck8hxlceveiff" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_018.png" id="169_xvsxq"]
+[ext_resource type="Texture2D" uid="uid://dky1m0061k1su" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_019.png" id="170_snyxw"]
+[ext_resource type="Texture2D" uid="uid://owd8lxqdsjr1" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_020.png" id="171_gd6r0"]
+[ext_resource type="Texture2D" uid="uid://ckvkf7yyrfc75" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_021.png" id="172_ifykq"]
+[ext_resource type="Texture2D" uid="uid://xtg08b0ythke" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_022.png" id="173_fsbya"]
+[ext_resource type="Texture2D" uid="uid://gr6migt8250s" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_023.png" id="174_am3ot"]
+[ext_resource type="Texture2D" uid="uid://glr46sygqyic" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_024.png" id="175_1vi4b"]
+[ext_resource type="Texture2D" uid="uid://dm1qvg3ouybib" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_025.png" id="176_dbfsr"]
+[ext_resource type="Texture2D" uid="uid://dphwb48f0v00o" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_026.png" id="177_3iuvn"]
+[ext_resource type="Texture2D" uid="uid://dssnlnnr70jfe" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_027.png" id="178_gktuv"]
+[ext_resource type="Texture2D" uid="uid://dy1dcsmyuakxw" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_028.png" id="179_1k8j3"]
+[ext_resource type="Texture2D" uid="uid://bta8e2v6c66it" path="res://texture/data/NPC/Warlord/Idle Blinking/0_Warlord_Idle Blinking_029.png" id="180_aphi4"]
+[ext_resource type="Texture2D" uid="uid://dnvyyiywmp238" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_000.png" id="181_ni6cb"]
+[ext_resource type="Texture2D" uid="uid://ci5wfkvnicyx" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_001.png" id="182_uuin6"]
+[ext_resource type="Texture2D" uid="uid://hbjtwsnulehf" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_002.png" id="183_jhe0r"]
+[ext_resource type="Texture2D" uid="uid://bockyxb8mtxi6" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_003.png" id="184_5p3lh"]
+[ext_resource type="Texture2D" uid="uid://c8ngbv3uk7kdl" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_004.png" id="185_k8iu2"]
+[ext_resource type="Texture2D" uid="uid://cvq7tmp34snh7" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_005.png" id="186_46akh"]
+[ext_resource type="Texture2D" uid="uid://cgljmk0jwjmtl" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_006.png" id="187_qeubl"]
+[ext_resource type="Texture2D" uid="uid://dtpeavkeloila" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_007.png" id="188_larel"]
+[ext_resource type="Texture2D" uid="uid://dktrky5jdxo3w" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_008.png" id="189_wdknu"]
+[ext_resource type="Texture2D" uid="uid://dha2dwdagcblh" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_009.png" id="190_o7l6w"]
+[ext_resource type="Texture2D" uid="uid://xdcnkn2wvamb" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_010.png" id="191_x4661"]
+[ext_resource type="Texture2D" uid="uid://dhe0eb5dwybfg" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_011.png" id="192_sh0ul"]
+[ext_resource type="Texture2D" uid="uid://b16ntouacxwiu" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_012.png" id="193_72lcq"]
+[ext_resource type="Texture2D" uid="uid://ugno8ustwxn3" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_013.png" id="194_fdb1m"]
+[ext_resource type="Texture2D" uid="uid://bahlade0bgy35" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_014.png" id="195_q08pp"]
+[ext_resource type="Texture2D" uid="uid://de4wjux550ocj" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_015.png" id="196_npxqm"]
+[ext_resource type="Texture2D" uid="uid://diov7vp1qsehk" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_016.png" id="197_pt0d1"]
+[ext_resource type="Texture2D" uid="uid://des11awx12w3l" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_017.png" id="198_yp1bn"]
+[ext_resource type="Texture2D" uid="uid://dxxqjenivln1p" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_018.png" id="199_7wn6v"]
+[ext_resource type="Texture2D" uid="uid://cvlkk4eox6ago" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_019.png" id="200_m2y8n"]
+[ext_resource type="Texture2D" uid="uid://d2mv51d2hdsbv" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_020.png" id="201_q4dhf"]
+[ext_resource type="Texture2D" uid="uid://dkuencc5gkabo" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_021.png" id="202_t3xvo"]
+[ext_resource type="Texture2D" uid="uid://bflwxndoly42f" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_022.png" id="203_s1hqy"]
+[ext_resource type="Texture2D" uid="uid://c535of0rxrw0u" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_023.png" id="204_yeni3"]
+[ext_resource type="Texture2D" uid="uid://cyjnfdbv8unnq" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_024.png" id="205_2myfv"]
+[ext_resource type="Texture2D" uid="uid://kmooxihj0h6s" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_025.png" id="206_sh8es"]
+[ext_resource type="Texture2D" uid="uid://ck0sabef5bted" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_026.png" id="207_1va36"]
+[ext_resource type="Texture2D" uid="uid://dhfsd6d82dgn5" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_027.png" id="208_5kdl6"]
+[ext_resource type="Texture2D" uid="uid://7vd4tgtc6s0x" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_028.png" id="209_is60l"]
+[ext_resource type="Texture2D" uid="uid://cscjd07ixee5v" path="res://texture/data/NPC/Warlord/Joy/0_Warlord_Joy_029.png" id="210_vt0y0"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_y4kuf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_gto4v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rjx3s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_y1bho")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_naos8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_p6eg8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_dcvxv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_t2062")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_282ab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ydsdi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ar3hx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ggj7t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_lo4eg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vvywj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_o2jdu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_d35pj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_qv0og")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ejk3y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_es2qc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_kckvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_0nmuw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_60ylq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_fvpmb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_2sjg5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_cmwmb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_isoft")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_3c2d8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_3e2rk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_2ibi0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_toodl")
+}],
+"loop": true,
+"name": &"Chagrin",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_awkn1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_stjhi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_jblqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_rocb3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_3i46v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_a6fh0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_kovob")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_n5fln")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_n2i7r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_my5jn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_07jbl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_iljf5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_of50e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_yd5os")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_sp78f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_oa4pt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_ishqn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_id87a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_7txr7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_6ugll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_x7b4q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_3qsh1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_utcd5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_l7tb1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_ipk20")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_lvad1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_h3jmq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_odf3y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_b4547")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_iafvt")
+}],
+"loop": true,
+"name": &"Communication",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("61_w7s3c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_n30eq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_0wn8j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_beljw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_8cnsl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_20ii2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_re5fq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_h5thx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_1onlg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_ryyh3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_34pdd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_3gr8c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_flyuw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_cwyo7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_jp2nd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_mmljn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_63ifd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_hta66")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_73aep")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_aju8v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_gjp8n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_emxcq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_oongt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_lfbvj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_btje6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_2vblg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_n6ko3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_qlqpo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_he6bu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90_f0n8y")
+}],
+"loop": true,
+"name": &"Greeting",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("91_jtg4e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_pt4mr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_iw8sa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("94_6bymy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("95_3kvjm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("96_sdjon")
+}, {
+"duration": 1.0,
+"texture": ExtResource("97_8urx0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_wt4kd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("99_36e50")
+}, {
+"duration": 1.0,
+"texture": ExtResource("100_2233r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("101_ax5tk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("102_fqe0x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("103_sqxet")
+}, {
+"duration": 1.0,
+"texture": ExtResource("104_oc64g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("105_u5k4m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("106_7mdau")
+}, {
+"duration": 1.0,
+"texture": ExtResource("107_2e53k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("108_5lu5p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("109_arpnw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("110_ul8gb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("111_hr3we")
+}, {
+"duration": 1.0,
+"texture": ExtResource("112_1mraj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("113_c1ira")
+}, {
+"duration": 1.0,
+"texture": ExtResource("114_osleu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("115_5wun7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("116_jeevb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("117_w2hmd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("118_ehu3k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("119_v2gvh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("120_x00n0")
+}],
+"loop": true,
+"name": &"Greeting_2",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("121_8o7dd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("122_vu42o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("123_jdv3b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("124_q2o1r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("125_i4m74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("126_hfo8v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("127_82uwl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("128_i1k74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("129_grj72")
+}, {
+"duration": 1.0,
+"texture": ExtResource("130_pamwn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("131_q6rht")
+}, {
+"duration": 1.0,
+"texture": ExtResource("132_7rdsx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("133_4oypb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("134_uukic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("135_xp5n8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("136_17fb3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("137_x05hs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("138_xn4th")
+}, {
+"duration": 1.0,
+"texture": ExtResource("139_2atcc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("140_kpxts")
+}, {
+"duration": 1.0,
+"texture": ExtResource("141_jmxx8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("142_fn0mg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("143_pfegg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("144_00a26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("145_faovc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("146_jxxr2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("147_g5ina")
+}, {
+"duration": 1.0,
+"texture": ExtResource("148_t332r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("149_v4i3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("150_juk1g")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("151_ag72f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("152_1eyco")
+}, {
+"duration": 1.0,
+"texture": ExtResource("153_1ir4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("154_rwcld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("155_xye1x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("156_r1m8r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("157_o8kvw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("158_ko2gm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("159_6gxaq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("160_nwtjp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("161_kxmp2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("162_q7nmi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("163_s0k5y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("164_hm1e5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("165_8cn1b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("166_mirfx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("167_s6nbg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("168_5iv3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("169_xvsxq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("170_snyxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("171_gd6r0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("172_ifykq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("173_fsbya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("174_am3ot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("175_1vi4b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("176_dbfsr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("177_3iuvn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("178_gktuv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("179_1k8j3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("180_aphi4")
+}],
+"loop": true,
+"name": &"Idle Blinking",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("181_ni6cb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("182_uuin6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("183_jhe0r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("184_5p3lh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("185_k8iu2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("186_46akh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("187_qeubl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("188_larel")
+}, {
+"duration": 1.0,
+"texture": ExtResource("189_wdknu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("190_o7l6w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("191_x4661")
+}, {
+"duration": 1.0,
+"texture": ExtResource("192_sh0ul")
+}, {
+"duration": 1.0,
+"texture": ExtResource("193_72lcq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("194_fdb1m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("195_q08pp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("196_npxqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("197_pt0d1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("198_yp1bn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("199_7wn6v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("200_m2y8n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("201_q4dhf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("202_t3xvo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("203_s1hqy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("204_yeni3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("205_2myfv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("206_sh8es")
+}, {
+"duration": 1.0,
+"texture": ExtResource("207_1va36")
+}, {
+"duration": 1.0,
+"texture": ExtResource("208_5kdl6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("209_is60l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("210_vt0y0")
+}],
+"loop": true,
+"name": &"Joy",
+"speed": 15.0
+}]

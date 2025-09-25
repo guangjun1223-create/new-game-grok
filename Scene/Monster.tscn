@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://da330t0vkq6jc"]
+
+[ext_resource type="Script" uid="uid://di6exn0e1fc5b" path="res://script/monster.gd" id="1_iia3d"]
+[ext_resource type="SpriteFrames" uid="uid://ckpv1vl3vaduk" path="res://Data/Slime.tres" id="2_iia3d"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iia3d"]
+radius = 40.0
+height = 80.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qheve"]
+bg_color = Color(0.980392, 0, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qheve"]
+radius = 500.0
+
+[node name="Monster" type="CharacterBody2D" groups=["monsters"]]
+y_sort_enabled = true
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_iia3d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -33)
+scale = Vector2(5, 5)
+sprite_frames = ExtResource("2_iia3d")
+animation = &"Attack"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -33)
+shape = SubResource("CapsuleShape2D_iia3d")
+
+[node name="HPBar" type="ProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = 31.0
+offset_right = 74.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+theme_override_styles/fill = SubResource("StyleBoxFlat_qheve")
+
+[node name="StateTimer" type="Timer" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 50.0
+path_max_distance = 1000.0
+avoidance_enabled = true
+
+[node name="DetectionRadius" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRadius"]
+position = Vector2(-1, -6)
+shape = SubResource("CircleShape2D_qheve")
+debug_color = Color(0.901961, 0.0235294, 0, 0.419608)
+
+[node name="InitTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="DetectionRadius" to="." method="_on_hero_entered"]
+[connection signal="body_exited" from="DetectionRadius" to="." method="_on_hero_exited"]

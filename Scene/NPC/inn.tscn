@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://dh00d4k8mlef6"]
+
+[ext_resource type="Script" uid="uid://dvehvdv1tblb" path="res://script/NPC/inn.gd" id="1_lrt1i"]
+[ext_resource type="SpriteFrames" uid="uid://d1kei4sn1o5wp" path="res://Data/inn NPC.tres" id="2_bgjbq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7to2u"]
+radius = 55.0
+height = 156.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6b3ce"]
+radius = 120.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_bgjbq"]
+font_size = 24
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 1)
+
+[node name="Inn" type="StaticBody2D"]
+y_sort_enabled = true
+collision_mask = 2
+script = ExtResource("1_lrt1i")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -82)
+sprite_frames = ExtResource("2_bgjbq")
+animation = &"Idle"
+frame_progress = 0.26956376
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -73)
+shape = SubResource("CapsuleShape2D_7to2u")
+
+[node name="InnEntranceArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InnEntranceArea"]
+position = Vector2(0, -70)
+shape = SubResource("CircleShape2D_6b3ce")
+
+[node name="StatusBarSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(0, -90)
+
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Label" type="Label" parent="."]
+z_index = -1
+y_sort_enabled = true
+offset_left = -59.0
+offset_top = 21.0
+offset_right = 45.0
+offset_bottom = 55.0
+text = "Quán trọ"
+label_settings = SubResource("LabelSettings_bgjbq")
+
+[connection signal="body_entered" from="InnEntranceArea" to="." method="_on_inn_entrance_area_body_entered"]

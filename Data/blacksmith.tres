@@ -1,0 +1,880 @@
+[gd_resource type="SpriteFrames" load_steps=211 format=3 uid="uid://cn4jrbn6lbl8h"]
+
+[ext_resource type="Texture2D" uid="uid://ck17ylq5b0qyo" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_000.png" id="1_487dg"]
+[ext_resource type="Texture2D" uid="uid://cjbe75ng87v2t" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_001.png" id="2_m6442"]
+[ext_resource type="Texture2D" uid="uid://fhpsppyak8u5" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_002.png" id="3_2nebg"]
+[ext_resource type="Texture2D" uid="uid://cnhan35gsi5ib" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_003.png" id="4_j8n1e"]
+[ext_resource type="Texture2D" uid="uid://lqpb4t6f2d1y" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_004.png" id="5_60h4u"]
+[ext_resource type="Texture2D" uid="uid://cbb35ar7wyrp2" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_005.png" id="6_cc41a"]
+[ext_resource type="Texture2D" uid="uid://b3ij5yf5wtmh8" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_006.png" id="7_h2ggk"]
+[ext_resource type="Texture2D" uid="uid://5aydt2ysvlnb" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_007.png" id="8_120c0"]
+[ext_resource type="Texture2D" uid="uid://b3rljoxrbtckm" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_008.png" id="9_uljf6"]
+[ext_resource type="Texture2D" uid="uid://ljjkj7t3506p" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_009.png" id="10_t0n4b"]
+[ext_resource type="Texture2D" uid="uid://mfvrvdvxciq0" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_010.png" id="11_3kcn7"]
+[ext_resource type="Texture2D" uid="uid://mps1aq813s75" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_011.png" id="12_bgk56"]
+[ext_resource type="Texture2D" uid="uid://8e87kkri448v" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_012.png" id="13_2h7c3"]
+[ext_resource type="Texture2D" uid="uid://5yfm6afk0akm" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_013.png" id="14_solhf"]
+[ext_resource type="Texture2D" uid="uid://bpjapvr6c7wj3" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_014.png" id="15_go668"]
+[ext_resource type="Texture2D" uid="uid://bcv36r7q7hdr1" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_015.png" id="16_os6wv"]
+[ext_resource type="Texture2D" uid="uid://y2upsdqrrvyl" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_016.png" id="17_va040"]
+[ext_resource type="Texture2D" uid="uid://rjudich0qfjm" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_017.png" id="18_g2xpa"]
+[ext_resource type="Texture2D" uid="uid://ckb8c3k31qqpa" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_018.png" id="19_c0jrp"]
+[ext_resource type="Texture2D" uid="uid://b0ggigcfascuo" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_019.png" id="20_x8tyj"]
+[ext_resource type="Texture2D" uid="uid://d30lees86ev2v" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_020.png" id="21_tlgso"]
+[ext_resource type="Texture2D" uid="uid://v2o42kgkucdt" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_021.png" id="22_vhv0p"]
+[ext_resource type="Texture2D" uid="uid://cihb1bkxb8nqj" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_022.png" id="23_vx3cx"]
+[ext_resource type="Texture2D" uid="uid://b3244c72b3ii" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_023.png" id="24_p643a"]
+[ext_resource type="Texture2D" uid="uid://dphtyw8tcgydc" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_024.png" id="25_6wel1"]
+[ext_resource type="Texture2D" uid="uid://ua00q5ratpel" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_025.png" id="26_c1uhm"]
+[ext_resource type="Texture2D" uid="uid://djkucnctxgno4" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_026.png" id="27_pvxyf"]
+[ext_resource type="Texture2D" uid="uid://dwag61se05pqb" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_027.png" id="28_s6hsr"]
+[ext_resource type="Texture2D" uid="uid://c8ogagcb1wyb8" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_028.png" id="29_483bp"]
+[ext_resource type="Texture2D" uid="uid://dtj88ed0t7bf6" path="res://texture/data/NPC/blackSmith/Chagrin/0_Blacksmith_Chagrin_029.png" id="30_qsygs"]
+[ext_resource type="Texture2D" uid="uid://bdu7yldi53jbh" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_000.png" id="31_vtfya"]
+[ext_resource type="Texture2D" uid="uid://chpv6h74aumci" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_001.png" id="32_4s25b"]
+[ext_resource type="Texture2D" uid="uid://dcixievnsss13" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_002.png" id="33_ml0av"]
+[ext_resource type="Texture2D" uid="uid://duuykypjtwgpq" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_003.png" id="34_l3chm"]
+[ext_resource type="Texture2D" uid="uid://cx74y5l84spun" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_004.png" id="35_kxwg1"]
+[ext_resource type="Texture2D" uid="uid://07mc2uagjcqd" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_005.png" id="36_wbo4d"]
+[ext_resource type="Texture2D" uid="uid://btgswr4s2mp1m" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_006.png" id="37_bj0jy"]
+[ext_resource type="Texture2D" uid="uid://brgwi3ww1fnvt" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_007.png" id="38_7oryx"]
+[ext_resource type="Texture2D" uid="uid://d0c2d8b6ri37w" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_008.png" id="39_h5p0h"]
+[ext_resource type="Texture2D" uid="uid://lsy0v257mnb4" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_009.png" id="40_jm5mv"]
+[ext_resource type="Texture2D" uid="uid://dryqnmww5hhm7" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_010.png" id="41_4wmjd"]
+[ext_resource type="Texture2D" uid="uid://bjx7uj60esagb" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_011.png" id="42_rjnbu"]
+[ext_resource type="Texture2D" uid="uid://vqiu7u50w5bx" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_012.png" id="43_gtx3p"]
+[ext_resource type="Texture2D" uid="uid://d2ivcjmivckk4" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_013.png" id="44_g021x"]
+[ext_resource type="Texture2D" uid="uid://c03tavtknixcs" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_014.png" id="45_1jl8i"]
+[ext_resource type="Texture2D" uid="uid://4uf0dia5mcvc" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_015.png" id="46_v726w"]
+[ext_resource type="Texture2D" uid="uid://vy1tqe1jcwax" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_016.png" id="47_fmjat"]
+[ext_resource type="Texture2D" uid="uid://c81cusbx464ou" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_017.png" id="48_x2v7g"]
+[ext_resource type="Texture2D" uid="uid://cpid6wnqv34ag" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_018.png" id="49_pgky7"]
+[ext_resource type="Texture2D" uid="uid://5402t2ynwaqc" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_019.png" id="50_7ph8l"]
+[ext_resource type="Texture2D" uid="uid://dkpc16cjit5kq" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_020.png" id="51_vp142"]
+[ext_resource type="Texture2D" uid="uid://d18df4d5pf71h" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_021.png" id="52_ufuc7"]
+[ext_resource type="Texture2D" uid="uid://btakob830i6n1" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_022.png" id="53_nyf3f"]
+[ext_resource type="Texture2D" uid="uid://djiu3p8nax2xp" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_023.png" id="54_kxr34"]
+[ext_resource type="Texture2D" uid="uid://cja54n5nc7wkv" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_024.png" id="55_75iay"]
+[ext_resource type="Texture2D" uid="uid://bo38472xtgfa4" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_025.png" id="56_uu144"]
+[ext_resource type="Texture2D" uid="uid://bdqfvplggom6v" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_026.png" id="57_lqc17"]
+[ext_resource type="Texture2D" uid="uid://mdgwoitt0d2l" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_027.png" id="58_ceus3"]
+[ext_resource type="Texture2D" uid="uid://6np3rcpiwr1y" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_028.png" id="59_aubxw"]
+[ext_resource type="Texture2D" uid="uid://b660r0uspo2gh" path="res://texture/data/NPC/blackSmith/Communication/0_Blacksmith_Communication_029.png" id="60_ojkv2"]
+[ext_resource type="Texture2D" uid="uid://c6heckhkbld1d" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_000.png" id="61_jnnmx"]
+[ext_resource type="Texture2D" uid="uid://k3xxjlu4fr0n" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_001.png" id="62_yre1x"]
+[ext_resource type="Texture2D" uid="uid://b1o2pkfdx6428" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_002.png" id="63_qrfhq"]
+[ext_resource type="Texture2D" uid="uid://b56vojupl85t4" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_003.png" id="64_m5pyc"]
+[ext_resource type="Texture2D" uid="uid://dy2u67r015kt1" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_004.png" id="65_0rykw"]
+[ext_resource type="Texture2D" uid="uid://cdea0m2607gmy" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_005.png" id="66_1m8vq"]
+[ext_resource type="Texture2D" uid="uid://bc85n3ikr725b" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_006.png" id="67_cnumv"]
+[ext_resource type="Texture2D" uid="uid://cgo1rbs0au6tb" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_007.png" id="68_33hww"]
+[ext_resource type="Texture2D" uid="uid://bxoc5uiipid7m" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_008.png" id="69_omnnb"]
+[ext_resource type="Texture2D" uid="uid://di1ofm7txe5n2" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_009.png" id="70_m2ya4"]
+[ext_resource type="Texture2D" uid="uid://6jt6utrxki1g" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_010.png" id="71_tnhud"]
+[ext_resource type="Texture2D" uid="uid://d00enobll7fis" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_011.png" id="72_gsbcx"]
+[ext_resource type="Texture2D" uid="uid://cbgopuj64y5xq" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_012.png" id="73_ln21e"]
+[ext_resource type="Texture2D" uid="uid://bk01aykhjs6gx" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_013.png" id="74_dvr37"]
+[ext_resource type="Texture2D" uid="uid://q80psmmkflso" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_014.png" id="75_bax5y"]
+[ext_resource type="Texture2D" uid="uid://diy4myp0afsyn" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_015.png" id="76_1tqo4"]
+[ext_resource type="Texture2D" uid="uid://dydd7o4surt1h" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_016.png" id="77_01wai"]
+[ext_resource type="Texture2D" uid="uid://nv3po8k3xv5o" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_017.png" id="78_x1c5k"]
+[ext_resource type="Texture2D" uid="uid://dqd8br3ar0urv" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_018.png" id="79_cyad1"]
+[ext_resource type="Texture2D" uid="uid://cdv8dm77ktm44" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_019.png" id="80_k4p6f"]
+[ext_resource type="Texture2D" uid="uid://cnxwcjx8l6k8g" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_020.png" id="81_yujul"]
+[ext_resource type="Texture2D" uid="uid://cq3r7xi2nged" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_021.png" id="82_dcrks"]
+[ext_resource type="Texture2D" uid="uid://dlssq1sehff47" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_022.png" id="83_1uffe"]
+[ext_resource type="Texture2D" uid="uid://cdvrgq24d8g8u" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_023.png" id="84_hg0q0"]
+[ext_resource type="Texture2D" uid="uid://dneit47t2elb1" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_024.png" id="85_e6nqm"]
+[ext_resource type="Texture2D" uid="uid://c4yavjt40rd3h" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_025.png" id="86_waqak"]
+[ext_resource type="Texture2D" uid="uid://becfh8ijnb60j" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_026.png" id="87_8meut"]
+[ext_resource type="Texture2D" uid="uid://c1pqsgawhoj8i" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_027.png" id="88_ednpj"]
+[ext_resource type="Texture2D" uid="uid://chj25bt4wemqa" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_028.png" id="89_3sp07"]
+[ext_resource type="Texture2D" uid="uid://drlyos0im4q3r" path="res://texture/data/NPC/blackSmith/Greeting/0_Blacksmith_Greeting_029.png" id="90_kplic"]
+[ext_resource type="Texture2D" uid="uid://c3l8ljuo26r16" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_000.png" id="91_ov60s"]
+[ext_resource type="Texture2D" uid="uid://chm3mmbt06yvm" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_001.png" id="92_i2x1f"]
+[ext_resource type="Texture2D" uid="uid://c1ayccrdwlwxp" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_002.png" id="93_tau5u"]
+[ext_resource type="Texture2D" uid="uid://cumnwfutb818v" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_003.png" id="94_kxafy"]
+[ext_resource type="Texture2D" uid="uid://c6ehvuj6jbrrb" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_004.png" id="95_4bkql"]
+[ext_resource type="Texture2D" uid="uid://bk2p8prbg8uyp" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_005.png" id="96_bfnyx"]
+[ext_resource type="Texture2D" uid="uid://c3bkr2l8ualdj" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_006.png" id="97_vf7nr"]
+[ext_resource type="Texture2D" uid="uid://gji4p3jenf4v" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_007.png" id="98_1jvw4"]
+[ext_resource type="Texture2D" uid="uid://vg6djcki7vfh" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_008.png" id="99_f6680"]
+[ext_resource type="Texture2D" uid="uid://bka0du5akm6rr" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_009.png" id="100_wt55x"]
+[ext_resource type="Texture2D" uid="uid://dpt5g3kg8rskt" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_010.png" id="101_l5cfw"]
+[ext_resource type="Texture2D" uid="uid://bafj264voo02e" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_011.png" id="102_5f7li"]
+[ext_resource type="Texture2D" uid="uid://dbw6y2seno6tm" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_012.png" id="103_qy0hp"]
+[ext_resource type="Texture2D" uid="uid://o3swnput4xgw" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_013.png" id="104_cf08m"]
+[ext_resource type="Texture2D" uid="uid://ccqtq0yxu76tu" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_014.png" id="105_dbgem"]
+[ext_resource type="Texture2D" uid="uid://da6fbacwe88tx" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_015.png" id="106_7xvu1"]
+[ext_resource type="Texture2D" uid="uid://gcehh7l2hj7c" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_016.png" id="107_gutg6"]
+[ext_resource type="Texture2D" uid="uid://i38ccvnqw31x" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_017.png" id="108_fv3sx"]
+[ext_resource type="Texture2D" uid="uid://8k5mqjp5ay0r" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_018.png" id="109_pesrn"]
+[ext_resource type="Texture2D" uid="uid://necxa8bxi03x" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_019.png" id="110_kngmc"]
+[ext_resource type="Texture2D" uid="uid://du521ju656223" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_020.png" id="111_ndtm6"]
+[ext_resource type="Texture2D" uid="uid://ut4i4786l3ip" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_021.png" id="112_4lwyd"]
+[ext_resource type="Texture2D" uid="uid://b8ifc45ywpq7i" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_022.png" id="113_vaewb"]
+[ext_resource type="Texture2D" uid="uid://bbsedi3vjhqn0" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_023.png" id="114_fse28"]
+[ext_resource type="Texture2D" uid="uid://c86iden1puawn" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_024.png" id="115_devyc"]
+[ext_resource type="Texture2D" uid="uid://ciqpnyxrv13pw" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_025.png" id="116_1p3jm"]
+[ext_resource type="Texture2D" uid="uid://cs52l2fsx131x" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_026.png" id="117_kssps"]
+[ext_resource type="Texture2D" uid="uid://dy7exqlakaq8w" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_027.png" id="118_7y07n"]
+[ext_resource type="Texture2D" uid="uid://c7jcyvqfwhfx6" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_028.png" id="119_wrf0o"]
+[ext_resource type="Texture2D" uid="uid://bmv6rlrw618f5" path="res://texture/data/NPC/blackSmith/Greeting_2/0_Blacksmith_Greeting_2_029.png" id="120_46uhl"]
+[ext_resource type="Texture2D" uid="uid://dewmxhtjcp7t0" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_000.png" id="121_06khi"]
+[ext_resource type="Texture2D" uid="uid://d1fm75vajh7py" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_001.png" id="122_6kdp0"]
+[ext_resource type="Texture2D" uid="uid://bb2m0mkciro7e" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_002.png" id="123_deva8"]
+[ext_resource type="Texture2D" uid="uid://b64yl667ww2vv" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_003.png" id="124_880dq"]
+[ext_resource type="Texture2D" uid="uid://ds6survht4kb1" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_004.png" id="125_eovbb"]
+[ext_resource type="Texture2D" uid="uid://exvkhnce0e2x" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_005.png" id="126_snoqm"]
+[ext_resource type="Texture2D" uid="uid://fk4cuakne4hw" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_006.png" id="127_cmqrh"]
+[ext_resource type="Texture2D" uid="uid://be7dvfcsynk3b" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_007.png" id="128_f4r15"]
+[ext_resource type="Texture2D" uid="uid://j858uxejni0g" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_008.png" id="129_wr3cp"]
+[ext_resource type="Texture2D" uid="uid://djqebo6b8av2p" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_009.png" id="130_2doqw"]
+[ext_resource type="Texture2D" uid="uid://0fw2w3sknekc" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_010.png" id="131_nrk6x"]
+[ext_resource type="Texture2D" uid="uid://rufwoupeoveo" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_011.png" id="132_nqxs3"]
+[ext_resource type="Texture2D" uid="uid://btqn8jxljcyo5" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_012.png" id="133_e14sh"]
+[ext_resource type="Texture2D" uid="uid://dinrkeslwvdxm" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_013.png" id="134_kierp"]
+[ext_resource type="Texture2D" uid="uid://dyvikxjo6p64x" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_014.png" id="135_ppb71"]
+[ext_resource type="Texture2D" uid="uid://dcu1iwfouk03k" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_015.png" id="136_nynfe"]
+[ext_resource type="Texture2D" uid="uid://boecjvmiqiuvr" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_016.png" id="137_8owe5"]
+[ext_resource type="Texture2D" uid="uid://n0tknbmkoodp" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_017.png" id="138_o0yl0"]
+[ext_resource type="Texture2D" uid="uid://dmwsvxv1m3ld1" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_018.png" id="139_i72pi"]
+[ext_resource type="Texture2D" uid="uid://bgyr3hrmoyabt" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_019.png" id="140_8s5lb"]
+[ext_resource type="Texture2D" uid="uid://dcxk65bmkr8td" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_020.png" id="141_j4qoh"]
+[ext_resource type="Texture2D" uid="uid://d2d6pwjm35nwg" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_021.png" id="142_jnxe6"]
+[ext_resource type="Texture2D" uid="uid://blb17uepx5n0t" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_022.png" id="143_itwed"]
+[ext_resource type="Texture2D" uid="uid://d117glwwhpi2m" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_023.png" id="144_x7gkb"]
+[ext_resource type="Texture2D" uid="uid://4ewagbwudq3f" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_024.png" id="145_vrcyw"]
+[ext_resource type="Texture2D" uid="uid://dkf2dwyx6hwnt" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_025.png" id="146_5y5i1"]
+[ext_resource type="Texture2D" uid="uid://bqwo5ks42dd47" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_026.png" id="147_sjs3e"]
+[ext_resource type="Texture2D" uid="uid://bgrxe6blxyf8w" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_027.png" id="148_oiwrv"]
+[ext_resource type="Texture2D" uid="uid://b1g70axfo5nrn" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_028.png" id="149_ywxwa"]
+[ext_resource type="Texture2D" uid="uid://bcsda0xmvflt4" path="res://texture/data/NPC/blackSmith/Idle/0_Blacksmith_Idle_029.png" id="150_7mkit"]
+[ext_resource type="Texture2D" uid="uid://dsquj7nvh7tb3" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_000.png" id="151_2ci4g"]
+[ext_resource type="Texture2D" uid="uid://bti2d5cbqymqy" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_001.png" id="152_q3up2"]
+[ext_resource type="Texture2D" uid="uid://cnit0kge2nk76" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_002.png" id="153_r66p8"]
+[ext_resource type="Texture2D" uid="uid://dqlpiuvk4d6si" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_003.png" id="154_3a8da"]
+[ext_resource type="Texture2D" uid="uid://xkdtm1yyl5fo" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_004.png" id="155_m05cu"]
+[ext_resource type="Texture2D" uid="uid://d2xgoqmqdu5o6" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_005.png" id="156_m157l"]
+[ext_resource type="Texture2D" uid="uid://bag08gd71a2br" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_006.png" id="157_yhpic"]
+[ext_resource type="Texture2D" uid="uid://c62f6xsrqf66b" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_007.png" id="158_rebu6"]
+[ext_resource type="Texture2D" uid="uid://drw5wy3gfe8mi" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_008.png" id="159_ojh1e"]
+[ext_resource type="Texture2D" uid="uid://bcg3wkrcmnno3" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_009.png" id="160_ujvvc"]
+[ext_resource type="Texture2D" uid="uid://dybv813yfk746" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_010.png" id="161_t28lr"]
+[ext_resource type="Texture2D" uid="uid://cdqhwu15ynhnm" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_011.png" id="162_nf8oy"]
+[ext_resource type="Texture2D" uid="uid://chqr2ex0n72mo" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_012.png" id="163_cvs5k"]
+[ext_resource type="Texture2D" uid="uid://dcg1egnyo5x1q" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_013.png" id="164_bdf8r"]
+[ext_resource type="Texture2D" uid="uid://cta43ted0d66e" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_014.png" id="165_1yicd"]
+[ext_resource type="Texture2D" uid="uid://dc21m4ii8y6a1" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_015.png" id="166_x2hrb"]
+[ext_resource type="Texture2D" uid="uid://dyk08t7cn2vpv" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_016.png" id="167_kswjw"]
+[ext_resource type="Texture2D" uid="uid://b44qgvsy8bdrd" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_017.png" id="168_joyqj"]
+[ext_resource type="Texture2D" uid="uid://ba10whchfgej7" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_018.png" id="169_tn8ly"]
+[ext_resource type="Texture2D" uid="uid://cnu5snt6fkagv" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_019.png" id="170_q1wh8"]
+[ext_resource type="Texture2D" uid="uid://bhr4j547bm0nk" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_020.png" id="171_hgtto"]
+[ext_resource type="Texture2D" uid="uid://bl0ytgrtio36u" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_021.png" id="172_qd6br"]
+[ext_resource type="Texture2D" uid="uid://dpwjfyb53y856" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_022.png" id="173_lo2t0"]
+[ext_resource type="Texture2D" uid="uid://ci7yl0h6e2etg" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_023.png" id="174_felkq"]
+[ext_resource type="Texture2D" uid="uid://d1xudqgrb8iro" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_024.png" id="175_4l17q"]
+[ext_resource type="Texture2D" uid="uid://cqqed1n084o2m" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_025.png" id="176_cienw"]
+[ext_resource type="Texture2D" uid="uid://cfn7nfetuooqi" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_026.png" id="177_2uv5e"]
+[ext_resource type="Texture2D" uid="uid://bx1o0e0hr4ck7" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_027.png" id="178_pa6k4"]
+[ext_resource type="Texture2D" uid="uid://3bv2wl48o3jc" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_028.png" id="179_whhdd"]
+[ext_resource type="Texture2D" uid="uid://cx0g5kqbmoxnm" path="res://texture/data/NPC/blackSmith/Idle Blinking/0_Blacksmith_Idle Blinking_029.png" id="180_lscvi"]
+[ext_resource type="Texture2D" uid="uid://bfkq43gcv5k43" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_000.png" id="181_od5le"]
+[ext_resource type="Texture2D" uid="uid://bdfo4nv3vos6u" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_001.png" id="182_khcrd"]
+[ext_resource type="Texture2D" uid="uid://dciixxhlo61f8" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_002.png" id="183_o1hye"]
+[ext_resource type="Texture2D" uid="uid://cm6s74q4y70ph" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_003.png" id="184_s106d"]
+[ext_resource type="Texture2D" uid="uid://q1yn07g37xdf" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_004.png" id="185_pbbn2"]
+[ext_resource type="Texture2D" uid="uid://dx8tchmjjjljy" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_005.png" id="186_agd8c"]
+[ext_resource type="Texture2D" uid="uid://2i8iyjnej0ja" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_006.png" id="187_stul3"]
+[ext_resource type="Texture2D" uid="uid://mcew87pjbcja" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_007.png" id="188_f6uoa"]
+[ext_resource type="Texture2D" uid="uid://bublilarysu5y" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_008.png" id="189_bkgwe"]
+[ext_resource type="Texture2D" uid="uid://c8mm18gdyv8pf" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_009.png" id="190_6tvah"]
+[ext_resource type="Texture2D" uid="uid://b6doaycbip31c" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_010.png" id="191_ekoeo"]
+[ext_resource type="Texture2D" uid="uid://b3ilmvkju27y0" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_011.png" id="192_ipy6l"]
+[ext_resource type="Texture2D" uid="uid://c0fdj8wkgdj8u" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_012.png" id="193_wlwyd"]
+[ext_resource type="Texture2D" uid="uid://rs137wyad5i6" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_013.png" id="194_ogrqn"]
+[ext_resource type="Texture2D" uid="uid://bcpp62vhxu2j1" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_014.png" id="195_qftba"]
+[ext_resource type="Texture2D" uid="uid://cvnp76tt26gya" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_015.png" id="196_k7l0t"]
+[ext_resource type="Texture2D" uid="uid://bvt1ihuw670k5" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_016.png" id="197_twsfk"]
+[ext_resource type="Texture2D" uid="uid://dwtw8m1dxyd7v" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_017.png" id="198_js56d"]
+[ext_resource type="Texture2D" uid="uid://bpb1omu5us5f2" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_018.png" id="199_rd0jj"]
+[ext_resource type="Texture2D" uid="uid://fm76ubetjy83" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_019.png" id="200_i1dip"]
+[ext_resource type="Texture2D" uid="uid://cmy1odr32g4pk" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_020.png" id="201_fjtb8"]
+[ext_resource type="Texture2D" uid="uid://djenh4iyaq8kn" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_021.png" id="202_ukf1u"]
+[ext_resource type="Texture2D" uid="uid://g0kqdklmh0b6" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_022.png" id="203_lfe4p"]
+[ext_resource type="Texture2D" uid="uid://c0nm4o18wmcbo" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_023.png" id="204_4f87i"]
+[ext_resource type="Texture2D" uid="uid://b3nuy8jltrqgl" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_024.png" id="205_kwv3n"]
+[ext_resource type="Texture2D" uid="uid://cl7xm0l8pgfp7" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_025.png" id="206_7haod"]
+[ext_resource type="Texture2D" uid="uid://hxs3x21mfwu7" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_026.png" id="207_bh3dh"]
+[ext_resource type="Texture2D" uid="uid://d35l1ypwhw3hk" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_027.png" id="208_1qqs6"]
+[ext_resource type="Texture2D" uid="uid://dtcw1pibi4frl" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_028.png" id="209_8tb4y"]
+[ext_resource type="Texture2D" uid="uid://b7xwdygam24jy" path="res://texture/data/NPC/blackSmith/Joy/0_Blacksmith_Joy_029.png" id="210_7hbg2"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_487dg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_m6442")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2nebg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_j8n1e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_60h4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_cc41a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_h2ggk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_120c0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_uljf6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_t0n4b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3kcn7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_bgk56")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_2h7c3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_solhf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_go668")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_os6wv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_va040")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_g2xpa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_c0jrp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_x8tyj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_tlgso")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_vhv0p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_vx3cx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_p643a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_6wel1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_c1uhm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_pvxyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_s6hsr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_483bp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_qsygs")
+}],
+"loop": true,
+"name": &"Chagrin",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_vtfya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_4s25b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_ml0av")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_l3chm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_kxwg1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_wbo4d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_bj0jy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_7oryx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_h5p0h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_jm5mv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_4wmjd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_rjnbu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_gtx3p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_g021x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_1jl8i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_v726w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_fmjat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_x2v7g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_pgky7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_7ph8l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_vp142")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_ufuc7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_nyf3f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_kxr34")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_75iay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_uu144")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_lqc17")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_ceus3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_aubxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_ojkv2")
+}],
+"loop": true,
+"name": &"Communication",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("61_jnnmx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_yre1x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_qrfhq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_m5pyc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_0rykw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_1m8vq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_cnumv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_33hww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_omnnb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_m2ya4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_tnhud")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_gsbcx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_ln21e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_dvr37")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_bax5y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_1tqo4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_01wai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_x1c5k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_cyad1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_k4p6f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_yujul")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_dcrks")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_1uffe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_hg0q0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_e6nqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_waqak")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_8meut")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_ednpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_3sp07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90_kplic")
+}],
+"loop": true,
+"name": &"Greeting",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("91_ov60s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_i2x1f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_tau5u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("94_kxafy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("95_4bkql")
+}, {
+"duration": 1.0,
+"texture": ExtResource("96_bfnyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("97_vf7nr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_1jvw4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("99_f6680")
+}, {
+"duration": 1.0,
+"texture": ExtResource("100_wt55x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("101_l5cfw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("102_5f7li")
+}, {
+"duration": 1.0,
+"texture": ExtResource("103_qy0hp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("104_cf08m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("105_dbgem")
+}, {
+"duration": 1.0,
+"texture": ExtResource("106_7xvu1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("107_gutg6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("108_fv3sx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("109_pesrn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("110_kngmc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("111_ndtm6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("112_4lwyd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("113_vaewb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("114_fse28")
+}, {
+"duration": 1.0,
+"texture": ExtResource("115_devyc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("116_1p3jm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("117_kssps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("118_7y07n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("119_wrf0o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("120_46uhl")
+}],
+"loop": true,
+"name": &"Greeting_2",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("121_06khi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("122_6kdp0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("123_deva8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("124_880dq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("125_eovbb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("126_snoqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("127_cmqrh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("128_f4r15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("129_wr3cp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("130_2doqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("131_nrk6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("132_nqxs3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("133_e14sh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("134_kierp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("135_ppb71")
+}, {
+"duration": 1.0,
+"texture": ExtResource("136_nynfe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("137_8owe5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("138_o0yl0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("139_i72pi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("140_8s5lb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("141_j4qoh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("142_jnxe6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("143_itwed")
+}, {
+"duration": 1.0,
+"texture": ExtResource("144_x7gkb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("145_vrcyw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("146_5y5i1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("147_sjs3e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("148_oiwrv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("149_ywxwa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("150_7mkit")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("151_2ci4g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("152_q3up2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("153_r66p8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("154_3a8da")
+}, {
+"duration": 1.0,
+"texture": ExtResource("155_m05cu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("156_m157l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("157_yhpic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("158_rebu6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("159_ojh1e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("160_ujvvc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("161_t28lr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("162_nf8oy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("163_cvs5k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("164_bdf8r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("165_1yicd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("166_x2hrb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("167_kswjw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("168_joyqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("169_tn8ly")
+}, {
+"duration": 1.0,
+"texture": ExtResource("170_q1wh8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("171_hgtto")
+}, {
+"duration": 1.0,
+"texture": ExtResource("172_qd6br")
+}, {
+"duration": 1.0,
+"texture": ExtResource("173_lo2t0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("174_felkq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("175_4l17q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("176_cienw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("177_2uv5e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("178_pa6k4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("179_whhdd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("180_lscvi")
+}],
+"loop": true,
+"name": &"Idle Blinking",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("181_od5le")
+}, {
+"duration": 1.0,
+"texture": ExtResource("182_khcrd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("183_o1hye")
+}, {
+"duration": 1.0,
+"texture": ExtResource("184_s106d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("185_pbbn2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("186_agd8c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("187_stul3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("188_f6uoa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("189_bkgwe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("190_6tvah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("191_ekoeo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("192_ipy6l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("193_wlwyd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("194_ogrqn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("195_qftba")
+}, {
+"duration": 1.0,
+"texture": ExtResource("196_k7l0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("197_twsfk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("198_js56d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("199_rd0jj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("200_i1dip")
+}, {
+"duration": 1.0,
+"texture": ExtResource("201_fjtb8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("202_ukf1u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("203_lfe4p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("204_4f87i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("205_kwv3n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("206_7haod")
+}, {
+"duration": 1.0,
+"texture": ExtResource("207_bh3dh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("208_1qqs6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("209_8tb4y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("210_7hbg2")
+}],
+"loop": true,
+"name": &"Joy",
+"speed": 30.0
+}]

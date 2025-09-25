@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci77liajdwugv"]
+
+[ext_resource type="SpriteFrames" uid="uid://b585o2ot5twd0" path="res://Data/items/MagicBoltAnim.tres" id="1_b6i4h"]
+[ext_resource type="Script" uid="uid://cnmvkm4xxc02c" path="res://script/UI/magic.gd" id="1_ujtiw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ujtiw"]
+radius = 24.0
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_ujtiw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_b6i4h")
+animation = &"hit"
+frame = 7
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ujtiw")
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true

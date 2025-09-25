@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cepi6shp033kj"]
+
+[ext_resource type="Script" uid="uid://b3ld4vjnrkuek" path="res://script/dropped_item.gd" id="1_g4283"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_flk2h"]
+radius = 100.0
+
+[node name="DroppedItem" type="Area2D"]
+z_index = -1
+scale = Vector2(0.7, 0.7)
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_g4283")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_flk2h")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 40.0
+one_shot = true
+autostart = true

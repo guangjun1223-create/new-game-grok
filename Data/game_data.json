@@ -1,0 +1,186 @@
+{
+  "job_classes": {
+	"Novice": "Tân Binh", "Swordsman": "Kiếm Sĩ", "Mage": "Pháp Sư", "Archer": "Cung Thủ",
+	"Thief": "Đạo Tặc", "Acolyte": "Tu Sĩ", "Knight": "Hiệp Sĩ", "Crusader": "Thánh Kỵ Sĩ",
+	"Wizard": "Thuật Sĩ", "Sage": "Học Giả", "Hunter": "Thợ Săn", "Sniper": "Xạ Thủ",
+	"Assassin": "Sát Thủ", "Rogue": "Kẻ Lãng Du", "Priest": "Linh Mục", "Monk": "Tu Binh",
+	"Lord_Knight": "Lãnh Chúa Kỵ Sĩ", "Paladin": "Hiệp Sĩ Bão Tố", "High_Wizard": "Đại Pháp Sư",
+	"Professor": "Giáo Sư", "Ranger": "Kiểm Lâm", "Gunslinger": "Tay Súng",
+	"Assassin_Cross": "Thích Khách Tinh Anh", "Stalker": "Kẻ Rình Rập",
+	"High_Priest": "Đại Tư Tế", "Champion": "Võ Vương"
+  },
+  "names": {
+	"first_names": ["An", "Bình", "Chi", "Dũng", "Hà", "Khánh", "Lan", "Minh", "Nam", "Thảo"],
+	"middle_names": ["Văn", "Thị", "Hữu", "Ngọc", "Phúc", "Minh", "Thanh", "Tấn", "Khánh", "Anh"],
+	"surnames": ["Nguyễn", "Trần", "Lê", "Phạm", "Hoàng", "Huỳnh", "Phan", "Vũ", "Võ", "Đặng"]
+  },
+  "heroes": {
+	"Novice": {
+	  "base_level": 1, "str": 1, "agi": 1, "vit": 1, "int": 1, "dex": 1, "luk": 1,
+	  "job_hp_factor": 3.0, "job_sp_factor": 0.5, "trans_mod": 1.0,
+	  "str_growth": 0.2, "agi_growth": 0.2, "vit_growth": 0.2, "int_growth": 0.2, "dex_growth": 0.2, "luk_growth": 0.2
+	},
+	"Swordsman": {
+	  "base_level": 10, "str": 8, "agi": 4, "vit": 6, "int": 2, "dex": 4, "luk": 2,
+	  "job_hp_factor": 5.5, "job_sp_factor": 0.8, "trans_mod": 1.0,
+	  "str_growth": 0.6, "agi_growth": 0.3, "vit_growth": 0.5, "int_growth": 0.1, "dex_growth": 0.3, "luk_growth": 0.2
+	},
+	"Mage": {
+	  "base_level": 10, "str": 2, "agi": 3, "vit": 4, "int": 8, "dex": 5, "luk": 3,
+	  "job_hp_factor": 3.0, "job_sp_factor": 2.0, "trans_mod": 1.0,
+	  "str_growth": 0.1, "agi_growth": 0.2, "vit_growth": 0.3, "int_growth": 0.6, "dex_growth": 0.4, "luk_growth": 0.2
+	},
+	"Archer": {
+	  "base_level": 10, "str": 4, "agi": 6, "vit": 4, "int": 3, "dex": 8, "luk": 4,
+	  "job_hp_factor": 4.0, "job_sp_factor": 1.0, "trans_mod": 1.0,
+	  "str_growth": 0.3, "agi_growth": 0.5, "vit_growth": 0.3, "int_growth": 0.2, "dex_growth": 0.6, "luk_growth": 0.3
+	},
+	"Thief": {
+	  "base_level": 10, "str": 5, "agi": 8, "vit": 4, "int": 2, "dex": 6, "luk": 5,
+	  "job_hp_factor": 4.0, "job_sp_factor": 0.9, "trans_mod": 1.0,
+	  "str_growth": 0.4, "agi_growth": 0.6, "vit_growth": 0.3, "int_growth": 0.1, "dex_growth": 0.5, "luk_growth": 0.4
+	},
+	"Acolyte": {
+	  "base_level": 10, "str": 4, "agi": 3, "vit": 5, "int": 7, "dex": 4, "luk": 5,
+	  "job_hp_factor": 3.5, "job_sp_factor": 1.8, "trans_mod": 1.0,
+	  "str_growth": 0.3, "agi_growth": 0.2, "vit_growth": 0.4, "int_growth": 0.5, "dex_growth": 0.3, "luk_growth": 0.4
+	},
+	"Knight": {
+	  "base_level": 1, "str": 10, "agi": 5, "vit": 8, "int": 2, "dex": 5, "luk": 3,
+	  "job_hp_factor": 7.0, "job_sp_factor": 1.0, "trans_mod": 1.0,
+	  "str_growth": 0.7, "agi_growth": 0.4, "vit_growth": 0.6, "int_growth": 0.1, "dex_growth": 0.4, "luk_growth": 0.2
+	},
+	"Crusader": {
+	  "base_level": 1, "str": 8, "agi": 4, "vit": 10, "int": 4, "dex": 5, "luk": 4,
+	  "job_hp_factor": 6.5, "job_sp_factor": 1.2, "trans_mod": 1.0,
+	  "str_growth": 0.5, "agi_growth": 0.3, "vit_growth": 0.7, "int_growth": 0.2, "dex_growth": 0.4, "luk_growth": 0.3
+	},
+	"Wizard": {
+	  "base_level": 1, "str": 2, "agi": 4, "vit": 4, "int": 10, "dex": 6, "luk": 3,
+	  "job_hp_factor": 3.2, "job_sp_factor": 2.5, "trans_mod": 1.0,
+	  "str_growth": 0.1, "agi_growth": 0.3, "vit_growth": 0.3, "int_growth": 0.7, "dex_growth": 0.5, "luk_growth": 0.2
+	},
+	"Sage": {
+	  "base_level": 1, "str": 3, "agi": 5, "vit": 5, "int": 9, "dex": 6, "luk": 4,
+	  "job_hp_factor": 3.5, "job_sp_factor": 2.3, "trans_mod": 1.0,
+	  "str_growth": 0.2, "agi_growth": 0.4, "vit_growth": 0.4, "int_growth": 0.6, "dex_growth": 0.5, "luk_growth": 0.3
+	},
+	"Hunter": {
+	  "base_level": 1, "str": 5, "agi": 8, "vit": 5, "int": 3, "dex": 10, "luk": 5,
+	  "job_hp_factor": 4.5, "job_sp_factor": 1.2, "trans_mod": 1.0,
+	  "str_growth": 0.3, "agi_growth": 0.6, "vit_growth": 0.4, "int_growth": 0.2, "dex_growth": 0.7, "luk_growth": 0.4
+	},
+	"Sniper": {
+	  "base_level": 1, "str": 6, "agi": 9, "vit": 5, "int": 3, "dex": 11, "luk": 6,
+	  "job_hp_factor": 4.7, "job_sp_factor": 1.3, "trans_mod": 1.0,
+	  "str_growth": 0.4, "agi_growth": 0.7, "vit_growth": 0.4, "int_growth": 0.2, "dex_growth": 0.8, "luk_growth": 0.5
+	},
+	"Assassin": {
+	  "base_level": 1, "str": 7, "agi": 9, "vit": 5, "int": 2, "dex": 7, "luk": 5,
+	  "job_hp_factor": 4.2, "job_sp_factor": 1.0, "trans_mod": 1.0,
+	  "str_growth": 0.5, "agi_growth": 0.7, "vit_growth": 0.4, "int_growth": 0.1, "dex_growth": 0.6, "luk_growth": 0.4
+	},
+	"Rogue": {
+	  "base_level": 1, "str": 6, "agi": 9, "vit": 5, "int": 4, "dex": 8, "luk": 6,
+	  "job_hp_factor": 4.0, "job_sp_factor": 1.1, "trans_mod": 1.0,
+	  "str_growth": 0.4, "agi_growth": 0.7, "vit_growth": 0.4, "int_growth": 0.3, "dex_growth": 0.6, "luk_growth": 0.5
+	},
+	"Priest": {
+	  "base_level": 1, "str": 4, "agi": 4, "vit": 6, "int": 9, "dex": 5, "luk": 6,
+	  "job_hp_factor": 3.8, "job_sp_factor": 2.0, "trans_mod": 1.0,
+	  "str_growth": 0.3, "agi_growth": 0.3, "vit_growth": 0.5, "int_growth": 0.6, "dex_growth": 0.4, "luk_growth": 0.5
+	},
+	"Monk": {
+	  "base_level": 1, "str": 8, "agi": 6, "vit": 7, "int": 5, "dex": 5, "luk": 4,
+	  "job_hp_factor": 4.5, "job_sp_factor": 1.5, "trans_mod": 1.0,
+	  "str_growth": 0.6, "agi_growth": 0.5, "vit_growth": 0.5, "int_growth": 0.3, "dex_growth": 0.4, "luk_growth": 0.3
+	},
+	"Lord_Knight": {
+	  "base_level": 1, "str": 14, "agi": 8, "vit": 12, "int": 3, "dex": 8, "luk": 5,
+	  "job_hp_factor": 9.0, "job_sp_factor": 1.5, "trans_mod": 1.25,
+	  "str_growth": 0.8, "agi_growth": 0.5, "vit_growth": 0.7, "int_growth": 0.2, "dex_growth": 0.5, "luk_growth": 0.3
+	},
+	"Paladin": {
+	  "base_level": 1, "str": 12, "agi": 6, "vit": 14, "int": 5, "dex": 7, "luk": 5,
+	  "job_hp_factor": 8.5, "job_sp_factor": 1.5, "trans_mod": 1.25,
+	  "str_growth": 0.6, "agi_growth": 0.4, "vit_growth": 0.8, "int_growth": 0.3, "dex_growth": 0.4, "luk_growth": 0.3
+	},
+	"High_Wizard": {
+	  "base_level": 1, "str": 3, "agi": 6, "vit": 6, "int": 14, "dex": 8, "luk": 5,
+	  "job_hp_factor": 4.0, "job_sp_factor": 3.5, "trans_mod": 1.25,
+	  "str_growth": 0.2, "agi_growth": 0.4, "vit_growth": 0.4, "int_growth": 0.8, "dex_growth": 0.6, "luk_growth": 0.3
+	},
+	"Professor": {
+	  "base_level": 1, "str": 4, "agi": 7, "vit": 7, "int": 13, "dex": 8, "luk": 5,
+	  "job_hp_factor": 4.5, "job_sp_factor": 3.0, "trans_mod": 1.25,
+	  "str_growth": 0.2, "agi_growth": 0.5, "vit_growth": 0.5, "int_growth": 0.7, "dex_growth": 0.6, "luk_growth": 0.3
+	},
+	"Ranger": {
+	  "base_level": 1, "str": 7, "agi": 12, "vit": 7, "int": 4, "dex": 14, "luk": 7,
+	  "job_hp_factor": 5.5, "job_sp_factor": 1.6, "trans_mod": 1.25,
+	  "str_growth": 0.4, "agi_growth": 0.7, "vit_growth": 0.5, "int_growth": 0.3, "dex_growth": 0.8, "luk_growth": 0.5
+	},
+	"Gunslinger": {
+	  "base_level": 1, "str": 6, "agi": 10, "vit": 6, "int": 4, "dex": 13, "luk": 7,
+	  "job_hp_factor": 5.0, "job_sp_factor": 1.4, "trans_mod": 1.25,
+	  "str_growth": 0.4, "agi_growth": 0.6, "vit_growth": 0.4, "int_growth": 0.3, "dex_growth": 0.8, "luk_growth": 0.5
+	},
+	"Assassin_Cross": {
+	  "base_level": 1, "str": 10, "agi": 12, "vit": 8, "int": 3, "dex": 10, "luk": 7,
+	  "job_hp_factor": 5.5, "job_sp_factor": 1.3, "trans_mod": 1.25,
+	  "str_growth": 0.6, "agi_growth": 0.8, "vit_growth": 0.5, "int_growth": 0.2, "dex_growth": 0.7, "luk_growth": 0.5
+	},
+	"Stalker": {
+	  "base_level": 1, "str": 8, "agi": 11, "vit": 7, "int": 6, "dex": 11, "luk": 8,
+	  "job_hp_factor": 5.0, "job_sp_factor": 1.4, "trans_mod": 1.25,
+	  "str_growth": 0.5, "agi_growth": 0.7, "vit_growth": 0.5, "int_growth": 0.4, "dex_growth": 0.7, "luk_growth": 0.6
+	},
+	"High_Priest": {
+	  "base_level": 1, "str": 5, "agi": 5, "vit": 8, "int": 12, "dex": 7, "luk": 8,
+	  "job_hp_factor": 4.5, "job_sp_factor": 2.5, "trans_mod": 1.25,
+	  "str_growth": 0.3, "agi_growth": 0.4, "vit_growth": 0.6, "int_growth": 0.7, "dex_growth": 0.5, "luk_growth": 0.6
+	},
+	"Champion": {
+	  "base_level": 1, "str": 10, "agi": 8, "vit": 9, "int": 6, "dex": 7, "luk": 5,
+	  "job_hp_factor": 5.5, "job_sp_factor": 1.7, "trans_mod": 1.25,
+	  "str_growth": 0.7, "agi_growth": 0.6, "vit_growth": 0.6, "int_growth": 0.4, "dex_growth": 0.5, "luk_growth": 0.4
+	}
+  },
+  "village_levels": {
+		"2": {
+			"gold_cost": 10,
+			"materials": [
+				{ "id": "wood", "quantity": 1 },
+				{ "id": "stone", "quantity": 1 }
+			],
+			"unlocks_npc": [ "BlacksmithNPC", "AlchemistNPC", "PotionSellerNPC", "EquipmentSellerNPC" ],
+			"unlocks_description": "Sao lại lỗi không thể dùng được??? 
+			vậy bạn thử dùng tôi xem"
+		},
+		"3": {
+			"gold_cost": 50,
+			"materials": [],
+			"unlocks_description": "Bạn cần giúp đỡ, 
+			hãy sử dụng tôi để có sự trợ giúp tốt nhất"
+		},
+		"4": {
+			"gold_cost": 100,
+			"materials": [],
+			"unlocks_description": "Lại cần giúp đỡ, 
+			vậy thì lại sử dụng tôi lần nữa!!!!"
+		},
+		"5": {
+			"gold_cost": 250,
+			"materials": [
+				{ "id": "small_crystal", "quantity": 1 }
+			],
+			"unlocks_npc": [ "JobChangerNpc" ],
+			"unlocks_description": "Tôi đoán chắc bạn đang bị mắc kẹt... 
+			Ai  cũng vậy thôi, hãy sử dụng tôi đi"
+		}
+	},
+	"inn_levels": {
+		"1": {"cost": 10, "heal_percent": 0.01},
+		"2": {"cost": 100, "heal_percent": 0.02}
+  }
+}

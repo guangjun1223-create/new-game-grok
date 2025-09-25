@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq27ah5r83lw5"]
+
+[ext_resource type="Texture2D" uid="uid://b57j0ufgdhtc" path="res://texture/UI/RectangleBox_96x96.png" id="1_wn7yl"]
+[ext_resource type="Script" uid="uid://kpi7gp88d1fr" path="res://script/UI/buyback_quantity_panel.gd" id="2_nfbv0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nfbv0"]
+texture = ExtResource("1_wn7yl")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+
+[node name="BuybackQuantityPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(250, 160)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -78.0
+offset_right = 114.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nfbv0")
+script = ExtResource("2_nfbv0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ItemNameLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Mua Lại [Tên Vật Phẩm]"
+
+[node name="QuantityLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Số lượng: 1"
+
+[node name="QuantitySlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TotalCostLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Tổng chi phí: 25 Vàng."
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ConfirmButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Mua"
+
+[node name="CancelButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Hủy"

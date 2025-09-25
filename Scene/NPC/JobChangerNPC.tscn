@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv77f613cljcc"]
+
+[ext_resource type="SpriteFrames" uid="uid://bbqgvdxewi0qo" path="res://Data/JobChangerNPC.tres" id="1_hvd2x"]
+[ext_resource type="Script" uid="uid://cqkns2hsndar4" path="res://script/NPC/job_changer_npc.gd" id="1_ivg8e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ivg8e"]
+radius = 56.0
+height = 170.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ahn6x"]
+radius = 150.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ivg8e"]
+font_size = 24
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="JobChangerNpc" type="CharacterBody2D"]
+collision_layer = 9
+script = ExtResource("1_ivg8e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -89)
+sprite_frames = ExtResource("1_hvd2x")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -78)
+shape = SubResource("CapsuleShape2D_ivg8e")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_ahn6x")
+
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+z_index = -1
+y_sort_enabled = true
+offset_left = -114.0
+offset_top = 26.0
+offset_right = 112.0
+offset_bottom = 60.0
+text = "Người chuyển nghề"
+label_settings = SubResource("LabelSettings_ivg8e")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_hero_entered"]

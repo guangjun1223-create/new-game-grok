@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://tl4oyg3tbbqv"]
+
+[ext_resource type="Script" uid="uid://sif0suidqwnp" path="res://script/UI/floating_text.gd" id="1_i6gtd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7er2b"]
+font_size = 36
+font_color = Color(1, 1, 1, 0)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="FloatingText" type="Node2D"]
+z_index = 5
+script = ExtResource("1_i6gtd")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 37.0
+offset_bottom = 23.0
+text = "9999"
+label_settings = SubResource("LabelSettings_7er2b")
+horizontal_alignment = 1
+vertical_alignment = 1

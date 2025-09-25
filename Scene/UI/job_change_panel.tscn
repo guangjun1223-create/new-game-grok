@@ -1,0 +1,98 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtejd7m56v4y1"]
+
+[ext_resource type="Script" uid="uid://56rtj1g26o1i" path="res://script/UI/job_change_panel.gd" id="1_caph2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_t16f6"]
+font_size = 19
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_caph2"]
+font_size = 17
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="JobChangePanel" type="Control"]
+custom_minimum_size = Vector2(550, 190)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_caph2")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 11
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Chọn Con Đường Mới"
+label_settings = SubResource("LabelSettings_t16f6")
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+text = "Anh hùng [Tên] đã sẵn sàng..."
+label_settings = SubResource("LabelSettings_caph2")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SwordsmanButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Trở thành Kiếm Sĩ"
+autowrap_mode = 2
+autowrap_trim_flags = 192
+
+[node name="MageButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Trở thành Pháp Sư"
+autowrap_mode = 2
+
+[node name="ArcherButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Trở thành Cung Thủ"
+autowrap_mode = 2
+
+[node name="ThiefButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Trở thành Đạo Tặc"
+autowrap_mode = 2
+
+[node name="AcolyteButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = " Trở thành Tu Sĩ"
+autowrap_mode = 2
+
+[node name="CloseButton" type="Button" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Đóng"

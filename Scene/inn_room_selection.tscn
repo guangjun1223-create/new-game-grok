@@ -1,0 +1,91 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnt1vdmno6gki"]
+
+[ext_resource type="Texture2D" uid="uid://b57j0ufgdhtc" path="res://texture/UI/RectangleBox_96x96.png" id="1_4byt7"]
+[ext_resource type="Script" uid="uid://rxvfpeq1tl5" path="res://script/inn_room_selection.gd" id="2_oqrt4"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oqrt4"]
+texture = ExtResource("1_4byt7")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+
+[node name="InnRoomSelection" type="PanelContainer"]
+custom_minimum_size = Vector2(250, 130)
+layout_direction = 1
+anchors_preset = -1
+anchor_left = 0.40849194
+anchor_top = 0.4153646
+anchor_right = 0.59150803
+anchor_bottom = 0.58463544
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxTexture_oqrt4")
+script = ExtResource("2_oqrt4")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Chọn phòng trọ"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Phòng lv1 (10 gold)"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Phòng lv2 (100 gold)"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Phòng lv3 (500 gold)"
+
+[node name="Button4" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Phòng lv4 (1000 gold)"
+
+[node name="Button5" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Phòng lv5 (2500 gold)"
+
+[node name="Button6" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Phòng lv6 (5000 gold)"
+
+[node name="Button7" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Phòng lv7 (10000 gold)"
+
+[node name="Button8" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Phòng lv8 (20000 gold)"
+
+[node name="Button9" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Phòng lv9 (50000 gold)"
+
+[node name="Button10" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Phòng lv10 (100000 gold)"
+
+[node name="closeButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Đóng"

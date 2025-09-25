@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4blj0d0k6ca4"]
+
+[ext_resource type="Script" uid="uid://x61mljitecqb" path="res://script/NPC/equipment_seller_npc.gd" id="1_230m4"]
+[ext_resource type="SpriteFrames" uid="uid://dakg6e4l0iinq" path="res://Data/equipsell.tres" id="2_230m4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bt74f"]
+radius = 60.0
+height = 166.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rhwp2"]
+radius = 120.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_230m4"]
+font_size = 24
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="equipmentsellernpc" type="StaticBody2D"]
+script = ExtResource("1_230m4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -85)
+sprite_frames = ExtResource("2_230m4")
+animation = &"Idle"
+frame_progress = 0.19897439
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -73)
+shape = SubResource("CapsuleShape2D_bt74f")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(0, -70)
+shape = SubResource("CircleShape2D_rhwp2")
+
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Label" type="Label" parent="."]
+z_index = -1
+offset_left = -82.0
+offset_top = 22.0
+offset_right = 72.0
+offset_bottom = 56.0
+text = "Tiệm trang bị"
+label_settings = SubResource("LabelSettings_230m4")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]

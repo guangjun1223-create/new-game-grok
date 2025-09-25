@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc08f8nm5uyow"]
+
+[ext_resource type="Texture2D" uid="uid://b57j0ufgdhtc" path="res://texture/UI/RectangleBox_96x96.png" id="1_2lnyw"]
+[ext_resource type="Script" uid="uid://bp2aqpu5kyvig" path="res://script/UI/hero_barracks_panel.gd" id="2_w2jqn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w2jqn"]
+texture = ExtResource("1_2lnyw")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+
+[node name="HeroBarracksPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(600, 400)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_w2jqn")
+script = ExtResource("2_w2jqn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Sảnh Hero"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HeroListContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Đóng"

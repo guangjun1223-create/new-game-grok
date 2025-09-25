@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmd1mbirnhdi7"]
+
+[ext_resource type="Script" uid="uid://bk8fbml6034hn" path="res://script/NPC/blacksmith.gd" id="1_0xwoy"]
+[ext_resource type="SpriteFrames" uid="uid://cn4jrbn6lbl8h" path="res://Data/blacksmith.tres" id="1_6davc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0xwoy"]
+radius = 27.0
+height = 74.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_0xwoy"]
+line_spacing = 0.0
+font_size = 12
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="BlacksmithNPC" type="StaticBody2D"]
+input_pickable = true
+script = ExtResource("1_0xwoy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -46)
+sprite_frames = ExtResource("1_6davc")
+animation = &"Idle"
+frame_progress = 0.6793038
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -40)
+shape = SubResource("CapsuleShape2D_0xwoy")
+
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 4.0
+offset_right = 50.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tiệm rèn 
+trang bị"
+label_settings = SubResource("LabelSettings_0xwoy")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

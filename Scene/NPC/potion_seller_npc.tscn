@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://bymbjv0u8elhm"]
+
+[ext_resource type="Script" uid="uid://hoc3e7wqjm2h" path="res://script/NPC/potion_seller_npc.gd" id="1_bt74f"]
+[ext_resource type="SpriteFrames" uid="uid://m3l5nrjjoauv" path="res://Data/PotionSell.tres" id="1_i625v"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bt74f"]
+radius = 60.0
+height = 166.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rhwp2"]
+radius = 120.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_fpn3j"]
+font_size = 24
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="PotionSellerNPC" type="StaticBody2D"]
+script = ExtResource("1_bt74f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -85)
+sprite_frames = ExtResource("1_i625v")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -73)
+shape = SubResource("CapsuleShape2D_bt74f")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(0, -70)
+shape = SubResource("CircleShape2D_rhwp2")
+
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = -91.0
+offset_top = 28.0
+offset_right = 89.0
+offset_bottom = 62.0
+text = "Tiệm bán thuốc"
+label_settings = SubResource("LabelSettings_fpn3j")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]

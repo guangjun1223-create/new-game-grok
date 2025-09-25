@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://p4oy7tc5ekxh"]
+
+[ext_resource type="Texture2D" uid="uid://cnt83s0aoh8cc" path="res://texture/item.png" id="1_icmub"]
+[ext_resource type="Script" uid="uid://dsd0ed24gv2iv" path="res://script/UI/gold_coin.gd" id="1_w30vj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w30vj"]
+atlas = ExtResource("1_icmub")
+region = Rect2(8.937851, 520.57416, 45.717712, 47.58374)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vdjfm"]
+radius = 150.0
+
+[node name="GoldCoin" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_w30vj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_w30vj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = -1
+y_sort_enabled = true
+shape = SubResource("CircleShape2D_vdjfm")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 90.0
+one_shot = true
