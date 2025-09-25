@@ -835,7 +835,7 @@ func gain_exp(amount: int):
 func level_up():
 	level += 1
 	current_exp -= exp_to_next_level
-	exp_to_next_level = int(100 * pow(level, 1.5))
+	exp_to_next_level = int(100 * pow(level, 3.35))
 
 	print("!!!!!!!!!! LEVEL UP !!!!!!!!!!")
 	print(">>> '%s' đã đạt đến cấp độ %d!" % [hero_name, level])
