@@ -842,12 +842,12 @@ func level_up():
 	
 	# ===================================================
 	# === TĂNG CHỈ SỐ KHI LÊN CẤP ===
-	STR += str_tang_truong +2.5
-	agi += agi_tang_truong +2.5
-	vit += vit_tang_truong +2.5
-	intel += int_tang_truong +2.5
-	dex += dex_tang_truong +2.5
-	luk += luk_tang_truong +2.5
+	STR += str_tang_truong
+	agi += agi_tang_truong
+	vit += vit_tang_truong
+	intel += int_tang_truong
+	dex += dex_tang_truong
+	luk += luk_tang_truong
 	
 	# In ra để kiểm tra
 	print("   -> STR: %.2f, AGI: %.2f, VIT: %.2f" % [STR, agi, vit])
