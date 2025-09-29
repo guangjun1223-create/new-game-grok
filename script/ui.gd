@@ -183,7 +183,7 @@ func _ready() -> void:
 	close_buyback_button.pressed.connect(_on_close_buyback_button_pressed)
 	
 	_create_slots_for_grid(backpack_grid, backpack_slots, 20, Callable(self, "_on_backpack_slot_mouse_entered"), Callable(self, "_on_backpack_slot_pressed"))
-	_create_slots_for_grid(warehouse_grid, warehouse_slots, 100, Callable(self, "_on_warehouse_slot_mouse_entered"))
+	_create_slots_for_grid(warehouse_grid, warehouse_slots, 1000, Callable(self, "_on_warehouse_slot_mouse_entered"))
 	_create_slots_for_grid(hero_buyback_grid, hero_buyback_slots, 20, Callable(self, "_on_backpack_slot_mouse_entered"))
 	_create_slots_for_grid(warehouse_buyback_grid, warehouse_buyback_slots, 100, Callable(self, "_on_warehouse_slot_mouse_entered"))
 	
