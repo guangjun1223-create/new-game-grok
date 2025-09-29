@@ -817,6 +817,8 @@ func get_body_radius() -> float:
 	return 30.0
 
 func gain_exp(amount: int):
+if level >= 100:
+return
 	if is_dead or (job_key == "Novice" and level >= MAX_LEVEL_NOVICE):
 		return
 
