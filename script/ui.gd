@@ -2,7 +2,6 @@
 extends CanvasLayer
 class_name UIController
 
-# --- CÁC HẰNG SỐ SCENE ---
 const ItemSlotScene = preload("res://Scene/UI/item_slot.tscn")
 const RespawnBarScene = preload("res://UI/respawn_bar.tscn")
 const InnRoomSelectionScene = preload("res://Scene/inn_room_selection.tscn")
@@ -10,97 +9,50 @@ const CraftingPanelScene = preload("res://Scene/UI/crafting_panel.tscn")
 const BuybackQuantityPanelScene = preload("res://Scene/UI/buyback_quantity_panel.tscn")
 const ShopPanelScene = preload("res://Scene/UI/shop_panel.tscn")
 const HeroBarracksPanelScene = preload("res://Scene/UI/hero_barracks_panel.tscn")
-const CraftingQuantityPanelScene = preload("res://Scene/UI/crafting_quantity_panel.tscn")
-const VillageUpgradePanelScene = preload("res://Scene/UI/village_upgrade_panel.tscn")
-const JobSkillPanelScene = preload("res://Scene/UI/job_skill_panel.tscn") # <-- THAY ĐÚNG ĐƯỜNG DẪN
-const SkillSlotScene = preload("res://Scene/UI/skill_slot.tscn")
-const ActiveSkillSlotScene = preload("res://Scene/UI/active_skill_slot.tscn")
-var _active_skill_slots_ui: Array = []
-# --- LỘ TRÌNH NGHỀ ---
-const HERO_JOB_PROGRESSION = ["Novice", "Swordsman", "Knight"] # <-- DANH SÁCH LỘ TRÌNH NGHỀ
-
-# ====================
-# BIẾN THAM CHIẾU NODE (QUAN TRỌNG: KIỂM TRA LẠI ĐƯỜNG DẪN)
-# ====================
-# --- BIẾN TRẠNG THÁI ---
-var _current_hero: Hero = null
-var _hero_in_view: Hero = null
-var _main_camera: Camera2D
+@export var blacksmith_npc: StaticBody2D
+@export var alchemist_npc: StaticBody2D
+@export var potion_seller_npc: StaticBody2D
+@export var equipment_seller_npc: StaticBody2D
 var _active_respawn_bars: Dictionary = {}
-const MAX_SKILL_SLOTS = 4
-var equipped_skills: Array = []
 
-# --- CÁC PANEL CHÍNH ---
+# ====================
+# THAM CHIẾU NODE
+# ====================
+# ----- Panel Chính -----
 @onready var selected_hero_panel: Panel = $SelectedHeroPanel
-@onready var hero_info_panel: PanelContainer = $HeroInfoPanel
-@onready var inventory_panel: PanelContainer = $InventoryPanel
-@onready var warehouse_panel: PanelContainer = $Warehouse
-@onready var main_command_menu: PanelContainer = $MainCommandMenu
-@onready var shop_list_panel: PanelContainer = $ShopListPanel
-@onready var movement_buttons: Control = $MovementButtons
-@onready var buyback_panel: PanelContainer = $BuybackPanel
-@onready var job_change_panel: JobChangePanel = $JobChangePanel
-@onready var bottom_bar_container: HBoxContainer = $HBoxContainer
-# --- THANH THÔNG TIN NGƯỜI CHƠI ---
-@onready var player_name_label: Label = $PlayerInfoBar/HBoxContainer/PlayerNameLabel
-@onready var player_level_label: Label = $PlayerInfoBar/HBoxContainer/PlayerLevelLabel
-@onready var player_gold_label: Label = $PlayerInfoBar/HBoxContainer/PlayerGoldLabel
-@onready var player_diamonds_label: Label = $PlayerInfoBar/HBoxContainer/PlayerDiamondsLabel
-@onready var hero_count_label: RichTextLabel = $PlayerInfoBar/HBoxContainer/HeroCountLabel
-@onready var village_upgrade_button: Button = $PlayerInfoBar/HBoxContainer/VillageUpgradeButton
-# --- PANEL HERO ĐƯỢC CHỌN (HUD NHỎ) ---
-@onready var name_label: Label = $SelectedHeroPanel/VBoxContainer/HBoxContainer2/NameLabel
+@onready var name_label: Label = $SelectedHeroPanel/VBoxContainer/NameLabel
+@onready var class_label: Label = $SelectedHeroPanel/VBoxContainer/ClassLabel
+@onready var level_label: Label = $SelectedHeroPanel/VBoxContainer/HBoxContainer2/LevelLabel
+@onready var exp_bar: ProgressBar = $SelectedHeroPanel/VBoxContainer/ExpBar
 @onready var rarity_label: RichTextLabel = $SelectedHeroPanel/VBoxContainer/HBoxContainer2/RarityLabel
+@onready var exp_label: Label = $SelectedHeroPanel/VBoxContainer/ExpBar/ExpLabel
 @onready var job_change_button: Button = $SelectedHeroPanel/VBoxContainer/HBoxContainer/JobChangeButton
-@onready var hp_bar_fill: NinePatchRect = $SelectedHeroPanel/VBoxContainer/HPBar/HP_Fill
-@onready var hp_bar_bg: NinePatchRect = $SelectedHeroPanel/VBoxContainer/HPBar/HP_Background
-@onready var hp_label: Label = $SelectedHeroPanel/VBoxContainer/HPBar/HP_Label
-@onready var sp_bar_fill: NinePatchRect = $SelectedHeroPanel/VBoxContainer/SP/SP_Fill
-@onready var sp_bar_bg: NinePatchRect = $SelectedHeroPanel/VBoxContainer/SP/SP_Background
-@onready var sp_label: Label = $SelectedHeroPanel/VBoxContainer/SP/SP_Label
-@onready var exp_bar_fill: NinePatchRect = $SelectedHeroPanel/VBoxContainer/ExpBar/ExpFill
-@onready var exp_bar_bg: NinePatchRect = $SelectedHeroPanel/VBoxContainer/ExpBar/ExpBackground
-@onready var exp_label: Label = $SelectedHeroPanel/VBoxContainer/ExpBar/Exp_Label
+
 
 # ----- Panel Thông tin Chi tiết -----
-@onready var info_name_label: Label = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/Info_NameLabel"
-@onready var info_job_label: Label = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer2/Info_JobLabel"
-@onready var info_rarity_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer2/info_rarityLabel"
-@onready var info_level_label: Label = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer4/Info_LevelLabel"
-@onready var info_exp_label: Label = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/Info_ExpLabel"
-@onready var info_hp_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/Info_HPLabel"
-@onready var info_sp_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/Info_SPLabel"
-@onready var info_str_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer/Info_StrLabel"
-@onready var info_agi_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer/Info_AgiLabel"
-@onready var info_vit_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer/Info_VitLabel"
-@onready var info_int_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer/Info_IntLabel"
-@onready var info_dex_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer/Info_DexLabel"
-@onready var info_luk_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer/Info_LukLabel"
-@onready var info_atk_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer3/Info_AtkLabel"
-@onready var info_matk_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer3/Info_MatkLabel"
-@onready var info_def_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/VBoxContainer2/Info_DefLabel"
-@onready var info_mdef_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/VBoxContainer2/Info_MdefLabel"
-@onready var info_hit_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/VBoxContainer2/Info_HitLabel"
-@onready var info_flee_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/VBoxContainer2/info_fleeLabel"
-@onready var info_crit_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/VBoxContainer2/Info_CritLabel"
-@onready var info_critDame_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/VBoxContainer2/info_critDameLabel"
-@onready var info_attackspeed_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/Info_AttackSpeedLabel"
-
-#=====================Nút nâng cấp tự do =============================
-@onready var stat_buttons: Array[Button] = [
-	$"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button", #STR
-	$"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button2", #AGI
-	$"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button3", # VIT
-	$"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button4", #INT
-	$"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button5", #DEX
-	$"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button6", #LUCK
-]
-@onready var free_points_label: Label = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer4/FreePointsLabel"
-@onready var skill_list_container: VBoxContainer = hero_info_panel.find_child("SkillListContainer")
-@onready var active_skill_grid: GridContainer = hero_info_panel.find_child("ActiveSkillGrid")
-@onready var skill_points_label: Label = hero_info_panel.find_child("SkillPointsLabel")
-@onready var sa_thai_button = $"HeroInfoPanel/HeroInfoPanel/Thông tin/FunctionButtons/SaThaiButton" # <-- Sửa đường dẫn cho đúng
-@onready var close_button = $"HeroInfoPanel/HeroInfoPanel/Thông tin/FunctionButtons/CloseButton"
+@onready var hero_info_panel: PanelContainer = $HeroInfoPanel
+@onready var info_name_label: Label = $HeroInfoPanel/VBoxContainer/VBoxContainer/Info_NameLabel
+@onready var info_job_label: Label = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer2/Info_JobLabel
+@onready var info_rarity_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer2/info_rarityLabel
+@onready var info_level_label: Label = $HeroInfoPanel/VBoxContainer/VBoxContainer/Info_LevelLabel
+@onready var info_exp_label: Label = $HeroInfoPanel/VBoxContainer/VBoxContainer/Info_ExpLabel
+@onready var info_hp_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/Info_HPLabel
+@onready var info_sp_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/Info_SPLabel
+@onready var info_str_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Info_StrLabel
+@onready var info_agi_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Info_AgiLabel
+@onready var info_vit_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Info_VitLabel
+@onready var info_int_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Info_IntLabel
+@onready var info_dex_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Info_DexLabel
+@onready var info_luk_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Info_LukLabel
+@onready var info_atk_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Info_AtkLabel
+@onready var info_matk_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Info_MatkLabel
+@onready var info_def_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Info_DefLabel
+@onready var info_mdef_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Info_MdefLabel
+@onready var info_hit_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Info_HitLabel
+@onready var info_flee_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/info_fleeLabel
+@onready var info_crit_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Info_CritLabel
+@onready var info_critDame_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/info_critDameLabel
+@onready var info_attackspeed_label: RichTextLabel = $HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Info_AttackSpeedLabel
 
 # ----- Panel Túi đồ (hero) -----
 @onready var equipment_slots: Dictionary = {
@@ -118,18 +70,39 @@ var equipped_skills: Array = []
 	"POTION_3": $InventoryPanel/HBoxContainer/EquipBG/EquipmentUI/EquipmentPanel/potion3slot
 }
 #-----Phần người chơi------------------
+@onready var player_name_label: Label = $PlayerInfoBar/HBoxContainer/PlayerNameLabel
+@onready var player_level_label: Label = $PlayerInfoBar/HBoxContainer/PlayerLevelLabel
+@onready var player_gold_label: Label = $PlayerInfoBar/HBoxContainer/PlayerGoldLabel
+@onready var player_diamonds_label: Label = $PlayerInfoBar/HBoxContainer/PlayerDiamondsLabel
+@onready var warehouse_panel: PanelContainer = $Warehouse
 @onready var warehouse_grid: GridContainer = $Warehouse/VBoxContainer/Panel/ScrollContainer/GridContainer
 @onready var warehouse_button: Button = $HBoxContainer/WarehouseButton
 @onready var close_warehouse_button: Button = $Warehouse/VBoxContainer/CloseButton
+@onready var inventory_panel: PanelContainer = $InventoryPanel
+@onready var bottom_bar_container: HBoxContainer = $HBoxContainer
 @onready var hero_gold_label: Label = $InventoryPanel/HBoxContainer/BackpackBG/MarginContainer/BackpackUI/HeroGoldLabel
 @onready var respawn_bar_container: VBoxContainer = $RespawnBarContainer
+@onready var hero_count_label: RichTextLabel = $PlayerInfoBar/HBoxContainer/HeroCountLabel
+
+#-------- phần ShopListPanel ----------------
+@onready var shop_list_panel: PanelContainer = $ShopListPanel
+
+#-------- phần MainCommandMenu ----------------
+@onready var main_command_menu: PanelContainer = $MainCommandMenu
+#---------- Phần đổi nghề _______________________
+@onready var job_change_panel: JobChangePanel = $JobChangePanel
+#==================Nâng cấp làng ==================================
+const VillageUpgradePanelScene = preload("res://Scene/UI/village_upgrade_panel.tscn")
+@onready var village_upgrade_button: Button = $PlayerInfoBar/HBoxContainer/VillageUpgradeButton
 
 # ------- phần MovementButtons-----
+@onready var  movement_buttons: Control = $MovementButtons
 @onready var go_to_village_button: Button = $MovementButtons/VBox/GoToVillageButton
 @onready var go_to_forest_button: Button = $MovementButtons/VBox/GoToForestButton
 @onready var go_to_forest2_button: Button = $MovementButtons/VBox/GoToForestButton2
 @onready var go_to_forest3_button: Button = $MovementButtons/VBox/GoToForestButton3
 #-------------- Phần Shop mua bán đồ BuybackPanel----------------------
+@onready var buyback_panel: PanelContainer = $BuybackPanel
 @onready var buyback_hero_name_label: Label = $BuybackPanel/VBoxContainer/HBoxContainer/VBoxContainer/BuybackHeroNameLabel
 @onready var hero_buyback_grid: GridContainer = $BuybackPanel/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/HeroBuybackGrid
 @onready var warehouse_buyback_grid: GridContainer = $BuybackPanel/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/WarehouseBuybackGrid
@@ -142,15 +115,7 @@ var equipped_skills: Array = []
 @onready var barracks_button: Button = $HBoxContainer/BarracksButton
 @onready var item_tooltip: PopupPanel = $ItemTooltip
 
-@export var blacksmith_npc: StaticBody2D
-@export var alchemist_npc: StaticBody2D
-@export var potion_seller_npc: StaticBody2D
-@export var equipment_seller_npc: StaticBody2D
 
-var hero_hien_tai: Hero
-
-var current_open_panel: Control = null
-var village_upgrade_panel_instance = null
 
 var backpack_slots: Array[Button] = []
 var warehouse_slots: Array[Button] = []
@@ -168,86 +133,15 @@ var _hero_for_buyback: Hero = null
 @export var shop_npc: StaticBody2D
 
 # ====================
+# BIẾN NỘI BỘ
+# ====================
+var _current_hero: Hero = null
+var _main_camera: Camera2D
+
+# ====================
 # HÀM TÍCH HỢP CỦA GODOT
 # ====================
 func _ready() -> void:
-	await get_tree().process_frame
-	
-	PlayerStats.register_ui_controller(self)
-	_main_camera = get_tree().root.get_camera_2d()
-	
-	# Ẩn các panel chính lúc ban đầu
-	selected_hero_panel.visible = false
-	hero_info_panel.visible = false
-	inventory_panel.visible = false
-	movement_buttons.visible = false
-	warehouse_panel.visible = false
-	buyback_panel.visible = false
-	shop_list_panel.hide()
-	main_command_menu.hide()
-	
-	# Kết nối các tín hiệu toàn cục
-	_connect_global_signals()
-	
-	# Kết nối các nút bấm trên giao diện
-	_connect_button_signals()
-	
-	# Cập nhật giao diện lần đầu
-	_update_player_info_bar()
-	_update_warehouse_display()
-	_update_hero_count_display()
-	_update_backpack_display()
-	
-	for slot_key in equipment_slots.keys():
-		equipment_slots[slot_key].pressed.connect(_on_equipment_slot_pressed.bind(slot_key))
-	for slot_key in equipment_slots.keys():
-		var slot_node = equipment_slots[slot_key]
-		slot_node.mouse_entered.connect(_on_equipment_slot_mouse_entered.bind(slot_key))
-		slot_node.mouse_exited.connect(_on_equipment_slot_mouse_exited)
-		
-	_create_slots_for_grid(backpack_grid, backpack_slots, 20, Callable(self, "_on_backpack_slot_mouse_entered"), Callable(self, "_on_backpack_slot_pressed"))
-	_create_slots_for_grid(warehouse_grid, warehouse_slots, 100, Callable(self, "_on_warehouse_slot_mouse_entered"))
-	_create_slots_for_grid(hero_buyback_grid, hero_buyback_slots, 20, Callable(self, "_on_backpack_slot_mouse_entered"))
-	_create_slots_for_grid(warehouse_buyback_grid, warehouse_buyback_slots, 100, Callable(self, "_on_warehouse_slot_mouse_entered"))
-	
-	for child in active_skill_grid.get_children():
-		child.queue_free()
-
-	for i in range(MAX_SKILL_SLOTS):
-		var new_slot = ActiveSkillSlotScene.instantiate()
-		active_skill_grid.add_child(new_slot)
-		_active_skill_slots_ui.append(new_slot)
-	
-	
-func _connect_global_signals():
-	GameEvents.hero_selected.connect(_on_hero_selected)
-	GameEvents.hero_arrived_at_shop.connect(_on_hero_arrived_at_shop)
-	GameEvents.hero_arrived_at_inn.connect(_on_hero_arrived_at_inn)
-	GameEvents.hero_arrived_at_potion_shop.connect(_on_hero_arrived_at_potion_shop)
-	GameEvents.hero_arrived_at_equipment_shop.connect(_on_hero_arrived_at_equipment_shop)
-	GameEvents.respawn_started.connect(_on_respawn_started)
-	GameEvents.respawn_finished.connect(_on_respawn_finished)
-	PlayerStats.player_stats_changed.connect(_update_player_info_bar)
-	PlayerStats.warehouse_changed.connect(_update_warehouse_display)
-	PlayerStats.hero_count_changed.connect(_update_hero_count_display)
-	PlayerStats.village_level_changed.connect(_update_hero_count_display)
-	PlayerStats.player_stats_changed.connect(_update_warehouse_display)
-	
-func _connect_button_signals():
-	selected_hero_panel.gui_input.connect(_on_panel_gui_input)
-	hero_info_panel.gui_input.connect(_on_panel_gui_input)
-	inventory_panel.gui_input.connect(_on_panel_gui_input)
-	bottom_bar_container.gui_input.connect(_on_panel_gui_input)
-	movement_buttons.gui_input.connect(_on_panel_gui_input)
-	barracks_button.pressed.connect(_on_barracks_button_pressed)
-	job_change_button.pressed.connect(_on_job_change_button_pressed)
-	village_upgrade_button.pressed.connect(_on_village_upgrade_button_pressed)
-	close_warehouse_button.pressed.connect(_on_close_button_pressed)
-	close_buyback_button.pressed.connect(_on_close_buyback_button_pressed)
-	sa_thai_button.pressed.connect(_on_sa_thai_button_pressed)
-	
-	var job_changer_npc = get_tree().get_root().get_node("World/Village_Boundary/JobChangerNpc")
-	
 	if is_instance_valid(blacksmith_npc):
 		blacksmith_npc.blacksmith_panel_requested.connect(_on_blacksmith_panel_requested)
 	else:
@@ -256,24 +150,80 @@ func _connect_button_signals():
 		alchemist_npc.alchemist_panel_requested.connect(_on_alchemist_panel_requested)
 	else:
 		push_warning("UI CHƯA ĐƯỢC KẾT NỐI VỚI ALCHEMIST NPC!")
+	
+	
+	var job_changer_npc = get_tree().get_root().get_node("World/Village_Boundary/JobChangerNpc")
 	if is_instance_valid(job_changer_npc):
 		job_changer_npc.open_job_change_panel.connect(_on_open_job_change_panel)
 	else:
 		push_warning("Không tìm thấy NPC chuyển nghề trong World")
+		
+	PlayerStats.register_ui_controller(self)
+	selected_hero_panel.visible = false
+	hero_info_panel.visible = false
+	inventory_panel.visible = false
+	movement_buttons.visible = false
+	warehouse_panel.visible = false
+	buyback_panel.visible = false
 	
+	_main_camera = get_tree().root.get_camera_2d()
+
+	PlayerStats.player_stats_changed.connect(_update_player_info_bar)
+	PlayerStats.warehouse_changed.connect(_update_warehouse_display)
+	GameEvents.hero_selected.connect(_on_hero_selected)
+	GameEvents.hero_arrived_at_shop.connect(_on_hero_arrived_at_shop)
+	GameEvents.hero_arrived_at_inn.connect(_on_hero_arrived_at_inn)
+	GameEvents.hero_arrived_at_potion_shop.connect(_on_hero_arrived_at_potion_shop)
+	job_change_button.pressed.connect(_on_job_change_button_pressed)
+	GameEvents.hero_arrived_at_equipment_shop.connect(_on_hero_arrived_at_equipment_shop)
+	village_upgrade_button.pressed.connect(_on_village_upgrade_button_pressed)
+	PlayerStats.hero_count_changed.connect(_update_hero_count_display)
+	PlayerStats.village_level_changed.connect(_update_hero_count_display)
+
+	close_buyback_button.pressed.connect(_on_close_buyback_button_pressed)
 	
-func _close_all_main_panels():
-	get_tree().call_group("panels", "hide")
+	_create_slots_for_grid(backpack_grid, backpack_slots, 20, Callable(self, "_on_backpack_slot_mouse_entered"), Callable(self, "_on_backpack_slot_pressed"))
+	_create_slots_for_grid(warehouse_grid, warehouse_slots, 1000, Callable(self, "_on_warehouse_slot_mouse_entered"))
+	_create_slots_for_grid(hero_buyback_grid, hero_buyback_slots, 20, Callable(self, "_on_backpack_slot_mouse_entered"))
+	_create_slots_for_grid(warehouse_buyback_grid, warehouse_buyback_slots, 100, Callable(self, "_on_warehouse_slot_mouse_entered"))
+	
+	_update_backpack_display()
+	_update_player_info_bar()
+	_update_warehouse_display()
+	_update_hero_count_display()
+	
+	for slot_key in equipment_slots.keys():
+		equipment_slots[slot_key].pressed.connect(_on_equipment_slot_pressed.bind(slot_key))
+	for slot_key in equipment_slots.keys():
+		var slot_node = equipment_slots[slot_key]
+		slot_node.mouse_entered.connect(_on_equipment_slot_mouse_entered.bind(slot_key))
+		slot_node.mouse_exited.connect(_on_equipment_slot_mouse_exited)
+
+	selected_hero_panel.gui_input.connect(_on_panel_gui_input)
+	hero_info_panel.gui_input.connect(_on_panel_gui_input)
+	inventory_panel.gui_input.connect(_on_panel_gui_input)
+	bottom_bar_container.gui_input.connect(_on_panel_gui_input)
+	movement_buttons.gui_input.connect(_on_panel_gui_input)
+	barracks_button.pressed.connect(_on_barracks_button_pressed)
+	GameEvents.respawn_started.connect(_on_respawn_started)
+	GameEvents.respawn_finished.connect(_on_respawn_finished)
+	
+	# ===================================================
 	
 func _process(_delta: float) -> void:
 	if item_tooltip.visible:
+		# ...thì liên tục cập nhật vị trí của nó theo con trỏ chuột
+		# Vector2(25, 25) tạo ra một khoảng cách an toàn về bên phải và xuống dưới
 		item_tooltip.position = get_viewport().get_mouse_position() + Vector2(30, 30)
+	# Lặp qua tất cả các thanh hồi sinh đang hoạt động
 	for hero in _active_respawn_bars:
 		var bar = _active_respawn_bars[hero]
+		# Lấy thông tin thời gian trực tiếp từ RespawnTimer của Hero
 		var timer_node = hero.get_node_or_null("RespawnTimer")
 		if is_instance_valid(timer_node):
 			bar.update_display(timer_node.time_left, timer_node.wait_time)
-
+	
+	
 	if is_instance_valid(_main_camera):
 		var cam_pos = _main_camera.global_position
 		coordinate_label.text = "X: %d | Y: %d" % [roundi(cam_pos.x), roundi(cam_pos.y)]
@@ -285,166 +235,87 @@ func _unhandled_input(event: InputEvent) -> void:
 			GameEvents.hero_selected.emit(null) # Gửi tín hiệu bỏ chọn hero
 			get_viewport().set_input_as_handled()
 
-func _on_str_button_pressed():
-	_add_point_to_stat("str")
-
-func _on_agi_button_pressed():
-	_add_point_to_stat("agi")
-
-func _on_vit_button_pressed():
-	_add_point_to_stat("vit")
-
-func _on_int_button_pressed():
-	_add_point_to_stat("int")
-
-func _on_dex_button_pressed():
-	_add_point_to_stat("dex")
-
-func _on_luk_button_pressed():
-	_add_point_to_stat("luk")
-
-func _add_point_to_stat(stat_name: String):
-	# Giao diện chỉ cần kiểm tra có hero không và ra lệnh, không cần tính toán gì cả
-	if is_instance_valid(_current_hero):
-		_current_hero.nang_cap_chi_so(stat_name)
-
-func _update_stat_buttons_visibility():
-	if not is_instance_valid(_current_hero):
-		for b in stat_buttons: 
-			b.hide()
-		free_points_label.hide()
-		return
-
-	var has_points = _current_hero.free_points > 0
-
-	# Ẩn/hiện nút cộng điểm
-	for b in stat_buttons:
-		b.visible = has_points
-
-	# Ẩn/hiện label
-	free_points_label.visible = has_points
-	if has_points:
-		free_points_label.text = "Điểm tự do: %d" % _current_hero.free_points
-
-
 # ===================================================
 # === HÀM MỚI ĐỂ XỬ LÝ CLICK XUYÊN UI ===
 # ===================================================
-
+# Hàm này được gọi khi có bất kỳ input nào (click, di chuột...) trên các panel
+# đã được kết nối ở hàm _ready().
 func _on_panel_gui_input(event: InputEvent) -> void:
+	# Nếu input là một cú click chuột
 	if event is InputEventMouseButton:
+		# Đánh dấu là input này đã được xử lý.
+		# Godot sẽ không gửi nó đến các hàm khác như _unhandled_input nữa.
 		get_viewport().set_input_as_handled()
+		
 		
 # ====================
 # HÀM XỬ LÝ TÍN HIỆU
 # ====================
 func _on_summon_button_pressed():
-	PlayerStats.try_to_summon_hero()
+	PlayerStats.trieu_hoi_hero()
 
 func _on_hero_selected(hero: Hero) -> void:
+	# === LOGIC CHỌN / BỎ CHỌN HERO (PHIÊN BẢN 4.0 - SỬA LỖI) ===
 	var previous_hero = _current_hero
-	if hero == previous_hero:
-		_current_hero = null
-	else:
-		_current_hero = hero
-	
-	# 1. NGẮT KẾT NỐI KHỎI HERO CŨ
+	var next_hero = hero
+
+	# Tối ưu: Nếu chọn lại chính hero đó thì không làm gì cả
+	if next_hero == previous_hero:
+		return
+
+	# 1. NGẮT KẾT NỐI KHỎI HERO CŨ (NẾU CÓ)
 	if is_instance_valid(previous_hero):
-		previous_hero.hp_changed.disconnect(_update_hp_bar)
-		previous_hero.sp_changed.disconnect(_update_sp_bar)
-		previous_hero.exp_changed.disconnect(_update_exp_bar) 
+		if previous_hero.is_connected("exp_changed", _on_hero_exp_changed):
+			previous_hero.exp_changed.disconnect(_on_hero_exp_changed)
 		if previous_hero.is_connected("stats_updated", _on_hero_stats_updated):
 			previous_hero.stats_updated.disconnect(_on_hero_stats_updated)
 		if previous_hero.is_connected("equipment_changed", _update_equipment_display):
 			previous_hero.equipment_changed.disconnect(_update_equipment_display)
+		# Ngắt kết nối inventory và gold của hero cũ
 		if previous_hero.is_connected("inventory_changed", _on_inventory_changed):
 			previous_hero.inventory_changed.disconnect(_on_inventory_changed)
 		if previous_hero.is_connected("gold_changed", _on_player_stats_gold_changed):
 			previous_hero.gold_changed.disconnect(_on_player_stats_gold_changed)
 		if previous_hero.is_connected("sp_changed", _on_hero_sp_changed):
 			previous_hero.sp_changed.disconnect(_on_hero_sp_changed)
-		if previous_hero.is_connected("free_points_changed", _on_free_points_changed):
-			previous_hero.free_points_changed.disconnect(_on_free_points_changed)
-		if previous_hero.is_connected("skill_activated", _on_hero_skill_activated):
-			previous_hero.skill_activated.disconnect(_on_hero_skill_activated)
-	
-	# 2. KẾT NỐI VỚI HERO MỚI
+
+
+	# 2. CẬP NHẬT HERO HIỆN TẠI
+	_current_hero = next_hero
+
+	# 3. KẾT NỐI VỚI HERO MỚI (NẾU CÓ)
 	if is_instance_valid(_current_hero):
-		_current_hero.hp_changed.connect(_update_hp_bar)
-		_current_hero.sp_changed.connect(_update_sp_bar)
-		_current_hero.exp_changed.connect(_update_exp_bar)
+		_current_hero.exp_changed.connect(_on_hero_exp_changed)
 		_current_hero.stats_updated.connect(_on_hero_stats_updated)
 		_current_hero.equipment_changed.connect(_update_equipment_display)
+		# Kết nối inventory và gold của hero mới
 		_current_hero.inventory_changed.connect(_on_inventory_changed)
 		_current_hero.gold_changed.connect(_on_player_stats_gold_changed)
 		_current_hero.sp_changed.connect(_on_hero_sp_changed)
-		_current_hero.free_points_changed.connect(_on_free_points_changed)
-		_current_hero.skill_activated.connect(_on_hero_skill_activated)
-	
-	# 3. CẬP NHẬT HERO HIỆN TẠI
+
+
+	# 4. CẬP NHẬT GIAO DIỆN CHUNG
 	var is_hero_selected = is_instance_valid(_current_hero)
 	selected_hero_panel.visible = is_hero_selected
+	#movement_buttons.visible = is_hero_selected
 	main_command_menu.visible = is_hero_selected
-	
-	# Luôn đóng các panel chi tiết khi đổi hero
 	hero_info_panel.visible = false
 	inventory_panel.visible = false
 	movement_buttons.hide()
 	shop_list_panel.hide()
-	
+
+	# 5. CẬP NHẬT DỮ LIỆU CỤ THỂ CỦA HERO MỚI
 	if is_hero_selected:
 		_update_selected_hero_panel()
-
-
-	# 5. CẬP NHẬT DỮ LIỆU
-	if is_hero_selected:
-		_update_selected_hero_panel()
-		_update_gold_display(_current_hero.gold)
-		_update_backpack_display()
+		_update_gold_display(_current_hero.gold) # << HIỂN THỊ VÀNG CỦA HERO
+		_update_backpack_display() # << HIỂN THỊ TÚI ĐỒ CỦA HERO
 		_update_equipment_display()
-		_update_stat_buttons_visibility()
 	else:
+		# Nếu không có hero nào được chọn, dọn dẹp UI
 		_update_gold_display(0)
 		_update_backpack_display()
 		_update_equipment_display()
-		_update_stat_buttons_visibility()
-		
-func _update_hp_bar(current_hp, max_hp):
-	var percentage = 0.0
-	if max_hp > 0: percentage = float(current_hp) / float(max_hp)
-	hp_bar_fill.size.x = hp_bar_bg.size.x * percentage
-	hp_label.text = "%d/%d HP" % [int(current_hp), int(max_hp)]
-
-func _update_sp_bar(current_sp, max_sp):
-	var percentage = 0.0
-	if max_sp > 0: percentage = float(current_sp) / float(max_sp)
-	sp_bar_fill.size.x = sp_bar_bg.size.x * percentage
-	sp_label.text = "%d/%d SP" % [int(current_sp), int(max_sp)]
-
-func _update_exp_bar(current_exp, max_exp):
-	var percentage = 0.0
-	if max_exp > 0: percentage = float(current_exp) / float(max_exp)
-	exp_bar_fill.size.x = exp_bar_bg.size.x * percentage
-	exp_label.text = "%d/%d EXP" % [int(current_exp), int(max_exp)]
-	
-func _on_hp_bar_mouse_entered():
-	hp_label.show()
-
-func _on_hp_bar_mouse_exited():
-	hp_label.hide()
-
-func _on_sp_bar_mouse_entered():
-	sp_label.show()
-
-func _on_sp_bar_mouse_exited():
-	sp_label.hide()
-
-func _on_exp_bar_mouse_entered():
-	exp_label.show()
-
-func _on_exp_bar_mouse_exited():
-	exp_label.hide()
-		
+	# ===================================================
 #========= CÁC HÀM XỬ LÝ TRONG MENU HERO================
 func _on_move_button_pressed():
 	main_command_menu.hide()
@@ -466,13 +337,17 @@ func _on_sell_items_shop_button_pressed():
 		print("Vui long chon mot Hero truoc!")
 		return
 		
+	# Hỏi PlayerStats xem NPC ở đâu
 	var npc_position = PlayerStats.get_shop_npc_position()
 	
+	# Nếu vị trí không hợp lệ (Vector2.ZERO là giá trị trả về khi có lỗi)
 	if npc_position == Vector2.ZERO:
 		return
 		
+	# Ra lệnh cho Hero di chuyển đến vị trí đã hỏi được
 	_current_hero.di_den_diem(npc_position)
 	
+	# Ẩn các menu đi sau khi ra lệnh
 	shop_list_panel.hide()
 	main_command_menu.show()
 
@@ -494,189 +369,33 @@ func _on_go_to_forest3_button_pressed():
 		_current_hero.di_den_khu_vuc(forest3_boundary)
 
 func _on_info_button_pressed():
-	if not is_instance_valid(_current_hero): return
-	
-	# Gán hero đang được xem để các hàm khác sử dụng
-	_hero_in_view = _current_hero
-	hero_info_panel.show()
-	
-	# Cập nhật tất cả thông tin (chỉ số, skill...)
-	_update_hero_info_panel() # <- Hàm này đã bao gồm việc cập nhật skill points label
-	
-	if is_instance_valid(skill_list_container):
-		skill_list_container.visible = true
-	if is_instance_valid(active_skill_grid):
-		active_skill_grid.visible = true
-	if is_instance_valid(skill_points_label):
-		skill_points_label.visible = true
-	
-	# === PHẦN CHỈNH SỬA QUAN TRỌNG ===
-	_build_skill_tree_panel() # Xây dựng lại cây skill từ đầu
-	_update_active_skill_slots() # Cập nhật các ô skill đã trang bị
-	# =================================
-
-	# Lắng nghe tín hiệu thay đổi skill từ hero
-	var skill_tree_signal = _hero_in_view.skill_tree_changed
-	if not skill_tree_signal.is_connected(_on_hero_skill_tree_changed):
-		skill_tree_signal.connect(_on_hero_skill_tree_changed)
-
-func _refresh_skill_panel():
-	if not is_instance_valid(_hero_in_view) or not is_instance_valid(skill_list_container):
-		return
-
-	for job_panel in skill_list_container.get_children():
-		# Kiểm tra xem nó có phải JobSkillPanel và biến skill_grid của nó có tồn tại không
-		if job_panel is JobSkillPanel and is_instance_valid(job_panel.skill_grid):
-			
-			# Lặp qua các SkillSlot và ra lệnh cập nhật
-			for slot in job_panel.skill_grid.get_children():
-				if slot is SkillSlot:
-					slot.refresh_display()
-		else:
-			push_warning("UI Refresh: Bỏ qua một node không hợp lệ trong SkillListContainer.")
-
-func _on_skill_upgrade_requested(skill_id: String):
-	print(">>> TRAM GAC 3: UIController da nhan lenh UPGRADE skill '%s'!" % skill_id) # <-- THÊM DÒNG NÀY
-	if is_instance_valid(_hero_in_view):
-		print("    -> Ra lenh cho Hero...")
-		_hero_in_view.learn_or_upgrade_skill(skill_id)
-
-func _on_skill_equip_requested(skill_id: String):
-	print(">>> TRAM GAC 3: UIController da nhan lenh EQUIP skill '%s'!" % skill_id)
-	if is_instance_valid(_hero_in_view):
-		_hero_in_view.equip_skill(skill_id)
-		
-func _on_skill_unequip_requested(skill_id: String):
-	print(">>> TRAM GAC 3: UIController da nhan lenh UNEQUIP skill '%s'!" % skill_id)
-	if is_instance_valid(_hero_in_view):
-		_hero_in_view.unequip_skill(skill_id)
-
-func _on_hero_skill_tree_changed():
-	if hero_info_panel.visible and is_instance_valid(_hero_in_view):
-		# Cập nhật lại tất cả mọi thứ liên quan đến skill
-		_update_hero_info_panel() # Cập nhật số điểm skill
-		_refresh_skill_panel() # "Vẽ" lại các skill slot (ví dụ: nút bấm từ disable -> enable)
-		_update_active_skill_slots() # Cập nhật icon các skill đã trang bị
-
-func _update_active_skill_slots():
-	if not is_instance_valid(_hero_in_view):
-		# Nếu không có hero, làm trống tất cả các slot
-		for slot in _active_skill_slots_ui:
-			slot.display_skill("") # Truyền chuỗi rỗng là đúng
-		return
-
-	var equipped_skills_array = _hero_in_view.equipped_skills
-	
-	# Lặp qua các slot UI và gán skill tương ứng
-	for i in range(_active_skill_slots_ui.size()):
-		var slot_node = _active_skill_slots_ui[i]
-		
-		# Lấy skill_id hoặc null từ mảng của hero
-		var skill_id_or_null = equipped_skills_array[i] if i < equipped_skills_array.size() else null
-		
-		# === PHẦN SỬA LỖI QUAN TRỌNG ===
-		# Dùng str() để đảm bảo giá trị truyền vào luôn là String
-		# Nếu skill_id_or_null là null, str() sẽ biến nó thành ""
-		slot_node.display_skill(str(skill_id_or_null))
-		# ================================
-		
-func _on_hero_skill_activated(skill_id: String, cooldown_duration: float):
-	# Tìm đúng slot UI đang hiển thị skill đó và ra lệnh bắt đầu cooldown
-	for slot in _active_skill_slots_ui:
-		if slot._skill_id == skill_id:
-			slot.start_cooldown(cooldown_duration)
-			return # Dừng lại khi đã tìm thấy
-			
-func _build_tooltip_string_for_skill(skill_data: Dictionary, hero: Hero) -> String:
-	var skill_id = skill_data.get("id", "") # Cần đảm bảo skill_data có id
-	var hero_skill_level = hero.get_skill_level(skill_id)
-	var max_level = skill_data.get("max_level", 1)
-	
-	var tooltip_string = "[font_size=28][color=gold]%s[/color][/font_size]\n" % skill_data.get("skill_name", "???")
-	tooltip_string += "[font_size=20]Cấp %d / %d[/font_size]\n\n" % [hero_skill_level, max_level]
-
-	if hero_skill_level > 0:
-		var effect_desc = skill_data.get("effects_per_level")[hero_skill_level - 1].get("description", "")
-		tooltip_string += "Hiệu ứng: [color=cyan]%s[/color]" % effect_desc
-	else:
-		tooltip_string += "Chưa học"
-		
-	return tooltip_string
-			
-			
-func _on_skill_upgrade_requested_static(skill_id: String):
-	if is_instance_valid(_hero_in_view):
-		# Ra lệnh cho hero đang được xem thực hiện việc học/nâng cấp
-		_hero_in_view.learn_or_upgrade_skill(skill_id)
-
-# Hàm được gọi khi nút "Trang bị" được nhấn
-func _on_skill_equip_requested_static(skill_id: String):
-	if is_instance_valid(_hero_in_view):
-		_hero_in_view.equip_skill(skill_id)
-
-# Hàm được gọi khi nút "Tháo" được nhấn
-func _on_skill_unequip_requested_static(skill_id: String):
-	if is_instance_valid(_hero_in_view):
-		_hero_in_view.unequip_skill(skill_id)
-		
-		
-func _build_skill_tree_panel():
-	if not is_instance_valid(_hero_in_view): return
-	if not is_instance_valid(skill_list_container):
-		push_error("Lỗi UI: Không tìm thấy 'SkillListContainer'!")
-		return
-
-	# Dọn dẹp các bảng skill cũ
-	for child in skill_list_container.get_children():
-		child.queue_free()
-
-	# Tìm vị trí của nghề hiện tại trong lộ trình
-	var current_job_index = HERO_JOB_PROGRESSION.find(_hero_in_view.job_key)
-	if current_job_index == -1:
-		push_warning("Nghề '%s' của hero không có trong HERO_JOB_PROGRESSION." % _hero_in_view.job_key)
-		current_job_index = 0
-		
-	# Lặp qua các nghề mà hero đã có
-	for i in range(current_job_index + 1):
-		var job_key = HERO_JOB_PROGRESSION[i]
-		
-		var new_job_panel = JobSkillPanelScene.instantiate()
-		skill_list_container.add_child(new_job_panel)
-		
-		# Ra lệnh cho JobSkillPanel tự xây dựng các SkillSlot bên trong nó
-		new_job_panel.build_for_job(job_key, _hero_in_view)
-
-		# === NỐI DÂY TÍN HIỆU CUỐI CÙNG (QUAN TRỌNG NHẤT) ===
-		# Kết nối tín hiệu từ JobSkillPanel về các hàm xử lý của UIController.
-		# Đây chính là 3 dòng code còn thiếu để hoàn thiện luồng sự kiện.
-		new_job_panel.upgrade_requested.connect(_on_skill_upgrade_requested)
-		new_job_panel.equip_requested.connect(_on_skill_equip_requested)
-		new_job_panel.unequip_requested.connect(_on_skill_unequip_requested)
-
-
-func _on_close_info_button_pressed():
-	hero_info_panel.visible = false
-	_hero_in_view = null# Dọn dẹp "trí nhớ" để tránh lỗi
+	if is_instance_valid(_current_hero):
+		hero_info_panel.visible = not hero_info_panel.visible
+		inventory_panel.visible = false
+		if hero_info_panel.visible:
+			_update_hero_info_panel(_current_hero)
 
 func _on_inventory_button_pressed():
-	_close_all_main_panels()
 	if is_instance_valid(_current_hero):
 		inventory_panel.visible = not inventory_panel.visible
 		hero_info_panel.visible = false
+
+func _on_close_info_button_pressed():
+	hero_info_panel.visible = false
+
 # ====================
 # HÀM CẬP NHẬT GIAO DIỆN
 # ====================
 func _update_selected_hero_panel() -> void:
 	if not is_instance_valid(_current_hero): return
-	await get_tree().process_frame
-	
 	name_label.text = _current_hero.hero_name
+	class_label.text = GameDataManager.get_job_display_name(_current_hero.job_key)
+	level_label.text = "Cấp độ: " + str(_current_hero.level)
 	var rarity = "N/A"
 	if _current_hero.name.contains("("):
 		var start = _current_hero.name.find("(") + 1
 		var end = _current_hero.name.find(")")
 		rarity = _current_hero.name.substr(start, end - start)
-		
 
 	var rarity_bbcode: String = rarity
 	match rarity:
@@ -689,30 +408,36 @@ func _update_selected_hero_panel() -> void:
 		"SS": rarity_bbcode = "[color=orangered]SS[/color]"
 		"SSR": rarity_bbcode = "[color=magenta]SSR[/color]"
 		"UR": rarity_bbcode = "[rainbow freq=1 sat=0.8 val=1.0]UR[/rainbow]"
-	rarity_label.text = rarity_bbcode
+	rarity_label.text = "Hạng: " + rarity_bbcode
 	
+	exp_bar.max_value = _current_hero.exp_to_next_level
+	if _current_hero.job_key == "Novice" and _current_hero.level >= _current_hero.MAX_LEVEL_NOVICE:
+		exp_bar.value = exp_bar.max_value # Lấp đầy thanh EXP
+		exp_label.text = "MAX"
+	else:
+		exp_bar.value = _current_hero.current_exp
+		exp_label.text = "%d / %d" % [_current_hero.current_exp, _current_hero.exp_to_next_level]
 		
 	if _current_hero.job_key == "Novice" and _current_hero.level >= _current_hero.MAX_LEVEL_NOVICE:
 		job_change_button.show()
 	else:
 		job_change_button.hide()
-		
-	_update_hp_bar(_current_hero.current_hp, _current_hero.max_hp)
-	_update_sp_bar(_current_hero.current_sp, _current_hero.max_sp)
-	_update_exp_bar(_current_hero.current_exp, _current_hero.exp_to_next_level)
 
-func _update_hero_info_panel():
-	if not is_instance_valid(_hero_in_view):
+func _update_hero_info_panel(hero_to_display: Hero):
+	print("2. Hàm _update_hero_info_panel được gọi.")
+	if not is_instance_valid(hero_to_display):
+		print("   -> LỖI: hero_to_display không hợp lệ!")
 		hero_info_panel.hide()
 		return
 	
-	skill_points_label.text = "Điểm kỹ năng: %d" % _hero_in_view.skill_points	
-	
-	info_name_label.text = "Tên: " + _hero_in_view.hero_name
-	info_job_label.text = "Nghề: " + GameDataManager.get_job_display_name(_hero_in_view.job_key)
+	info_name_label.text = "Tên: " + hero_to_display.hero_name
+	print("   -> Đã gán tên ", info_name_label.text)
+	var job_text = "Nghề: " + GameDataManager.get_job_display_name(hero_to_display.job_key)
+	info_job_label.text = "Nghề: " + GameDataManager.get_job_display_name(hero_to_display.job_key)
+	print("   -> Đã gán nghề: ", job_text)
 	var rarity = "Chưa rõ"
-	if _hero_in_view.name.contains("("):
-		rarity = _hero_in_view.name.substr(_hero_in_view.name.find("(") + 1, _hero_in_view.name.find(")") - _hero_in_view.name.find("(") - 1)
+	if hero_to_display.name.contains("("):
+		rarity = hero_to_display.name.substr(hero_to_display.name.find("(") + 1, hero_to_display.name.find(")") - hero_to_display.name.find("(") - 1)
 	var rarity_bbcode: String = rarity
 	match rarity:
 		"F":
@@ -739,42 +464,46 @@ func _update_hero_info_panel():
 
 	info_rarity_label.text = "Hạng: " + rarity_bbcode
 		
-	info_level_label.text = "Cấp: " + str(_hero_in_view.level)
-	info_exp_label.text = "EXP: %d/%d" % [_hero_in_view.current_exp, _hero_in_view.exp_to_next_level]
+	info_level_label.text = "Cấp: " + str(hero_to_display.level)
+	info_exp_label.text = "EXP: %d/%d" % [hero_to_display.current_exp, hero_to_display.exp_to_next_level]
 	# 1. Lấy ra các giá trị gốc và bonus từ hero
-	var bonus_hp = snapped(_hero_in_view.bonus_max_hp, 0.01)
-	var base_hp = snapped(_hero_in_view.max_hp - bonus_hp, 0.01)
-	var bonus_sp = snapped(_hero_in_view.bonus_max_sp, 0.01)
-	var base_sp = snapped(_hero_in_view.max_sp - bonus_sp, 0.01)
-	var base_str = snapped(_hero_in_view.STR, 0.01)
-	var bonus_str = snapped(_hero_in_view.bonus_str, 0.01)
-	var base_agi = snapped(_hero_in_view.AGI, 0.01)
-	var bonus_agi = snapped(_hero_in_view.bonus_agi, 0.01)
-	var base_vit = snapped(_hero_in_view.VIT, 0.01)
-	var bonus_vit = snapped(_hero_in_view.bonus_vit, 0.01)
-	var base_intel = snapped(_hero_in_view.INTEL, 0.01)
-	var bonus_intel = snapped(_hero_in_view.bonus_intel, 0.01)
-	var base_dex = snapped(_hero_in_view.DEX, 0.01)
-	var bonus_dex = snapped(_hero_in_view.bonus_dex, 0.01)
-	var base_luk = snapped(_hero_in_view.LUK, 0.01)
-	var bonus_luk = snapped(_hero_in_view.bonus_luk, 0.01)
-	var bonus_def = snapped(_hero_in_view.bonus_def, 0.01)
-	var base_def = snapped(_hero_in_view.def - bonus_def, 0.01)
-	var bonus_mdef = snapped(_hero_in_view.bonus_mdef, 0.01)
-	var base_mdef = snapped(_hero_in_view.mdef - bonus_mdef, 0.01)
-	var bonus_hit = snapped(_hero_in_view.bonus_hit, 0.01)
-	var base_hit = snapped(_hero_in_view.hit - bonus_hit - _hero_in_view.bonus_hit_hidden, 0.01)
-	var bonus_flee = snapped(_hero_in_view.bonus_flee, 0.01)
-	var base_flee = snapped(_hero_in_view.flee - bonus_flee, 0.01)
-	var bonus_crit = snapped(_hero_in_view.bonus_crit_rate, 0.01)
-	var base_crit = snapped(_hero_in_view.crit_rate - bonus_crit - _hero_in_view.bonus_crit_rate_hidden, 0.01)
-	var bonus_crit_dame = snapped(_hero_in_view.bonus_crit_dame, 0.01)
-	var base_crit_dame = snapped(_hero_in_view.crit_damage - bonus_crit_dame, 0.01)
+	var bonus_hp = snapped(hero_to_display.bonus_max_hp, 0.01)
+	var base_hp = snapped(hero_to_display.max_hp - bonus_hp, 0.01)
+	var bonus_sp = snapped(hero_to_display.bonus_max_sp, 0.01)
+	var base_sp = snapped(hero_to_display.max_sp - bonus_sp, 0.01)
+	var base_str = snapped(hero_to_display.STR, 0.01)
+	var bonus_str = snapped(hero_to_display.bonus_str, 0.01)
+	var base_agi = snapped(hero_to_display.agi, 0.01)
+	var bonus_agi = snapped(hero_to_display.bonus_agi, 0.01)
+	var base_vit = snapped(hero_to_display.vit, 0.01)
+	var bonus_vit = snapped(hero_to_display.bonus_vit, 0.01)
+	var base_intel = snapped(hero_to_display.intel, 0.01)
+	var bonus_intel = snapped(hero_to_display.bonus_intel, 0.01)
+	var base_dex = snapped(hero_to_display.dex, 0.01)
+	var bonus_dex = snapped(hero_to_display.bonus_dex, 0.01)
+	var base_luk = snapped(hero_to_display.luk, 0.01)
+	var bonus_luk = snapped(hero_to_display.bonus_luk, 0.01)
+	var bonus_atk = snapped(hero_to_display.bonus_atk, 0.01)
+	var base_atk = snapped(hero_to_display.atk - bonus_atk, 0.01)
+	var bonus_matk = snapped(hero_to_display.bonus_matk, 0.01)
+	var base_matk = snapped(hero_to_display.matk - bonus_matk, 0.01)
+	var bonus_def = snapped(hero_to_display.bonus_def, 0.01)
+	var base_def = snapped(hero_to_display.def - bonus_def, 0.01)
+	var bonus_mdef = snapped(hero_to_display.bonus_mdef, 0.01)
+	var base_mdef = snapped(hero_to_display.mdef - bonus_mdef, 0.01)
+	var bonus_hit = snapped(hero_to_display.bonus_hit, 0.01)
+	var base_hit = snapped(hero_to_display.hit - bonus_hit - hero_to_display.bonus_hit_hidden, 0.01)
+	var bonus_flee = snapped(hero_to_display.bonus_flee, 0.01)
+	var base_flee = snapped(hero_to_display.flee - bonus_flee, 0.01)
+	var bonus_crit = snapped(hero_to_display.bonus_crit_rate, 0.01)
+	var base_crit = snapped(hero_to_display.crit_rate - bonus_crit - hero_to_display.bonus_crit_rate_hidden, 0.01)
+	var bonus_crit_dame = snapped(hero_to_display.bonus_crit_dame, 0.01)
+	var base_crit_dame = snapped(hero_to_display.crit_damage - bonus_crit_dame, 0.01)
 	
 	
-	var current_hp_int = int(_hero_in_view.current_hp)
+	var current_hp_int = int(hero_to_display.current_hp)
 	info_hp_label.text = "HP: %d/%s" % [current_hp_int, str(roundi(base_hp))] + ("[color=cyan] +%s[/color]" % str(roundi(bonus_hp)) if bonus_hp > 0 else "")
-	var current_sp_int = int(_hero_in_view.current_sp)
+	var current_sp_int = int(hero_to_display.current_sp)
 	info_sp_label.text = "SP: %d/%s" % [current_sp_int, str(roundi(base_sp))] + ("[color=cyan] +%s[/color]" % str(roundi(bonus_sp)) if bonus_sp > 0 else "")
 	
 	info_str_label.text = "Sức mạnh: %s" % str(roundi(base_str)) + ("[color=cyan] +%s[/color]" % str(roundi(bonus_str)) if bonus_str > 0 else "")
@@ -783,17 +512,28 @@ func _update_hero_info_panel():
 	info_int_label.text = "Trí tuệ: %s" % str(roundi(base_intel)) + ("[color=cyan] +%s[/color]" % str(roundi(bonus_intel)) if bonus_intel > 0 else "")
 	info_dex_label.text = "Độ chuẩn: %s" % str(roundi(base_dex)) + ("[color=cyan] +%s[/color]" % str(roundi(bonus_dex)) if bonus_dex > 0 else "")
 	info_luk_label.text = "May mắn: %s" % str(roundi(base_luk)) + ("[color=cyan] +%s[/color]" % str(roundi(bonus_luk)) if bonus_luk > 0 else "")
-	info_atk_label.text = "Sát thương: %d - %d" % [int(_hero_in_view.min_atk), int(_hero_in_view.max_atk)] 
-	info_matk_label.text = "Sát thương phép: %d - %d" % [int(_hero_in_view.min_matk), int(_hero_in_view.max_matk)]
+	info_atk_label.text = "Sát thương: %s" % str(roundi(base_atk)) + ("[color=cyan] +%s[/color]" % str(roundi(bonus_atk)) if bonus_atk > 0 else "")
+	info_matk_label.text = "Sát thương phép: %s" % str(roundi(base_matk)) + ("[color=cyan] +%s[/color]" % str(roundi(bonus_matk)) if bonus_matk > 0 else "")
 	info_def_label.text = "Phòng thủ: %s" % str(roundi(base_def)) + ("[color=cyan] +%s[/color]" % str(roundi(bonus_def)) if bonus_def > 0 else "")
 	info_mdef_label.text = "Phòng thủ phép: %s" % str(roundi(base_mdef)) + ("[color=cyan] +%s[/color]" % str(roundi(bonus_mdef)) if bonus_mdef > 0 else "")
 	info_hit_label.text = "Chính xác: %s" % str(roundi(base_hit)) + ("[color=cyan] +%s[/color]" % str(roundi(bonus_hit)) if bonus_hit > 0 else "")
 	info_flee_label.text = "Tránh né: %s" % str(roundi(base_flee)) + ("[color=cyan] +%s[/color]" % str(roundi(bonus_flee)) if bonus_flee > 0 else "")
 	info_crit_label.text = "Tỉ lệ trí mạng: %s%%" % str(snapped(base_crit, 0.1)) + ("[color=cyan] +%s%%[/color]" % str(snapped(bonus_crit, 0.1)) if bonus_crit > 0 else "")
 	info_critDame_label.text = "ST chí mạng: x%s" % str(snapped(base_crit_dame, 0.1)) + ("[color=cyan] +%s[/color]" % str(snapped(bonus_crit_dame, 0.1)) if bonus_crit_dame > 0 else "")
-	info_attackspeed_label.text = "Tốc độ đánh: %.2f giây/đòn" % _hero_in_view.attack_speed_calculated
-	info_sp_label.text = "SP: %d/%d" % [int(_hero_in_view.current_sp), int(_hero_in_view.max_sp)]
+	info_attackspeed_label.text = "Tốc độ đánh: %.2f giây/đòn" % hero_to_display.attack_speed_calculated
+	info_sp_label.text = "SP: %d/%d" % [int(hero_to_display.current_sp), int(hero_to_display.max_sp)]
 
+
+func _on_hero_exp_changed(current_exp, exp_to_next_level):
+	if not is_instance_valid(_current_hero): return
+
+	# Cập nhật thanh EXP ở panel chính
+	exp_bar.max_value = exp_to_next_level
+	exp_bar.value = current_exp
+	
+	# Cập nhật label EXP ở panel chi tiết (nếu nó đang mở)
+	if hero_info_panel.visible:
+		info_exp_label.text = "EXP: %d/%d" % [current_exp, exp_to_next_level]
 
 # Hàm này được gọi khi tín hiệu "stats_updated" của hero được phát ra (khi lên cấp).
 func _on_hero_stats_updated():
@@ -801,14 +541,7 @@ func _on_hero_stats_updated():
 	_update_selected_hero_panel()
 	if hero_info_panel.visible:
 		# Truyền Hero đang được chọn vào hàm
-		_update_hero_info_panel()
-		_update_stat_buttons_visibility()
-		free_points_label.text = "Điểm tự do: %d" % _current_hero.free_points
-		
-func _on_free_points_changed():
-	if is_instance_valid(_current_hero):
-		# Cập nhật label và ẩn/hiện nút
-		_update_stat_buttons_visibility()
+		_update_hero_info_panel(_current_hero)
 		
 func _create_backpack_slots(amount: int) -> void:
 	# Xóa các ô cũ đi (giữ nguyên)
@@ -929,12 +662,27 @@ func _on_equipment_slot_pressed(slot_key: String):
 	_current_hero.unequip_item(slot_key)
 
 func _on_equipment_slot_mouse_entered(slot_key: String):
-	if is_instance_valid(_current_hero):
-		var item_info = _current_hero.equipment.get(slot_key)
-		if item_info:
-			# SỬA Ở ĐÂY: Gọi trực tiếp đến item_tooltip và gửi cả dictionary
-			item_tooltip.update_tooltip(item_info)
-			item_tooltip.popup(Rect2(get_viewport().get_mouse_position(), item_tooltip.size))
+	if not is_instance_valid(_current_hero):
+		return
+
+	var equipped_item = _current_hero.equipment.get(slot_key)
+	if not equipped_item:
+		return
+
+	# Bắt đầu kiểm tra xem equipped_item là String hay Dictionary
+	var item_id_to_show = ""
+	if equipped_item is Dictionary:
+		# Nếu là Potion, lấy ID từ bên trong Dictionary
+		item_id_to_show = equipped_item.get("id", "")
+	elif equipped_item is String:
+		# Nếu là trang bị thường, nó chính là ID
+		item_id_to_show = equipped_item
+
+	# Chỉ hiển thị tooltip nếu có ID hợp lệ
+	if not item_id_to_show.is_empty():
+		item_tooltip.update_tooltip(item_id_to_show)
+		item_tooltip.position = get_viewport().get_mouse_position() + Vector2(20, 20)
+		item_tooltip.popup()
 
 func _on_equipment_slot_mouse_exited():
 	item_tooltip.hide()
@@ -991,31 +739,24 @@ func _on_respawn_finished(hero: Hero):
 		# 4. Lệnh cho thanh hồi sinh tự hủy khỏi Scene
 		bar_to_remove.queue_free()
 
-func tim_potion_slot_san_sang(potion_type: String = "hp") -> String: # Thêm tham số loại potion
+func tim_potion_slot_san_sang() -> String:
+	# Chỉ tìm khi đang có hero được chọn
 	if not is_instance_valid(_current_hero):
 		return ""
 
+	# Lặp qua các ô Potion đã định nghĩa
 	for slot_key in ["POTION_1", "POTION_2", "POTION_3"]:
 		var slot_node = equipment_slots.get(slot_key)
 		var item_in_slot = _current_hero.equipment.get(slot_key)
-
+		
 		var is_slot_ready = false
 		if is_instance_valid(slot_node):
 			is_slot_ready = slot_node.is_ready()
 
-		# Nếu ô có đồ và đang không cooldown
 		if item_in_slot != null and is_slot_ready:
-			# Lấy data của item để xem nó là loại gì
-			var item_data = ItemDatabase.get_item_data(item_in_slot["id"])
-			var stats = item_data.get("stats", {})
-
-			# Kiểm tra xem có đúng loại potion đang cần tìm không
-			if potion_type == "hp" and stats.has("heal_amount"):
-				return slot_key
-			elif potion_type == "sp" and stats.has("sp_restore_amount"):
-				return slot_key
-
-	return "" # Không tìm thấy loại potion phù hợp
+			return slot_key
+			
+	return ""
 
 # Hàm này ra lệnh cho một ô Potion cụ thể bắt đầu cooldown
 func bat_dau_cooldown_potion(slot_key: String, duration: float):
@@ -1024,7 +765,6 @@ func bat_dau_cooldown_potion(slot_key: String, duration: float):
 		slot_node.start_cooldown(duration)
 
 func _on_warehouse_button_pressed() -> void:
-	_close_all_main_panels()
 	warehouse_panel.visible = not warehouse_panel.visible
 
 func _on_close_button_pressed() -> void:
@@ -1119,7 +859,7 @@ func _update_player_info_bar():
 		player_name_label.text = "Tên: " + PlayerStats.player_name
 		
 	if is_instance_valid(player_level_label):
-		player_level_label.text = "Cấp: " + str(PlayerStats.village_level)
+		player_level_label.text = "Cấp: " + str(PlayerStats.player_level)
 
 	if is_instance_valid(player_gold_label):
 		# Sử dụng player_gold thay vì gold (gold là của hero)
@@ -1154,7 +894,7 @@ func _update_warehouse_display():
 			slot_node.display_item(null, 0)
 			
 	# Sau khi đã quét xong toàn bộ nhà kho, cập nhật trạng thái nút Summon
-	summon_button.disabled = not PlayerStats.can_summon()
+	summon_button.disabled = not has_scroll
 
 func _on_rest_button_pressed():
 	if not is_instance_valid(_current_hero):
@@ -1223,20 +963,23 @@ func _on_inn_panel_closed(hero):
 	hero.doi_trang_thai(Hero.State.IDLE)
 		
 func _on_backpack_slot_mouse_entered(slot_index: int):
-	if is_instance_valid(_current_hero):
-		var item_info = _current_hero.inventory[slot_index]
-		if item_info:
-			# SỬA LẠI: Gọi thẳng tới tooltip và gửi cả dictionary
-			item_tooltip.update_tooltip(item_info)
-			item_tooltip.popup(Rect2(get_viewport().get_mouse_position(), item_tooltip.size))
+	if not is_instance_valid(_current_hero): return
+	if slot_index < 0 or slot_index >= _current_hero.inventory.size(): return
+
+	var item_info = _current_hero.inventory[slot_index]
+	if item_info and item_info.has("id"):
+		item_tooltip.update_tooltip(item_info["id"])
+		item_tooltip.show()
 
 # Xử lý khi di chuột vào ô NHÀ KHO
 func _on_warehouse_slot_mouse_entered(slot_index: int):
+	if slot_index < 0 or slot_index >= PlayerStats.warehouse.size(): return
+	
 	var item_info = PlayerStats.warehouse[slot_index]
-	if item_info:
-		# SỬA Ở ĐÂY:
-		item_tooltip.update_tooltip(item_info)
-		item_tooltip.popup(Rect2(get_viewport().get_mouse_position(), item_tooltip.size))
+	if item_info and item_info.has("id"):
+		item_tooltip.update_tooltip(item_info["id"])
+		# Chỉ ra lệnh "hiện", không cần đặt vị trí ở đây nữa
+		item_tooltip.show()
 
 # Hàm này được gọi khi Panel Chế tác bị đóng
 func _on_crafting_panel_closed(_hero):
@@ -1288,30 +1031,13 @@ func _on_blacksmith_panel_requested():
 	crafting_panel.panel_closed.connect(_on_crafting_panel_closed.bind(null)) # null vì không có hero nào liên quan
 	add_child(crafting_panel)
 	crafting_panel.setup("blacksmith") # Mở panel với đúng loại chế tác
-	crafting_panel.recipe_selected.connect(_on_crafting_recipe_selected)
-	
 
 func _on_alchemist_panel_requested():
 	var crafting_panel = CraftingPanelScene.instantiate()
 	crafting_panel.panel_closed.connect(_on_crafting_panel_closed.bind(null))
 	add_child(crafting_panel)
 	crafting_panel.setup("alchemist")
-	crafting_panel.recipe_selected.connect(_on_crafting_recipe_selected)
-
-func _on_crafting_recipe_selected(recipe: Dictionary):
-	# In ra để kiểm tra
-	print("UI đã nhận được yêu cầu chế tạo: ", recipe["result"]["item_id"])
-
-	# 1. Tạo ra panel chọn số lượng
-	var quantity_panel = CraftingQuantityPanelScene.instantiate()
-	add_child(quantity_panel)
-
-	# 2. Thiết lập cho panel đó (bạn cần có hàm setup trong script của quantity_panel)
-	quantity_panel.setup(recipe)
-
-	# 3. Hiển thị panel
-	quantity_panel.show()
-
+	
 func _on_hero_sp_changed(current_sp, max_sp):
 	# Chỉ cập nhật nếu panel thông tin đang hiển thị
 	if hero_info_panel.visible and is_instance_valid(_current_hero):
@@ -1336,11 +1062,9 @@ func _on_hero_arrived_at_potion_shop(hero: Hero):
 	hero.doi_trang_thai(Hero.State.TRADING)
 	
 	var shop_panel = ShopPanelScene.instantiate()
-	shop_panel.add_to_group("panels")
 	shop_panel.item_tooltip = item_tooltip 
 	add_child(shop_panel)
 	shop_panel.setup("potion", hero)
-	current_open_panel = shop_panel
 
 func _on_job_change_button_pressed():
 	if not is_instance_valid(_current_hero): return
@@ -1371,19 +1095,9 @@ func _on_hero_arrived_at_equipment_shop(hero: Hero):
 	shop_panel.setup("equipment", hero)
 
 func _on_village_upgrade_button_pressed():
-	if is_instance_valid(village_upgrade_panel_instance):
-		print("Đã mở panel update village")
-		return
-	_close_all_main_panels()
-	village_upgrade_panel_instance = VillageUpgradePanelScene.instantiate()
-	village_upgrade_panel_instance.panel_closed.connect(_on_village_upgrade_panel_closed)
-	add_child(village_upgrade_panel_instance)
-	
-func _on_village_upgrade_panel_closed():
-	_close_all_main_panels()
-	# Khi nhận được tín hiệu panel đã đóng, xóa tham chiếu
-	village_upgrade_panel_instance = null
-	print("Panel nang cap lang da dong. Co the mo lai.")
+	# Tạo một instance mới mỗi lần nhấn để đảm bảo dữ liệu luôn được làm mới
+	var upgrade_panel = VillageUpgradePanelScene.instantiate()
+	add_child(upgrade_panel)
 	# Không cần gọi setup vì panel sẽ tự lấy dữ liệu từ PlayerStats
 
 func _update_hero_count_display(_new_level = 0):
@@ -1402,76 +1116,22 @@ func _update_hero_count_display(_new_level = 0):
 
 func _on_barracks_button_pressed():
 	var barracks_panel = HeroBarracksPanelScene.instantiate()
-	barracks_panel.add_to_group("panel")
-	
-	_close_all_main_panels()
-		# Kết nối tín hiệu mới từ panel kho hero
+	# Kết nối tín hiệu mới từ panel kho hero
 	barracks_panel.display_hero_info_requested.connect(_on_display_barracks_hero_info)
 	add_child(barracks_panel)
 	
 func _on_display_barracks_hero_info(hero_from_barracks: Hero):
-	if not is_instance_valid(hero_from_barracks): return
-	
-	# Gán "trí nhớ" cho hero từ sảnh
-	_hero_in_view = hero_from_barracks
-
-	_update_hero_info_panel()
-	
-	if is_instance_valid(skill_list_container):
-		skill_list_container.visible = false
-	if is_instance_valid(active_skill_grid):
-		active_skill_grid.visible = false
-	if is_instance_valid(skill_points_label):
-		skill_points_label.visible = false
-	if is_instance_valid(free_points_label):
-		free_points_label.visible = false
-	# Ẩn tất cả các nút cộng điểm chỉ số
-	for btn in stat_buttons:
-		btn.visible = false
-	
+	print("\n--- DEBUG INFO PANEL ---")
+	print("1. UI đã nhận tín hiệu 'display_hero_info_requested'.")
+	if is_instance_valid(hero_from_barracks):
+		print("   -> Hero nhận được từ sảnh: ", hero_from_barracks.name)
+	else:
+		print("   -> LỖI: Hero nhận được không hợp lệ (null)!")
+		return
+	# Gọi hàm cập nhật với Hero được gửi từ kho
+	_update_hero_info_panel(hero_from_barracks)
+	# Hiển thị panel
 	hero_info_panel.show()
 	hero_info_panel.move_to_front()
-
-
-func request_hero_dismissal(hero_to_dismiss: Hero):
-	if not is_instance_valid(hero_to_dismiss):
-		print("Lỗi: Yêu cầu sa thải một hero không hợp lệ.")
-		return
-
-	var hero_name = hero_to_dismiss.name
-
-	# Nếu InfoPanel đang mở và hiển thị hero này, hãy đóng nó và dọn dẹp
-	if hero_to_dismiss == _hero_in_view:
-		hero_info_panel.hide()
-		_hero_in_view = null
-
-	# Nếu hero này đang được chọn ngoài world, hủy chọn
-	if hero_to_dismiss == _current_hero:
-		GameEvents.hero_selected.emit(null)
-
-	# Gọi logic sa thải cốt lõi
-	PlayerStats.sa_thai_hero(hero_to_dismiss)
-	print("Đã sa thải thành công hero: " + hero_name)
-
-func _on_sa_thai_button_pressed():
-	request_hero_dismissal(_hero_in_view)
-	
-func _update_main_stats_display():
-	if not is_instance_valid(_hero_in_view):
-		# Nếu không có hero nào được chọn, có thể xóa text hoặc để trống
-		info_str_label.text = "STR: --"
-		info_agi_label.text = "AGI: --"
-		info_vit_label.text = "VIT: --"
-		info_int_label.text = "INT: --"
-		info_dex_label.text = "DEX: --"
-		info_luk_label.text = "LUK: --"
-		return
-
-	# Cập nhật text cho các label chỉ số
-	info_str_label.text = "STR: %d" % _hero_in_view.STR
-	info_agi_label.text = "AGI: %d" % _hero_in_view.AGI
-	info_vit_label.text = "VIT: %d" % _hero_in_view.VIT
-	info_int_label.text = "INT: %d" % _hero_in_view.INTEL
-	info_dex_label.text = "DEX: %d" % _hero_in_view.DEX
-	info_luk_label.text = "LUK: %d" % _hero_in_view.LUK
-	# ... (cập nhật các label khác nếu có)
+	print("4. Đã yêu cầu HeroInfoPanel hiển thị.")
+	print("------------------------\n")
