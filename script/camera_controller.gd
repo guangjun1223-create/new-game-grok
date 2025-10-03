@@ -11,16 +11,27 @@ extends Camera2D
 
 var followed_hero: Node2D = null  # Lưu hero đang theo dõi
 
+var is_zoom_locked: bool = false
+
 func _ready() -> void:
 	# Kết nối tín hiệu chọn hero với hàm on_hero_selected
 	GameEvents.hero_selected.connect(on_hero_selected)
+	GameEvents.ui_panel_opened.connect(lock_zoom)
+	GameEvents.ui_panel_closed.connect(unlock_zoom)
+
+func lock_zoom():
+	is_zoom_locked = true
+	print("Camera zoom LOCKED")
+
+func unlock_zoom():
+	is_zoom_locked = false
+	print("Camera zoom UNLOCKED")
 
 func _process(delta: float) -> void:
+	# Giữ nguyên logic di chuyển camera của bạn
 	if is_instance_valid(followed_hero):
-		# Camera theo hero
 		position = followed_hero.global_position
 	else:
-		# Camera tự do di chuyển bằng bàn phím
 		var direction := Vector2.ZERO
 		if Input.is_action_pressed("ui_up"):
 			direction.y -= 1
@@ -32,17 +43,28 @@ func _process(delta: float) -> void:
 			direction.x += 1
 		direction = direction.normalized()
 		position += direction * speed * delta
+		
+func _unhandled_input(event: InputEvent) -> void:
+	# === BƯỚC KIỂM TRA QUAN TRỌNG NHẤT ===
+	# Nếu "công tắc" đang bật (bị khóa), không làm gì cả và thoát ngay
+	if is_zoom_locked:
+		return
+	# ======================================
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and event.button_mask == MOUSE_BUTTON_MASK_RIGHT:
-		position -= event.relative * pan_speed
-
+	# Xử lý zoom bằng lăn chuột
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			zoom -= Vector2.ONE * zoom_speed
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			zoom += Vector2.ONE * zoom_speed
-		zoom = zoom.clamp(Vector2.ONE * min_zoom, Vector2.ONE * max_zoom)
+		
+		# Giới hạn mức độ zoom
+		zoom = zoom.clamp(Vector2(min_zoom, min_zoom), Vector2(max_zoom, max_zoom))
+
+func _input(event: InputEvent) -> void:
+	# Giữ lại logic kéo-thả bản đồ bằng chuột phải ở đây
+	if event is InputEventMouseMotion and event.button_mask == MOUSE_BUTTON_MASK_RIGHT:
+		position -= event.relative * pan_speed
 
 # Hàm xử lý khi một hero được chọn (click)
 func on_hero_selected(hero_node: Node2D) -> void:
@@ -53,3 +75,6 @@ func on_hero_selected(hero_node: Node2D) -> void:
 	else:
 		# Chọn hero mới để theo dõi
 		followed_hero = hero_node
+
+func on_hero_deselected():
+	followed_hero = null

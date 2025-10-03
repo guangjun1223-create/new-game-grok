@@ -4,7 +4,7 @@
 
 [node name="ItemTooltip" type="PopupPanel"]
 oversampling_override = 1.0
-size = Vector2i(224, 122)
+size = Vector2i(224, 149)
 visible = true
 mouse_passthrough = true
 content_scale_size = Vector2i(250, 0)
@@ -37,6 +37,9 @@ bbcode_enabled = true
 text = "ádasd"
 fit_content = true
 autowrap_mode = 2
+
+[node name="TypeLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="DescriptionLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 clip_contents = false

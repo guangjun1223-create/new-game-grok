@@ -1,0 +1,104 @@
+[gd_scene load_steps=5 format=3 uid="uid://da16hpl86p2jy"]
+
+[ext_resource type="Script" uid="uid://gdo11rlfbdbs" path="res://script/UI/skill_slot.gd" id="1_0beoe"]
+[ext_resource type="Texture2D" uid="uid://cvjja6vfjwucc" path="res://texture/Folding & Cutout Paper UI SpriteSheet.png" id="2_w5iqf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5iqf"]
+atlas = ExtResource("2_w5iqf")
+region = Rect2(2784, 3648, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgebf"]
+atlas = ExtResource("2_w5iqf")
+region = Rect2(2784, 3648, 96, 96)
+
+[node name="SkillSlot" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -279.5
+offset_top = -44.5
+offset_right = 121.5
+offset_bottom = 44.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0beoe")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Node2D" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="FrameRect" type="TextureRect" parent="HBoxContainer/Node2D"]
+layout_mode = 0
+offset_left = -5.5
+offset_top = -10.5
+offset_right = 90.5
+offset_bottom = 85.5
+scale = Vector2(0.8, 0.8)
+texture = SubResource("AtlasTexture_w5iqf")
+
+[node name="IconRect" type="TextureRect" parent="HBoxContainer/Node2D"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.5
+offset_top = -31.5
+offset_right = 70.5
+offset_bottom = 64.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_dgebf")
+
+[node name="InfoContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="NameLabel" type="Label" parent="HBoxContainer/InfoContainer"]
+layout_mode = 2
+text = "name"
+
+[node name="LevelLabel" type="Label" parent="HBoxContainer/InfoContainer"]
+layout_mode = 2
+text = "level"
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="HBoxContainer/InfoContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "đây là thông tin"
+fit_content = true
+autowrap_mode = 2
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="ActionButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Kích hoạt"
+
+[node name="EquipButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Trang bị"
+
+[node name="LockOverlay" type="ColorRect" parent="."]
+visible = false
+layout_mode = 2
+color = Color(0, 0, 0, 0.7254902)

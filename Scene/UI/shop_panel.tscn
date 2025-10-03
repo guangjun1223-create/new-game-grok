@@ -1,9 +1,49 @@
-[gd_scene load_steps=2 format=3 uid="uid://dimpqtsix6obs"]
+[gd_scene load_steps=17 format=3 uid="uid://dimpqtsix6obs"]
 
 [ext_resource type="Script" uid="uid://ba3o6u1obk78n" path="res://script/UI/shop_panel.gd" id="1_1yfji"]
+[ext_resource type="Texture2D" uid="uid://vsfbmy6gfj1w" path="res://texture/UI01/shop/2.png" id="2_cllvi"]
+[ext_resource type="Texture2D" uid="uid://bllr5ojbewtjj" path="res://texture/UI01/shop/12.png" id="3_wime1"]
+[ext_resource type="Texture2D" uid="uid://bm8hb4ix1ghrk" path="res://texture/UI01/inventory/17.png" id="4_u7v4a"]
+[ext_resource type="Texture2D" uid="uid://84hapryncb2q" path="res://texture/UI01/inventory/18.png" id="5_g6t78"]
+[ext_resource type="Texture2D" uid="uid://dtsrjf14ogcmr" path="res://texture/UI01/inventory/19.png" id="6_kpvc2"]
+[ext_resource type="Texture2D" uid="uid://bcja6x52xj2ji" path="res://texture/UI01/inventory/20.png" id="7_f3v8e"]
 
-[node name="ShopPanel" type="Control"]
-custom_minimum_size = Vector2(300, 400)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gaky1"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8kqk1"]
+texture = ExtResource("2_cllvi")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_neuyw"]
+texture = ExtResource("3_wime1")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eiouw"]
+texture = ExtResource("6_kpvc2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xsq7h"]
+texture = ExtResource("6_kpvc2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yplu0"]
+texture = ExtResource("6_kpvc2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_po8xd"]
+texture = ExtResource("7_f3v8e")
+
+[sub_resource type="Theme" id="Theme_ods1t"]
+VScrollBar/icons/decrement = ExtResource("4_u7v4a")
+VScrollBar/icons/decrement_highlight = ExtResource("4_u7v4a")
+VScrollBar/icons/decrement_pressed = ExtResource("4_u7v4a")
+VScrollBar/icons/increment = ExtResource("5_g6t78")
+VScrollBar/icons/increment_highlight = ExtResource("5_g6t78")
+VScrollBar/icons/increment_pressed = ExtResource("5_g6t78")
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_eiouw")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_xsq7h")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_yplu0")
+VScrollBar/styles/scroll = SubResource("StyleBoxTexture_po8xd")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_crwmi"]
+
+[node name="ShopPanel" type="Control" groups=["panels"]]
+custom_minimum_size = Vector2(250, 400)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -12,37 +52,74 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -250.0
 offset_top = -200.0
-offset_right = 50.0
+offset_right = 150.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1yfji")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(450, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gaky1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+theme_override_constants/separation = -30
 
-[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Panel" type="Panel" parent="PanelContainer/VBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_8kqk1")
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Cửa Hàng"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Panel2" type="Panel" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-horizontal_scroll_mode = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_neuyw")
 
-[node name="ItemGrid" type="GridContainer" parent="PanelContainer/VBoxContainer/ScrollContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/Panel2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -153.5
+offset_right = 150.0
+offset_bottom = 153.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_ods1t")
+horizontal_scroll_mode = 0
+scroll_deadzone = 2
+
+[node name="ItemGrid" type="GridContainer" parent="PanelContainer/VBoxContainer/Panel2/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
 columns = 5
 
 [node name="CloseButton" type="Button" parent="PanelContainer/VBoxContainer"]
@@ -50,4 +127,5 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_styles/pressed = SubResource("StyleBoxTexture_crwmi")
 text = "Đóng"

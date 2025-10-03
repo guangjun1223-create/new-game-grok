@@ -1,79 +1,42 @@
 {
   "slime_normal_01": {
-	"name": "slime",
+	"name": "Slime",
 	"type": "NORMAL",
 	"level": 1,
 	"sprite_frames_path": "res://Data/Slime.tres",
-	"stats": {
-	  "max_hp": 50,
-	  "atk": 8,
-	  "matk": 8,
-	  "def": 1,
-	  "mdef": 1,
-	  "hit": 90,
-	  "crit": 5,
-	  "giap": 1
+	"base_stats": {
+	  "STR": 8,
+	  "AGI": 5,
+	  "VIT": 10,
+	  "INTEL": 1,
+	  "DEX": 10,
+	  "LUK": 5
 	},
-	"exp_reward": 500,
-	"gold_drop": [10, 20],
+	"exp_reward": 1000,
+	"gold_drop": [5, 10],
 	"respawn_time": 20.0,
-	"respawn_radius": 100,
 	"loot_table": [
-		{"item_id": "wood", "chance": 0.25, "quantity": [1,1]},
-		{"item_id": "stone", "chance": 0.25, "quantity":[1,1]},
-		{"item_id": "herb", "chance": 0.25, "quantity":[1,1]},
-		{"item_id": "small_crystal", "chance": 0.25, "quantity":[1,1]},
-		{"item_id": "empty_bottle", "chance": 0.25, "quantity":[1,1]},
-		{"item_id": "spring_water", "chance": 0.25, "quantity":[1,1]}
-		]
+		{"item_id": "herb", "chance": 0.15, "quantity": [1,1]}
+	]
   },
   "slime_blue_01": {
-	"name": "Slime xanh",
+	"name": "Slime Xanh",
 	"type": "ELITE",
 	"level": 5,
 	"sprite_frames_path": "res://Data/Slime_01.tres",
-	"stats": {
-	  "max_hp": 200,
-	  "atk": 30,
-	  "matk": 10,
-	  "def": 5,
-	  "mdef": 5,
-	  "hit": 90,
-	  "crit": 15,
-	  "giap": 5
+	"base_stats": {
+	  "STR": 15,
+	  "AGI": 8,
+	  "VIT": 25,
+	  "INTEL": 5,
+	  "DEX": 18,
+	  "LUK": 10
 	},
-	"exp_reward": 25,
+	"exp_reward": 3500,
 	"gold_drop": [20, 50],
 	"respawn_time": 60.0,
-	"respawn_radius": 50.0,
 	"loot_table": [
-		{"item_id": "small_crystal", "chance": 0.25, "quantity":[1,1]},
-		{"item_id": "empty_bottle", "chance": 0.25, "quantity":[1,1]},
-		{"item_id": "spring_water", "chance": 0.25, "quantity":[1,1]},
-		{"item_id": "thread", "chance": 0.25, "quantity":[1,1]},
-		{"item_id": "cloth", "chance": 0.25, "quantity":[1,1]},
-		{"item_id": "leather", "chance": 0.25, "quantity":[1,1]}
-		]
-  },
-  "orc_chief_boss_01": {
-	"name": "Thủ Lĩnh Orc",
-	"type": "BOSS",
-	"level": 10,
-	"sprite_frames_path": "res://Data/Orc.tres",
-	"stats": {
-	  "max_hp": 1000,
-	  "atk": 50,
-	  "matk": 50,
-	  "def": 15,
-	  "mdef": 15,
-	  "hit": 80,
-	  "crit": 20,
-	  "giap": 15
-	},
-	"exp_reward": 10000,
-	"gold_drop": [100, 500],
-	"respawn_time": 600.0,
-	"respawn_radius": 20.0,
-	"loot_table": ["orc_chief_axe", "healing_potion_large", "rare_gem"]
+		{"item_id": "small_crystal", "chance": 0.1, "quantity":[1,1]}
+	]
   }
 }

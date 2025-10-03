@@ -1,13 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxuwxheh8fch2"]
+[gd_scene load_steps=6 format=3 uid="uid://dxuwxheh8fch2"]
 
 [ext_resource type="Script" uid="uid://dk7o2tp3mnas8" path="res://script/UI/item_slot.gd" id="1_36q54"]
-[ext_resource type="Texture2D" uid="uid://dxoapwgl1etra" path="res://texture/UI/CharacterBox_56x57.png" id="1_vk2nk"]
-[ext_resource type="Shader" uid="uid://wj8t56bgtwit" path="res://Scene/UI/item_slot.gdshader" id="3_3iyk1"]
+[ext_resource type="Texture2D" uid="uid://cvjja6vfjwucc" path="res://texture/Folding & Cutout Paper UI SpriteSheet.png" id="2_3iyk1"]
+[ext_resource type="Texture2D" uid="uid://dn0ragedbm148" path="res://texture/3232.png" id="3_3iyk1"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f24jf"]
-shader = ExtResource("3_3iyk1")
-shader_parameter/progress = 0.0
-shader_parameter/cooldown_color = Color(0, 0, 0, 0.6)
+[sub_resource type="AtlasTexture" id="AtlasTexture_f24jf"]
+atlas = ExtResource("2_3iyk1")
+region = Rect2(2784, 3648, 96, 96)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3iyk1"]
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.78431374)
 
 [node name="ItemSlot" type="Button"]
 custom_minimum_size = Vector2(64, 64)
@@ -17,14 +20,15 @@ flat = true
 script = ExtResource("1_36q54")
 
 [node name="Background" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_vk2nk")
-expand_mode = 1
+texture = SubResource("AtlasTexture_f24jf")
+expand_mode = 3
 stretch_mode = 5
 
 [node name="ItemIcon" type="TextureRect" parent="."]
@@ -40,7 +44,7 @@ offset_right = 24.0
 offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
-expand_mode = 5
+expand_mode = 1
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="."]
@@ -50,22 +54,27 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -23.0
+offset_left = -44.0
+offset_top = -26.0
+offset_right = -4.0
+offset_bottom = -3.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "99"
+label_settings = SubResource("LabelSettings_3iyk1")
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Timer" type="Timer" parent="."]
+[node name="CooldownTimer" type="Timer" parent="."]
 
-[node name="CooldownOverlay" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_f24jf")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.5882353)
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 60.0
+offset_bottom = 61.0
+value = 40.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_progress = ExtResource("3_3iyk1")
+tint_progress = Color(1, 1, 1, 0.49803922)

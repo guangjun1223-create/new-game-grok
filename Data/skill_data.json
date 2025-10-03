@@ -1,0 +1,126 @@
+{
+	"NOV_SWORD_BOOM": {
+		"skill_name": "Kiếm Bộc Phá",
+		"job": "Novice",
+		"unlock_level": 5,
+		"max_level": 5,
+		"skill_point_cost": [1, 1, 1, 1, 1],
+		"usage_type": "ACTIVE",
+		"requirements": { "weapon_type": "SWORD" },
+		"sp_cost_per_level": [10, 12, 14, 16, 18],
+		"cooldown": 8.0,
+		"atlas_coords": { "x": 192, "y": 2880, "w": 64, "h": 64 },
+		"effects_per_level": [
+			{ "description": "Gây 110% ATK và có 5% đẩy lùi kẻ địch.", "damage_multiplier": 1.1, "knockback_chance": 0.05 },
+			{ "description": "Gây 115% ATK và có 10% đẩy lùi kẻ địch.", "damage_multiplier": 1.15, "knockback_chance": 0.1 },
+			{ "description": "Gây 120% ATK và có 15% đẩy lùi kẻ địch.", "damage_multiplier": 1.2, "knockback_chance": 0.15 },
+			{ "description": "Gây 125% ATK và có 20% đẩy lùi kẻ địch.", "damage_multiplier": 1.25, "knockback_chance": 0.20 },
+			{ "description": "Gây 140% ATK và có 25% đẩy lùi kẻ địch.", "damage_multiplier": 1.4, "knockback_chance": 0.25 }
+		]
+	},
+	"NOV_DOUBLE_SHOT": {
+		"skill_name": "Liên Hoàn Tiễn",
+		"job": "Novice",
+		"unlock_level": 5,
+		"max_level": 5,
+		"skill_point_cost": [1, 1, 1, 1, 1],
+		"usage_type": "ACTIVE",
+		"requirements": { "weapon_type": "BOW" },
+		"sp_cost_per_level": [12, 14, 16, 18, 20],
+		"cooldown": 6.0,
+		"atlas_coords": { "x": 896.0, "y": 3328.0, "w": 64, "h": 64 },
+		"effects_per_level": [
+			{ "description": "Bắn ra mũi tên gây 100% ATK.", "damage_multiplier": 1.0, "projectile_count": 1 },
+			{ "description": "Bắn ra mũi tên gây 110% ATK.", "damage_multiplier": 1.1, "projectile_count": 1 },
+			{ "description": "Bắn ra mũi tên gây 115% ATK.", "damage_multiplier": 1.15, "projectile_count": 1 },
+			{ "description": "Bắn ra mũi tên gây 120% ATK.", "damage_multiplier": 1.2, "projectile_count": 1 },
+			{ "description": "Bắn ra mũi tên gây 125% ATK.", "damage_multiplier": 1.25, "projectile_count": 1 }
+		]
+	},
+	"NOV_FIRE_BOLT": {
+		"skill_name": "Hỏa Tiễn",
+		"job": "Novice",
+		"unlock_level": 5,
+		"max_level": 5,
+		"skill_point_cost": [1, 1, 2, 2, 3],
+		"usage_type": "ACTIVE",
+		"requirements": { "weapon_type": "STAFF" },
+		"sp_cost_per_level": [15, 18, 21, 24, 27],
+		"cooldown": 7.0,
+		"atlas_coords": { "x": 0.0, "y": 3968.0, "w": 64, "h": 64 },
+		"effects_per_level": [
+			{ "description": "Bắn cầu lửa gây 150% MATK.", "damage_multiplier": 1.5, "damage_type": "MAGIC" },
+			{ "description": "Bắn cầu lửa gây 160% MATK.", "damage_multiplier": 1.6, "damage_type": "MAGIC" },
+			{ "description": "Bắn cầu lửa gây 170% MATK.", "damage_multiplier": 1.7, "damage_type": "MAGIC" },
+			{ "description": "Bắn cầu lửa gây 180% MATK.", "damage_multiplier": 1.8, "damage_type": "MAGIC" },
+			{ "description": "Bắn cầu lửa gây 190% MATK.", "damage_multiplier": 1.9, "damage_type": "MAGIC" }
+		]
+	},
+	"NOV_HEAL": {
+		"skill_name": "Thánh Quang",
+		"job": "Novice",
+		"unlock_level": 3,
+		"max_level": 5,
+		"skill_point_cost": [2, 3, 4, 5, 6],
+		"usage_type": "ACTIVE",
+		"sp_cost_per_level": [10, 15, 20, 25, 25],
+		"cooldown": 10.0,
+		"target_type": "ALLY_OR_SELF",
+		"atlas_coords": { "x": 448.0, "y": 3840.0, "w": 64, "h": 64 },
+		"effects_per_level": [
+			{ "description": "Hồi phục một lượng HP bằng 150% MATK.", "heal_multiplier": 1.5 },
+			{ "description": "Hồi phục một lượng HP bằng 200% MATK.", "heal_multiplier": 2.0 },
+			{ "description": "Hồi phục một lượng HP bằng 250% MATK.", "heal_multiplier": 2.5 },
+			{ "description": "Hồi phục một lượng HP bằng 300% MATK.", "heal_multiplier": 3.0 },
+			{ "description": "Hồi phục một lượng HP bằng 350% MATK.", "heal_multiplier": 3.5 }
+		]
+	},
+	"NOV_INCREASE_HP": {
+		"skill_name": "Tăng Cường HP",
+		"job": "Novice",
+		"unlock_level": 2,
+		"max_level": 5,
+		"skill_point_cost": [1, 1, 1, 1, 1],
+		"usage_type": "PASSIVE",
+		"atlas_coords": { "x": 512.0, "y": 2816.0, "w": 64, "h": 64 },
+		"effects_per_level": [
+			{ "description": "Tăng tối đa 50 HP.", "bonus_max_hp": 50 },
+			{ "description": "Tăng tối đa 75 HP.", "bonus_max_hp": 75 },
+			{ "description": "Tăng tối đa 100 HP.", "bonus_max_hp": 100 },
+			{ "description": "Tăng tối đa 125 HP.", "bonus_max_hp": 125 },
+			{ "description": "Tăng tối đa 150 HP.", "bonus_max_hp": 150 }
+		]
+	},
+	"NOV_INCREASE_FLEE": {
+		"skill_name": "Nhanh Nhẹn",
+		"job": "Novice",
+		"unlock_level": 3,
+		"max_level": 5,
+		"skill_point_cost": [1, 1, 1, 1, 1],
+		"usage_type": "PASSIVE",
+		"atlas_coords": { "x": 320.0, "y": 4288.0, "w": 64, "h": 64 },
+		"effects_per_level": [
+			{ "description": "Tăng một chút điểm Né Tránh (FLEE).", "bonus_flee": 2 },
+			{ "description": "Tăng một chút điểm Né Tránh (FLEE).", "bonus_flee": 5 },
+			{ "description": "Tăng một chút điểm Né Tránh (FLEE).", "bonus_flee": 7 },
+			{ "description": "Tăng một chút điểm Né Tránh (FLEE).", "bonus_flee": 10 },
+			{ "description": "Tăng một chút điểm Né Tránh (FLEE).", "bonus_flee": 12 }
+		]
+	},
+	"NOV_INCREASE_SP": {
+		"skill_name": "Tĩnh Tâm",
+		"job": "Novice",
+		"unlock_level": 3,
+		"max_level": 5,
+		"skill_point_cost": [1, 1, 1, 1, 1],
+		"usage_type": "PASSIVE",
+		"atlas_coords": { "x": 576.0, "y": 2808.0, "w": 64, "h": 64 },
+		"effects_per_level": [
+			{ "description": "Tăng tối đa 20 SP.", "bonus_max_sp": 20 },
+			{ "description": "Tăng tối đa 40 SP.", "bonus_max_sp": 40 },
+			{ "description": "Tăng tối đa 60 SP.", "bonus_max_sp": 60 },
+			{ "description": "Tăng tối đa 80 SP.", "bonus_max_sp": 80 },
+			{ "description": "Tăng tối đa 100 SP.", "bonus_max_sp": 100 }
+		]
+	}
+}

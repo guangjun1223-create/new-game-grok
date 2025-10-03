@@ -12,7 +12,7 @@ font_size = 17
 shadow_size = 5
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="JobChangePanel" type="Control"]
+[node name="JobChangePanel" type="Control" groups=["panel"]]
 custom_minimum_size = Vector2(550, 190)
 layout_mode = 3
 anchors_preset = 8

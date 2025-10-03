@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bodk8e45mem8o"]
 
-[ext_resource type="Texture2D" uid="uid://etgovlgmjhfu" path="res://texture/data/Hero/arrow.png" id="1_327fr"]
 [ext_resource type="Script" uid="uid://ckhntptc20swg" path="res://script/UI/arow.gd" id="1_y26dh"]
+[ext_resource type="Texture2D" uid="uid://dpg1l2a6t6jo5" path="res://texture/data/Hero/Arrow.png" id="2_y26dh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y26dh"]
 radius = 5.0
@@ -14,7 +14,7 @@ script = ExtResource("1_y26dh")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 0.38397244
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_327fr")
+texture = ExtResource("2_y26dh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(35, 0)

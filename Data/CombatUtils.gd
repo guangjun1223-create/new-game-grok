@@ -3,126 +3,97 @@ extends Node
 
 # --- CÔNG THỨC HERO TẤN CÔNG QUÁI (PHIÊN BẢN MỚI 2.0) ---
 # Trả về một Dictionary chứa đầy đủ thông tin về đòn đánh
-func hero_tan_cong_quai(
-	atk_hero: float,
-	matk_hero: float,
-	dex_hero: float,
-	crit_rate_hero: float,
-	_hit_hero: float, # Không còn dùng nhưng giữ lại để tương thích
-	cap_do_hero: int,
-	def_quai: float,
-	mdef_quai: float,
-	_giap_quai: float,
-	cap_do_quai: int,
-	su_dung_phep: bool
-) -> Dictionary:
+func hero_tan_cong_quai(hero_attacker: Hero, monster_defender: Node, su_dung_phep: bool, skill_damage_multiplier: float = 1.0) -> Dictionary:
+	var result = {"damage": 0, "is_crit": false, "is_miss": false}
 
-	# Chuẩn bị sẵn một "báo cáo" kết quả
-	var result = {
-		"damage": 0,
-		"is_crit": false,
-		"is_miss": false
-	}
+	# 1. KIỂM TRA TỶ LỆ TRÚNG (HIT vs FLEE)
+	var hit_chance = 80.0 + hero_attacker.hit - monster_defender.flee
+	hit_chance = clamp(hit_chance, 5.0, 95.0)
+	if hero_attacker.hit >= monster_defender.flee + 20:
+		hit_chance = 100.0
 
-	# 1. LOGIC TÍNH TỈ LỆ TRÚNG MỚI
-	var ti_le_trung_cuoi_cung: float = 90.0
-	var chenh_lech_cap_do = cap_do_quai - cap_do_hero
-	if chenh_lech_cap_do > 0:
-		ti_le_trung_cuoi_cung -= chenh_lech_cap_do
-	ti_le_trung_cuoi_cung = clamp(ti_le_trung_cuoi_cung, 5.0, 90.0)
-
-	if randf() * 100 > ti_le_trung_cuoi_cung:
-		print("HERO TAN CONG: MISS! (Cơ hội trúng: %.1f%%)" % ti_le_trung_cuoi_cung)
-		result.is_miss = true
-		return result # Trả về báo cáo -> Đánh trượt
-
-	# 2. TÍNH SÁT THƯƠNG CƠ BẢN (giữ nguyên)
-	var bien_do = clamp(1.0 - (dex_hero / 100.0), 0.05, 0.3)
-	var dame_raw: float
-	if su_dung_phep:
-		var min_dame = matk_hero * (1.0 - bien_do)
-		var max_dame = matk_hero * (1.0 + (dex_hero / 100.0))
-		dame_raw = randf_range(min_dame, max_dame)
-		var tile_giam = clamp(mdef_quai / (mdef_quai + 100.0), 0.0, 0.8)
-		dame_raw *= (1.0 - tile_giam)
-	else:
-		var min_dame = atk_hero * (1.0 - bien_do)
-		var max_dame = atk_hero * (1.0 + (dex_hero / 100.0))
-		dame_raw = randf_range(min_dame, max_dame)
-		var tile_giam = clamp(def_quai / (def_quai + 100.0), 0.0, 0.8)
-		dame_raw *= (1.0 - tile_giam)
-
-	# 3. LOGIC TÍNH TỈ LỆ CHÍ MẠNG MỚI
-	var ti_le_chi_mang_cuoi_cung = crit_rate_hero
-	if chenh_lech_cap_do > 0:
-		ti_le_chi_mang_cuoi_cung -= chenh_lech_cap_do
-	ti_le_chi_mang_cuoi_cung = clamp(ti_le_chi_mang_cuoi_cung, 0.0, 100.0)
-
-	if randf() * 100 < ti_le_chi_mang_cuoi_cung:
-		dame_raw *= 1.5
-		result.is_crit = true # Ghi nhận vào báo cáo -> Đây là đòn CRIT
-		print("HERO TAN CONG: CRITICAL HIT! (Cơ hội crit: %.1f%%)" % ti_le_chi_mang_cuoi_cung)
-
-	# 4. TRẢ VỀ KẾT QUẢ CUỐI CÙNG
-	var final_damage_int = int(round(dame_raw))
-	result.damage = final_damage_int # Ghi nhận sát thương vào báo cáo
-	print("HERO TAN CONG: Gây ra %d sát thương." % final_damage_int)
-	return result
-
-
-# --- CÔNG THỨC QUÁI TẤN CÔNG HERO (PHIÊN BẢN MỚI 2.0) ---
-func quai_tan_cong_hero(
-	atk_quai: float,
-	matk_quai: float,
-	hit_quai: float,
-	crit_quai: float,
-	cap_do_quai: int,
-	def_hero: float,
-	mdef_hero: float,
-	flee_hero: float,
-	cap_do_hero: int,
-	su_dung_phep: bool
-) -> Dictionary:
-
-	var result = {
-		"damage": 0,
-		"is_crit": false,
-		"is_miss": false
-	}
-
-	# 1. TÍNH TỈ LỆ TRÚNG (công thức gốc)
-	var hit_chance = clamp(hit_quai - flee_hero + (cap_do_quai - cap_do_hero) * 0.5, 20, 100)
 	if randf() * 100 > hit_chance:
-		print("QUAI TAN CONG: MISS!")
 		result.is_miss = true
 		return result
 
-	# 2. TÍNH SÁT THƯƠNG
-	var tile_giam: float
-	var dame_base: float
-	var def_min_hero = def_hero * 0.9
-	var def_max_hero = def_hero * 1.1
-	var mdef_min_hero = mdef_hero * 0.9
-	var mdef_max_hero = mdef_hero * 1.1
+	# 2. TÍNH SÁT THƯƠNG GỐC VÀ KIỂM TRA CHÍ MẠNG
+	var base_damage = 0.0
+	var is_crit = false
+
+	# Tỷ lệ chí mạng thực tế = crit của hero - kháng crit của quái
+	var real_crit_rate = hero_attacker.crit_rate - (monster_defender.LUK / 5.0 if "LUK" in monster_defender else 0)
+	if not su_dung_phep and randf() * 100 < real_crit_rate:
+		is_crit = true
+		result.is_crit = true
 
 	if su_dung_phep:
-		dame_base = matk_quai
-		var mdef_random = randf_range(mdef_min_hero, mdef_max_hero)
-		tile_giam = clamp(mdef_random / (mdef_random + 100.0), 0.0, 0.8)
+		base_damage = randf_range(hero_attacker.min_matk, hero_attacker.max_matk)
 	else:
-		dame_base = atk_quai
-		var def_random = randf_range(def_min_hero, def_max_hero)
-		tile_giam = clamp(def_random / (def_random + 100.0), 0.0, 0.8)
-	var dame_final = dame_base * (1.0 - tile_giam)
+		if is_crit:
+			# Crit luôn gây sát thương tối đa
+			base_damage = hero_attacker.max_atk
+		else:
+			base_damage = randf_range(hero_attacker.min_atk, hero_attacker.max_atk)
+			
+	# Nhân sát thương với hệ số skill (giờ đã hợp lệ)
+	base_damage *= skill_damage_multiplier
 
-	# 3. KIỂM TRA CHÍ MẠNG
-	if randf() * 100 < crit_quai:
-		dame_final *= 1.5
+	# 3. ÁP DỤNG SÁT THƯƠNG CHÍ MẠNG
+	if is_crit:
+		base_damage *= hero_attacker.crit_damage
+
+	# 4. TÍNH TOÁN GIẢM SÁT THƯƠNG
+	var final_damage = 0.0
+	if su_dung_phep:
+		final_damage = base_damage - monster_defender.mdef
+	else:
+		final_damage = base_damage - monster_defender.def
+
+	# Đảm bảo sát thương không bị âm
+	final_damage = max(final_damage, 1.0)
+
+	result.damage = roundi(final_damage)
+	return result
+
+
+# --- CÔNG THỨC QUÁI TẤN CÔNG HERO ---
+func quai_tan_cong_hero(monster_attacker: Node, target_hero: Hero, su_dung_phep: bool) -> Dictionary:
+	var result = {"damage": 0, "is_crit": false, "is_miss": false, "is_perfect_dodge": false}
+
+	# 1. KIỂM TRA NÉ TRÁNH HOÀN HẢO CỦA HERO
+	if not su_dung_phep and randf() * 100 < target_hero.perfect_dodge:
+		result.is_miss = true
+		result.is_perfect_dodge = true
+		return result
+
+	# 2. KIỂM TRA TỶ LỆ TRÚNG (HIT vs FLEE)
+	var hit_chance = 80.0 + monster_attacker.hit - target_hero.flee
+	hit_chance = clamp(hit_chance, 5.0, 95.0)
+	if monster_attacker.hit >= target_hero.flee + 20:
+		hit_chance = 100.0
+
+	if randf() * 100 > hit_chance:
+		result.is_miss = true
+		return result
+
+	# 3. TÍNH SÁT THƯƠNG GỐC VÀ KIỂM TRA CHÍ MẠNG
+	var base_damage = 0.0
+	if su_dung_phep:
+	# Lấy sát thương phép ngẫu nhiên trong khoảng min/max của quái
+		base_damage = randf_range(monster_attacker.min_matk, monster_attacker.max_matk)
+	else:
+	# Lấy sát thương vật lý ngẫu nhiên trong khoảng min/max của quái
+		base_damage = randf_range(monster_attacker.min_atk, monster_attacker.max_atk)
+
+	var real_crit_rate = monster_attacker.crit_rate - target_hero.crit_resist
+	if not su_dung_phep and randf() * 100 < real_crit_rate:
 		result.is_crit = true
-		print("QUAI TAN CONG: CRITICAL HIT!")
+		base_damage *= 1.4 # Sát thương crit của quái là 140%
 
-	# 4. TRẢ VỀ KẾT QUẢ
-	var final_damage_int = int(round(dame_final))
-	result.damage = final_damage_int
-	print("QUAI TAN CONG: Gây ra %d sát thương." % final_damage_int)
+	# 4. TÍNH TOÁN GIẢM SÁT THƯƠNG
+	var final_damage = base_damage - target_hero.def # Giả sử quái chỉ tấn công vật lý
+
+	final_damage = max(final_damage, 1.0)
+
+	result.damage = roundi(final_damage)
 	return result

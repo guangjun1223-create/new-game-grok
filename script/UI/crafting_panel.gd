@@ -1,20 +1,16 @@
-# Script CraftingPanel.gd
+# Script CraftingPanel.gd (Đã sửa lỗi và tối ưu)
 extends PanelContainer
 
 const RecipeTooltipScene = preload("res://Scene/UI/RecipeTooltip.tscn")
 var recipe_tooltip_instance = null
 
-# Tín hiệu sẽ được phát ra khi người chơi chọn một công thức
 signal recipe_selected(recipe)
-# Tín hiệu sẽ được phát ra khi người chơi đóng bảng
 signal panel_closed
 
-# Tham chiếu đến các Node con
 @onready var title_label: Label = $VBoxContainer/TitleLabel
 @onready var recipe_grid: GridContainer = $VBoxContainer/ScrollContainer/RecipeGrid
 @onready var close_button: Button = $VBoxContainer/CloseButton
 
-# Hàm này sẽ được gọi từ bên ngoài (bởi ui.gd) để khởi tạo bảng
 func setup(station_type: String):
 	if station_type == "blacksmith":
 		title_label.text = "Rèn Trang Bị"
@@ -27,67 +23,61 @@ func setup(station_type: String):
 	close_button.pressed.connect(_on_close_button_pressed)
 
 func _process(_delta):
-	# Nếu tooltip đang tồn tại và đang hiển thị...
 	if is_instance_valid(recipe_tooltip_instance) and recipe_tooltip_instance.visible:
-		# ...thì liên tục cập nhật vị trí của nó theo con trỏ chuột
 		recipe_tooltip_instance.position = get_viewport().get_mouse_position() + Vector2(25, 25)
 
-
-# Hàm "vẽ" các công thức lên lưới
-# THAY THẾ TOÀN BỘ HÀM CŨ BẰNG PHIÊN BẢN NÀY
-func _populate_recipe_grid():
-	# Dọn dẹp các slot cũ
+func _populate_recipe_grid(recipes: Array):
 	for child in recipe_grid.get_children():
 		child.queue_free()
 
-	# Lấy danh sách ID của các công thức
-	var recipe_ids = GameDataManager.get_recipes_for_station(_station_type)
-
-	for recipe_id in recipe_ids:
-		# Lấy dữ liệu đầy đủ của công thức từ ID
-		var recipe_data = GameDataManager.get_recipe_data(recipe_id)
-		if recipe_data.is_empty(): continue
-
-		var result_item_id = recipe_data["result_id"]
+	var total_slots = max(100, recipes.size())
+	for i in range(total_slots):
 		var recipe_slot = preload("res://Scene/UI/item_slot.tscn").instantiate()
 		recipe_grid.add_child(recipe_slot)
-		recipe_slot.display_item(ItemDatabase.get_item_icon(result_item_id), 1)
 
-		# --- LOGIC MỚI ĐÃ SỬA LỖI ---
-		# 1. Luôn luôn kết nối tín hiệu cho tooltip, bất kể có chế được hay không
-		recipe_slot.mouse_entered.connect(_on_recipe_mouse_entered.bind(recipe_id))
-		recipe_slot.mouse_exited.connect(_on_recipe_mouse_exited)
+		if i < recipes.size():
+			var recipe = recipes[i]
+			var result_item_id = recipe["result"]["item_id"]
+			var result_amount = recipe["result"].get("amount", 1)
+			recipe_slot.display_item(ItemDatabase.get_item_icon(result_item_id), result_amount)
+			
+			# Kết nối tooltip cho TẤT CẢ các slot có công thức
+			recipe_slot.mouse_entered.connect(_on_recipe_mouse_entered.bind(recipe))
+			recipe_slot.mouse_exited.connect(_on_recipe_mouse_exited)
 
-		# 2. Dùng dữ liệu đầy đủ của công thức để kiểm tra
-		var can_craft = PlayerStats.can_craft_recipe(recipe_id)
-
-		if can_craft:
-			# 3. Nếu chế được, làm nó sáng lên VÀ kết nối nút bấm
-			recipe_slot.modulate = Color(1, 1, 1)
-			recipe_slot.pressed.connect(_on_craftable_recipe_pressed.bind(recipe_id))
+			if PlayerStats.can_craft(recipe):
+				# Đủ nguyên liệu -> sáng, cho phép click
+				recipe_slot.modulate = Color.WHITE
+				recipe_slot.disabled = false
+				recipe_slot.pressed.connect(recipe_selected.emit.bind(recipe))
+			else:
+				# Thiếu nguyên liệu -> xám, không cho click
+				recipe_slot.modulate = Color(0.5, 0.5, 0.5)
+				recipe_slot.disabled = true
 		else:
-			# 4. Nếu không chế được, chỉ làm nó mờ đi. Click sẽ không có tác dụng.
-			recipe_slot.modulate = Color(0.5, 0.5, 0.5)
-
-
+			# Ô trống
+			recipe_slot.display_item(null, 0)
+			recipe_slot.disabled = true
 
 func _on_close_button_pressed():
 	panel_closed.emit()
-	queue_free() # Tự hủy
+	queue_free()
 
-func _on_locked_recipe_mouse_entered(recipe: Dictionary):
-	if is_instance_valid(recipe_tooltip_instance):
-		recipe_tooltip_instance.queue_free()
+# --- CÁC HÀM BỊ THIẾU ĐÃ ĐƯỢC THÊM VÀO ---
 
-	recipe_tooltip_instance = RecipeTooltipScene.instantiate()
-	add_child(recipe_tooltip_instance)
+# Hàm này được gọi khi di chuột VÀO một công thức
+func _on_recipe_mouse_entered(recipe: Dictionary):
+	# Kiểm tra xem tooltip đã được tạo chưa, nếu chưa thì tạo
+	if not is_instance_valid(recipe_tooltip_instance):
+		recipe_tooltip_instance = RecipeTooltipScene.instantiate()
+		add_child(recipe_tooltip_instance)
+	
+	# Cập nhật nội dung tooltip và hiển thị nó
 	recipe_tooltip_instance.build_tooltip(recipe)
-
-	# === THAY ĐỔI QUAN TRỌNG ===
-	# Chỉ ra lệnh "hiện", việc định vị sẽ do _process lo
 	recipe_tooltip_instance.show()
 
-func _on_locked_recipe_mouse_exited():
+# Hàm này được gọi khi di chuột RA KHỎI một công thức
+func _on_recipe_mouse_exited():
+	# Nếu tooltip tồn tại thì ẩn nó đi
 	if is_instance_valid(recipe_tooltip_instance):
-		# Chỉ cần ẩn đi, không cần xóa
 		recipe_tooltip_instance.hide()

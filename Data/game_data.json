@@ -148,26 +148,29 @@
   },
   "village_levels": {
 		"2": {
-			"gold_cost": 10,
+			"gold_cost": 0,
 			"materials": [
-				{ "id": "wood", "quantity": 1 },
-				{ "id": "stone", "quantity": 1 }
+				{ "id": "wood", "quantity": 0 },
+				{ "id": "stone", "quantity": 0 }
 			],
 			"unlocks_npc": [ "BlacksmithNPC", "AlchemistNPC", "PotionSellerNPC", "EquipmentSellerNPC" ],
 			"unlocks_description": "Sao lại lỗi không thể dùng được??? 
-			vậy bạn thử dùng tôi xem"
+			vậy bạn thử dùng tôi xem
+			Bạn sẽ mở được nơi chế tạo và bán đồ thì phải"
 		},
 		"3": {
-			"gold_cost": 50,
+			"gold_cost": 0,
 			"materials": [],
 			"unlocks_description": "Bạn cần giúp đỡ, 
-			hãy sử dụng tôi để có sự trợ giúp tốt nhất"
+			hãy sử dụng tôi để có sự trợ giúp tốt nhất
+			Ngôi làng của bạn có thể chứa thêm anh hùng"
 		},
 		"4": {
 			"gold_cost": 100,
 			"materials": [],
 			"unlocks_description": "Lại cần giúp đỡ, 
-			vậy thì lại sử dụng tôi lần nữa!!!!"
+			vậy thì lại sử dụng tôi lần nữa!!!!
+			Ngôi làng của bạn chứa thêm anh hùng"
 		},
 		"5": {
 			"gold_cost": 250,
@@ -176,7 +179,8 @@
 			],
 			"unlocks_npc": [ "JobChangerNpc" ],
 			"unlocks_description": "Tôi đoán chắc bạn đang bị mắc kẹt... 
-			Ai  cũng vậy thôi, hãy sử dụng tôi đi"
+			Ai  cũng vậy thôi, hãy sử dụng tôi đi
+			Anh hùng level max có thể chuyển nghề rồi"
 		}
 	},
 	"inn_levels": {

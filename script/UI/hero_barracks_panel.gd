@@ -12,6 +12,8 @@ const HeroBarracksEntryScene = preload("res://Scene/UI/hero_barracks_entry.tscn"
 signal display_hero_info_requested(hero_object)
 
 func _ready():
+	add_to_group("panels")
+	PlayerStats.hero_count_changed.connect(populate_barracks)
 	close_button.pressed.connect(queue_free) # Nút đóng chỉ cần tự hủy
 	populate_barracks()
 
@@ -49,22 +51,11 @@ func _on_hero_info_requested(hero_roster_index: int):
 
 # Khi nhấn nút "Sa thải", giờ chúng ta nhận được vị trí (index)
 func _on_hero_dismiss_requested(hero_roster_index: int):
-	print("\n--- BẮT ĐẦU QUÁ TRÌNH SA THẢI (INDEX: %d) ---" % hero_roster_index)
-	# Kiểm tra xem index có hợp lệ không
 	if hero_roster_index < 0 or hero_roster_index >= PlayerStats.hero_roster.size():
-		print("LỖI: Index không hợp lệ!")
 		return
 		
-	# Lấy ra đối tượng Hero một cách an toàn từ index
 	var hero_to_dismiss = PlayerStats.hero_roster[hero_roster_index]
-
-	if not is_instance_valid(hero_to_dismiss):
-		print("LỖI: Hero tại index %d không hợp lệ!" % hero_roster_index)
-		return
-	print("Hero cần sa thải: ", hero_to_dismiss.name)
-	# Xóa hero khỏi danh sách và giải phóng bộ nhớ
-	PlayerStats.hero_roster.erase(hero_to_dismiss)
-	hero_to_dismiss.free()
-	print("Đã sa thải thành công!")
-	# "Vẽ" lại danh sách để cập nhật
-	populate_barracks()
+	
+	# Nhờ UIController xử lý toàn bộ quá trình sa thải
+	if is_instance_valid(PlayerStats.ui_controller_ref):
+		PlayerStats.ui_controller_ref.request_hero_dismissal(hero_to_dismiss)

@@ -18,6 +18,9 @@ y_sort_enabled = true
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_iia3d")
+monster_id = null
+stopping_distance = null
+respawn_radius = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true

@@ -104,7 +104,6 @@ func _remove_resting_hero(hero):
 	if is_instance_valid(hero):
 		hero.finish_resting()
 
-
 func _on_inn_entrance_area_body_entered(body: Node2D) -> void:
 	if body is Hero:
 		var hero = body as Hero

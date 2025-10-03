@@ -1,59 +1,97 @@
-[gd_scene load_steps=45 format=3 uid="uid://dckfidqhq07y"]
+[gd_scene load_steps=64 format=3 uid="uid://dckfidqhq07y"]
 
 [ext_resource type="Script" uid="uid://dmd2aehvjbfuv" path="res://script/ui.gd" id="1_7nlkl"]
 [ext_resource type="Texture2D" uid="uid://b57j0ufgdhtc" path="res://texture/UI/RectangleBox_96x96.png" id="1_we040"]
+[ext_resource type="Texture2D" uid="uid://cvjja6vfjwucc" path="res://texture/Folding & Cutout Paper UI SpriteSheet.png" id="2_ntk1p"]
+[ext_resource type="Texture2D" uid="uid://cgmou0pova8q5" path="res://texture/UI/04.png" id="3_a5dvy"]
+[ext_resource type="Texture2D" uid="uid://bwthqfx83nr01" path="res://texture/UI01/btn/13.png" id="4_ccdw3"]
 [ext_resource type="StyleBox" uid="uid://makpx88y72yo" path="res://UI/HoverButton.tres" id="4_f6k66"]
-[ext_resource type="Texture2D" uid="uid://db8o880yl73m2" path="res://texture/UI/Button_52x14.png" id="4_i3p7b"]
+[ext_resource type="Texture2D" uid="uid://b6gi327atug4x" path="res://texture/UI01/btn/26.png" id="5_3xnhf"]
 [ext_resource type="StyleBox" uid="uid://v2nofeosyucp" path="res://UI/pressedButton.tres" id="5_fv4t1"]
 [ext_resource type="StyleBox" uid="uid://bljmrd4klte00" path="res://UI/NormalButton.tres" id="6_jg4dc"]
 [ext_resource type="Texture2D" uid="uid://cnt83s0aoh8cc" path="res://texture/item.png" id="7_xql8a"]
-[ext_resource type="Texture2D" uid="uid://8ssudn3wbult" path="res://texture/UI/HotkeyBox_34x34.png" id="9_jg4dc"]
+[ext_resource type="Texture2D" uid="uid://dqqim82c6hnqn" path="res://texture/UI/PlusButton.png" id="9_a5dvy"]
 [ext_resource type="LabelSettings" uid="uid://d3a7limvs11h4" path="res://UI/textUI.tres" id="10_ninrt"]
-[ext_resource type="Texture2D" uid="uid://5q5opapct313" path="res://texture/All Icons.png" id="10_xql8a"]
+[ext_resource type="Texture2D" uid="uid://36orn1kodfk3" path="res://texture/UI01/inventory/21.png" id="10_ntk1p"]
 [ext_resource type="PackedScene" uid="uid://dxuwxheh8fch2" path="res://Scene/UI/item_slot.tscn" id="11_pcf3q"]
 [ext_resource type="PackedScene" uid="uid://pee25h5vdlrl" path="res://Scene/UI/ItemTooltip.tscn" id="11_xql8a"]
-[ext_resource type="Texture2D" uid="uid://cfgear0obwptt" path="res://texture/UI/TitleBox_64x16.png" id="14_1visn"]
+[ext_resource type="Texture2D" uid="uid://b33mhx32rahkk" path="res://texture/UI01/btn/25.png" id="14_cfnlm"]
 [ext_resource type="PackedScene" uid="uid://bojfef5rnqwm1" path="res://Scene/UI/village_upgrade_panel.tscn" id="15_a5dvy"]
 [ext_resource type="PackedScene" uid="uid://dtejd7m56v4y1" path="res://Scene/UI/job_change_panel.tscn" id="15_sv612"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxl0w"]
+atlas = ExtResource("2_ntk1p")
+region = Rect2(3224, 3608, 208, 176)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nq5m3"]
 content_margin_left = 5.0
 content_margin_top = 5.0
 content_margin_right = 5.0
 content_margin_bottom = 5.0
-texture = ExtResource("4_i3p7b")
+texture = SubResource("AtlasTexture_oxl0w")
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwh44"]
+atlas = ExtResource("2_ntk1p")
+region = Rect2(2264, 104, 208, 176)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d7nlp"]
+texture = SubResource("AtlasTexture_mwh44")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81bxb"]
+atlas = ExtResource("2_ntk1p")
+region = Rect2(2264, 104, 208, 176)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0ksfg"]
+texture = SubResource("AtlasTexture_81bxb")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fv4t1"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ycrtq"]
-texture = ExtResource("1_we040")
-texture_margin_left = 11.9151
-texture_margin_top = 12.1545
-texture_margin_right = 12.1545
-texture_margin_bottom = 13.1121
-expand_margin_left = 12.0
-expand_margin_top = 12.0
-expand_margin_right = 12.0
-expand_margin_bottom = 12.0
-region_rect = Rect2(0, 0, 96, 96)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnd31"]
+atlas = ExtResource("2_ntk1p")
+region = Rect2(56, 544, 400, 176)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i584i"]
+texture = SubResource("AtlasTexture_pnd31")
+expand_margin_left = 20.0
+expand_margin_top = 20.0
+expand_margin_bottom = 20.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_pcf3q"]
 shadow_size = 3
-shadow_color = Color(0, 0, 0, 0.44705883)
+shadow_color = Color(0, 0, 0, 0.85490197)
 
-[sub_resource type="LabelSettings" id="LabelSettings_ninrt"]
-shadow_color = Color(0, 0, 0, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntk1p"]
+atlas = ExtResource("3_a5dvy")
+region = Rect2(51, 6, 42, 5)
+margin = Rect2(-1, 0, 0, 0)
+filter_clip = true
 
-[sub_resource type="LabelSettings" id="LabelSettings_1visn"]
-shadow_size = 2
-shadow_color = Color(0, 0, 0, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccdw3"]
+atlas = ExtResource("3_a5dvy")
+region = Rect2(0, 3, 48, 11)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1visn"]
-bg_color = Color(0.73333335, 0.5764706, 0, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xnhf"]
+atlas = ExtResource("3_a5dvy")
+region = Rect2(51, 22, 42, 5)
+margin = Rect2(-1.2, 0, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfnlm"]
+atlas = ExtResource("3_a5dvy")
+region = Rect2(0, 19, 48, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5dvy"]
+atlas = ExtResource("3_a5dvy")
+region = Rect2(51, 38, 42, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4olq6"]
+atlas = ExtResource("3_a5dvy")
+region = Rect2(0, 35, 48, 11)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f6k66"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jg4dc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pcf3q"]
 atlas = ExtResource("7_xql8a")
@@ -77,25 +115,37 @@ region = Rect2(712, 64, 48, 56)
 atlas = ExtResource("7_xql8a")
 region = Rect2(840, 64, 56, 56)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xql8a"]
-texture = ExtResource("9_jg4dc")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 8.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jg4dc"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a5dvy"]
-atlas = ExtResource("10_xql8a")
-region = Rect2(208, 32, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8dwb"]
+atlas = ExtResource("2_ntk1p")
+region = Rect2(40, 776, 632, 512)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3xnhf"]
+texture = SubResource("AtlasTexture_y8dwb")
+texture_margin_left = 30.0
+texture_margin_top = 30.0
+texture_margin_right = 15.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_026ak"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5unkv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_obxh1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1visn"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1visn"]
-texture = ExtResource("1_we040")
-texture_margin_left = 12.0
-texture_margin_top = 12.0
-texture_margin_right = 12.0
-texture_margin_bottom = 12.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_hl6pt"]
+atlas = ExtResource("2_ntk1p")
+region = Rect2(48, 776, 624, 512)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vjsyu"]
+texture = SubResource("AtlasTexture_hl6pt")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_sv612"]
 shadow_size = 2
@@ -104,31 +154,43 @@ shadow_offset = Vector2(3, 3)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a5dvy"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ntk1p"]
-texture = ExtResource("1_we040")
-texture_margin_left = 12.0
-texture_margin_top = 12.0
-texture_margin_right = 12.0
-texture_margin_bottom = 12.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7nlp"]
+atlas = ExtResource("2_ntk1p")
+region = Rect2(48, 776, 624, 512)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_81bxb"]
+texture = SubResource("AtlasTexture_d7nlp")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_a5dvy"]
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 0.4627451)
 shadow_offset = Vector2(3, 3)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ccdw3"]
-texture = ExtResource("14_1visn")
-texture_margin_left = 12.0
-texture_margin_top = 5.0
-texture_margin_right = 12.0
-texture_margin_bottom = 5.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ksfg"]
+atlas = ExtResource("2_ntk1p")
+region = Rect2(2960, 3800, 192, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2ojno"]
+texture = SubResource("AtlasTexture_0ksfg")
+texture_margin_left = 24.0
+texture_margin_top = 8.0
+texture_margin_right = 24.0
+region_rect = Rect2(0, 0, 192, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ubty"]
+atlas = ExtResource("2_ntk1p")
+region = Rect2(688, 3824, 64, 64)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a5dvy"]
-texture = ExtResource("1_we040")
-texture_margin_left = 12.0
-texture_margin_top = 12.0
-texture_margin_right = 12.0
-texture_margin_bottom = 12.0
+texture = ExtResource("10_ntk1p")
+texture_margin_left = 30.0
+texture_margin_top = 30.0
+texture_margin_right = 30.0
+texture_margin_bottom = 30.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_ntk1p"]
 outline_size = 5
@@ -163,7 +225,12 @@ theme_override_constants/separation = 5
 custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
 tooltip_text = "Tại đây bạn có thể triệu hồi anh hùng mới"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxTexture_nq5m3")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_d7nlp")
+theme_override_styles/hover = SubResource("StyleBoxTexture_0ksfg")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_fv4t1")
 text = "Triệu hồi"
 
@@ -180,25 +247,28 @@ text = "Nhà kho"
 layout_mode = 2
 text = "X:000 /Y:000 "
 
-[node name="SelectedHeroPanel" type="Panel" parent="."]
-custom_minimum_size = Vector2(250, 150)
-offset_left = 15.0
-offset_top = 65.0
-offset_right = 249.0
-offset_bottom = 186.0
+[node name="SelectedHeroPanel" type="Panel" parent="." groups=["panel"]]
+custom_minimum_size = Vector2(250, 130)
+offset_left = 8.0
+offset_top = 51.0
+offset_right = 265.0
+offset_bottom = 196.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 tooltip_text = "Bảng thông tin anh hùng bạn đang lựa chọn"
-theme_override_styles/panel = SubResource("StyleBoxTexture_ycrtq")
+theme_override_styles/panel = SubResource("StyleBoxTexture_i584i")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SelectedHeroPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 7
+layout_mode = 0
+offset_right = 220.0
+offset_bottom = 111.0
+theme_override_constants/separation = 8
 
-[node name="NameLabel" type="Label" parent="SelectedHeroPanel/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="SelectedHeroPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="SelectedHeroPanel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 tooltip_text = "Tên anh hùng"
 mouse_filter = 1
@@ -206,65 +276,179 @@ text = "Tên Anh Hùng"
 label_settings = SubResource("LabelSettings_pcf3q")
 vertical_alignment = 1
 
-[node name="ClassLabel" type="Label" parent="SelectedHeroPanel/VBoxContainer"]
-auto_translate_mode = 1
-layout_mode = 2
-tooltip_text = "Nghề nghiệp của anh hùng bạn đang chọn"
-tooltip_auto_translate_mode = 1
-mouse_filter = 1
-text = "Nghề nghiệp"
-label_settings = SubResource("LabelSettings_ninrt")
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="SelectedHeroPanel/VBoxContainer"]
-layout_mode = 2
-
-[node name="LevelLabel" type="Label" parent="SelectedHeroPanel/VBoxContainer/HBoxContainer2"]
-auto_translate_mode = 1
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-tooltip_text = "Cấp độ của hero"
-tooltip_auto_translate_mode = 1
-mouse_filter = 1
-text = "Level:1"
-label_settings = SubResource("LabelSettings_1visn")
-
 [node name="RarityLabel" type="RichTextLabel" parent="SelectedHeroPanel/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(110, 0)
+custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
 bbcode_enabled = true
-text = "Hạng: F"
+fit_content = true
 
-[node name="ExpBar" type="ProgressBar" parent="SelectedHeroPanel/VBoxContainer"]
-custom_minimum_size = Vector2(220, 10)
+[node name="HPBar" type="Control" parent="SelectedHeroPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
-size_flags_vertical = 6
-theme_override_styles/fill = SubResource("StyleBoxFlat_1visn")
-value = 50.0
-show_percentage = false
 
-[node name="ExpLabel" type="Label" parent="SelectedHeroPanel/VBoxContainer/ExpBar"]
+[node name="HP_Fill" type="NinePatchRect" parent="SelectedHeroPanel/VBoxContainer/HPBar"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 3.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ntk1p")
+patch_margin_left = 5
+patch_margin_top = 1
+patch_margin_right = 5
+patch_margin_bottom = 1
+
+[node name="HP_Background" type="NinePatchRect" parent="SelectedHeroPanel/VBoxContainer/HPBar"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ccdw3")
+patch_margin_left = 7
+patch_margin_right = 7
+
+[node name="HP_Label" type="Label" parent="SelectedHeroPanel/VBoxContainer/HPBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -5.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SP" type="Control" parent="SelectedHeroPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="SP_Fill" type="NinePatchRect" parent="SelectedHeroPanel/VBoxContainer/SP"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -2.0
+offset_right = 4.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_3xnhf")
+region_rect = Rect2(0, 0, 42, 5)
+patch_margin_left = 5
+patch_margin_top = 1
+patch_margin_right = 5
+patch_margin_bottom = 1
+
+[node name="SP_Background" type="NinePatchRect" parent="SelectedHeroPanel/VBoxContainer/SP"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_cfnlm")
+patch_margin_left = 7
+patch_margin_right = 7
+
+[node name="SP_Label" type="Label" parent="SelectedHeroPanel/VBoxContainer/SP"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -10.0
-offset_bottom = 3.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "1234565"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExpBar" type="Control" parent="SelectedHeroPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="ExpFill" type="NinePatchRect" parent="SelectedHeroPanel/VBoxContainer/ExpBar"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = -9.0
+offset_right = -3.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_a5dvy")
+region_rect = Rect2(-1, 0, 0, 0)
+patch_margin_left = 3
+patch_margin_right = 4
+
+[node name="ExpBackground" type="NinePatchRect" parent="SelectedHeroPanel/VBoxContainer/ExpBar"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -12.0
+offset_right = 1.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_4olq6")
+region_rect = Rect2(0, 0, 48, 11)
+patch_margin_left = 7
+patch_margin_right = 6
+
+[node name="Exp_Label" type="Label" parent="SelectedHeroPanel/VBoxContainer/ExpBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -14.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SelectedHeroPanel/VBoxContainer"]
 layout_mode = 2
-alignment = 1
+size_flags_horizontal = 4
+size_flags_vertical = 6
 
 [node name="InfoButton" type="Button" parent="SelectedHeroPanel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
-text = "Thông tin"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("4_ccdw3")
+flat = true
+expand_icon = true
 
 [node name="InventoryButton" type="Button" parent="SelectedHeroPanel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
-text = "Túi đồ"
+size_flags_horizontal = 6
+size_flags_vertical = 4
+icon = ExtResource("5_3xnhf")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="JobChangeButton" type="Button" parent="SelectedHeroPanel/VBoxContainer/HBoxContainer"]
 visible = false
@@ -272,7 +456,6 @@ layout_mode = 2
 text = "Chuyển Job"
 
 [node name="MovementButtons" type="PanelContainer" parent="."]
-visible = false
 custom_minimum_size = Vector2(100, 0)
 layout_direction = 1
 anchors_preset = 6
@@ -293,14 +476,9 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_f6k66")
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 10
-alignment = 1
 
 [node name="GoToVillageButton" type="Button" parent="MovementButtons/VBox"]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("6_jg4dc")
-theme_override_styles/pressed = ExtResource("5_fv4t1")
-theme_override_styles/hover = ExtResource("4_f6k66")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_jg4dc")
 text = "Về Làng"
 icon = SubResource("AtlasTexture_pcf3q")
 expand_icon = true
@@ -342,10 +520,8 @@ theme_override_styles/pressed = ExtResource("5_fv4t1")
 theme_override_styles/hover = ExtResource("4_f6k66")
 text = "Quay lại"
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MovementButtons"]
-layout_mode = 2
-
 [node name="ShopListPanel" type="PanelContainer" parent="."]
+visible = false
 custom_minimum_size = Vector2(100, 0)
 layout_direction = 1
 anchors_preset = 6
@@ -457,78 +633,77 @@ expand_icon = true
 [node name="NinePatchRect" type="NinePatchRect" parent="MainCommandMenu"]
 layout_mode = 2
 
-[node name="HeroInfoPanel" type="PanelContainer" parent="."]
+[node name="HeroInfoPanel" type="PanelContainer" parent="." groups=["panel"]]
 visible = false
-custom_minimum_size = Vector2(550, 500)
-offset_left = 392.0
-offset_top = 152.0
-offset_right = 842.0
-offset_bottom = 572.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_xql8a")
+custom_minimum_size = Vector2(300, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -210.0
+offset_right = 225.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_3xnhf")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HeroInfoPanel"]
+[node name="HeroInfoPanel" type="TabContainer" parent="HeroInfoPanel"]
+layout_mode = 2
+tab_alignment = 1
+current_tab = 1
+all_tabs_in_front = true
+
+[node name="Thông tin" type="VBoxContainer" parent="HeroInfoPanel/HeroInfoPanel"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HeroInfoPanel/HeroInfoPanel/Thông tin"]
 layout_mode = 2
 
-[node name="TitleHBox" type="HBoxContainer" parent="HeroInfoPanel/VBoxContainer"]
-custom_minimum_size = Vector2(350, 0)
-layout_mode = 2
-size_flags_vertical = 4
-alignment = 1
-
-[node name="Label" type="Label" parent="HeroInfoPanel/VBoxContainer/TitleHBox"]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-text = "Chi tiết Anh Hùng"
-label_settings = ExtResource("10_ninrt")
-horizontal_alignment = 1
-
-[node name="CloseButton" type="Button" parent="HeroInfoPanel/VBoxContainer/TitleHBox"]
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-size_flags_horizontal = 10
-icon = SubResource("AtlasTexture_a5dvy")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HeroInfoPanel/VBoxContainer"]
-layout_mode = 2
-
-[node name="Info_NameLabel" type="Label" parent="HeroInfoPanel/VBoxContainer/VBoxContainer"]
+[node name="Info_NameLabel" type="Label" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer"]
 layout_mode = 2
 text = "Tên:"
-label_settings = ExtResource("10_ninrt")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HeroInfoPanel/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer"]
 layout_mode = 2
 
-[node name="Info_JobLabel" type="Label" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(400, 0)
+[node name="Info_JobLabel" type="Label" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 text = "Nghề nghiệp"
-label_settings = ExtResource("10_ninrt")
 
-[node name="info_rarityLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(100, 0)
+[node name="info_rarityLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 bbcode_enabled = true
-text = "Độ hiếm: A"
+text = "Hạng: A"
 scroll_active = false
 autowrap_mode = 2
 autowrap_trim_flags = 0
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Info_LevelLabel" type="Label" parent="HeroInfoPanel/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer"]
+layout_mode = 2
+
+[node name="Info_LevelLabel" type="Label" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Cấp độ:"
-label_settings = ExtResource("10_ninrt")
 
-[node name="Info_ExpLabel" type="Label" parent="HeroInfoPanel/VBoxContainer/VBoxContainer"]
+[node name="FreePointsLabel" type="Label" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+
+[node name="Info_ExpLabel" type="Label" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer"]
 layout_mode = 2
 text = "Exp"
-label_settings = ExtResource("10_ninrt")
 
-[node name="Info_HPLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer"]
+[node name="Info_HPLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
@@ -539,7 +714,7 @@ text = "Hp:"
 fit_content = true
 scroll_active = false
 
-[node name="Info_SPLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer"]
+[node name="Info_SPLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(20, 25)
 layout_mode = 2
@@ -549,19 +724,12 @@ bbcode_enabled = true
 text = "SP:"
 scroll_active = false
 
-[node name="HSeparator3" type="HSeparator" parent="HeroInfoPanel/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HeroInfoPanel/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-
-[node name="Info_AtkLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Info_AtkLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer3"]
 clip_contents = false
-custom_minimum_size = Vector2(250, 25)
+custom_minimum_size = Vector2(200, 25)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -569,82 +737,7 @@ bbcode_enabled = true
 text = "Tấn công:"
 scroll_active = false
 
-[node name="Info_StrLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-clip_contents = false
-custom_minimum_size = Vector2(250, 25)
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-bbcode_enabled = true
-text = "Sức mạng:"
-scroll_active = false
-
-[node name="Info_AgiLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-clip_contents = false
-custom_minimum_size = Vector2(250, 25)
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-bbcode_enabled = true
-text = "Nhanh nhẹn:"
-scroll_active = false
-
-[node name="Info_VitLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-clip_contents = false
-custom_minimum_size = Vector2(250, 25)
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-bbcode_enabled = true
-text = "Sức bền:"
-scroll_active = false
-
-[node name="Info_IntLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-clip_contents = false
-custom_minimum_size = Vector2(250, 25)
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-bbcode_enabled = true
-text = "Trí tuệ:"
-scroll_active = false
-
-[node name="Info_DexLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-clip_contents = false
-custom_minimum_size = Vector2(250, 25)
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-bbcode_enabled = true
-text = "Chính xác:"
-scroll_active = false
-
-[node name="Info_LukLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-clip_contents = false
-custom_minimum_size = Vector2(250, 25)
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-bbcode_enabled = true
-text = "May mắn:"
-scroll_active = false
-
-[node name="Info_AttackSpeedLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-clip_contents = false
-custom_minimum_size = Vector2(250, 25)
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-bbcode_enabled = true
-text = "Tốc độ:"
-
-[node name="VSeparator" type="VSeparator" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Info_MatkLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Info_MatkLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer3"]
 clip_contents = false
 custom_minimum_size = Vector2(250, 25)
 layout_mode = 2
@@ -653,7 +746,152 @@ theme_override_constants/outline_size = 5
 bbcode_enabled = true
 text = "Tấn công phép:"
 
-[node name="Info_DefLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HSeparator3" type="HSeparator" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Button" type="Button" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+keep_pressed_outside = true
+icon = ExtResource("9_a5dvy")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button2" type="Button" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("9_a5dvy")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button3" type="Button" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("9_a5dvy")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button4" type="Button" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("9_a5dvy")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button5" type="Button" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("9_a5dvy")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button6" type="Button" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("9_a5dvy")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Info_StrLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+bbcode_enabled = true
+text = "Sức mạng:"
+scroll_active = false
+
+[node name="Info_AgiLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+bbcode_enabled = true
+text = "Nhanh nhẹn:"
+scroll_active = false
+
+[node name="Info_VitLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+bbcode_enabled = true
+text = "Sức bền:"
+scroll_active = false
+
+[node name="Info_IntLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+bbcode_enabled = true
+text = "Trí tuệ:"
+scroll_active = false
+
+[node name="Info_DexLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+bbcode_enabled = true
+text = "Chính xác:"
+scroll_active = false
+
+[node name="Info_LukLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+bbcode_enabled = true
+text = "May mắn:"
+fit_content = true
+scroll_active = false
+
+[node name="VSeparator" type="VSeparator" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Info_DefLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/VBoxContainer2"]
 clip_contents = false
 custom_minimum_size = Vector2(250, 25)
 layout_mode = 2
@@ -662,7 +900,7 @@ theme_override_constants/outline_size = 5
 bbcode_enabled = true
 text = "Giáp:"
 
-[node name="Info_MdefLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Info_MdefLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/VBoxContainer2"]
 clip_contents = false
 custom_minimum_size = Vector2(250, 25)
 layout_mode = 2
@@ -671,7 +909,7 @@ theme_override_constants/outline_size = 5
 bbcode_enabled = true
 text = "Giáp phép:"
 
-[node name="Info_HitLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Info_HitLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/VBoxContainer2"]
 clip_contents = false
 custom_minimum_size = Vector2(250, 25)
 layout_mode = 2
@@ -680,7 +918,7 @@ theme_override_constants/outline_size = 5
 bbcode_enabled = true
 text = "Chuẩn xác:"
 
-[node name="info_fleeLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="info_fleeLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/VBoxContainer2"]
 clip_contents = false
 custom_minimum_size = Vector2(250, 25)
 layout_mode = 2
@@ -689,7 +927,7 @@ theme_override_constants/outline_size = 5
 bbcode_enabled = true
 text = "Tránh né:"
 
-[node name="Info_CritLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Info_CritLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/VBoxContainer2"]
 clip_contents = false
 custom_minimum_size = Vector2(250, 25)
 layout_mode = 2
@@ -698,7 +936,7 @@ theme_override_constants/outline_size = 5
 bbcode_enabled = true
 text = "Chí mạng:"
 
-[node name="info_critDameLabel" type="RichTextLabel" parent="HeroInfoPanel/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="info_critDameLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/VBoxContainer2"]
 clip_contents = false
 custom_minimum_size = Vector2(250, 25)
 layout_mode = 2
@@ -707,19 +945,76 @@ theme_override_constants/outline_size = 5
 bbcode_enabled = true
 text = "STCM:"
 
-[node name="FunctionButtons" type="HBoxContainer" parent="HeroInfoPanel/VBoxContainer"]
+[node name="HSeparator4" type="HSeparator" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer"]
+layout_mode = 2
+
+[node name="Info_AttackSpeedLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+bbcode_enabled = true
+text = "Tốc độ:"
+
+[node name="FunctionButtons" type="HBoxContainer" parent="HeroInfoPanel/HeroInfoPanel/Thông tin"]
 layout_mode = 2
 alignment = 1
 
-[node name="LockUnlockButton" type="Button" parent="HeroInfoPanel/VBoxContainer/FunctionButtons"]
+[node name="SaThaiButton" type="Button" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/FunctionButtons"]
 layout_mode = 2
-text = "Lock"
+text = "Sa Thải"
 
-[node name="QuitButton" type="Button" parent="HeroInfoPanel/VBoxContainer/FunctionButtons"]
+[node name="CloseButton" type="Button" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/FunctionButtons"]
 layout_mode = 2
-text = "Từ bỏ"
+text = "Đóng"
 
-[node name="InventoryPanel" type="PanelContainer" parent="."]
+[node name="Skill" type="PanelContainer" parent="HeroInfoPanel/HeroInfoPanel"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_026ak")
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HeroInfoPanel/HeroInfoPanel/Skill"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroInfoPanel/HeroInfoPanel/Skill/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HeroInfoPanel/HeroInfoPanel/Skill/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Kỹ năng đang sử dụng"
+
+[node name="SkillPointsLabel" type="Label" parent="HeroInfoPanel/HeroInfoPanel/Skill/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ActiveSkillGrid" type="GridContainer" parent="HeroInfoPanel/HeroInfoPanel/Skill/VBoxContainer"]
+custom_minimum_size = Vector2(400, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 4
+columns = 4
+
+[node name="HSeparator" type="HSeparator" parent="HeroInfoPanel/HeroInfoPanel/Skill/VBoxContainer"]
+layout_mode = 2
+
+[node name="SkillListScroll" type="ScrollContainer" parent="HeroInfoPanel/HeroInfoPanel/Skill/VBoxContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5unkv")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_obxh1")
+
+[node name="SkillListContainer" type="VBoxContainer" parent="HeroInfoPanel/HeroInfoPanel/Skill/VBoxContainer/SkillListScroll"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="InventoryPanel" type="PanelContainer" parent="." groups=["panel"]]
 visible = false
 custom_minimum_size = Vector2(450, 250)
 anchors_preset = 8
@@ -740,7 +1035,7 @@ layout_mode = 2
 
 [node name="EquipBG" type="PanelContainer" parent="InventoryPanel/HBoxContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_1visn")
+theme_override_styles/panel = SubResource("StyleBoxTexture_vjsyu")
 
 [node name="EquipmentUI" type="VBoxContainer" parent="InventoryPanel/HBoxContainer/EquipBG"]
 custom_minimum_size = Vector2(150, 0)
@@ -840,7 +1135,7 @@ offset_bottom = 308.0
 custom_minimum_size = Vector2(450, 400)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxTexture_ntk1p")
+theme_override_styles/panel = SubResource("StyleBoxTexture_81bxb")
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryPanel/HBoxContainer/BackpackBG"]
 layout_mode = 2
@@ -891,13 +1186,13 @@ size_flags_vertical = 3
 theme_override_constants/separation = 4
 alignment = 1
 
-[node name="PlayerInfoBar" type="PanelContainer" parent="."]
+[node name="PlayerInfoBar" type="PanelContainer" parent="." groups=["panel"]]
 custom_minimum_size = Vector2(500, 0)
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 50.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_ccdw3")
+theme_override_styles/panel = SubResource("StyleBoxTexture_2ojno")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PlayerInfoBar"]
 custom_minimum_size = Vector2(800, 0)
@@ -923,8 +1218,13 @@ text = "level:"
 label_settings = ExtResource("10_ninrt")
 
 [node name="VillageUpgradeButton" type="Button" parent="PlayerInfoBar/HBoxContainer"]
+custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
-text = "Nâng cấp làng"
+size_flags_horizontal = 6
+size_flags_vertical = 4
+icon = ExtResource("14_cfnlm")
+flat = true
+expand_icon = true
 
 [node name="VSeparator2" type="VSeparator" parent="PlayerInfoBar/HBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
@@ -951,13 +1251,22 @@ label_settings = ExtResource("10_ninrt")
 [node name="HeroCountLabel" type="RichTextLabel" parent="PlayerInfoBar/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.4627451)
+theme_override_constants/line_separation = 5
+theme_override_constants/paragraph_separation = 0
+theme_override_constants/shadow_outline_size = 5
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 7
+theme_override_constants/text_highlight_v_padding = 7
+theme_override_icons/horizontal_rule = SubResource("AtlasTexture_7ubty")
 bbcode_enabled = true
 text = "Hero: "
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Warehouse" type="PanelContainer" parent="."]
+[node name="Warehouse" type="PanelContainer" parent="." groups=["panel"]]
 visible = false
 custom_minimum_size = Vector2(600, 600)
 anchors_preset = 8
@@ -1011,7 +1320,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Đóng"
 
-[node name="BuybackPanel" type="PanelContainer" parent="."]
+[node name="BuybackPanel" type="PanelContainer" parent="." groups=["panel"]]
 visible = false
 custom_minimum_size = Vector2(850, 600)
 anchors_preset = 8
@@ -1114,7 +1423,10 @@ visible = false
 [connection signal="pressed" from="ShopListPanel/VBox/BackToMainMenuButton2" to="." method="_on_back_to_main_menu_button_pressed"]
 [connection signal="pressed" from="MainCommandMenu/VBox/MoveButton" to="." method="_on_move_button_pressed"]
 [connection signal="pressed" from="MainCommandMenu/VBox/ShopButton" to="." method="_on_shop_button_pressed"]
-[connection signal="pressed" from="HeroInfoPanel/VBoxContainer/TitleHBox/CloseButton" to="." method="_on_close_info_button_pressed"]
-[connection signal="pressed" from="HeroInfoPanel/VBoxContainer/FunctionButtons/LockUnlockButton" to="." method="_on_lock_unlock_button_pressed"]
-[connection signal="pressed" from="HeroInfoPanel/VBoxContainer/FunctionButtons/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="Warehouse/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button" to="." method="_on_str_button_pressed"]
+[connection signal="pressed" from="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button2" to="." method="_on_agi_button_pressed"]
+[connection signal="pressed" from="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button3" to="." method="_on_vit_button_pressed"]
+[connection signal="pressed" from="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button4" to="." method="_on_int_button_pressed"]
+[connection signal="pressed" from="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button5" to="." method="_on_dex_button_pressed"]
+[connection signal="pressed" from="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button6" to="." method="_on_luk_button_pressed"]
+[connection signal="pressed" from="HeroInfoPanel/HeroInfoPanel/Thông tin/FunctionButtons/CloseButton" to="." method="_on_close_info_button_pressed"]

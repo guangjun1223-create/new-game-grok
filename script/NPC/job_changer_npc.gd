@@ -36,6 +36,7 @@ func _on_hero_entered(body):
 	else:
 		print("NPC: 'Hãy rèn luyện thêm đi, khi nào đủ mạnh mẽ hãy quay lại gặp ta.'")
 		
+		
 func _on_animation_timer_timeout():
 	if animated_sprite.animation == "Idle" or animated_sprite.animation == "Idle Blinking":
 		# Chọn một animation ngẫu nhiên từ danh sách

@@ -28,3 +28,7 @@ signal hero_arrived_at_crafting_station(hero: Hero, station_type: String)
 signal hero_arrived_at_potion_shop(hero: Hero)
 @warning_ignore("unused_signal")
 signal hero_arrived_at_equipment_shop(hero: Hero)
+@warning_ignore("unused_signal")
+signal ui_panel_opened
+@warning_ignore("unused_signal")
+signal ui_panel_closed

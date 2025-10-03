@@ -7,7 +7,7 @@ font_size = 20
 shadow_size = 3
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="VillageUpgradePanel" type="Control"]
+[node name="VillageUpgradePanel" type="Control" groups=["panel"]]
 custom_minimum_size = Vector2(400, 350)
 layout_mode = 3
 anchors_preset = 8

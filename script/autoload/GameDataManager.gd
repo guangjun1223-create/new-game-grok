@@ -3,7 +3,7 @@ extends Node
 # Hai biến để lưu trữ hai loại dữ liệu riêng biệt
 var _game_data: Dictionary = {}      # Sẽ chứa dữ liệu từ game_data.json
 var _crafting_data: Dictionary = {}  # Sẽ chứa dữ liệu từ crafting.json
-
+enum ItemQuality { BI_HONG, KEM, THUONG, TOT, RAT_TOT, HIEM }
 
 func _ready():
 	# Tải file dữ liệu game chính
@@ -75,3 +75,63 @@ func get_village_level_data(level_string: String) -> Dictionary:
 	
 	# Trả về dữ liệu cho cấp độ được yêu cầu, hoặc một Dictionary rỗng nếu không tìm thấy
 	return village_data.get(level_string, {})
+	
+static func create_equipment_instance(base_item_id: String) -> Dictionary:
+	var base_item_data = ItemDatabase.get_item_data(base_item_id)
+	if base_item_data.is_empty() or base_item_data.get("item_type") != "EQUIPMENT":
+		push_error("Loi: Khong the tao instance cho item khong phai trang bi: " + base_item_id)
+		return {}
+
+	# --- B1: Roll ngẫu nhiên để xác định chất lượng (Logic này giữ nguyên) ---
+	var roll = randf()
+	var quality: ItemQuality
+	var quality_name: String
+	var stat_modifier: float
+
+	if roll < 0.27: # 27% Hỏng
+		quality = ItemQuality.BI_HONG
+	elif roll < 0.53: # 26% Kém (27% + 26%)
+		quality = ItemQuality.KEM
+		quality_name = "Kém"
+		stat_modifier = 0.6
+	elif roll < 0.83: # 30% Thường (53% + 30%)
+		quality = ItemQuality.THUONG
+		quality_name = "Thường"
+		stat_modifier = 0.8
+	elif roll < 0.93: # 10% Tốt (83% + 10%)
+		quality = ItemQuality.TOT
+		quality_name = "Tốt"
+		stat_modifier = 1.0
+	elif roll < 0.98: # 5% Rất Tốt (93% + 5%)
+		quality = ItemQuality.RAT_TOT
+		quality_name = "Rất Tốt"
+		stat_modifier = 1.2
+	else: # 2% Hiếm
+		quality = ItemQuality.HIEM
+		quality_name = "Hiếm"
+		stat_modifier = 1.5
+
+	# --- B2: Xử lý kết quả ---
+	if quality == ItemQuality.BI_HONG:
+		print("Chế tạo thất bại! Trang bị đã bị hỏng.")
+		return {}
+
+	var new_item_instance = base_item_data.duplicate(true)
+
+	# === DÒNG SỬA LỖI QUAN TRỌNG ===
+	# Thêm ID gốc vào instance mới để các hàm khác có thể nhận diện
+	new_item_instance["id"] = base_item_id
+	# ================================
+
+	new_item_instance["quality"] = quality_name
+
+	var base_stats = base_item_data.get("stats", {})
+	var final_stats = {}
+	for stat_name in base_stats:
+		final_stats[stat_name] = int(round(base_stats[stat_name] * stat_modifier))
+
+	new_item_instance["stats"] = final_stats
+	new_item_instance["unique_id"] = Time.get_unix_time_from_system() + randi()
+
+	print("Đã tạo ra trang bị: %s [%s]" % [base_item_id, quality_name])
+	return new_item_instance

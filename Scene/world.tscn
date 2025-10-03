@@ -2410,11 +2410,10 @@ position = Vector2(-666, -6467)
 
 [node name="PotionSellerNPC" parent="Village_Boundary" instance=ExtResource("15_bfvnh")]
 y_sort_enabled = true
-position = Vector2(-1022, -5066)
+position = Vector2(516, -5002)
 
 [node name="equipmentsellernpc" parent="Village_Boundary" instance=ExtResource("16_o8j5v")]
-y_sort_enabled = true
-position = Vector2(-601, -5066)
+position = Vector2(130, -5012)
 
 [node name="Forest_Boundary" type="Area2D" parent="."]
 collision_layer = 8

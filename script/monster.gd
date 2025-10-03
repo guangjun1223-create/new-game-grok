@@ -30,7 +30,7 @@ enum MonsterType { NORMAL, ELITE, BOSS }
 # BIẾN TRẠNG THÁI & CHỈ SỐ
 # ============================================================================
 # --- State Machine ---
-var _current_state = MonsterState.IDLE
+var _current_state: MonsterState = MonsterState.IDLE
 var is_dead: bool = false
 var target_hero: CharacterBody2D = null
 var damage_dealt_by_heroes: Dictionary = {}
@@ -39,16 +39,25 @@ var damage_dealt_by_heroes: Dictionary = {}
 var monster_name: String = "Monster"
 var monster_type: MonsterType = MonsterType.NORMAL
 var level: int = 1
-var max_hp: float = 10.0
+var exp_reward: int = 0
+var gold_drop_range: Array = []
+var loot_table: Array = []
+var respawn_time: float = 10.0
+
+# --- Chỉ số chiến đấu (sẽ được tính toán) ---
+var max_hp: float
 var current_hp: float
-var atk: float = 1.0
-var matk: float = 0.0
-var def_quai: float = 0.0
-var mdef_quai: float = 0.0
-var hit_rate: float = 10.0
-var crit_rate: float = 0.0
-var giap_quai: float = 0.0
-var respawn_time: float = 10.0 # Mặc định 10 giây
+var min_atk: float
+var max_atk: float
+var min_matk: float
+var max_matk: float
+var def: float
+var mdef: float
+var hit: float
+var flee: float
+var crit_rate: float
+var crit_damage: float
+var perfect_dodge: float
 
 # --- Di chuyển & Vị trí ---
 var speed: float = 100.0
@@ -56,10 +65,6 @@ var wander_radius_fixed: float = 400.0
 var _initial_spawn_position: Vector2
 var movement_area: Area2D
 var attack_range: float = 150.0
-var hit: float = 50.0  # hoặc tính theo level/quái
-
-
-var exp_reward: int = 0
 var gold_drop: Array = []
 
 const DroppedItemScene = preload("res://Data/items/DroppedItem.tscn")
@@ -69,21 +74,83 @@ const DroppedItemScene = preload("res://Data/items/DroppedItem.tscn")
 # ============================================================================
 func _ready():
 	add_to_group(&"monsters")
-	_initial_spawn_position = global_position
-	movement_area = get_parent()
+	_initial_spawn_position = global_position # Lưu vị trí gốc
 
 	# Kết nối tất cả các tín hiệu cần thiết
+	_connect_signals()
+
+	# Lên lịch để khởi tạo đầy đủ sau khi scene đã sẵn sàng
+	call_deferred("_initialize_monster")
+
+func _connect_signals():
 	state_timer.timeout.connect(_on_state_timer_timeout)
 	attack_timer.timeout.connect(_on_attack_timer_timeout)
 	respawn_timer.timeout.connect(_on_respawn_timer_timeout)
-	
-	# Kết nối tín hiệu khi animation kết thúc
 	animated_sprite.animation_finished.connect(_on_animation_finished)
-	
-	# Tải dữ liệu và bắt đầu hoạt động một cách an toàn
-	call_deferred("_initialize_monster")
-	call_deferred("_start_idle")
 
+func _initialize_monster():
+	if monster_id.is_empty():
+		push_error("Monster ID is empty!")
+		queue_free()
+		return
+
+	var base_data = MonsterManager.get_monster_data(monster_id)
+	if base_data.is_empty():
+		queue_free()
+		return
+
+	# 1. Gán các thông tin cơ bản
+	monster_name = base_data.get("name", "Quái Vật")
+	level = base_data.get("level", 1)
+	exp_reward = base_data.get("exp_reward", 0)
+	gold_drop_range = base_data.get("gold_drop", [1, 1])
+	loot_table = base_data.get("loot_table", [])
+	respawn_time = base_data.get("respawn_time", 20.0)
+	
+	var monster_type_string = base_data.get("type", "NORMAL").to_upper()
+	if monster_type_string == "ELITE": monster_type = MonsterType.ELITE
+	elif monster_type_string == "BOSS": monster_type = MonsterType.BOSS
+	else: monster_type = MonsterType.NORMAL
+
+	# 2. GỌI "BỘ NÃO" ĐỂ TÍNH TOÁN CHỈ SỐ
+	var final_stats = MonsterDataManager.calculate_final_stats(base_data)
+
+	# 3. Áp dụng các chỉ số đã được tính toán
+	_apply_stats(final_stats)
+
+	# 4. Tải hình ảnh
+	var frames_path = base_data.get("sprite_frames_path", "")
+	if frames_path != "" and FileAccess.file_exists(frames_path):
+		animated_sprite.sprite_frames = load(frames_path)
+
+	# 5. SỬA LỖI: Gán khu vực di chuyển MỘT CÁCH AN TOÀN
+	movement_area = get_parent()
+	if not is_instance_valid(movement_area):
+		push_error("Lỗi nghiêm trọng: Quái vật '%s' không có khu vực di chuyển (parent) hợp lệ!" % monster_name)
+		# Nếu không có khu vực, quái vật sẽ không thể đi lang thang, chỉ đứng yên
+	
+	# 6. Khởi động AI sau khi mọi thứ đã sẵn sàng
+	_start_idle()
+
+# Hàm phụ trợ mới - Chịu trách nhiệm gán các chỉ số cuối cùng
+func _apply_stats(stats: Dictionary):
+	max_hp = stats.get("max_hp", 10.0)
+	current_hp = max_hp
+	min_atk = stats.get("min_atk", 1.0)
+	max_atk = stats.get("max_atk", 2.0)
+	min_matk = stats.get("min_matk", 0.0)
+	max_matk = stats.get("max_matk", 0.0)
+	def = stats.get("def", 0.0)
+	mdef = stats.get("mdef", 0.0)
+	hit = stats.get("hit", 1.0)
+	flee = stats.get("flee", 1.0)
+	crit_rate = stats.get("crit_rate", 0.0)
+	crit_damage = stats.get("crit_damage", 1.4)
+	perfect_dodge = stats.get("perfect_dodge", 0.0)
+
+	# Cập nhật thanh HP
+	hp_bar.max_value = max_hp
+	hp_bar.value = current_hp
 
 # ============================================================================
 # HÀM VẬT LÝ & VÒNG LẶP CHÍNH
@@ -184,27 +251,33 @@ func _apply_damage_to_hero():
 	if is_dead or not is_instance_valid(target_hero): return
 
 	if global_position.distance_to(target_hero.global_position) <= attack_range + 20:
-		# 1. Yêu cầu CombatUtils tính toán và trả về "báo cáo"
-		var combat_result = CombatUtils.quai_tan_cong_hero(atk, matk, hit_rate, crit_rate, level, target_hero.def, target_hero.mdef, target_hero.flee, target_hero.level, false)
+		# 1. Yêu cầu CombatUtils tính toán bằng cách truyền vào 2 đối tượng
+		# self (chính con quái vật này) và target_hero (mục tiêu)
+		var combat_result = CombatUtils.quai_tan_cong_hero(self, target_hero, false)
 
 		# 2. Lấy vị trí hiển thị chữ (trên đầu Hero)
 		var text_position = target_hero.global_position - Vector2(0, 250)
 
 		# 3. Đọc "báo cáo" và yêu cầu hiển thị
+		var text_to_show = ""
+		var color = Color.WHITE
+
 		if combat_result.is_miss:
-			FloatingTextManager.show_text("MISS!!",Color.WEB_GRAY, text_position)
+			text_to_show = "MISS!!"
+			if combat_result.is_perfect_dodge:
+				text_to_show = "PERFECT DODGE!!"
+			color = Color.WEB_GRAY
 		else:
-			var text_to_show = str(combat_result.damage)
-			var color = Color.WHITE # Sát thương quái gây ra có màu khác
+			text_to_show = str(combat_result.damage)
 			if combat_result.is_crit:
-				color = Color.RED # Crit của quái có màu đỏ
+				color = Color.RED
 				text_to_show += "!!"
 
-			FloatingTextManager.show_text(text_to_show, color, text_position, combat_result.is_crit)
+		FloatingTextManager.show_text(text_to_show, color, text_position, combat_result.is_crit)
 
-			# 4. Gây sát thương thực sự lên Hero
-			if combat_result.damage > 0:
-				target_hero.take_damage(combat_result.damage, self)
+		# 4. Gây sát thương thực sự lên Hero
+		if combat_result.damage > 0:
+			target_hero.take_damage(combat_result.damage, self)
 
 # ============================================================================
 # HỆ THỐNG SỰ SỐNG & CÁI CHẾT (TỰ HỒI SINH)
@@ -333,45 +406,6 @@ func _on_hero_exited(body):
 # ============================================================================
 # CÁC HÀM HỖ TRỢ
 # ============================================================================
-func _initialize_monster():
-	if monster_id == "": return
-	var data = MonsterManager.get_monster_data(monster_id)
-	if data.is_empty(): queue_free(); return
-
-	# Tải dữ liệu chính
-	monster_name = data.get("name", "Unnamed Monster")
-	level = data.get("level", 1)
-	respawn_time = data.get("respawn_time", 10.0)
-	
-	var monster_type_string = data.get("type", "NORMAL").to_upper()
-	if monster_type_string == "ELITE": monster_type = MonsterType.ELITE
-	elif monster_type_string == "BOSS": monster_type = MonsterType.BOSS
-	else: monster_type = MonsterType.NORMAL
-
-	# Tải chỉ số
-	var stats = data.get("stats", {})
-	max_hp = stats.get("max_hp", 10.0)
-	atk = stats.get("atk", 1.0)
-	matk = stats.get("matk", 0.0)
-	def_quai = stats.get("def", 0.0)
-	mdef_quai = stats.get("mdef", 0.0)
-	hit_rate = stats.get("hit", 1.0)
-	crit_rate = stats.get("crit", 0.0)
-	giap_quai = stats.get("giap", 0.0)
-	exp_reward = data.get("exp_reward", 0)
-	gold_drop = data.get("gold_drop", [])
-
-	# Tải hình ảnh
-	var frames_path = data.get("sprite_frames_path", "")
-	if frames_path != "" and FileAccess.file_exists(frames_path):
-		animated_sprite.sprite_frames = load(frames_path)
-	
-	# Thiết lập máu và thanh HP
-	current_hp = max_hp
-	hp_bar.max_value = max_hp
-	hp_bar.value = current_hp
-
-		
 func _on_animation_finished():
 	if not is_dead:
 		# Quái còn sống thì chỉ xử lý Attack

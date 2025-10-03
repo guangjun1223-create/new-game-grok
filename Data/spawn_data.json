@@ -1,0 +1,30 @@
+{
+  "forest": {
+	"normal_monsters": [
+	  { "id": "slime_normal_01", "max_count": 15 }
+	],
+	"elite_monsters": [
+	  { "id": "slime_blue_01", "max_count": 3 }
+	],
+	"boss": {
+	  "id": "",
+	  "spawn_location_node": "" 
+	}
+  },
+  "forest1": {
+	"normal_monsters": [],
+	"elite_monsters": [],
+	"boss": {
+	  "id": "",
+	  "spawn_location_node": ""
+	}
+  },
+  "forest2": {
+	"normal_monsters": [],
+	"elite_monsters": [],
+	"boss": {
+	  "id": "",
+	  "spawn_location_node": ""
+	}
+  }
+}

@@ -10,10 +10,13 @@ class_name VillageUpgradePanel
 @onready var upgrade_button: Button = $PanelContainer/VBoxContainer/UpgradeButton
 @onready var close_button: Button = $PanelContainer/VBoxContainer/CloseButton
 
+signal panel_closed
+
 func _ready():
+	
 	# Kết nối các tín hiệu
 	upgrade_button.pressed.connect(_on_upgrade_button_pressed)
-	close_button.pressed.connect(queue_free) # Nút đóng chỉ cần tự hủy
+	close_button.pressed.connect(_on_close_button_pressed)
 	
 	# Lắng nghe tín hiệu từ PlayerStats để tự cập nhật khi Làng lên cấp
 	PlayerStats.village_level_changed.connect(_on_village_level_changed)
@@ -29,21 +32,16 @@ func update_display():
 	level_info_label.text = "Nâng cấp từ Cấp %d -> Cấp %d" % [current_level, next_level]
 	
 	var upgrade_data = GameDataManager.get_village_level_data(str(next_level))
-	
-	# Nếu không có dữ liệu cho cấp tiếp theo (đã max level)
 	if upgrade_data.is_empty():
-		requirements_list_label.text = "Làng đã đạt cấp độ tối đa."
-		reward_description_label.text = ""
-		upgrade_button.text = "Đã Tối Đa"
+		requirements_list_label.text = "Đã đạt cấp độ tối đa!"
 		upgrade_button.disabled = true
 		return
 		
-	# Xây dựng chuỗi hiển thị yêu cầu
 	var requirements_text = ""
-	
 	# 1. Yêu cầu Vàng
 	var gold_cost = upgrade_data.get("gold_cost", 0)
 	var player_has_gold = PlayerStats.player_gold
+	
 	if player_has_gold >= gold_cost:
 		requirements_text += "[color=white]Vàng: %d / %d[/color]\n" % [player_has_gold, gold_cost]
 	else:
@@ -51,9 +49,13 @@ func update_display():
 		
 	# 2. Yêu cầu Nguyên liệu
 	var materials_needed = upgrade_data.get("materials", [])
-	for material in materials_needed:
-		var item_id = material["id"]
-		var required_qty = material["quantity"]
+	
+	# === SỬA LẠI TÊN BIẾN Ở ĐÂY ===
+	for material_data in materials_needed: # Đổi từ "material" thành "material_data"
+		var item_id = material_data["id"]
+		var required_qty = material_data["quantity"]
+		# ============================
+		
 		var player_has_qty = PlayerStats.get_item_quantity_in_warehouse(item_id)
 		var item_name = ItemDatabase.get_item_data(item_id).get("item_name", "???")
 		
@@ -78,3 +80,8 @@ func _on_upgrade_button_pressed():
 func _on_village_level_changed(_new_level):
 	# Chỉ cần gọi lại hàm update_display là mọi thứ sẽ tự làm mới
 	update_display()
+	
+func _on_close_button_pressed():
+	
+	panel_closed.emit() # Phát tín hiệu báo rằng panel sắp đóng
+	queue_free() 

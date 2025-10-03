@@ -1,4 +1,4 @@
-#MonsterManager.gd
+# res://script/autoload/MonsterManager.gd
 extends Node
 
 const MONSTER_DATA_PATH = "res://Data/monsters.json"
@@ -25,4 +25,4 @@ func get_monster_data(monster_id: String) -> Dictionary:
 		return _monster_database[monster_id]
 	else:
 		push_error("Khong tim thay quai vat voi ID: " + monster_id)
-		return {} # Trả về một dictionary rỗng để tránh crash game
+		return {}

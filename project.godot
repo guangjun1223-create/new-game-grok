@@ -24,6 +24,8 @@ PlayerStats="*res://script/autoload/PlayerStats.gd"
 CombatUtils="*res://Data/CombatUtils.gd"
 MonsterManager="*res://script/autoload/MonsterManager.gd"
 FloatingTextManager="*res://script/UI/FloatingTextManager.gd"
+EnchantmentUtils="*res://script/autoload/EnchantmentUtils.gd"
+MonsterDataManager="*res://Data/MonsterDataManager.gd"
 
 [display]
 
@@ -36,6 +38,7 @@ window/stretch/aspect="expand"
 
 heroes=""
 monsters=""
+panels=""
 
 [input]
 

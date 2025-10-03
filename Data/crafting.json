@@ -11,9 +11,9 @@
 	{
 	  "result": { "item_id": "short_sword", "quantity": 1 },
 	  "materials": [
-		{ "item_id": "simple_sword", "quantity": 1 },
-		{ "item_id": "leather", "quantity": 1 },
-		{ "item_id": "stone", "quantity": 1 }
+		{ "item_id": "simple_sword", "quantity": 0 },
+		{ "item_id": "leather", "quantity": 0 },
+		{ "item_id": "stone", "quantity": 0 }
 	  ],
 	  "cost": 10
 	},
@@ -37,25 +37,25 @@
 	{
 	  "result": { "item_id": "simple_helmet", "quantity": 1 },
 	  "materials": [
-		{ "item_id": "stone", "quantity": 1 },
-		{ "item_id": "leather", "quantity": 1 }
+		{ "item_id": "stone", "quantity": 0 },
+		{ "item_id": "leather", "quantity": 0 }
 	  ],
 	  "cost": 10
 	},
 	{
 	  "result": { "item_id": "wooden_shield", "quantity": 1 },
 	  "materials": [
-		{ "item_id": "wood", "quantity": 1 },
-		{ "item_id": "stone", "quantity": 1 }
+		{ "item_id": "wood", "quantity": 0 },
+		{ "item_id": "stone", "quantity": 0 }
 	  ],
 	  "cost": 10
 	},
 	{
 	  "result": { "item_id": "leather_armor", "quantity": 1 },
 	  "materials": [
-		{ "item_id": "leather", "quantity": 1 },
-		{ "item_id": "cloth", "quantity": 1 },
-		{ "item_id": "thread", "quantity": 1 }
+		{ "item_id": "leather", "quantity": 0 },
+		{ "item_id": "cloth", "quantity": 0 },
+		{ "item_id": "thread", "quantity": 0 }
 	  ],
 	  "cost": 10
 	}
@@ -64,9 +64,18 @@
 	{
 	  "result": { "item_id": "healing_potion_small", "quantity": 1 },
 	  "materials": [
-		{ "item_id": "herb", "quantity": 2 },
-		{ "item_id": "spring_water", "quantity": 1 },
-		{ "item_id": "empty_bottle", "quantity": 1 }
+		{ "item_id": "herb", "quantity": 0 },
+		{ "item_id": "spring_water", "quantity": 0 },
+		{ "item_id": "empty_bottle", "quantity": 0 }
+	  ],
+	  "cost": 10
+	},
+	{
+	  "result": { "item_id": "sp_potion_small", "quantity": 1 },
+	  "materials": [
+		{ "item_id": "herb", "quantity": 0 },
+		{ "item_id": "spring_water", "quantity": 0 },
+		{ "item_id": "empty_bottle", "quantity": 0 }
 	  ],
 	  "cost": 10
 	}

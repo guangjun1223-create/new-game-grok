@@ -1,4 +1,4 @@
-# Script PotionSellNPC.gd
+# Script EquipmentNPC.gd
 extends StaticBody2D
 class_name EquipmentSellerNPC
 
@@ -12,29 +12,55 @@ var is_active = false
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var animation_timer: Timer = $AnimationTimer
+@onready var interaction_prompt_button: Button = $InteractionPromptButton
+
+var hero_in_range = null
 
 func _ready():
-	if PlayerStats.village_level >= 2:
+	PlayerStats.register_equipment_seller_npc(self)
+	_check_activation(PlayerStats.village_level)
+	
+	PlayerStats.village_level_changed.connect(_on_village_level_changed)
+	animation_timer.timeout.connect(_on_animation_timer_timeout)
+	animated_sprite.animation_finished.connect(_on_animation_finished)
+	interaction_prompt_button.pressed.connect(_on_interaction_prompt_button_pressed)
+	
+func _on_village_level_changed(new_level: int):
+	print("EquipmentSellerNPC: Nhan duoc tin hieu lang len cap: %d" % new_level)
+	_check_activation(new_level)
+	
+func _check_activation(current_village_level: int):
+	# Dựa vào cấp làng để quyết định NPC có nên hoạt động hay không
+	if current_village_level >= 2:
 		set_active(true)
 	else:
 		set_active(false)
-	PlayerStats.register_equipment_seller_npc(self)
-	# Kết nối các tín hiệu cần thiết
-	animation_timer.timeout.connect(_on_animation_timer_timeout)
-	animated_sprite.animation_finished.connect(_on_animation_finished)
-
+	
 func _on_interaction_area_body_entered(body):
-	if not is_active or not body is Hero:
-		return
-	# Chỉ phản ứng nếu một Node thuộc nhóm "heroes" đi vào
-	if body.is_in_group("heroes"):
-		# Ép kiểu an toàn
-		var hero = body as Hero
-		# Chỉ kích hoạt nếu hero đang di chuyển (để tránh kích hoạt lại khi đang đứng yên)
-		if hero and hero._current_state == Hero.State.NAVIGATING:
-			print(">>> NPC: Phat hien hero '%s' da den. Phat tin hieu..." % hero.name)
-			# Phát tín hiệu toàn cục, báo cho UI và các hệ thống khác biết
-			GameEvents.hero_arrived_at_equipment_shop.emit(body)
+	if is_active and body.is_in_group("heroes"):
+		hero_in_range = body
+		interaction_prompt_button.visible = true # Hiện Button lên
+
+func _on_interaction_area_body_exited(body):
+	if body == hero_in_range:
+		hero_in_range = null
+		interaction_prompt_button.visible = false # Ẩn Button đi
+
+func _on_interaction_prompt_button_pressed():
+	# Nếu có một Hero đang trong tầm
+	if is_instance_valid(hero_in_range):
+		print("Nguoi choi da click vao button de tuong tac voi: ", name)
+		# Yêu cầu Hero dừng lại và giao dịch với chính NPC này
+		hero_in_range.stop_and_interact_with_npc(self)
+		
+func open_shop_panel(hero_interacting):
+	print("Mo cua hang '%s' cho Hero: '%s'" % [name, hero_interacting.name])
+	#
+	# TẠI ĐÂY, BẠN SẼ GỌI HÀM ĐỂ MỞ PANEL MUA SẮM CỦA BẠN
+	# Ví dụ: shop_panel.show_panel(hero_interacting)
+	#
+	# Tạm thời chúng ta có thể dùng một tín hiệu toàn cục nếu bạn đã có sẵn
+	GameEvents.hero_arrived_at_equipment_shop.emit(hero_interacting)
 
 func _on_animation_timer_timeout():
 	# Chỉ chơi animation ngẫu nhiên nếu đang ở trạng thái rảnh rỗi (Idle)

@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://i4lvbnr0xqo2"]
+
+[ext_resource type="Script" uid="uid://cb05h7ds5s73u" path="res://script/UI/job_skill_panel.gd" id="1_nhcux"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_78rau"]
+
+[node name="JobSkillPanel" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 50.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_78rau")
+script = ExtResource("1_nhcux")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="JobNameLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SkillGrid" type="VBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2

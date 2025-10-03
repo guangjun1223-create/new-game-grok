@@ -1,8 +1,10 @@
 # PlayerStats.gd
 extends Node
 
+const VFX_scene = preload("res://Scene/VFX/vfx_player.tscn")
+const DIAMOND_COST_FOR_SUMMON = 100
 
-signal inventory_changed
+#signal inventory_changed
 signal gold_changed(new_gold_amount)
 signal player_stats_changed
 signal warehouse_changed
@@ -52,9 +54,9 @@ var inventory: Array = [] # Mảng chính lưu trữ dữ liệu túi đồ
 const INVENTORY_SIZE: int = 20 # Sức chứa tối đa của túi đồ
 
 var player_gold: int = 1000      # Vàng trong kho
-var player_diamonds: int = 50    # Kim cương
+var player_diamonds: int = 500    # Kim cương
 var warehouse: Array = []        # Mảng chứa đồ trong Nhà kho
-const WAREHOUSE_SIZE: int = 100  # Sức chứa của Nhà kho
+const WAREHOUSE_SIZE: int = 500  # Sức chứa của Nhà kho
 var current_inn_level: int = 1
 
 
@@ -79,6 +81,7 @@ func _ready():
 	if warehouse.is_empty():
 		print("PlayerStats: Khoi tao Nha kho lan dau.")
 		warehouse.resize(WAREHOUSE_SIZE)
+		
 	
 func initialize_world_references():
 	var main_scene_root = get_tree().current_scene
@@ -97,38 +100,36 @@ func initialize_world_references():
 	hero_spawn_point = main_scene_root.find_child("HeroSpawnPoint", true, false)
 	ghost_respawn_point = main_scene_root.find_child("GhostRespawnPoint", true, false)
 	
-	# === PHẦN THAY ĐỔI QUAN TRỌNG ===
-	# Xóa bỏ hoàn toàn việc tìm kiếm UI bằng group
-	# if not is_instance_valid(ui_controller_ref):
-	# 	 push_error("LỖI: PlayerStats không thể tìm thấy UIController trong world!")
-	# ==============================
-	
 	if not is_instance_valid(hero_container):
 		push_error("LỖI: PlayerStats không tìm thấy node 'HeroContainer' trong world!")
-	
+	hero_count_changed.emit()
 
 # THAY THẾ TOÀN BỘ HÀM CŨ BẰNG PHIÊN BẢN NÀY
 func trieu_hoi_hero():
-	# --- BƯỚC 1: KIỂM TRA CÁC ĐIỀU KIỆN BAN ĐẦU ---
-	if get_item_quantity_in_warehouse("summon_scroll") <= 0:
-		print("Không có Cuộn Giấy Triệu Hồi để sử dụng!")
-		return
+	if get_item_quantity_in_warehouse("summon_scroll") <= 0: return
+	if hero_roster.size() >= BARRACKS_SIZE + get_max_heroes(): return
+
+	remove_item_from_warehouse("summon_scroll", 1)
+	var new_hero = _tao_mot_hero_moi() # Gọi hàm phụ tá
+
+	hero_roster.append(new_hero)
+	print(">>> Da trieu hoi thanh cong '%s' bang Cuon Giay!" % new_hero.name)
+
+	if get_active_hero_count() < get_max_heroes():
+		deploy_hero(new_hero)
+	else:
+		new_hero.doi_trang_thai(Hero.State.IN_BARRACKS)
+
+	update_hero_deployment()
+	save_game()
 		
-	if hero_roster.size() >= BARRACKS_SIZE + get_max_heroes():
-		print("Toàn bộ Doanh trại (sân chính + sảnh) đã đầy! Không thể triệu hồi.")
-		return
-
-	# --- BƯỚC 2: ĐẾM SỐ HERO TRÊN SÂN TRƯỚC KHI TẠO HERO MỚI ---
-	var active_hero_count_before_summon = get_active_hero_count()
-	var max_heroes_allowed = get_max_heroes()
-
-	# --- BƯỚC 3: TẠO MỘT HERO HOÀN CHỈNH ---
+func _tao_mot_hero_moi() -> Hero:
 	var new_hero = hero_scene.instantiate()
 	new_hero.world_node = world_node
 	new_hero.gate_connections = gate_connections
 	new_hero._ui_controller = ui_controller_ref
-	
-	# --- (Phần code gán chỉ số, tên, độ hiếm ngẫu nhiên của bạn giữ nguyên) ---
+
+	# (Toàn bộ phần code gán chỉ số, tên, độ hiếm ngẫu nhiên của bạn nằm ở đây)
 	var str_co_ban = randi_range(1, 5)
 	var agi_co_ban = randi_range(1, 5)
 	var vit_co_ban = randi_range(1, 5)
@@ -156,7 +157,6 @@ func trieu_hoi_hero():
 		mod_tang_truong = randf_range(0.1, 0.5)
 	var job_key = "Novice"
 	var du_lieu_nghe = GameDataManager.get_hero_definition(job_key)
-
 	new_hero.str_co_ban = str_co_ban
 	new_hero.agi_co_ban = agi_co_ban
 	new_hero.vit_co_ban = vit_co_ban
@@ -172,27 +172,13 @@ func trieu_hoi_hero():
 	var ten_ngau_nhien = GameDataManager.tao_ten_ngau_nhien()
 	new_hero.hero_name = ten_ngau_nhien
 	new_hero.name = "%s (%s)" % [ten_ngau_nhien, do_hiem]
-	# ------------------------------------------------------------------------------------
 	new_hero._initialize_stats()
 	new_hero.current_hp = new_hero.max_hp
 	new_hero.current_sp = new_hero.max_sp
-	
 	var starting_items = [{"id": "simple_sword", "quantity": 1}, {"id": "magic_staff", "quantity": 1}, {"id": "long_bow", "quantity": 1}]
 	var starting_gold = 50
 	new_hero.setup(starting_items, starting_gold)
-	
-
-	# --- BƯỚC 4: XỬ LÝ LOGIC MỚI ---
-	remove_item_from_warehouse("summon_scroll", 1)
-	hero_roster.append(new_hero)
-	print(">>> Đã triệu hồi thành công '%s'. Tổng số Hero: %d" % [new_hero.name, hero_roster.size()])
-
-	# Quyết định vị trí dựa trên số hero trên sân TRƯỚC KHI triệu hồi
-	if active_hero_count_before_summon < max_heroes_allowed:
-		deploy_hero(new_hero)
-	else:
-		new_hero.doi_trang_thai(Hero.State.IN_BARRACKS)
-		print("Sân chính đã đầy! Hero '%s' được đưa vào sảnh." % new_hero.name)
+	return new_hero
 
 func add_gold(amount: int):
 	if amount <= 0: return # Không làm gì nếu số vàng cộng vào là số âm hoặc 0
@@ -267,6 +253,7 @@ func load_game():
 	var default_npc_levels = { "inn": 1, "blacksmith": 1, "AlchemistNPC": 1, "PotionSellerNPC": 1, "EquipmentSellerNPC": 1 }
 	npc_levels = game_data.get("npc_levels", default_npc_levels)
 	
+	
 	# Tái tạo lại từng Hero từ dữ liệu và thêm vào roster
 	var saved_roster_data = game_data.get("hero_roster_data", [])
 	for hero_data in saved_roster_data:
@@ -290,7 +277,8 @@ func load_game():
 		var cam_x = game_data.get("camera_pos_x", 0)
 		var cam_y = game_data.get("camera_pos_y", 0)
 		camera_ref.global_position = Vector2(cam_x, cam_y)
-		
+	
+	update_npc_unlock_state()
 	player_stats_changed.emit()
 	warehouse_changed.emit()
 	village_level_changed.emit(village_level)
@@ -318,57 +306,66 @@ func _notification(what):
 		# Cho phép game thoát sau khi đã lưu
 		get_tree().quit()
 
-func add_item_to_warehouse(item_id: String, quantity_to_add: int = 1) -> bool:
-	var item_data = ItemDatabase.get_item_data(item_id)
+func add_item_to_warehouse(item_data_or_id, quantity_to_add: int = 1) -> bool:
+	var item_id: String
+	var item_data: Dictionary
+
+	# Tự động nhận diện xem đang nhận vào ID hay một Dictionary đầy đủ
+	if typeof(item_data_or_id) == TYPE_STRING:
+		item_id = item_data_or_id
+		item_data = ItemDatabase.get_item_data(item_id)
+	elif typeof(item_data_or_id) == TYPE_DICTIONARY:
+		item_data = item_data_or_id
+		item_id = item_data["id"]
+	else:
+		push_error("add_item_to_warehouse: Du lieu vao khong hop le.")
+		return false
+
 	if item_data.is_empty():
 		push_error("add_item_to_warehouse: Khong tim thay du lieu cho item ID '%s'" % item_id)
 		return false
 
 	var is_stackable = item_data.get("is_stackable", false)
+
+	# XỬ LÝ TRANG BỊ (KHÔNG XẾP CHỒNG)
+	if not is_stackable:
+		for i in range(warehouse.size()):
+			if warehouse[i] == null:
+				warehouse[i] = item_data # Lưu cả dictionary vào slot
+				warehouse_changed.emit()
+				return true
+		return false # Hết chỗ
+
+	# XỬ LÝ VẬT PHẨM THƯỜNG (XẾP CHỒNG ĐƯỢC)
 	var max_stack = item_data.get("max_stack_size", 999)
 	var quantity_left = quantity_to_add
-	var item_added = false
+	var item_added_somewhere = false
 
-	# === PHẦN LOGIC CỐT LÕI ĐÃ BỊ THIẾU ===
-	if is_stackable:
-		# Vòng 1: Tìm các chồng có sẵn để cộng dồn
-		for i in range(warehouse.size()):
-			var slot = warehouse[i]
-			if slot and slot["id"] == item_id and slot["quantity"] < max_stack:
-				var can_add_here = max_stack - slot["quantity"]
-				var add_amount = min(quantity_left, can_add_here)
-				slot["quantity"] += add_amount
-				quantity_left -= add_amount
-				item_added = true
-				if quantity_left <= 0: break
-		
-		# Vòng 2: Nếu vẫn còn, tìm ô trống để tạo chồng mới
-		if quantity_left > 0:
-			for i in range(warehouse.size()):
-				if warehouse[i] == null:
-					var add_amount = min(quantity_left, max_stack)
-					warehouse[i] = {"id": item_id, "quantity": add_amount}
-					quantity_left -= add_amount
-					item_added = true
-					if quantity_left <= 0: break
-	else: # Nếu item không thể xếp chồng
-		for _i in range(quantity_to_add):
-			var found_empty_slot = false
-			for j in range(warehouse.size()):
-				if warehouse[j] == null:
-					warehouse[j] = {"id": item_id, "quantity": 1}
-					item_added = true
-					found_empty_slot = true
-					break
-			if not found_empty_slot: break
-	# ======================================
+	# Vòng 1: Tìm các chồng có sẵn để cộng dồn
+	for i in range(warehouse.size()):
+		var slot = warehouse[i]
+		if slot and slot["id"] == item_id and slot["quantity"] < max_stack:
+			var can_add_here = max_stack - slot["quantity"]
+			var add_amount = min(quantity_left, can_add_here)
+			slot["quantity"] += add_amount
+			quantity_left -= add_amount
+			item_added_somewhere = true
+			if quantity_left <= 0: break
 
-	if item_added:
-		warehouse_changed.emit()
+	# Vòng 2: Nếu vẫn còn, tìm ô trống
 	if quantity_left > 0:
-		return false
+		for i in range(warehouse.size()):
+			if warehouse[i] == null:
+				var add_amount = min(quantity_left, max_stack)
+				warehouse[i] = {"id": item_id, "quantity": add_amount}
+				quantity_left -= add_amount
+				item_added_somewhere = true
+				if quantity_left <= 0: break
 
-	return true
+	if item_added_somewhere:
+		warehouse_changed.emit()
+
+	return quantity_left <= 0
 
 func add_gold_to_player(amount: int):
 	if amount <= 0: return
@@ -406,31 +403,45 @@ func get_inn_entrance_position() -> Vector2:
 		return Vector2.ZERO
 
 func remove_item_from_warehouse(item_id: String, quantity_to_remove: int = 1) -> bool:
-	# === PHẦN LOGIC CỐT LÕI ĐÃ BỊ THIẾU ===
-	var quantity_left = quantity_to_remove
+	var quantity_left_to_remove = quantity_to_remove
+	
 	# Vòng lặp từ cuối lên để việc xóa không làm ảnh hưởng đến chỉ số của mảng
 	for i in range(warehouse.size() - 1, -1, -1):
-		var slot = warehouse[i]
-		# Nếu ô có đồ và đúng loại item cần xóa
-		if slot and slot["id"] == item_id:
-			# Xác định số lượng có thể xóa ở ô này
-			var remove_amount = min(quantity_left, slot["quantity"])
-			slot["quantity"] -= remove_amount
-			quantity_left -= remove_amount
+		var slot_data = warehouse[i]
+		
+		# Bỏ qua các ô trống hoặc các item không đúng ID
+		if not slot_data or slot_data.get("id") != item_id:
+			continue
+
+		# --- LOGIC SỬA LỖI ---
+		# Lấy dữ liệu gốc của item để kiểm tra xem nó có xếp chồng được không
+		var base_item_data = ItemDatabase.get_item_data(item_id)
+		var is_stackable = base_item_data.get("is_stackable", false)
+		
+		if is_stackable:
+			# Nếu là item xếp chồng được, nó chắc chắn có key "quantity"
+			var remove_amount = min(quantity_left_to_remove, slot_data["quantity"])
+			slot_data["quantity"] -= remove_amount
+			quantity_left_to_remove -= remove_amount
 			
 			# Nếu số lượng trong ô về 0, làm trống ô đó
-			if slot["quantity"] <= 0:
+			if slot_data["quantity"] <= 0:
 				warehouse[i] = null
-			
-			# Nếu đã xóa đủ số lượng yêu cầu, thoát khỏi vòng lặp
-			if quantity_left <= 0:
-				break
-	# =====================================
+		else:
+			# Nếu là trang bị (không xếp chồng), coi như số lượng là 1
+			# Chỉ xóa khi chúng ta vẫn cần xóa item (quantity_left_to_remove > 0)
+			if quantity_left_to_remove > 0:
+				warehouse[i] = null # Xóa toàn bộ trang bị khỏi ô
+				quantity_left_to_remove -= 1
+		
+		# Nếu đã xóa đủ số lượng yêu cầu, thoát khỏi vòng lặp
+		if quantity_left_to_remove <= 0:
+			break
 	
 	warehouse_changed.emit()
 	
 	# Trả về true nếu đã xóa đủ (quantity_left == 0), ngược lại trả về false
-	return quantity_left <= 0
+	return quantity_left_to_remove <= 0
 	
 func can_craft(recipe: Dictionary) -> bool:
 	var materials_needed = recipe.get("materials", [])
@@ -590,6 +601,18 @@ func upgrade_village():
 	# 4. Phát tín hiệu báo cho các hệ thống khác biết
 	village_level_changed.emit(village_level)
 	player_stats_changed.emit() # Cập nhật UI chung (ví dụ: lượng vàng)
+	update_hero_deployment()
+
+func update_npc_unlock_state():
+	var max_level = village_level
+	# Lặp từng cấp từ 2 tới max_level, mỗi cấp gọi mở khóa nếu có
+	for level in range(2, max_level + 1):
+		var upgrade_data = GameDataManager.get_village_level_data(str(level))
+		var npcs_to_unlock = upgrade_data.get("unlocks_npc", [])
+		for npc_name in npcs_to_unlock:
+			var npc_node = world_node.find_child(npc_name, true, false)
+			if is_instance_valid(npc_node) and npc_node.has_method("set_active"):
+				npc_node.set_active(true)
 
 func get_item_quantity_in_warehouse(item_id: String) -> int:
 	var total_quantity = 0
@@ -601,11 +624,12 @@ func get_item_quantity_in_warehouse(item_id: String) -> int:
 			total_quantity += item_info.get("quantity", 0)
 	# Trả về tổng số lượng đếm được
 	return total_quantity
-	print("--- NÂNG CẤP LÀNG THÀNH CÔNG! ---")
 	
 func get_current_hero_count() -> int:
 	if is_instance_valid(hero_container):
+		# 2. Trả về số lượng node con (chính là các hero) đang có trong container
 		return hero_container.get_child_count()
+	push_warning("PlayerStats: Tham chiếu 'hero_container' không hợp lệ. Không thể đếm hero.")
 	return 0
 
 func get_max_heroes() -> int:
@@ -622,15 +646,20 @@ func get_active_hero_count() -> int:
 # Hàm để "triển khai" một Hero ra sân
 func deploy_hero(hero: Hero):
 	if not hero in hero_roster:
-		push_error("Không thể triển khai Hero không có trong danh sách!")
 		return
+		
+	var vfx_instance = VFX_scene.instantiate()
+	hero_container.add_child(vfx_instance)
+	var spawn_position = hero_spawn_point.global_position
+	vfx_instance.global_position = spawn_position - Vector2(0, 80)
+	
+	vfx_instance.play_effect("summon")
 
 	# Thêm node Hero vào cây scene để nó hiện ra và hoạt động
 	hero_container.add_child(hero)
 	hero.global_position = hero_spawn_point.global_position
 	hero.movement_area = village_boundary
 	hero.doi_trang_thai(Hero.State.IDLE)
-	hero_count_changed.emit() # Báo cho UI cập nhật
 	print("Đã triển khai Hero '%s' ra sân!" % hero.name)
 
 # Hàm để "triệu hồi" một Hero về sảnh
@@ -646,3 +675,140 @@ func recall_hero(hero: Hero):
 	hero.doi_trang_thai(Hero.State.IN_BARRACKS)
 	hero_count_changed.emit() # Báo cho UI cập nhật
 	print("Đã triệu hồi Hero '%s' về sảnh!" % hero.name)
+	
+func sa_thai_hero(hero_can_xoa: Hero):
+	if not is_instance_valid(hero_can_xoa):
+		print("Loi: Khong the sa thai hero khong hop le.")
+		return
+
+	# Lưu lại trạng thái của hero TRƯỚC KHI xóa
+	var was_in_world = hero_can_xoa.is_inside_tree()
+
+	# 1. Xóa khỏi danh sách chính (roster)
+	if hero_can_xoa in hero_roster:
+		hero_roster.erase(hero_can_xoa)
+		print("Da xoa '%s' khoi danh sach roster." % hero_can_xoa.name)
+	
+	# 2. Nếu hero đang ở ngoài world, xóa node của nó khỏi game
+	if was_in_world:
+		hero_can_xoa.queue_free()
+
+	# === LOGIC MỚI: TỰ ĐỘNG TRIỂN KHAI HERO THAY THẾ ===
+	# 3. Chỉ thực hiện khi hero bị sa thải là hero ngoài world
+	if was_in_world:
+		# Tìm một hero đang rảnh rỗi trong sảnh
+		var next_hero_in_barracks = _find_hero_in_barracks()
+		
+		# Nếu tìm thấy một hero
+		if is_instance_valid(next_hero_in_barracks):
+			print("Một hero trong sảnh sẽ được triển khai để thay thế.")
+			# Gọi hàm triển khai đã có sẵn
+			deploy_hero(next_hero_in_barracks)
+		else:
+			# Nếu không tìm thấy hero nào trong sảnh
+			print("Sảnh trống, không có hero nào để thay thế.")
+	# =================================================
+
+	# 4. Phát tín hiệu để UI cập nhật lại số lượng hero
+	update_hero_deployment()
+	save_game()
+
+func _find_hero_in_barracks() -> Hero:
+	for hero in hero_roster:
+		if is_instance_valid(hero) and hero._current_state == Hero.State.IN_BARRACKS:
+			return hero # Tìm thấy, trả về hero ngay lập tức
+	return null # Nếu lặp hết mà không có, trả về null
+
+func _check_and_deploy_barracks_heroes():
+	# Vòng lặp: Tiếp tục chạy chừng nào số hero trên world vẫn ít hơn giới hạn
+	while get_current_hero_count() < get_max_heroes():
+		# Tìm một hero đang rảnh rỗi trong sảnh
+		var hero_to_deploy = _find_hero_in_barracks()
+		
+		# Nếu tìm thấy...
+		if is_instance_valid(hero_to_deploy):
+			print("Còn chỗ trống trên world. Triển khai hero '%s' từ sảnh." % hero_to_deploy.name)
+			deploy_hero(hero_to_deploy)
+		else:
+			# Nếu không còn hero nào trong sảnh, thoát khỏi vòng lặp
+			print("Sảnh đã trống.")
+			break
+	
+	# Sau khi lấp đầy tất cả các chỗ có thể, phát tín hiệu MỘT LẦN DUY NHẤT
+	# để UI cập nhật lại lần cuối cho chính xác.
+	hero_count_changed.emit()
+
+func update_hero_deployment():
+	# Vòng lặp: Tiếp tục chạy chừng nào số hero trên world vẫn ít hơn giới hạn
+	while get_current_hero_count() < get_max_heroes():
+		# Tìm một hero đang rảnh rỗi trong sảnh
+		var hero_to_deploy = _find_hero_in_barracks()
+		
+		# Nếu tìm thấy...
+		if is_instance_valid(hero_to_deploy):
+			deploy_hero(hero_to_deploy)
+		else:
+			# Nếu không còn hero nào trong sảnh, thoát khỏi vòng lặp
+			break
+	
+	# Sau khi lấp đầy tất cả các chỗ có thể, phát tín hiệu MỘT LẦN DUY NHẤT
+	# để UI cập nhật lại lần cuối cho chính xác.
+	hero_count_changed.emit()
+
+func can_summon() -> bool:
+	# Điều kiện 1: Đủ kim cương?
+	if player_diamonds >= DIAMOND_COST_FOR_SUMMON:
+		return true
+	# Điều kiện 2: Có cuộn giấy?
+	if get_item_quantity_in_warehouse("summon_scroll") > 0:
+		return true
+	# Nếu không thỏa mãn cả hai
+	return false
+
+# HÀM MỚI 2: Hàm triệu hồi "tổng", sẽ được gọi bởi nút bấm
+func try_to_summon_hero():
+	# Ưu tiên 1: Kiểm tra Kim Cương
+	if player_diamonds >= DIAMOND_COST_FOR_SUMMON:
+		print(">>> Uu tien su dung Kim Cuong de trieu hoi...")
+		# Gọi hàm triệu hồi bằng kim cương (chúng ta sẽ tạo ở dưới)
+		trieu_hoi_hero_bang_kim_cuong(DIAMOND_COST_FOR_SUMMON)
+		return # Dừng lại sau khi triệu hồi thành công
+
+	# Ưu tiên 2: Kiểm tra Cuộn Giấy
+	if get_item_quantity_in_warehouse("summon_scroll") > 0:
+		print(">>> Khong du Kim Cuong, su dung Cuon Giay Trieu Hoi...")
+		trieu_hoi_hero() # Gọi hàm triệu hồi bằng cuộn giấy cũ
+		return # Dừng lại sau khi triệu hồi thành công
+
+	# Nếu không đủ cả hai
+	print("Trieu hoi that bai: Khong du Kim Cuong hoac Cuon Giay.")
+
+# HÀM MỚI 3: Hàm tiêu kim cương
+func spend_player_diamonds(amount: int) -> bool:
+	if player_diamonds >= amount:
+		player_diamonds -= amount
+		player_stats_changed.emit()
+		return true
+	return false
+
+# HÀM MỚI 4: Hàm logic triệu hồi bằng kim cương
+func trieu_hoi_hero_bang_kim_cuong(cost: int):
+	if not spend_player_diamonds(cost):
+		return # Kiểm tra trừ tiền thất bại thì dừng lại
+
+	if hero_roster.size() >= BARRACKS_SIZE + get_max_heroes():
+		print("Doanh trai da day!")
+		return
+
+	# Tái sử dụng logic tạo hero để tránh lặp code
+	var new_hero = _tao_mot_hero_moi()
+	hero_roster.append(new_hero)
+	print(">>> Da trieu hoi thanh cong '%s' bang Kim Cuong!" % new_hero.name)
+
+	if get_active_hero_count() < get_max_heroes():
+		deploy_hero(new_hero)
+	else:
+		new_hero.doi_trang_thai(Hero.State.IN_BARRACKS)
+
+	update_hero_deployment()
+	save_game()
