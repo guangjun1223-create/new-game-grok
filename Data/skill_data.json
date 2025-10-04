@@ -6,16 +6,17 @@
 		"max_level": 5,
 		"skill_point_cost": [1, 1, 1, 1, 1],
 		"usage_type": "ACTIVE",
-		"requirements": { "weapon_type": "SWORD" },
+		"required_weapon_type": "SWORD",
+		"max_range": 150,
 		"sp_cost_per_level": [10, 12, 14, 16, 18],
 		"cooldown": 8.0,
 		"atlas_coords": { "x": 192, "y": 2880, "w": 64, "h": 64 },
 		"effects_per_level": [
-			{ "description": "Gây 110% ATK và có 5% đẩy lùi kẻ địch.", "damage_multiplier": 1.1, "knockback_chance": 0.05 },
-			{ "description": "Gây 115% ATK và có 10% đẩy lùi kẻ địch.", "damage_multiplier": 1.15, "knockback_chance": 0.1 },
-			{ "description": "Gây 120% ATK và có 15% đẩy lùi kẻ địch.", "damage_multiplier": 1.2, "knockback_chance": 0.15 },
-			{ "description": "Gây 125% ATK và có 20% đẩy lùi kẻ địch.", "damage_multiplier": 1.25, "knockback_chance": 0.20 },
-			{ "description": "Gây 140% ATK và có 25% đẩy lùi kẻ địch.", "damage_multiplier": 1.4, "knockback_chance": 0.25 }
+			{ "vfx_scale": 2.0, "description": "Gây 110% ATK và có 5% đẩy lùi kẻ địch.", "damage_multiplier": 1.1, "knockback_chance": 0.05 },
+			{ "vfx_scale": 2.0,"description": "Gây 115% ATK và có 10% đẩy lùi kẻ địch.", "damage_multiplier": 1.15, "knockback_chance": 0.1 },
+			{ "vfx_scale": 2.0,"description": "Gây 120% ATK và có 15% đẩy lùi kẻ địch.", "damage_multiplier": 1.2, "knockback_chance": 0.15 },
+			{ "vfx_scale": 2.0,"description": "Gây 125% ATK và có 20% đẩy lùi kẻ địch.", "damage_multiplier": 1.25, "knockback_chance": 0.20 },
+			{ "vfx_scale": 2.0,"description": "Gây 140% ATK và có 25% đẩy lùi kẻ địch.", "damage_multiplier": 1.4, "knockback_chance": 0.25 }
 		]
 	},
 	"NOV_DOUBLE_SHOT": {
@@ -25,16 +26,16 @@
 		"max_level": 5,
 		"skill_point_cost": [1, 1, 1, 1, 1],
 		"usage_type": "ACTIVE",
-		"requirements": { "weapon_type": "BOW" },
+		"required_weapon_type": "BOW",
 		"sp_cost_per_level": [12, 14, 16, 18, 20],
 		"cooldown": 6.0,
 		"atlas_coords": { "x": 896.0, "y": 3328.0, "w": 64, "h": 64 },
 		"effects_per_level": [
-			{ "description": "Bắn ra mũi tên gây 100% ATK.", "damage_multiplier": 1.0, "projectile_count": 1 },
-			{ "description": "Bắn ra mũi tên gây 110% ATK.", "damage_multiplier": 1.1, "projectile_count": 1 },
-			{ "description": "Bắn ra mũi tên gây 115% ATK.", "damage_multiplier": 1.15, "projectile_count": 1 },
-			{ "description": "Bắn ra mũi tên gây 120% ATK.", "damage_multiplier": 1.2, "projectile_count": 1 },
-			{ "description": "Bắn ra mũi tên gây 125% ATK.", "damage_multiplier": 1.25, "projectile_count": 1 }
+			{ "vfx_scale": 2.0,"description": "Bắn ra mũi tên gây 100% ATK.", "damage_multiplier": 1.0, "projectile_count": 1 },
+			{ "vfx_scale": 2.0,"description": "Bắn ra mũi tên gây 110% ATK.", "damage_multiplier": 1.1, "projectile_count": 1 },
+			{ "vfx_scale": 2.0,"description": "Bắn ra mũi tên gây 115% ATK.", "damage_multiplier": 1.15, "projectile_count": 1 },
+			{ "vfx_scale": 2.0,"description": "Bắn ra mũi tên gây 120% ATK.", "damage_multiplier": 1.2, "projectile_count": 1 },
+			{ "vfx_scale": 2.0,"description": "Bắn ra mũi tên gây 125% ATK.", "damage_multiplier": 1.25, "projectile_count": 1 }
 		]
 	},
 	"NOV_FIRE_BOLT": {
@@ -44,16 +45,16 @@
 		"max_level": 5,
 		"skill_point_cost": [1, 1, 2, 2, 3],
 		"usage_type": "ACTIVE",
-		"requirements": { "weapon_type": "STAFF" },
+		"required_weapon_type": "STAFF",
 		"sp_cost_per_level": [15, 18, 21, 24, 27],
 		"cooldown": 7.0,
 		"atlas_coords": { "x": 0.0, "y": 3968.0, "w": 64, "h": 64 },
 		"effects_per_level": [
-			{ "description": "Bắn cầu lửa gây 150% MATK.", "damage_multiplier": 1.5, "damage_type": "MAGIC" },
-			{ "description": "Bắn cầu lửa gây 160% MATK.", "damage_multiplier": 1.6, "damage_type": "MAGIC" },
-			{ "description": "Bắn cầu lửa gây 170% MATK.", "damage_multiplier": 1.7, "damage_type": "MAGIC" },
-			{ "description": "Bắn cầu lửa gây 180% MATK.", "damage_multiplier": 1.8, "damage_type": "MAGIC" },
-			{ "description": "Bắn cầu lửa gây 190% MATK.", "damage_multiplier": 1.9, "damage_type": "MAGIC" }
+			{ "vfx_scale": 2.0,"description": "Bắn cầu lửa gây 150% MATK.", "damage_multiplier": 1.5, "damage_type": "MAGIC" },
+			{ "vfx_scale": 2.0,"description": "Bắn cầu lửa gây 160% MATK.", "damage_multiplier": 1.6, "damage_type": "MAGIC" },
+			{ "vfx_scale": 2.0,"description": "Bắn cầu lửa gây 170% MATK.", "damage_multiplier": 1.7, "damage_type": "MAGIC" },
+			{ "vfx_scale": 2.0,"description": "Bắn cầu lửa gây 180% MATK.", "damage_multiplier": 1.8, "damage_type": "MAGIC" },
+			{ "vfx_scale": 2.0,"description": "Bắn cầu lửa gây 190% MATK.", "damage_multiplier": 1.9, "damage_type": "MAGIC" }
 		]
 	},
 	"NOV_HEAL": {
@@ -63,16 +64,17 @@
 		"max_level": 5,
 		"skill_point_cost": [2, 3, 4, 5, 6],
 		"usage_type": "ACTIVE",
+		"required_weapon_type": "STAFF",
 		"sp_cost_per_level": [10, 15, 20, 25, 25],
 		"cooldown": 10.0,
 		"target_type": "ALLY_OR_SELF",
 		"atlas_coords": { "x": 448.0, "y": 3840.0, "w": 64, "h": 64 },
 		"effects_per_level": [
-			{ "description": "Hồi phục một lượng HP bằng 150% MATK.", "heal_multiplier": 1.5 },
-			{ "description": "Hồi phục một lượng HP bằng 200% MATK.", "heal_multiplier": 2.0 },
-			{ "description": "Hồi phục một lượng HP bằng 250% MATK.", "heal_multiplier": 2.5 },
-			{ "description": "Hồi phục một lượng HP bằng 300% MATK.", "heal_multiplier": 3.0 },
-			{ "description": "Hồi phục một lượng HP bằng 350% MATK.", "heal_multiplier": 3.5 }
+			{ "vfx_scale": 2.0,"description": "Hồi phục một lượng HP bằng 150% MATK.", "heal_multiplier": 1.5 },
+			{ "vfx_scale": 2.0,"description": "Hồi phục một lượng HP bằng 200% MATK.", "heal_multiplier": 2.0 },
+			{ "vfx_scale": 2.0,"description": "Hồi phục một lượng HP bằng 250% MATK.", "heal_multiplier": 2.5 },
+			{ "vfx_scale": 2.0,"description": "Hồi phục một lượng HP bằng 300% MATK.", "heal_multiplier": 3.0 },
+			{ "vfx_scale": 2.0,"description": "Hồi phục một lượng HP bằng 350% MATK.", "heal_multiplier": 3.5 }
 		]
 	},
 	"NOV_INCREASE_HP": {

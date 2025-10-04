@@ -82,6 +82,5 @@ func _on_village_level_changed(_new_level):
 	update_display()
 	
 func _on_close_button_pressed():
-	
 	panel_closed.emit() # Phát tín hiệu báo rằng panel sắp đóng
 	queue_free() 

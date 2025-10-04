@@ -1,11 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://bojfef5rnqwm1"]
+[gd_scene load_steps=7 format=3 uid="uid://bojfef5rnqwm1"]
 
 [ext_resource type="Script" uid="uid://c4ebynntswi1e" path="res://script/UI/village_upgrade_panel.gd" id="1_hhw24"]
+[ext_resource type="Texture2D" uid="uid://36orn1kodfk3" path="res://texture/UI01/inventory/21.png" id="2_q34rb"]
+[ext_resource type="Texture2D" uid="uid://5q5opapct313" path="res://texture/All Icons.png" id="3_gspr1"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cdlux"]
+texture = ExtResource("2_q34rb")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 30.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_i0ane"]
 font_size = 20
 shadow_size = 3
 shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t801w"]
+atlas = ExtResource("3_gspr1")
+region = Rect2(64, 32, 16, 16)
 
 [node name="VillageUpgradePanel" type="Control" groups=["panel"]]
 custom_minimum_size = Vector2(400, 350)
@@ -31,6 +44,7 @@ anchor_bottom = 1.0
 offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_cdlux")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -88,3 +102,15 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Đóng"
+
+[node name="Button" type="Button" parent="PanelContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+icon = SubResource("AtlasTexture_t801w")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="PanelContainer/Button" to="." method="_on_close_button_pressed"]

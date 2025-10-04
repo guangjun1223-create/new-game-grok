@@ -1,0 +1,107 @@
+{
+	"faces": [
+		{"id": "face0001", "path": "res://texture/data/Hero/0001/Face 01.png", "gender": "male"},
+		{"id": "face0002", "path": "res://texture/data/Hero/0002/Face 01.png", "gender": "unisex"},
+		{"id": "face0003", "path": "res://texture/data/Hero/0003/Face 01.png", "gender": "male"},
+		{"id": "face0004", "path": "res://texture/data/Hero/0004/Face 01.png", "gender": "male"},
+		{"id": "face0005", "path": "res://texture/data/Hero/0005/Face 01.png", "gender": "male"},
+		{"id": "face0006", "path": "res://texture/data/Hero/0006/Face 01.png", "gender": "male"},
+		{"id": "face0007", "path": "res://texture/data/Hero/0007/Face 01.png", "gender": "female"},
+		{"id": "face0008", "path": "res://texture/data/Hero/0008/Face 01.png", "gender": "female"},
+		{"id": "face0009", "path": "res://texture/data/Hero/0009/Face 01.png", "gender": "unisex"}
+	],
+	"helmets": [
+		{"id":"helmets0001", "path": "res://texture/data/Hero/0001/Head.png", "gender": "male"},
+		{"id":"helmets0002", "path": "res://texture/data/Hero/0002/Head.png", "gender": "male"},
+		{"id":"helmets0003", "path": "res://texture/data/Hero/0003/Head.png", "gender": "male"},
+		{"id":"helmets0004", "path": "res://texture/data/Hero/0004/Head.png", "gender": "male"},
+		{"id":"helmets0005", "path": "res://texture/data/Hero/0005/Head.png", "gender": "male"},
+		{"id":"helmets0006", "path": "res://texture/data/Hero/0006/Head.png", "gender": "male"},
+		{"id":"helmets0007", "path": "res://texture/data/Hero/0007/Head.png", "gender": "female"},
+		{"id":"helmets0008", "path": "res://texture/data/Hero/0008/Head.png", "gender": "female"},
+		{"id":"helmets0009", "path": "res://texture/data/Hero/0009/Head.png", "gender": "female"}
+	],
+	"armor_sets": [
+		{
+			"set_name": "0001",
+			"armor_sprite": "res://texture/data/Hero/0001/Body.png",
+			"gloves_l_sprite": "res://texture/data/Hero/0001/Left Arm.png",
+			"gloves_r_sprite": "res://texture/data/Hero/0001/Right Arm.png",
+			"boots_l_sprite": "res://texture/data/Hero/0001/Left Leg.png",
+			"boots_r_sprite": "res://texture/data/Hero/0001/Right Leg.png",
+			"gender": "unisex"
+		},
+		{
+			"set_name": "0002",
+			"armor_sprite": "res://texture/data/Hero/0002/Body.png",
+			"gloves_l_sprite": "res://texture/data/Hero/0002/Left Arm.png",
+			"gloves_r_sprite": "res://texture/data/Hero/0002/Right Arm.png",
+			"boots_l_sprite": "res://texture/data/Hero/0002/Left Leg.png",
+			"boots_r_sprite": "res://texture/data/Hero/0002/Right Leg.png",
+			"gender": "unisex"
+		},
+		{
+			"set_name": "0003",
+			"armor_sprite": "res://texture/data/Hero/0003/Body.png",
+			"gloves_l_sprite": "res://texture/data/Hero/0003/Left Arm.png",
+			"gloves_r_sprite": "res://texture/data/Hero/0003/Right Arm.png",
+			"boots_l_sprite": "res://texture/data/Hero/0003/Left Leg.png",
+			"boots_r_sprite": "res://texture/data/Hero/0003/Right Leg.png",
+			"gender": "unisex"
+		},
+		{
+			"set_name": "0004",
+			"armor_sprite": "res://texture/data/Hero/0004/Body.png",
+			"gloves_l_sprite": "res://texture/data/Hero/0004/Left Arm.png",
+			"gloves_r_sprite": "res://texture/data/Hero/0004/Right Arm.png",
+			"boots_l_sprite": "res://texture/data/Hero/0004/Left Leg.png",
+			"boots_r_sprite": "res://texture/data/Hero/0004/Right Leg.png",
+			"gender": "unisex"
+		},
+		{
+			"set_name": "0005",
+			"armor_sprite": "res://texture/data/Hero/0005/Body.png",
+			"gloves_l_sprite": "res://texture/data/Hero/0005/Left Arm.png",
+			"gloves_r_sprite": "res://texture/data/Hero/0005/Right Arm.png",
+			"boots_l_sprite": "res://texture/data/Hero/0005/Left Leg.png",
+			"boots_r_sprite": "res://texture/data/Hero/0005/Right Leg.png",
+			"gender": "unisex"
+		},
+		{
+			"set_name": "0006",
+			"armor_sprite": "res://texture/data/Hero/0006/Body.png",
+			"gloves_l_sprite": "res://texture/data/Hero/0006/Left Arm.png",
+			"gloves_r_sprite": "res://texture/data/Hero/0006/Right Arm.png",
+			"boots_l_sprite": "res://texture/data/Hero/0006/Left Leg.png",
+			"boots_r_sprite": "res://texture/data/Hero/0006/Right Leg.png",
+			"gender": "unisex"
+		},
+		{
+			"set_name": "0007",
+			"armor_sprite": "res://texture/data/Hero/0007/Body.png",
+			"gloves_l_sprite": "res://texture/data/Hero/0007/Left Arm.png",
+			"gloves_r_sprite": "res://texture/data/Hero/0007/Right Arm.png",
+			"boots_l_sprite": "res://texture/data/Hero/0007/Left Leg.png",
+			"boots_r_sprite": "res://texture/data/Hero/0007/Right Leg.png",
+			"gender": "female"
+		},
+		{
+			"set_name": "0008",
+			"armor_sprite": "res://texture/data/Hero/0008/Body.png",
+			"gloves_l_sprite": "res://texture/data/Hero/0008/Left Arm.png",
+			"gloves_r_sprite": "res://texture/data/Hero/0008/Right Arm.png",
+			"boots_l_sprite": "res://texture/data/Hero/0008/Left Leg.png",
+			"boots_r_sprite": "res://texture/data/Hero/0008/Right Leg.png",
+			"gender": "female"
+		},
+		{
+			"set_name": "0009",
+			"armor_sprite": "res://texture/data/Hero/0009/Body.png",
+			"gloves_l_sprite": "res://texture/data/Hero/0009/Left Arm.png",
+			"gloves_r_sprite": "res://texture/data/Hero/0009/Right Arm.png",
+			"boots_l_sprite": "res://texture/data/Hero/0009/Left Leg.png",
+			"boots_r_sprite": "res://texture/data/Hero/0009/Right Leg.png",
+			"gender": "female"
+		}
+	]
+}

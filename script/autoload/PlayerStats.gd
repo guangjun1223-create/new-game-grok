@@ -35,6 +35,8 @@ var ui_controller_ref: Node
 var camera_ref: Camera2D
 
 var gold: int = 1000
+var auto_potion_hp_threshold: float = 0.5 # Mặc định: tự dùng HP Potion khi máu dưới 50%
+var auto_potion_sp_threshold: float = 0.3 # Mặc định: tự dùng SP Potion khi SP dưới 30%
 
 var shop_npc_ref: Node = null
 var blacksmith_ref: Node = null
@@ -106,30 +108,84 @@ func initialize_world_references():
 
 # THAY THẾ TOÀN BỘ HÀM CŨ BẰNG PHIÊN BẢN NÀY
 func trieu_hoi_hero():
-	if get_item_quantity_in_warehouse("summon_scroll") <= 0: return
-	if hero_roster.size() >= BARRACKS_SIZE + get_max_heroes(): return
+	if get_item_quantity_in_warehouse("summon_scroll") <= 0:
+		return
 
+	if hero_roster.size() >= BARRACKS_SIZE + get_max_heroes():
+		print("Doanh trại và nhà chính đã đầy!")
+		return
+	
 	remove_item_from_warehouse("summon_scroll", 1)
-	var new_hero = _tao_mot_hero_moi() # Gọi hàm phụ tá
+	
+	var hero_data = _tao_mot_hero_moi()
+
+	# --- PHẦN NÂNG CẤP ---
+	var base_appearance = _tao_ngoai_hinh_ngau_nhien() # 1. Gọi hàm mới
+	var new_hero = hero_scene.instantiate()
+	new_hero.base_appearance = base_appearance # 2. Gán ngoại hình cho Hero
+	# ---------------------
+	
+	new_hero.name = "Hero_%d" % hero_roster.size()
+	new_hero.hero_name = hero_data.name
+	# ... (các dòng gán chỉ số còn lại của bạn giữ nguyên)
+	new_hero.str_co_ban = hero_data.STR
+	new_hero.agi_co_ban = hero_data.AGI
+	new_hero.vit_co_ban = hero_data.VIT
+	new_hero.int_co_ban = hero_data.INTEL
+	new_hero.dex_co_ban = hero_data.DEX
+	new_hero.luk_co_ban = hero_data.LUK
+	
+	hero_roster.append(new_hero)
+	deploy_hero(new_hero)
+
+	save_game()
+
+func trieu_hoi_hero_bang_kim_cuong(cost: int):
+	# Dòng này bị lặp, chúng ta sẽ xóa nó và để hàm spend_player_diamonds xử lý
+	# if not spend_player_diamonds(cost): 
+	# 	return
+
+	if hero_roster.size() >= BARRACKS_SIZE + get_max_heroes():
+		print("Doanh trại và nhà chính đã đầy!")
+		# Không cần hoàn lại tiền vì chúng ta chưa trừ
+		return
+
+	# --- PHẦN THAY ĐỔI QUAN TRỌNG ---
+	# Trừ tiền ngay trước khi triệu hồi. Nếu thất bại thì dừng lại.
+	if not spend_player_diamonds(cost):
+		print("Không đủ kim cương.")
+		return 
+	# --------------------------------
+
+	var hero_data = _tao_mot_hero_moi()
+
+	# --- PHẦN NÂNG CẤP ---
+	var base_appearance = _tao_ngoai_hinh_ngau_nhien() # 1. Gọi hàm mới
+	var new_hero = hero_scene.instantiate()
+	new_hero.base_appearance = base_appearance # 2. Gán ngoại hình cho Hero
+	# ---------------------
+
+	new_hero.name = "Hero_%d" % hero_roster.size()
+	new_hero.hero_name = hero_data.name
+	new_hero.str_co_ban = hero_data.STR
+	new_hero.agi_co_ban = hero_data.AGI
+	new_hero.vit_co_ban = hero_data.VIT
+	new_hero.int_co_ban = hero_data.INTEL
+	new_hero.dex_co_ban = hero_data.DEX
+	new_hero.luk_co_ban = hero_data.LUK
 
 	hero_roster.append(new_hero)
-	print(">>> Da trieu hoi thanh cong '%s' bang Cuon Giay!" % new_hero.name)
+	deploy_hero(new_hero)
 
-	if get_active_hero_count() < get_max_heroes():
-		deploy_hero(new_hero)
-	else:
-		new_hero.doi_trang_thai(Hero.State.IN_BARRACKS)
-
-	update_hero_deployment()
 	save_game()
-		
+
 func _tao_mot_hero_moi() -> Hero:
 	var new_hero = hero_scene.instantiate()
 	new_hero.world_node = world_node
 	new_hero.gate_connections = gate_connections
 	new_hero._ui_controller = ui_controller_ref
 
-	# (Toàn bộ phần code gán chỉ số, tên, độ hiếm ngẫu nhiên của bạn nằm ở đây)
+	# PHẦN TẠO CHỈ SỐ GIỮ NGUYÊN
 	var str_co_ban = randi_range(1, 5)
 	var agi_co_ban = randi_range(1, 5)
 	var vit_co_ban = randi_range(1, 5)
@@ -155,8 +211,47 @@ func _tao_mot_hero_moi() -> Hero:
 		elif roll_do_hiem < 0.95: do_hiem = "SSR"
 		else: do_hiem = "UR"
 		mod_tang_truong = randf_range(0.1, 0.5)
+	
 	var job_key = "Novice"
 	var du_lieu_nghe = GameDataManager.get_hero_definition(job_key)
+	
+	# ============================================================================
+	# === LOGIC TẠO NGOẠI HÌNH ĐÚNG CHUẨN ===
+	# ============================================================================
+	
+	# 1. Lấy TẤT CẢ các bộ phận ngoại hình từ AppearanceDatabase
+	var all_faces = AppearanceDatabase.get_all_faces()
+	var all_helmets = AppearanceDatabase.get_all_helmets()
+	var all_armor_sets = AppearanceDatabase.get_all_armor_sets()
+	
+	# 2. Quyết định giới tính ngẫu nhiên cho Hero
+	var hero_gender = ["male", "female"].pick_random()
+	print("[DEBUG] Giới tính ngẫu nhiên cho Hero: ", hero_gender)
+	
+	# 3. Lọc danh sách các bộ phận theo giới tính đã chọn
+	var valid_faces = all_faces.filter(func(face): return face.get("gender", "unisex") == hero_gender or face.get("gender", "unisex") == "unisex")
+	var valid_helmets = all_helmets.filter(func(helmet): return helmet.get("gender", "unisex") == hero_gender or helmet.get("gender", "unisex") == "unisex")
+	var valid_armor_sets = all_armor_sets.filter(func(aset): return aset.get("gender", "unisex") == hero_gender or aset.get("gender", "unisex") == "unisex")
+
+	var chosen_face_data = valid_faces.pick_random() if not valid_faces.is_empty() else all_faces.pick_random()
+	var chosen_helmet_data = valid_helmets.pick_random() if not valid_helmets.is_empty() else all_helmets.pick_random()
+	var chosen_armor_set_data = valid_armor_sets.pick_random() if not valid_armor_sets.is_empty() else all_armor_sets.pick_random()
+	
+	print("[DEBUG] Du lieu ARMOR SET goc lay tu JSON: ", chosen_armor_set_data)
+
+	# 5. Tạo "Chứng minh thư" ngoại hình cho Hero mới
+	var new_hero_appearance = {
+		"face": chosen_face_data.get("path"),
+		"helmet": chosen_helmet_data.get("path"),
+		# Sửa lỗi: Gán trực tiếp cả dictionary của bộ giáp đã chọn
+		"armor_set": chosen_armor_set_data 
+	}
+	# ============================================================================
+	
+	# Gán "Chứng minh thư" này cho đối tượng Hero
+	new_hero.base_appearance = new_hero_appearance
+	
+	# PHẦN GÁN CHỈ SỐ GIỮ NGUYÊN
 	new_hero.str_co_ban = str_co_ban
 	new_hero.agi_co_ban = agi_co_ban
 	new_hero.vit_co_ban = vit_co_ban
@@ -180,6 +275,53 @@ func _tao_mot_hero_moi() -> Hero:
 	new_hero.setup(starting_items, starting_gold)
 	return new_hero
 
+func _tao_ngoai_hinh_ngau_nhien() -> Dictionary:
+	# BƯỚC 1: LẤY DỮ LIỆU TỪ ĐÚNG NƠI (AppearanceDatabase)
+	var all_faces = AppearanceDatabase.get_all_faces()
+	var all_helmets = AppearanceDatabase.get_all_helmets()
+	var all_armor_sets = AppearanceDatabase.get_all_armor_sets()
+
+	# Kiểm tra nếu một trong các danh sách bị rỗng thì thoát để tránh lỗi
+	if all_faces.is_empty() or all_helmets.is_empty() or all_armor_sets.is_empty():
+		push_error("Không thể tạo ngoại hình vì một trong các danh sách (faces, helmets, armor_sets) bị rỗng.")
+		return {}
+
+	# BƯỚC 2: QUYẾT ĐỊNH GIỚI TÍNH NGẪU NHIÊN CHO HERO
+	var hero_gender = ["male", "female"].pick_random()
+	print("[DEBUG] Giới tính ngẫu nhiên cho Hero: ", hero_gender)
+
+	# BƯỚC 3: LỌC DANH SÁCH CÁC BỘ PHẬN THEO GIỚI TÍNH
+	var valid_faces = all_faces.filter(func(face): return face.get("gender", "unisex") == hero_gender or face.get("gender", "unisex") == "unisex")
+	var valid_helmets = all_helmets.filter(func(helmet): return helmet.get("gender", "unisex") == hero_gender or helmet.get("gender", "unisex") == "unisex")
+	var valid_armor_sets = all_armor_sets.filter(func(aset): return aset.get("gender", "unisex") == hero_gender or aset.get("gender", "unisex") == "unisex")
+
+	# BƯỚC 4: CHỌN NGẪU NHIÊN TỪ DANH SÁCH ĐÃ LỌC (phòng trường hợp danh sách rỗng thì dùng lại danh sách gốc)
+	var chosen_face_data = valid_faces.pick_random() if not valid_faces.is_empty() else all_faces.pick_random()
+	var chosen_helmet_data = valid_helmets.pick_random() if not valid_helmets.is_empty() else all_helmets.pick_random()
+	var chosen_armor_set_data = valid_armor_sets.pick_random() if not valid_armor_sets.is_empty() else all_armor_sets.pick_random()
+
+	# BƯỚC 5: TẠO DICTIONARY NGOẠI HÌNH CUỐI CÙNG
+	
+	var final_armor_set = {
+		"set_name": chosen_armor_set_data.get("set_name"),
+		"armor_sprite": chosen_armor_set_data.get("armor_sprite"),
+		"gloves_l_sprite": chosen_armor_set_data.get("gloves_l_sprite"),
+		"gloves_r_sprite": chosen_armor_set_data.get("gloves_r_sprite"),
+		"boots_l_sprite": chosen_armor_set_data.get("boots_l_sprite"),
+		"boots_r_sprite": chosen_armor_set_data.get("boots_r_sprite"),
+	}
+
+
+	var final_appearance = {
+		"face": chosen_face_data.get("path"),
+		"helmet": chosen_helmet_data.get("path"),
+		"armor_set": final_armor_set
+	}
+	
+	print("\n--- [DEBUG] PlayerStats đã tạo bộ ngoại hình ngẫu nhiên cho Hero mới: ---\n", final_appearance, "\n------------------------------------------------------------------\n")
+
+	return final_appearance
+
 func add_gold(amount: int):
 	if amount <= 0: return # Không làm gì nếu số vàng cộng vào là số âm hoặc 0
 	
@@ -193,10 +335,10 @@ func register_ui_controller(ui_node: Node):
 	print(">>> PlayerStats: Da dang ky UIController thanh cong!")
 	
 func save_game():
-	var file = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
-	if not file:
-		push_error("Lỗi nghiêm trọng: Không thể tạo hoặc mở file lưu!")
-		return
+	var hero_roster_data = []
+	for hero in hero_roster:
+		if is_instance_valid(hero):
+			hero_roster_data.append(hero.save_data())
 
 	# Chuẩn bị một "gói dữ liệu tổng" để lưu
 	var game_data = {
@@ -207,21 +349,21 @@ func save_game():
 		"village_level": village_level,
 		"npc_levels": npc_levels,
 		
-		# BƯỚC QUAN TRỌNG: Khởi tạo "hero_roster_data" là một mảng trống
-		"hero_roster_data": [],
+		"auto_potion_hp_threshold": auto_potion_hp_threshold, # <--- THÊM DÒNG NÀY
+		"auto_potion_sp_threshold": auto_potion_sp_threshold, # <--- THÊM DÒNG NÀY
 		
 		"camera_pos_x": camera_ref.global_position.x if is_instance_valid(camera_ref) else 0.0,
-		"camera_pos_y": camera_ref.global_position.y if is_instance_valid(camera_ref) else 0.0
+		"camera_pos_y": camera_ref.global_position.y if is_instance_valid(camera_ref) else 0.0,
+		
+		"hero_roster_data": hero_roster_data
 	}
 
 	# Bây giờ, chúng ta có thể an toàn lặp và append dữ liệu vào mảng đã tồn tại
-	for hero_object in hero_roster:
-		game_data["hero_roster_data"].append(hero_object.save_data())
-
-	var json_string = JSON.stringify(game_data, "\t")
+	var json_string = JSON.stringify(game_data, "\t") # Dùng "\t" để file save dễ đọc hơn
+	var file = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
 	file.store_string(json_string)
 	file.close()
-
+	
 	print(">>> GAME SAVED! (Hệ thống Roster mới)")
 	
 func load_game():
@@ -253,6 +395,11 @@ func load_game():
 	var default_npc_levels = { "inn": 1, "blacksmith": 1, "AlchemistNPC": 1, "PotionSellerNPC": 1, "EquipmentSellerNPC": 1 }
 	npc_levels = game_data.get("npc_levels", default_npc_levels)
 	
+	# ======================= PHẦN CẬP NHẬT =======================
+	# Tải cài đặt tự dùng Potion, nếu không có thì dùng giá trị mặc định
+	auto_potion_hp_threshold = game_data.get("auto_potion_hp_threshold", 0.5) # <--- THÊM DÒNG NÀY
+	auto_potion_sp_threshold = game_data.get("auto_potion_sp_threshold", 0.3) # <--- THÊM DÒNG NÀY
+	# =============================================================
 	
 	# Tái tạo lại từng Hero từ dữ liệu và thêm vào roster
 	var saved_roster_data = game_data.get("hero_roster_data", [])
@@ -277,6 +424,7 @@ func load_game():
 		var cam_x = game_data.get("camera_pos_x", 0)
 		var cam_y = game_data.get("camera_pos_y", 0)
 		camera_ref.global_position = Vector2(cam_x, cam_y)
+
 	
 	update_npc_unlock_state()
 	player_stats_changed.emit()
@@ -645,22 +793,32 @@ func get_active_hero_count() -> int:
 
 # Hàm để "triển khai" một Hero ra sân
 func deploy_hero(hero: Hero):
-	if not hero in hero_roster:
+	if not is_instance_valid(hero):
 		return
-		
-	var vfx_instance = VFX_scene.instantiate()
-	hero_container.add_child(vfx_instance)
-	var spawn_position = hero_spawn_point.global_position
-	vfx_instance.global_position = spawn_position - Vector2(0, 80)
 	
-	vfx_instance.play_effect("summon")
+	# Chỉ thêm vào Scene nếu nó chưa có ở đó
+	if not hero.is_inside_tree():
+		
+		# === PHẦN BỊ THIẾU SỐ 1: ĐẶT VỊ TRÍ XUẤT HIỆN ===
+		# Đặt Hero vào đúng vị trí xuất phát bạn đã định nghĩa
+		if is_instance_valid(hero_spawn_point):
+			hero.global_position = hero_spawn_point.global_position
+		# ===============================================
 
-	# Thêm node Hero vào cây scene để nó hiện ra và hoạt động
-	hero_container.add_child(hero)
-	hero.global_position = hero_spawn_point.global_position
-	hero.movement_area = village_boundary
-	hero.doi_trang_thai(Hero.State.IDLE)
-	print("Đã triển khai Hero '%s' ra sân!" % hero.name)
+		# Thêm Hero vào Scene
+		hero_container.add_child(hero)
+		
+		# === PHẦN BỊ THIẾU SỐ 2: "CHỈ ĐƯỜNG" CHO HERO ===
+		# Gán khu vực làng làm movement_area mặc định cho Hero
+		if is_instance_valid(village_boundary):
+			hero.movement_area = village_boundary
+		else:
+			push_warning("PlayerStats: Không tìm thấy village_boundary để gán cho Hero mới!")
+		# ==============================================
+
+	# Đảm bảo trạng thái của Hero không phải là IN_BARRACKS (phần này của bạn đã đúng)
+	if hero._current_state == Hero.State.IN_BARRACKS:
+		hero.doi_trang_thai(Hero.State.IDLE)
 
 # Hàm để "triệu hồi" một Hero về sảnh
 func recall_hero(hero: Hero):
@@ -792,23 +950,3 @@ func spend_player_diamonds(amount: int) -> bool:
 	return false
 
 # HÀM MỚI 4: Hàm logic triệu hồi bằng kim cương
-func trieu_hoi_hero_bang_kim_cuong(cost: int):
-	if not spend_player_diamonds(cost):
-		return # Kiểm tra trừ tiền thất bại thì dừng lại
-
-	if hero_roster.size() >= BARRACKS_SIZE + get_max_heroes():
-		print("Doanh trai da day!")
-		return
-
-	# Tái sử dụng logic tạo hero để tránh lặp code
-	var new_hero = _tao_mot_hero_moi()
-	hero_roster.append(new_hero)
-	print(">>> Da trieu hoi thanh cong '%s' bang Kim Cuong!" % new_hero.name)
-
-	if get_active_hero_count() < get_max_heroes():
-		deploy_hero(new_hero)
-	else:
-		new_hero.doi_trang_thai(Hero.State.IN_BARRACKS)
-
-	update_hero_deployment()
-	save_game()

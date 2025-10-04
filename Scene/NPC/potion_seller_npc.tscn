@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://hoc3e7wqjm2h" path="res://script/NPC/potion_seller_npc.gd" id="1_bt74f"]
 [ext_resource type="SpriteFrames" uid="uid://m3l5nrjjoauv" path="res://Data/PotionSell.tres" id="1_i625v"]
-[ext_resource type="Texture2D" uid="uid://dkvcr0c87nacy" path="res://texture/UI/2.png" id="3_tatf5"]
+[ext_resource type="Texture2D" uid="uid://dkvcr0c87nacy" path="res://texture/UI/0011.png" id="3_tatf5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bt74f"]
 radius = 60.0
@@ -65,3 +65,4 @@ icon_alignment = 1
 expand_icon = true
 
 [connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]

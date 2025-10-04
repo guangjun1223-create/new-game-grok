@@ -267,5 +267,3 @@ script = ExtResource("1_t2qnx")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_t25i5")
 animation = &"heal"
-frame = 15
-frame_progress = 1.0

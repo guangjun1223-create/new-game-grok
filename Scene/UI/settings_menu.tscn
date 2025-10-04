@@ -1,0 +1,142 @@
+[gd_scene load_steps=9 format=3 uid="uid://cw27scsjlm6yw"]
+
+[ext_resource type="Texture2D" uid="uid://cvjja6vfjwucc" path="res://texture/Folding & Cutout Paper UI SpriteSheet.png" id="1_31dse"]
+[ext_resource type="Script" uid="uid://bulp12nhtto53" path="res://script/UI/settings_menu.gd" id="1_tiu48"]
+[ext_resource type="Texture2D" uid="uid://5q5opapct313" path="res://texture/All Icons.png" id="2_tiu48"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1xi7"]
+atlas = ExtResource("1_31dse")
+region = Rect2(880, 2288, 768, 560)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ayu52"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tiu48"]
+atlas = ExtResource("2_tiu48")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tc2bw"]
+atlas = ExtResource("2_tiu48")
+region = Rect2(208, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayu52"]
+atlas = ExtResource("2_tiu48")
+region = Rect2(64, 32, 16, 16)
+
+[node name="SettingsMenu" type="Control"]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tiu48")
+
+[node name="ColorRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_d1xi7")
+expand_mode = 1
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -55.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ayu52")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 9
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "CÀI ĐẶT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Cài đặt HP:"
+
+[node name="HPS" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 56.0
+
+[node name="HP" type="Label" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Cài đặt SP:"
+
+[node name="SPS" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 20.0
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="SP" type="Label" parent="Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Đóng"
+
+[node name="CloseXButton" type="TextureButton" parent="Panel"]
+unique_name_in_owner = true
+texture_filter = 3
+layout_mode = 0
+offset_left = 168.0
+offset_top = -95.0
+offset_right = 200.0
+offset_bottom = -63.0
+texture_normal = SubResource("AtlasTexture_tiu48")
+texture_pressed = SubResource("AtlasTexture_tc2bw")
+texture_hover = SubResource("AtlasTexture_ayu52")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true

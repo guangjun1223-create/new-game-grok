@@ -13,7 +13,7 @@ signal unequip_requested(skill_id: String)
 # BIẾN
 # ====================
 # QUAN TRỌNG: Thay đổi đường dẫn này cho đúng với project của bạn.
-const SKILL_ATLAS = preload("res://texture/item.png")
+const SKILL_ATLAS = preload("res://texture/item001.png")
 
 var _skill_id: String
 var _hero_ref: Hero
@@ -127,11 +127,36 @@ func _update_upgrade_button_state(current_level: int, max_level: int):
 		push_warning("Lỗi dữ liệu skill '%s': Thiếu giá tiền cho cấp %d" % [_skill_id, current_level + 1])
 
 func _update_equip_button_state(current_level: int):
-	if _skill_data.get("usage_type") == "ACTIVE" and current_level > 0:
-		equip_button.visible = true
-		equip_button.text = "Tháo" if _hero_ref.is_skill_equipped(_skill_id) else "Trang Bị"
-	else:
+	# --- BƯỚC 1: Kiểm tra các điều kiện cơ bản (giống code của bạn) ---
+	# Nếu skill chưa học hoặc không phải skill chủ động, ẩn nút trang bị đi và dừng lại.
+	if _skill_data.get("usage_type") != "ACTIVE" or current_level <= 0:
 		equip_button.visible = false
+		modulate = Color.WHITE # Đảm bảo ô không bị mờ nếu nó là skill bị động
+		return
+	
+	# Nếu qua được bước trên, nút trang bị sẽ được hiện ra
+	equip_button.visible = true
+
+	# --- BƯỚC 2 (NÂNG CẤP): Kiểm tra yêu cầu vũ khí từ Hero ---
+	var check_result = _hero_ref.check_skill_requirements(_skill_id)
+	var can_equip_now = check_result.can_equip
+	var reason = check_result.reason
+
+	# --- BƯỚC 3: Cập nhật trạng thái hiển thị dựa trên TẤT CẢ điều kiện ---
+	if can_equip_now:
+		# Nếu đủ điều kiện vũ khí: Ô sáng, cho phép bấm nút, không cần giải thích
+		modulate = Color.WHITE
+		tooltip_text = ""
+		equip_button.disabled = false
+	else:
+		# Nếu KHÔNG đủ điều kiện: Ô mờ đi, KHÓA nút, hiện lý do khi di chuột vào
+		modulate = Color(0.5, 0.5, 0.5, 1.0) 
+		tooltip_text = reason
+		equip_button.disabled = true
+	
+	# --- BƯỚC 4: Cập nhật chữ trên nút (giống code của bạn) ---
+	# Dù nút bị khóa, vẫn hiển thị đúng chữ "Tháo" nếu skill đang được trang bị
+	equip_button.text = "Tháo" if _hero_ref.is_skill_equipped(_skill_id) else "Trang Bị"
 
 # ====================
 # HÀM XỬ LÝ TÍN HIỆU

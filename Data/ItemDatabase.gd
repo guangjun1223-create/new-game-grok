@@ -1,6 +1,6 @@
 extends Node
 
-const ITEM_ATLAS = preload("res://texture/item.png")
+const ITEM_ATLAS = preload("res://texture/item001.png")
 
 var _item_data: Dictionary = {}
 

@@ -1,35 +1,33 @@
-# res://script/UI/item_slot.gd (PHIÊN BẢN HOÀN CHỈNH CUỐI CÙNG)
+# res://script/UI/item_slot.gd (PHIÊN BẢN HOÀN CHỈNH DỰA TRÊN CODE CỦA BẠN)
+class_name ItemSlot
 extends Button
 
 # Đảm bảo các tên này khớp với tên node trong Scene của bạn
 @onready var item_icon: TextureRect = $ItemIcon
 @onready var quantity_label: Label = $Label
 @onready var cooldown_timer: Timer = $CooldownTimer
-@onready var cooldown_progress: TextureProgressBar = $TextureProgressBar
+@onready var cooldown_progress: TextureProgressBar = $CooldownOverlay
 
 func _ready():
-	# Ẩn lớp phủ cooldown khi bắt đầu
+	# Ẩn và reset cooldown khi bắt đầu
 	cooldown_progress.visible = false
-	# Kết nối tín hiệu timeout của ĐÚNG timer
-	cooldown_timer.timeout.connect(_on_cooldown_finished)
+	cooldown_progress.value = 0 # Sửa lại tên biến cho đúng
+	cooldown_timer.timeout.connect(_on_cooldown_timer_finished) # Kết nối tín hiệu
+	
+	# Hiển thị ô trống lúc đầu
 	display_item(null, 0)
 	
 func _process(_delta):
-	# Nếu đang trong chế độ Editor, không chạy
+	# Không chạy code nếu đang trong Editor
 	if Engine.is_editor_hint():
 		return
 	
 	# Liên tục cập nhật giá trị của thanh cooldown nếu timer đang chạy
-	if not cooldown_timer.is_stopped(): # Sửa: Dùng đúng biến cooldown_timer
-		# Giá trị của progress bar = % thời gian còn lại
+	if not cooldown_timer.is_stopped():
+		# Giá trị của progress bar = % thời gian còn lại (từ 0 đến 100)
 		cooldown_progress.value = (cooldown_timer.time_left / cooldown_timer.wait_time) * 100
-	else:
-		# Đảm bảo giá trị về 0 khi không cooldown
-		if cooldown_progress.value > 0:
-			cooldown_progress.value = 0
-			cooldown_progress.visible = false
-
-
+	
+# Hàm hiển thị item, không thay đổi
 func display_item(new_icon: Texture2D, amount: int):
 	if new_icon:
 		item_icon.texture = new_icon
@@ -44,25 +42,22 @@ func display_item(new_icon: Texture2D, amount: int):
 		item_icon.visible = false
 		quantity_label.visible = false
 
-# ========================================
-# === LOGIC COOLDOWN ĐÃ ĐƯỢC SỬA LỖI ===
-# ========================================
+# ===============================================
+# === LOGIC COOLDOWN MỚI THEO CÁCH CỦA BẠN ===
+# ===============================================
 
-# Bắt đầu đếm ngược cooldown
+# Hàm này sẽ được gọi từ ui.gd
 func start_cooldown(duration: float):
 	if duration <= 0: return
 	
 	cooldown_timer.wait_time = duration
-	cooldown_timer.start() # Sửa: Dùng đúng biến cooldown_timer
+	cooldown_timer.start()
 	
+	# Hiển thị thanh cooldown và đặt nó ở mức 100%
 	cooldown_progress.visible = true
 	cooldown_progress.value = 100
 
-# Kiểm tra xem ô này có đang cooldown không
-func is_ready() -> bool:
-	return cooldown_timer.is_stopped() # Sửa: Dùng đúng biến cooldown_timer
-
 # Được gọi khi Timer đếm ngược xong
-func _on_cooldown_finished(): # Sửa: Sửa lại tên hàm cho đúng với signal đã kết nối
+func _on_cooldown_timer_finished():
 	cooldown_progress.visible = false
 	cooldown_progress.value = 0

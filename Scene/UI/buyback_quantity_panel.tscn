@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://cq27ah5r83lw5"]
 
-[ext_resource type="Texture2D" uid="uid://b57j0ufgdhtc" path="res://texture/UI/RectangleBox_96x96.png" id="1_wn7yl"]
+[ext_resource type="Texture2D" uid="uid://36orn1kodfk3" path="res://texture/UI01/inventory/21.png" id="1_nfbv0"]
 [ext_resource type="Script" uid="uid://kpi7gp88d1fr" path="res://script/UI/buyback_quantity_panel.gd" id="2_nfbv0"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nfbv0"]
-texture = ExtResource("1_wn7yl")
-texture_margin_left = 12.0
-texture_margin_top = 12.0
-texture_margin_right = 12.0
-texture_margin_bottom = 12.0
+texture = ExtResource("1_nfbv0")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
 
 [node name="BuybackQuantityPanel" type="PanelContainer" groups=["panel"]]
 custom_minimum_size = Vector2(250, 160)

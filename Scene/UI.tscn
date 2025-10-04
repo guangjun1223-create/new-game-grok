@@ -1,23 +1,26 @@
-[gd_scene load_steps=64 format=3 uid="uid://dckfidqhq07y"]
+[gd_scene load_steps=66 format=3 uid="uid://dckfidqhq07y"]
 
 [ext_resource type="Script" uid="uid://dmd2aehvjbfuv" path="res://script/ui.gd" id="1_7nlkl"]
-[ext_resource type="Texture2D" uid="uid://b57j0ufgdhtc" path="res://texture/UI/RectangleBox_96x96.png" id="1_we040"]
 [ext_resource type="Texture2D" uid="uid://cvjja6vfjwucc" path="res://texture/Folding & Cutout Paper UI SpriteSheet.png" id="2_ntk1p"]
 [ext_resource type="Texture2D" uid="uid://cgmou0pova8q5" path="res://texture/UI/04.png" id="3_a5dvy"]
+[ext_resource type="Texture2D" uid="uid://b0q4wfplriq46" path="res://texture/UI01/btn/8.png" id="3_cfnlm"]
 [ext_resource type="Texture2D" uid="uid://bwthqfx83nr01" path="res://texture/UI01/btn/13.png" id="4_ccdw3"]
 [ext_resource type="StyleBox" uid="uid://makpx88y72yo" path="res://UI/HoverButton.tres" id="4_f6k66"]
 [ext_resource type="Texture2D" uid="uid://b6gi327atug4x" path="res://texture/UI01/btn/26.png" id="5_3xnhf"]
 [ext_resource type="StyleBox" uid="uid://v2nofeosyucp" path="res://UI/pressedButton.tres" id="5_fv4t1"]
 [ext_resource type="StyleBox" uid="uid://bljmrd4klte00" path="res://UI/NormalButton.tres" id="6_jg4dc"]
-[ext_resource type="Texture2D" uid="uid://cnt83s0aoh8cc" path="res://texture/item.png" id="7_xql8a"]
+[ext_resource type="Texture2D" uid="uid://mtx41iydhqxh" path="res://texture/item001.png" id="7_xql8a"]
 [ext_resource type="Texture2D" uid="uid://dqqim82c6hnqn" path="res://texture/UI/PlusButton.png" id="9_a5dvy"]
 [ext_resource type="LabelSettings" uid="uid://d3a7limvs11h4" path="res://UI/textUI.tres" id="10_ninrt"]
 [ext_resource type="Texture2D" uid="uid://36orn1kodfk3" path="res://texture/UI01/inventory/21.png" id="10_ntk1p"]
 [ext_resource type="PackedScene" uid="uid://dxuwxheh8fch2" path="res://Scene/UI/item_slot.tscn" id="11_pcf3q"]
 [ext_resource type="PackedScene" uid="uid://pee25h5vdlrl" path="res://Scene/UI/ItemTooltip.tscn" id="11_xql8a"]
+[ext_resource type="Texture2D" uid="uid://5q5opapct313" path="res://texture/All Icons.png" id="13_oxl0w"]
 [ext_resource type="Texture2D" uid="uid://b33mhx32rahkk" path="res://texture/UI01/btn/25.png" id="14_cfnlm"]
+[ext_resource type="Texture2D" uid="uid://dvr3ye5qd55dm" path="res://texture/UI01/skills/6.png" id="14_mwh44"]
 [ext_resource type="PackedScene" uid="uid://bojfef5rnqwm1" path="res://Scene/UI/village_upgrade_panel.tscn" id="15_a5dvy"]
 [ext_resource type="PackedScene" uid="uid://dtejd7m56v4y1" path="res://Scene/UI/job_change_panel.tscn" id="15_sv612"]
+[ext_resource type="PackedScene" uid="uid://cw27scsjlm6yw" path="res://Scene/UI/settings_menu.tscn" id="20_4olq6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oxl0w"]
 atlas = ExtResource("2_ntk1p")
@@ -117,16 +120,12 @@ region = Rect2(840, 64, 56, 56)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jg4dc"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y8dwb"]
-atlas = ExtResource("2_ntk1p")
-region = Rect2(40, 776, 632, 512)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3xnhf"]
-texture = SubResource("AtlasTexture_y8dwb")
-texture_margin_left = 30.0
-texture_margin_top = 30.0
-texture_margin_right = 15.0
-texture_margin_bottom = 20.0
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pnd31"]
+texture = ExtResource("10_ntk1p")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 30.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_026ak"]
 
@@ -134,18 +133,18 @@ texture_margin_bottom = 20.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_obxh1"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_i584i"]
+atlas = ExtResource("13_oxl0w")
+region = Rect2(64, 32, 16, 16)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1visn"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hl6pt"]
-atlas = ExtResource("2_ntk1p")
-region = Rect2(48, 776, 624, 512)
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vjsyu"]
-texture = SubResource("AtlasTexture_hl6pt")
+texture = ExtResource("14_mwh44")
 texture_margin_left = 20.0
 texture_margin_top = 20.0
 texture_margin_right = 20.0
-texture_margin_bottom = 20.0
+texture_margin_bottom = 40.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_sv612"]
 shadow_size = 2
@@ -154,21 +153,21 @@ shadow_offset = Vector2(3, 3)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a5dvy"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d7nlp"]
-atlas = ExtResource("2_ntk1p")
-region = Rect2(48, 776, 624, 512)
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_81bxb"]
-texture = SubResource("AtlasTexture_d7nlp")
+texture = ExtResource("14_mwh44")
 texture_margin_left = 20.0
 texture_margin_top = 20.0
 texture_margin_right = 20.0
-texture_margin_bottom = 20.0
+texture_margin_bottom = 40.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_a5dvy"]
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 0.4627451)
 shadow_offset = Vector2(3, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8dwb"]
+atlas = ExtResource("13_oxl0w")
+region = Rect2(64, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ksfg"]
 atlas = ExtResource("2_ntk1p")
@@ -201,11 +200,11 @@ shadow_color = Color(0.3167847, 0.31678474, 0.3167847, 0)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ccdw3"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ninrt"]
-texture = ExtResource("1_we040")
+texture = ExtResource("10_ntk1p")
 texture_margin_left = 12.0
-texture_margin_top = 12.0
+texture_margin_top = 20.0
 texture_margin_right = 12.0
-texture_margin_bottom = 12.0
+texture_margin_bottom = 30.0
 
 [node name="Ui" type="CanvasLayer"]
 script = ExtResource("1_7nlkl")
@@ -247,7 +246,18 @@ text = "Nhà kho"
 layout_mode = 2
 text = "X:000 /Y:000 "
 
+[node name="SettingButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+icon = ExtResource("3_cfnlm")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
 [node name="SelectedHeroPanel" type="Panel" parent="." groups=["panel"]]
+visible = false
 custom_minimum_size = Vector2(250, 130)
 offset_left = 8.0
 offset_top = 51.0
@@ -647,16 +657,15 @@ offset_right = 225.0
 offset_bottom = 210.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_3xnhf")
+theme_override_styles/panel = SubResource("StyleBoxTexture_pnd31")
 
 [node name="HeroInfoPanel" type="TabContainer" parent="HeroInfoPanel"]
 layout_mode = 2
 tab_alignment = 1
-current_tab = 1
+current_tab = 0
 all_tabs_in_front = true
 
 [node name="Thông tin" type="VBoxContainer" parent="HeroInfoPanel/HeroInfoPanel"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -970,6 +979,7 @@ layout_mode = 2
 text = "Đóng"
 
 [node name="Skill" type="PanelContainer" parent="HeroInfoPanel/HeroInfoPanel"]
+visible = false
 custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
@@ -1014,8 +1024,17 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Button" type="Button" parent="HeroInfoPanel"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+icon = SubResource("AtlasTexture_i584i")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
 [node name="InventoryPanel" type="PanelContainer" parent="." groups=["panel"]]
-visible = false
 custom_minimum_size = Vector2(450, 250)
 anchors_preset = 8
 anchor_left = 0.5
@@ -1173,6 +1192,15 @@ theme_override_font_sizes/font_size = 16
 text = "Vàng:"
 label_settings = ExtResource("10_ninrt")
 vertical_alignment = 1
+
+[node name="Button" type="Button" parent="InventoryPanel"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+icon = SubResource("AtlasTexture_y8dwb")
+flat = true
+expand_icon = true
 
 [node name="ItemTooltip" parent="." instance=ExtResource("11_xql8a")]
 visible = false
@@ -1407,8 +1435,16 @@ visible = false
 [node name="VillageUpgradePanel" parent="." instance=ExtResource("15_a5dvy")]
 visible = false
 
+[node name="SettingsMenu" parent="." instance=ExtResource("20_4olq6")]
+visible = false
+offset_left = -154.0
+offset_top = -117.0
+offset_right = 246.0
+offset_bottom = 183.0
+
 [connection signal="pressed" from="HBoxContainer/SummonButton" to="." method="_on_summon_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/WarehouseButton" to="." method="_on_warehouse_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/SettingButton" to="." method="_on_setting_button_pressed"]
 [connection signal="pressed" from="SelectedHeroPanel/VBoxContainer/HBoxContainer/InfoButton" to="." method="_on_info_button_pressed"]
 [connection signal="pressed" from="SelectedHeroPanel/VBoxContainer/HBoxContainer/InventoryButton" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="MovementButtons/VBox/GoToVillageButton" to="." method="_on_go_to_village_button_pressed"]
@@ -1430,3 +1466,5 @@ visible = false
 [connection signal="pressed" from="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button5" to="." method="_on_dex_button_pressed"]
 [connection signal="pressed" from="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button6" to="." method="_on_luk_button_pressed"]
 [connection signal="pressed" from="HeroInfoPanel/HeroInfoPanel/Thông tin/FunctionButtons/CloseButton" to="." method="_on_close_info_button_pressed"]
+[connection signal="pressed" from="HeroInfoPanel/Button" to="." method="_on_close_info_button_pressed"]
+[connection signal="pressed" from="InventoryPanel/Button" to="." method="_on_button_pressed"]

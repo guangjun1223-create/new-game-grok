@@ -25,7 +25,9 @@ CombatUtils="*res://Data/CombatUtils.gd"
 MonsterManager="*res://script/autoload/MonsterManager.gd"
 FloatingTextManager="*res://script/UI/FloatingTextManager.gd"
 EnchantmentUtils="*res://script/autoload/EnchantmentUtils.gd"
+AppearanceDatabase="*res://script/autoload/AppearanceDatabase.gd"
 MonsterDataManager="*res://Data/MonsterDataManager.gd"
+SkillDatabase="*res://script/autoload/SkillDatabase.gd"
 
 [display]
 

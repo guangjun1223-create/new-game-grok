@@ -3,7 +3,7 @@
 		"simple_sword": {
 			"item_name": "Kiếm Gỗ",
 			"description": "Một thanh kiếm gỗ cơ bản, dùng để luyện tập.",
-			"icon_path": "res://texture/data/Hero/novice/Villager_1/Vector Parts/Sword.png",
+			"icon_path": "res://texture/Item/Weapon/Sword_1/1.png",
 			"item_type": "EQUIPMENT",
 			"category": "equipment", 
 			"equip_slot": "MAIN_HAND",
@@ -15,7 +15,7 @@
 		"short_sword": {
 			"item_name": "Kiếm Ngắn",
 			"description": "Tốc độ cực nhanh, tầm đánh gần, sát thương thấp.",
-			"icon_path": "res://Data/items/short_sword.tres",
+			"icon_path": "res://texture/Item/Weapon/Dagger_1/1.png",
 			"item_type": "EQUIPMENT",
 			"category": "equipment", 
 			"equip_slot": "MAIN_HAND",
@@ -27,7 +27,7 @@
 		"magic_staff": {
 			"item_name": "Gậy Phép",
 			"description": "Tầm đánh xa, sát thương phép cao nhưng tốc độ chậm.",
-			"icon_path": "res://Data/items/MagicStaff.tres",
+			"icon_path": "res://texture/Item/Weapon/Staves_1/1.png",
 			"projectile_scene": "res://Data/items/magic.tscn",
 			"item_type": "EQUIPMENT",
 			"category": "equipment", 
@@ -40,7 +40,7 @@
 		"long_bow": {
 			"item_name": "Cung Dài",
 			"description": "Tầm đánh xa nhất, tốc độ khá.",
-			"icon_path": "res://texture/data/Hero/Bow.png",
+			"icon_path": "res://texture/Item/Weapon/Bow_1/1.png",
 			"projectile_scene": "res://Data/items/arow.tscn",
 			"item_type": "EQUIPMENT",
 			"category": "equipment", 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dafvr7jnkb1u7"]
+[gd_scene load_steps=7 format=3 uid="uid://dafvr7jnkb1u7"]
 
 [ext_resource type="Script" uid="uid://d0t0g1fpllfx8" path="res://script/NPC/shop_npc.gd" id="1_va8ib"]
+[ext_resource type="Texture2D" uid="uid://dkvcr0c87nacy" path="res://texture/UI/0011.png" id="2_7gbbd"]
 [ext_resource type="SpriteFrames" uid="uid://cx7cguf2awopf" path="res://Data/shop_npc.tres" id="2_n5rpg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w3vmd"]
@@ -18,6 +19,20 @@ shadow_color = Color(0, 0, 0, 1)
 [node name="ShopNPC" type="StaticBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_va8ib")
+
+[node name="InteractionPromptButton" type="Button" parent="."]
+visible = false
+z_index = 1
+y_sort_enabled = true
+offset_left = -15.0
+offset_top = -265.0
+offset_right = 155.0
+offset_bottom = -140.0
+text = "Xin chào!!"
+icon = ExtResource("2_7gbbd")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
@@ -51,3 +66,4 @@ text = "Chợ thu mua"
 label_settings = SubResource("LabelSettings_6pftk")
 
 [connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]

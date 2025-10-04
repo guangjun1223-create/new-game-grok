@@ -31,7 +31,7 @@ func display_skill(p_skill_id: String):
 	var coords = skill_data.get("atlas_coords")
 	if coords is Dictionary and coords.has_all(["x", "y", "w", "h"]):
 		var atlas_icon = AtlasTexture.new()
-		atlas_icon.atlas = preload("res://texture/item.png") # THAY ĐÚNG ĐƯỜNG DẪN
+		atlas_icon.atlas = preload("res://texture/item001.png") # THAY ĐÚNG ĐƯỜNG DẪN
 		atlas_icon.region = Rect2(coords.x, coords.y, coords.w, coords.h)
 		icon.texture = atlas_icon
 
