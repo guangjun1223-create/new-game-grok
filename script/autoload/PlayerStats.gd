@@ -108,93 +108,75 @@ func initialize_world_references():
 
 # THAY THẾ TOÀN BỘ HÀM CŨ BẰNG PHIÊN BẢN NÀY
 func trieu_hoi_hero():
-	if get_item_quantity_in_warehouse("summon_scroll") <= 0:
-		return
-
+	# --- BƯỚC 1: KIỂM TRA ĐIỀU KIỆN CHUNG ---
+	# Luôn kiểm tra chỗ trống trong doanh trại trước tiên.
 	if hero_roster.size() >= BARRACKS_SIZE + get_max_heroes():
-		print("Doanh trại và nhà chính đã đầy!")
-		return
-	
-	remove_item_from_warehouse("summon_scroll", 1)
-	
-	var hero_data = _tao_mot_hero_moi()
-
-	# --- PHẦN NÂNG CẤP ---
-	var base_appearance = _tao_ngoai_hinh_ngau_nhien() # 1. Gọi hàm mới
-	var new_hero = hero_scene.instantiate()
-	new_hero.base_appearance = base_appearance # 2. Gán ngoại hình cho Hero
-	# ---------------------
-	
-	new_hero.name = "Hero_%d" % hero_roster.size()
-	new_hero.hero_name = hero_data.name
-	# ... (các dòng gán chỉ số còn lại của bạn giữ nguyên)
-	new_hero.str_co_ban = hero_data.STR
-	new_hero.agi_co_ban = hero_data.AGI
-	new_hero.vit_co_ban = hero_data.VIT
-	new_hero.int_co_ban = hero_data.INTEL
-	new_hero.dex_co_ban = hero_data.DEX
-	new_hero.luk_co_ban = hero_data.LUK
-	
-	hero_roster.append(new_hero)
-	deploy_hero(new_hero)
-
-	save_game()
-
-func trieu_hoi_hero_bang_kim_cuong(cost: int):
-	# Dòng này bị lặp, chúng ta sẽ xóa nó và để hàm spend_player_diamonds xử lý
-	# if not spend_player_diamonds(cost): 
-	# 	return
-
-	if hero_roster.size() >= BARRACKS_SIZE + get_max_heroes():
-		print("Doanh trại và nhà chính đã đầy!")
-		# Không cần hoàn lại tiền vì chúng ta chưa trừ
+		print("Doanh trại và nhà chính đã đầy! Không thể triệu hồi.")
+		# Thông báo cho UI biết là không thể triệu hồi (tùy chọn)
+		# get_tree().call_group("ui_elements", "show_notification", "Doanh trại đầy!")
 		return
 
-	# --- PHẦN THAY ĐỔI QUAN TRỌNG ---
-	# Trừ tiền ngay trước khi triệu hồi. Nếu thất bại thì dừng lại.
-	if not spend_player_diamonds(cost):
-		print("Không đủ kim cương.")
-		return 
-	# --------------------------------
-
-	var hero_data = _tao_mot_hero_moi()
-
-	# --- PHẦN NÂNG CẤP ---
-	var base_appearance = _tao_ngoai_hinh_ngau_nhien() # 1. Gọi hàm mới
-	var new_hero = hero_scene.instantiate()
-	new_hero.base_appearance = base_appearance # 2. Gán ngoại hình cho Hero
-	# ---------------------
-
-	new_hero.name = "Hero_%d" % hero_roster.size()
-	new_hero.hero_name = hero_data.name
-	new_hero.str_co_ban = hero_data.STR
-	new_hero.agi_co_ban = hero_data.AGI
-	new_hero.vit_co_ban = hero_data.VIT
-	new_hero.int_co_ban = hero_data.INTEL
-	new_hero.dex_co_ban = hero_data.DEX
-	new_hero.luk_co_ban = hero_data.LUK
-
-	hero_roster.append(new_hero)
-	deploy_hero(new_hero)
-
-	save_game()
+	# --- BƯỚC 2: KIỂM TRA TÀI NGUYÊN VÀ TRIỆU HỒI ---
+	var summon_success = false
+	
+	# Ưu tiên 1: Kiểm tra Cuộn Giấy Triệu Hồi
+	if get_item_quantity_in_warehouse("summon_scroll") > 0:
+		print(">>> Sử dụng Cuộn Giấy Triệu Hồi...")
+		remove_item_from_warehouse("summon_scroll", 1)
+		summon_success = true
+	
+	# Ưu tiên 2: Nếu không có cuộn giấy, kiểm tra Kim Cương
+	elif player_diamonds >= DIAMOND_COST_FOR_SUMMON:
+		print(">>> Hết cuộn giấy, sử dụng %d Kim Cương..." % DIAMOND_COST_FOR_SUMMON)
+		# Hàm spend_player_diamonds sẽ trừ tiền và trả về true nếu thành công
+		if spend_player_diamonds(DIAMOND_COST_FOR_SUMMON):
+			summon_success = true
+	
+	# --- BƯỚC 3: XỬ LÝ KẾT QUẢ ---
+	if summon_success:
+		# Nếu một trong hai tài nguyên trên được sử dụng thành công
+		# thì mới bắt đầu tạo hero.
+		var new_hero = _tao_mot_hero_moi()
+		
+		# Thêm hero vào game và lưu lại
+		hero_roster.append(new_hero)
+		deploy_hero(new_hero)
+		save_game()
+		
+		print(">>> Triệu hồi thành công hero: %s" % new_hero.name)
+	else:
+		# Nếu không có bất kỳ tài nguyên nào đủ
+		print(">>> Không đủ Cuộn Giấy Triệu Hồi hoặc Kim Cương.")
+		# Thông báo cho UI biết là không đủ tài nguyên (tùy chọn)
+		# get_tree().call_group("ui_elements", "show_notification", "Không đủ tài nguyên!")
 
 func _tao_mot_hero_moi() -> Hero:
 	var new_hero = hero_scene.instantiate()
+	var stats_component: HeroStats = new_hero.get_node("HeroStats")
+	var inventory_component: HeroInventory = new_hero.get_node("HeroInventory")
+	var skills_component: HeroSkills = new_hero.get_node("HeroSkills")
+	
+	stats_component.hero = new_hero
+	inventory_component.hero = new_hero
+	skills_component.hero = new_hero
+	
 	new_hero.world_node = world_node
 	new_hero.gate_connections = gate_connections
-	new_hero._ui_controller = ui_controller_ref
+	# _ui_controller sẽ được gán sau nếu cần, hoặc bạn có thể gán trực tiếp
+	# new_hero._ui_controller = ui_controller_ref
 
-	# PHẦN TẠO CHỈ SỐ GIỮ NGUYÊN
+	# --- TẠO CHỈ SỐ GỐC ---
 	var str_co_ban = randi_range(1, 5)
 	var agi_co_ban = randi_range(1, 5)
 	var vit_co_ban = randi_range(1, 5)
 	var int_co_ban = randi_range(1, 5)
 	var dex_co_ban = randi_range(1, 5)
 	var luk_co_ban = randi_range(1, 5)
+	
 	var tong_diem = str_co_ban + agi_co_ban + vit_co_ban + int_co_ban + dex_co_ban + luk_co_ban
 	var do_hiem: String
 	var mod_tang_truong: float
+
 	if tong_diem < 30:
 		var roll_do_hiem = randf()
 		if roll_do_hiem < 0.4: do_hiem = "F"
@@ -203,7 +185,7 @@ func _tao_mot_hero_moi() -> Hero:
 		elif roll_do_hiem < 0.95: do_hiem = "B"
 		elif roll_do_hiem < 0.99: do_hiem = "A"
 		else: do_hiem = "S"
-		mod_tang_truong = 0.1
+		mod_tang_truong = 0.0 # Độ hiếm thấp không có mod tăng trưởng
 	else:
 		var roll_do_hiem = randf()
 		if roll_do_hiem < 0.5: do_hiem = "SS"
@@ -214,76 +196,74 @@ func _tao_mot_hero_moi() -> Hero:
 	
 	var job_key = "Novice"
 	var du_lieu_nghe = GameDataManager.get_hero_definition(job_key)
-	
-	# ============================================================================
-	# === LOGIC TẠO NGOẠI HÌNH ĐÚNG CHUẨN ===
-	# ============================================================================
-	
-	# 1. Lấy TẤT CẢ các bộ phận ngoại hình từ AppearanceDatabase
+
+	# --- TẠO NGOẠI HÌNH ---
 	var all_faces = AppearanceDatabase.get_all_faces()
-	var all_helmets = AppearanceDatabase.get_all_helmets()
+	var all_head = AppearanceDatabase.get_all_head()
 	var all_armor_sets = AppearanceDatabase.get_all_armor_sets()
-	
-	# 2. Quyết định giới tính ngẫu nhiên cho Hero
 	var hero_gender = ["male", "female"].pick_random()
-	print("[DEBUG] Giới tính ngẫu nhiên cho Hero: ", hero_gender)
-	
-	# 3. Lọc danh sách các bộ phận theo giới tính đã chọn
-	var valid_faces = all_faces.filter(func(face): return face.get("gender", "unisex") == hero_gender or face.get("gender", "unisex") == "unisex")
-	var valid_helmets = all_helmets.filter(func(helmet): return helmet.get("gender", "unisex") == hero_gender or helmet.get("gender", "unisex") == "unisex")
-	var valid_armor_sets = all_armor_sets.filter(func(aset): return aset.get("gender", "unisex") == hero_gender or aset.get("gender", "unisex") == "unisex")
+	var valid_faces = all_faces.filter(func(face): return face.get("gender", "unisex") in [hero_gender, "unisex"])
+	var valid_head = all_head.filter(func(head): return head.get("gender", "unisex") in [hero_gender, "unisex"])
+	var valid_armor_sets = all_armor_sets.filter(func(aset): return aset.get("gender", "unisex") in [hero_gender, "unisex"])
 
 	var chosen_face_data = valid_faces.pick_random() if not valid_faces.is_empty() else all_faces.pick_random()
-	var chosen_helmet_data = valid_helmets.pick_random() if not valid_helmets.is_empty() else all_helmets.pick_random()
+	var chosen_head_data = valid_head.pick_random() if not valid_head.is_empty() else all_head.pick_random()
 	var chosen_armor_set_data = valid_armor_sets.pick_random() if not valid_armor_sets.is_empty() else all_armor_sets.pick_random()
 	
-	print("[DEBUG] Du lieu ARMOR SET goc lay tu JSON: ", chosen_armor_set_data)
-
-	# 5. Tạo "Chứng minh thư" ngoại hình cho Hero mới
 	var new_hero_appearance = {
 		"face": chosen_face_data.get("path"),
-		"helmet": chosen_helmet_data.get("path"),
-		# Sửa lỗi: Gán trực tiếp cả dictionary của bộ giáp đã chọn
-		"armor_set": chosen_armor_set_data 
+		"head": chosen_head_data.get("path"),
+		"armor_set": chosen_armor_set_data
 	}
-	# ============================================================================
 	
-	# Gán "Chứng minh thư" này cho đối tượng Hero
-	new_hero.base_appearance = new_hero_appearance
-	
-	# PHẦN GÁN CHỈ SỐ GIỮ NGUYÊN
-	new_hero.str_co_ban = str_co_ban
-	new_hero.agi_co_ban = agi_co_ban
-	new_hero.vit_co_ban = vit_co_ban
-	new_hero.int_co_ban = int_co_ban
-	new_hero.dex_co_ban = dex_co_ban
-	new_hero.luk_co_ban = luk_co_ban
-	new_hero.str_tang_truong = du_lieu_nghe.get("str_growth", 0.0) + mod_tang_truong
-	new_hero.agi_tang_truong = du_lieu_nghe.get("agi_growth", 0.0) + mod_tang_truong
-	new_hero.vit_tang_truong = du_lieu_nghe.get("vit_growth", 0.0) + mod_tang_truong
-	new_hero.int_tang_truong = du_lieu_nghe.get("int_growth", 0.0) + mod_tang_truong
-	new_hero.dex_tang_truong = du_lieu_nghe.get("dex_growth", 0.0) + mod_tang_truong
-	new_hero.luk_tang_truong = du_lieu_nghe.get("luk_growth", 0.0) + mod_tang_truong
+	# ======================================================================
+	# === PHẦN SỬA LỖI QUAN TRỌNG: GÁN DỮ LIỆU VÀO ĐÚNG COMPONENT CON ===
+	# ======================================================================
+
+	# 1. Gán dữ liệu cho "Nhạc trưởng" hero.gd
 	var ten_ngau_nhien = GameDataManager.tao_ten_ngau_nhien()
 	new_hero.hero_name = ten_ngau_nhien
 	new_hero.name = "%s (%s)" % [ten_ngau_nhien, do_hiem]
-	new_hero._initialize_stats()
-	new_hero.current_hp = new_hero.max_hp
-	new_hero.current_sp = new_hero.max_sp
+	new_hero.base_appearance = new_hero_appearance
+
+	# 2. Gán dữ liệu cho component HeroStats
+	# Gán chỉ số Gacha
+	stats_component.str_co_ban = str_co_ban
+	stats_component.agi_co_ban = agi_co_ban
+	stats_component.vit_co_ban = vit_co_ban
+	stats_component.int_co_ban = int_co_ban
+	stats_component.dex_co_ban = dex_co_ban
+	stats_component.luk_co_ban = luk_co_ban
+	stats_component.str_tang_truong = du_lieu_nghe.get("str_growth", 0.0) + mod_tang_truong
+	stats_component.agi_tang_truong = du_lieu_nghe.get("agi_growth", 0.0) + mod_tang_truong
+	stats_component.vit_tang_truong = du_lieu_nghe.get("vit_growth", 0.0) + mod_tang_truong
+	stats_component.int_tang_truong = du_lieu_nghe.get("int_growth", 0.0) + mod_tang_truong
+	stats_component.dex_tang_truong = du_lieu_nghe.get("dex_growth", 0.0) + mod_tang_truong
+	stats_component.luk_tang_truong = du_lieu_nghe.get("luk_growth", 0.0) + mod_tang_truong
+	stats_component.job_key = job_key
+	# Gán nghề
+	stats_component.initialize_stats()
+	
+	# 4. Cập nhật HP/SP cho "Nhạc trưởng"
+	new_hero.current_hp = stats_component.max_hp
+	new_hero.current_sp = stats_component.max_sp
+	
+	# 5. Yêu cầu component HeroInventory thiết lập đồ và vàng
 	var starting_items = [{"id": "simple_sword", "quantity": 1}, {"id": "magic_staff", "quantity": 1}, {"id": "long_bow", "quantity": 1}]
 	var starting_gold = 50
-	new_hero.setup(starting_items, starting_gold)
+	inventory_component.setup(starting_items, starting_gold)
+	
 	return new_hero
 
 func _tao_ngoai_hinh_ngau_nhien() -> Dictionary:
 	# BƯỚC 1: LẤY DỮ LIỆU TỪ ĐÚNG NƠI (AppearanceDatabase)
 	var all_faces = AppearanceDatabase.get_all_faces()
-	var all_helmets = AppearanceDatabase.get_all_helmets()
+	var all_head = AppearanceDatabase.get_all_head()
 	var all_armor_sets = AppearanceDatabase.get_all_armor_sets()
 
 	# Kiểm tra nếu một trong các danh sách bị rỗng thì thoát để tránh lỗi
-	if all_faces.is_empty() or all_helmets.is_empty() or all_armor_sets.is_empty():
-		push_error("Không thể tạo ngoại hình vì một trong các danh sách (faces, helmets, armor_sets) bị rỗng.")
+	if all_faces.is_empty() or all_head.is_empty() or all_armor_sets.is_empty():
+		push_error("Không thể tạo ngoại hình vì một trong các danh sách (faces, head, armor_sets) bị rỗng.")
 		return {}
 
 	# BƯỚC 2: QUYẾT ĐỊNH GIỚI TÍNH NGẪU NHIÊN CHO HERO
@@ -292,12 +272,12 @@ func _tao_ngoai_hinh_ngau_nhien() -> Dictionary:
 
 	# BƯỚC 3: LỌC DANH SÁCH CÁC BỘ PHẬN THEO GIỚI TÍNH
 	var valid_faces = all_faces.filter(func(face): return face.get("gender", "unisex") == hero_gender or face.get("gender", "unisex") == "unisex")
-	var valid_helmets = all_helmets.filter(func(helmet): return helmet.get("gender", "unisex") == hero_gender or helmet.get("gender", "unisex") == "unisex")
+	var valid_head = all_head.filter(func(head): return head.get("gender", "unisex") == hero_gender or head.get("gender", "unisex") == "unisex")
 	var valid_armor_sets = all_armor_sets.filter(func(aset): return aset.get("gender", "unisex") == hero_gender or aset.get("gender", "unisex") == "unisex")
 
 	# BƯỚC 4: CHỌN NGẪU NHIÊN TỪ DANH SÁCH ĐÃ LỌC (phòng trường hợp danh sách rỗng thì dùng lại danh sách gốc)
 	var chosen_face_data = valid_faces.pick_random() if not valid_faces.is_empty() else all_faces.pick_random()
-	var chosen_helmet_data = valid_helmets.pick_random() if not valid_helmets.is_empty() else all_helmets.pick_random()
+	var chosen_head_data = valid_head.pick_random() if not valid_head.is_empty() else all_head.pick_random()
 	var chosen_armor_set_data = valid_armor_sets.pick_random() if not valid_armor_sets.is_empty() else all_armor_sets.pick_random()
 
 	# BƯỚC 5: TẠO DICTIONARY NGOẠI HÌNH CUỐI CÙNG
@@ -314,7 +294,7 @@ func _tao_ngoai_hinh_ngau_nhien() -> Dictionary:
 
 	var final_appearance = {
 		"face": chosen_face_data.get("path"),
-		"helmet": chosen_helmet_data.get("path"),
+		"head": chosen_head_data.get("path"),
 		"armor_set": final_armor_set
 	}
 	
@@ -923,30 +903,9 @@ func can_summon() -> bool:
 	# Nếu không thỏa mãn cả hai
 	return false
 
-# HÀM MỚI 2: Hàm triệu hồi "tổng", sẽ được gọi bởi nút bấm
-func try_to_summon_hero():
-	# Ưu tiên 1: Kiểm tra Kim Cương
-	if player_diamonds >= DIAMOND_COST_FOR_SUMMON:
-		print(">>> Uu tien su dung Kim Cuong de trieu hoi...")
-		# Gọi hàm triệu hồi bằng kim cương (chúng ta sẽ tạo ở dưới)
-		trieu_hoi_hero_bang_kim_cuong(DIAMOND_COST_FOR_SUMMON)
-		return # Dừng lại sau khi triệu hồi thành công
-
-	# Ưu tiên 2: Kiểm tra Cuộn Giấy
-	if get_item_quantity_in_warehouse("summon_scroll") > 0:
-		print(">>> Khong du Kim Cuong, su dung Cuon Giay Trieu Hoi...")
-		trieu_hoi_hero() # Gọi hàm triệu hồi bằng cuộn giấy cũ
-		return # Dừng lại sau khi triệu hồi thành công
-
-	# Nếu không đủ cả hai
-	print("Trieu hoi that bai: Khong du Kim Cuong hoac Cuon Giay.")
-
-# HÀM MỚI 3: Hàm tiêu kim cương
 func spend_player_diamonds(amount: int) -> bool:
 	if player_diamonds >= amount:
 		player_diamonds -= amount
 		player_stats_changed.emit()
 		return true
 	return false
-
-# HÀM MỚI 4: Hàm logic triệu hồi bằng kim cương

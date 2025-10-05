@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmv25cp6k7foo"
-path="res://.godot/imported/Head.png-e05ea9a22e68ff2b7db600b1bd5bcbce.ctex"
+path.s3tc="res://.godot/imported/Head.png-e05ea9a22e68ff2b7db600b1bd5bcbce.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Zombie/Head.png"
-dest_files=["res://.godot/imported/Head.png-e05ea9a22e68ff2b7db600b1bd5bcbce.ctex"]
+dest_files=["res://.godot/imported/Head.png-e05ea9a22e68ff2b7db600b1bd5bcbce.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

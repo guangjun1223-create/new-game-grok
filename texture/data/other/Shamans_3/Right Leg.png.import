@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkmf5dgct3uvx"
-path="res://.godot/imported/Right Leg.png-7d7391ae874d37a6187f5a5920502fdd.ctex"
+path.s3tc="res://.godot/imported/Right Leg.png-7d7391ae874d37a6187f5a5920502fdd.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Shamans_3/Right Leg.png"
-dest_files=["res://.godot/imported/Right Leg.png-7d7391ae874d37a6187f5a5920502fdd.ctex"]
+dest_files=["res://.godot/imported/Right Leg.png-7d7391ae874d37a6187f5a5920502fdd.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

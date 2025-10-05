@@ -10,7 +10,7 @@
 		{"id": "face0008", "path": "res://texture/data/Hero/0008/Face 01.png", "gender": "female"},
 		{"id": "face0009", "path": "res://texture/data/Hero/0009/Face 01.png", "gender": "unisex"}
 	],
-	"helmets": [
+	"head": [
 		{"id":"helmets0001", "path": "res://texture/data/Hero/0001/Head.png", "gender": "male"},
 		{"id":"helmets0002", "path": "res://texture/data/Hero/0002/Head.png", "gender": "male"},
 		{"id":"helmets0003", "path": "res://texture/data/Hero/0003/Head.png", "gender": "male"},

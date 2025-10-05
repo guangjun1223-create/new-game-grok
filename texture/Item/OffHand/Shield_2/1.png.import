@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhug0g81656wm"
-path="res://.godot/imported/1.png-c4c82bc095a84a2bc4ef183b5854865b.ctex"
+path.s3tc="res://.godot/imported/1.png-c4c82bc095a84a2bc4ef183b5854865b.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/Item/OffHand/Shield_2/1.png"
-dest_files=["res://.godot/imported/1.png-c4c82bc095a84a2bc4ef183b5854865b.ctex"]
+dest_files=["res://.godot/imported/1.png-c4c82bc095a84a2bc4ef183b5854865b.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

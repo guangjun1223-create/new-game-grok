@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqfo33f6q1ccy"
-path="res://.godot/imported/Shield.png-cd2e5cb77ff9eff2b35c818f2ecaff21.ctex"
+path.s3tc="res://.godot/imported/Shield.png-cd2e5cb77ff9eff2b35c818f2ecaff21.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Death_Knight/Shield.png"
-dest_files=["res://.godot/imported/Shield.png-cd2e5cb77ff9eff2b35c818f2ecaff21.ctex"]
+dest_files=["res://.godot/imported/Shield.png-cd2e5cb77ff9eff2b35c818f2ecaff21.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

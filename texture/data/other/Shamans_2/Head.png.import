@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://5q8kpfmdaoik"
-path="res://.godot/imported/Head.png-1d9978a52fb4816de964ec41a404aba5.ctex"
+path.s3tc="res://.godot/imported/Head.png-1d9978a52fb4816de964ec41a404aba5.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Shamans_2/Head.png"
-dest_files=["res://.godot/imported/Head.png-1d9978a52fb4816de964ec41a404aba5.ctex"]
+dest_files=["res://.godot/imported/Head.png-1d9978a52fb4816de964ec41a404aba5.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

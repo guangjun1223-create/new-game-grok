@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dah23qu1kobt"
-path="res://.godot/imported/Left Leg.png-1520d223aa70bd26b3d52dfdab41526e.ctex"
+path.s3tc="res://.godot/imported/Left Leg.png-1520d223aa70bd26b3d52dfdab41526e.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Skull Knight/Left Leg.png"
-dest_files=["res://.godot/imported/Left Leg.png-1520d223aa70bd26b3d52dfdab41526e.ctex"]
+dest_files=["res://.godot/imported/Left Leg.png-1520d223aa70bd26b3d52dfdab41526e.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

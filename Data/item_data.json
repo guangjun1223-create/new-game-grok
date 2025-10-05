@@ -5,11 +5,11 @@
 			"description": "Một thanh kiếm gỗ cơ bản, dùng để luyện tập.",
 			"icon_path": "res://texture/Item/Weapon/Sword_1/1.png",
 			"item_type": "EQUIPMENT",
-			"category": "equipment", 
+			"category": "equipment",
 			"equip_slot": "MAIN_HAND",
 			"weapon_type": "SWORD",
 			"aspd_penalty": 5,
-			"stats": { "str": 2, "atk": 10,"def":5, "max_hp":50,"attack_range_bonus": 0.0},
+			"stats": { "str": 2, "atk": 10, "def": 5, "max_hp": 50, "attack_range_bonus": 0.0 },
 			"price": 1
 		},
 		"short_sword": {
@@ -17,7 +17,7 @@
 			"description": "Tốc độ cực nhanh, tầm đánh gần, sát thương thấp.",
 			"icon_path": "res://texture/Item/Weapon/Dagger_1/1.png",
 			"item_type": "EQUIPMENT",
-			"category": "equipment", 
+			"category": "equipment",
 			"equip_slot": "MAIN_HAND",
 			"weapon_type": "DAGGER",
 			"aspd_penalty": 2,
@@ -30,11 +30,11 @@
 			"icon_path": "res://texture/Item/Weapon/Staves_1/1.png",
 			"projectile_scene": "res://Data/items/magic.tscn",
 			"item_type": "EQUIPMENT",
-			"category": "equipment", 
+			"category": "equipment",
 			"equip_slot": "MAIN_HAND",
 			"weapon_type": "STAFF",
 			"aspd_penalty": 10,
-			"stats": { "matk": 12, "int": 2, "max_sp":50, "attack_range_bonus": 600.0 }, 
+			"stats": { "matk": 12, "int": 2, "max_sp": 50, "attack_range_bonus": 600.0 },
 			"price": 1
 		},
 		"long_bow": {
@@ -43,78 +43,206 @@
 			"icon_path": "res://texture/Item/Weapon/Bow_1/1.png",
 			"projectile_scene": "res://Data/items/arow.tscn",
 			"item_type": "EQUIPMENT",
-			"category": "equipment", 
+			"category": "equipment",
 			"equip_slot": "MAIN_HAND",
 			"weapon_type": "BOW",
 			"aspd_penalty": 7,
-			"stats": { "atk": 8, "dex": 5, "agi": 2, "attack_range_bonus": 600.0 }, 
+			"stats": { "atk": 8, "dex": 5, "agi": 2, "attack_range_bonus": 600.0 },
 			"price": 1
 		}
 	},
 	"equipment": {
 		"simple_helmet": {
-			"item_name": "Mũ Sắt", "description": "Một chiếc mũ sắt cơ bản.",
-			"icon_path": "res://Data/items/ClothHat.tres",
-			"item_type": "EQUIPMENT","category": "equipment", "equip_slot": "HELMET",
-			"stats": { "def": 5, "vit": 2 }, "price": 1
+			"item_name": "Mũ Sắt",
+			"description": "Một chiếc mũ sắt cơ bản.",
+			"icon_path": "res://texture/Item/Helmet/00001.png",
+			"item_type": "EQUIPMENT",
+			"category": "equipment",
+			"equip_slot": "HELMET",
+			"stats": { "def": 5, "vit": 2 },
+			"price": 1
 		},
 		"leather_armor": {
-			"item_name": "Áo Da", "description": "Một chiếc áo da nhẹ.",
-			"icon_path": "res://Data/items/LeatherArmor.tres",
-			"item_type": "EQUIPMENT","category": "equipment", "equip_slot": "ARMOR",
-			"stats": { "def": 5, "max_hp": 20 }, "price": 1
+			"item_name": "Áo Da",
+			"description": "Một chiếc áo da nhẹ.",
+			"icon_path": "res://texture/data/Hero/Medieval Commander/Body.png",
+			"item_type": "EQUIPMENT",
+			"category": "equipment",
+			"equip_slot": "ARMOR",
+			"stats": { "def": 5, "max_hp": 20 },
+			"price": 1,
+			"visuals": [
+		{"target_sprite": "ArmorSprite","texture_path": "res://texture/data/Hero/Medieval Commander/Body.png"},
+		{"target_sprite": "Arm_R_Sprite", "texture_path": "res://texture/data/Hero/Medieval Commander/Right Arm.png"},
+		{"target_sprite": "Arm_L_Sprite", "texture_path": "res://texture/data/Hero/Medieval Commander/Left Arm.png"	}
+	]
 		},
 		"Leather_boots": {
-			"item_name": "Giầy da", "description": "Một đôi giầy bằng da.",
-			"icon_path": "res://Data/items/Leather Boots.tres",
-			"item_type": "EQUIPMENT","category": "equipment", "equip_slot": "BOOTS",
-			"stats": { "def": 2, "agi": 2 }, "price": 1
+			"item_name": "Giầy da",
+			"description": "Một đôi giầy bằng da.",
+			"icon_path": "res://texture/data/Hero/Medieval Commander/Left Leg.png",
+			"item_type": "EQUIPMENT",
+			"category": "equipment",
+			"equip_slot": "BOOTS",
+			"stats": { "def": 2, "agi": 2 },
+			"price": 1,
+			 "visuals": [
+		{"target_sprite": "BootsLSprite","texture_path": "res://texture/data/Hero/Medieval Commander/Left Leg.png"},
+		{"target_sprite": "BootsRSprite","texture_path": "res://texture/data/Hero/Medieval Commander/Right Leg.png"}
+	]
 		},
 		"wooden_shield": {
-			"item_name": "Khiên Gỗ", "description": "Một chiếc khiên gỗ.",
-			"icon_path": "res://Data/items/wooden_shield.tres",
-			"item_type": "EQUIPMENT","category": "equipment", "equip_slot": "OFF_HAND",
-			"stats": { "def": 8 }, "price": 1
+			"item_name": "Khiên Gỗ",
+			"description": "Một chiếc khiên gỗ.",
+			"icon_path": "res://texture/Item/OffHand/Shield_1/1.png",
+			"item_type": "EQUIPMENT",
+			"category": "equipment",
+			"equip_slot": "OFF_HAND",
+			"stats": { "def": 8 },
+			"price": 1
 		}
 	},
 	"consumables": {
 		"healing_potion_small": {
-			"item_name": "Bình Máu Nhỏ", "description": "Hồi phục 50 HP.",
-			"description": "Một bình thuốc nhỏ do bọn trẻ con pha chế thành,
-			uống vào cũng đớ khát",
-			"icon_path": "res://Data/items/potion_small.tres",
+			"item_name": "Bình Máu Nhỏ",
+			"description": "Một bình thuốc nhỏ do bọn trẻ con pha chế thành, uống vào cũng đỡ khát. Hồi phục 100 HP.",
+			"icon_path": "res://texture/Item/Potion/8.png",
 			"category": "potion",
-			"item_type": "CONSUMABLE", "is_stackable": true, "max_stack_size": 999999,
-			"stats": { "heal_amount": 100 }, "price": 1
+			"item_type": "CONSUMABLE",
+			"is_stackable": true,
+			"max_stack_size": 999999,
+			"stats": { "heal_amount": 100 },
+			"price": 1
 		},
 		"sp_potion_small": {
-			"item_name": "Miếng thịt nhỏ", "description": "Hồi phục 50 SP.",
-			"description": "Một miếng thịt không biết để bao lâu nhưng vẫn dùng tốt, ăn vẫn chống đói",
-			"icon_path": "res://Data/items/SPPotion.tres",
+			"item_name": "Miếng thịt nhỏ",
+			"description": "Một miếng thịt không biết để bao lâu nhưng vẫn dùng tốt, ăn vẫn chống đói. Hồi phục 50 SP.",
+			"icon_path": "res://texture/Item/Potion/7.png",
 			"category": "potion",
-			"item_type": "CONSUMABLE", "is_stackable": true, "max_stack_size": 999999,
-			"stats": { "sp_restore_amount": 50 }, "price": 1
+			"item_type": "CONSUMABLE",
+			"is_stackable": true,
+			"max_stack_size": 999999,
+			"stats": { "sp_restore_amount": 50 },
+			"price": 1
 		},
 		"summon_scroll": {
-			"item_name": "Cuộn giấy triệu hồi", "description": "Dùng để triệu hồi anh hùng.",
-			"icon_path": "res://Data/items/summonScroll.tres",
-			"item_type": "CONSUMABLE", "is_stackable": true, "max_stack_size": 99999
+			"item_name": "Cuộn giấy triệu hồi",
+			"description": "Dùng để triệu hồi anh hùng.",
+			"icon_path": "res://texture/Item/scroll/1.png",
+			"item_type": "CONSUMABLE",
+			"is_stackable": true,
+			"max_stack_size": 99999
 		}
 	},
 	"materials": {
-		"wood": { "item_name": "Gỗ", "description": "Nguyên liệu chế tác cơ bản.", "icon_path": "res://Data/items/wood.tres", "item_type": "MATERIAL", "is_stackable": true, "max_stack_size": 999999, "price": 10 },
-		"stone": { "item_name": "Đá", "description": "Nguyên liệu chế tác cơ bản.", "icon_path": "res://Data/items/stone.tres", "item_type": "MATERIAL", "is_stackable": true, "max_stack_size": 999999, "price": 10 },
-		"small_crystal": { "item_name": "Tinh Thể Nhỏ", "description": "Một tinh thể lấp lánh năng lượng.", "icon_path": "res://Data/items/SmallCrystal.tres", "item_type": "MATERIAL", "is_stackable": true, "max_stack_size": 999999, "price": 12 },
-		"thread": { "item_name": "Chỉ", "description": "Dùng để may vá.", "icon_path": "res://Data/items/Thread.tres", "item_type": "MATERIAL", "is_stackable": true, "max_stack_size": 999999, "price": 10 },
-		"cloth": { "item_name": "Vải", "description": "Dùng để chế tạo quần áo và giáp nhẹ.", "icon_path": "res://Data/items/cloth.tres", "item_type": "MATERIAL", "is_stackable": true, "max_stack_size": 999999, "price": 10 },
-		"leather": { "item_name": "Da Thú", "description": "Dùng để chế tạo giáp da.", "icon_path": "res://Data/items/leather.tres", "item_type": "MATERIAL", "is_stackable": true, "max_stack_size": 999999, "price": 10 },
-		"herb": { "item_name": "Thảo Dược", "description": "Nguyên liệu để chế tạo thuốc.", "icon_path": "res://Data/items/herb.tres", "item_type": "MATERIAL", "is_stackable": true, "max_stack_size": 999999, "price": 10 },
-		"spring_water": { "item_name": "Nước Suối", "description": "Nước tinh khiết từ trong núi.", "icon_path": "res://Data/items/water.tres", "item_type": "MATERIAL", "is_stackable": true, "max_stack_size": 999999, "price": 10 },
-		"empty_bottle": { "item_name": "Lọ Rỗng", "description": "Dùng để chứa chất lỏng.", "icon_path": "res://Data/items/EmptyBottle.tres", "item_type": "MATERIAL", "is_stackable": true, "max_stack_size": 999999, "price": 10 },
-		"weapon_upgrade_stone": {"item_name": "Đá cường hóa vũ khí", "description": "Một loại đá chắc chắn rất tố làm vũ khí", "icon_path": "res://................", "item_type": "MATERIAL", "is_stackable": "true", "max_stack_size": 999999},
-		"armor_upgrade_stone": {"item_name": "Đá cường hóa trang bị", "description": "Một loại đá dẻo dai nhưng chắc chắn", "icon_path": "res://................", "item_type": "MATERIAL", "is_stackable": "true", "max_stack_size": 999999}
+		"wood": {
+			"item_name": "Gỗ",
+			"description": "Nguyên liệu chế tác cơ bản.",
+			"icon_path": "res://texture/Item/Craft Resources/27.png",
+			"item_type": "MATERIAL",
+			"is_stackable": true,
+			"max_stack_size": 999999,
+			"price": 10
+		},
+		"stone": {
+			"item_name": "Đá",
+			"description": "Nguyên liệu chế tác cơ bản.",
+			"icon_path": "res://texture/Item/Craft Resources/12.png",
+			"item_type": "MATERIAL",
+			"is_stackable": true,
+			"max_stack_size": 999999,
+			"price": 10
+		},
+		"small_crystal": {
+			"item_name": "Tinh Thể Nhỏ",
+			"description": "Một tinh thể lấp lánh năng lượng.",
+			"icon_path": "res://texture/Item/Craft Resources/14.png",
+			"item_type": "MATERIAL",
+			"is_stackable": true,
+			"max_stack_size": 999999,
+			"price": 12
+		},
+		"thread": {
+			"item_name": "Chỉ",
+			"description": "Dùng để may vá.",
+			"icon_path": "res://texture/Item/Craft Resources/48.png",
+			"item_type": "MATERIAL",
+			"is_stackable": true,
+			"max_stack_size": 999999,
+			"price": 10
+		},
+		"cloth": {
+			"item_name": "Vải",
+			"description": "Dùng để chế tạo quần áo và giáp nhẹ.",
+			"icon_path": "res://texture/Item/Craft Resources/43.png",
+			"item_type": "MATERIAL",
+			"is_stackable": true,
+			"max_stack_size": 999999,
+			"price": 10
+		},
+		"leather": {
+			"item_name": "Da Thú",
+			"description": "Dùng để chế tạo giáp da.",
+			"icon_path": "res://texture/Item/Craft Resources/40.png",
+			"item_type": "MATERIAL",
+			"is_stackable": true,
+			"max_stack_size": 999999,
+			"price": 10
+		},
+		"herb": {
+			"item_name": "Thảo Dược",
+			"description": "Nguyên liệu để chế tạo thuốc.",
+			"icon_path": "res://texture/Item/Craft Resources/45.png",
+			"item_type": "MATERIAL",
+			"is_stackable": true,
+			"max_stack_size": 999999,
+			"price": 10
+		},
+		"spring_water": {
+			"item_name": "Nước Suối",
+			"description": "Nước tinh khiết từ trong núi.",
+			"icon_path": "res://texture/Item/Craft Resources/50.png",
+			"item_type": "MATERIAL",
+			"is_stackable": true,
+			"max_stack_size": 999999,
+			"price": 10
+		},
+		"empty_bottle": {
+			"item_name": "Miếng thủy tinh",
+			"description": "Dùng để tạo chai nước.",
+			"icon_path": "res://texture/Item/Craft Resources/4.png",
+			"item_type": "MATERIAL",
+			"is_stackable": true,
+			"max_stack_size": 999999,
+			"price": 10
+		},
+		"weapon_upgrade_stone": {
+			"item_name": "Đá cường hóa vũ khí",
+			"description": "Một loại đá chắc chắn rất tốt làm vũ khí",
+			"icon_path": "res://texture/Item/Craft Resources/8.png",
+			"item_type": "MATERIAL",
+			"is_stackable": true,
+			"max_stack_size": 999999
+		},
+		"armor_upgrade_stone": {
+			"item_name": "Đá cường hóa trang bị",
+			"description": "Một loại đá dẻo dai nhưng chắc chắn",
+			"icon_path": "res://texture/Item/Craft Resources/9.png",
+			"item_type": "MATERIAL",
+			"is_stackable": true,
+			"max_stack_size": 999999
+		}
 	},
 	"currency": {
-		"gold_coin": { "item_name": "Vàng", "description": "Tiền tệ chính trong game.", "icon_path": "res://Data/items/gold.tres", "item_type": "CURRENCY", "is_stackable": true }
+		"gold_coin": {
+			"item_name": "Vàng",
+			"description": "Tiền tệ chính trong game.",
+			"icon_data": {
+				"atlas_path": "res://texture/item001.png",
+				"region": [0.0, 512.0, 64.0, 64.0]
+			},
+			"item_type": "CURRENCY",
+			"is_stackable": true
+		}
 	}
 }

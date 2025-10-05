@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://p8xiaablvpd4"
-path="res://.godot/imported/Left Arm.png-253ede4adf3419c7dec519796ba14cfa.ctex"
+path.s3tc="res://.godot/imported/Left Arm.png-253ede4adf3419c7dec519796ba14cfa.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Death_Knight/Left Arm.png"
-dest_files=["res://.godot/imported/Left Arm.png-253ede4adf3419c7dec519796ba14cfa.ctex"]
+dest_files=["res://.godot/imported/Left Arm.png-253ede4adf3419c7dec519796ba14cfa.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

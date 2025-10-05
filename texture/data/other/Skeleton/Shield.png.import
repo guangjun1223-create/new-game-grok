@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwrtixl2bu5dx"
-path="res://.godot/imported/Shield.png-e8bc32468a374f3e5fad6af9614c3afa.ctex"
+path.s3tc="res://.godot/imported/Shield.png-e8bc32468a374f3e5fad6af9614c3afa.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Skeleton/Shield.png"
-dest_files=["res://.godot/imported/Shield.png-e8bc32468a374f3e5fad6af9614c3afa.ctex"]
+dest_files=["res://.godot/imported/Shield.png-e8bc32468a374f3e5fad6af9614c3afa.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqcsl1tge5p7n"
-path="res://.godot/imported/Right Arm.png-5f96b041d18e6c8acec3e231d520d6ab.ctex"
+path.s3tc="res://.godot/imported/Right Arm.png-5f96b041d18e6c8acec3e231d520d6ab.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Pumpkin Head Guy/Right Arm.png"
-dest_files=["res://.godot/imported/Right Arm.png-5f96b041d18e6c8acec3e231d520d6ab.ctex"]
+dest_files=["res://.godot/imported/Right Arm.png-5f96b041d18e6c8acec3e231d520d6ab.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

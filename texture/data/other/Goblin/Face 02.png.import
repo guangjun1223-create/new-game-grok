@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://wya1rrpr1rus"
-path="res://.godot/imported/Face 02.png-3d77ea26186108a7a60e48c850a44603.ctex"
+path.s3tc="res://.godot/imported/Face 02.png-3d77ea26186108a7a60e48c850a44603.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Goblin/Face 02.png"
-dest_files=["res://.godot/imported/Face 02.png-3d77ea26186108a7a60e48c850a44603.ctex"]
+dest_files=["res://.godot/imported/Face 02.png-3d77ea26186108a7a60e48c850a44603.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

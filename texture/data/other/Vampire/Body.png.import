@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://4md4xqlmnwnd"
-path="res://.godot/imported/Body.png-e016a6f1aa4ddeb27da88cd5589c3e15.ctex"
+path.s3tc="res://.godot/imported/Body.png-e016a6f1aa4ddeb27da88cd5589c3e15.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Vampire/Body.png"
-dest_files=["res://.godot/imported/Body.png-e016a6f1aa4ddeb27da88cd5589c3e15.ctex"]
+dest_files=["res://.godot/imported/Body.png-e016a6f1aa4ddeb27da88cd5589c3e15.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

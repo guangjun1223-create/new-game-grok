@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b267ev7yl27m4"
-path="res://.godot/imported/Right Hand.png-4798c8a7f261094ba75a991ee3fed53f.ctex"
+path.s3tc="res://.godot/imported/Right Hand.png-4798c8a7f261094ba75a991ee3fed53f.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Shamans_1/Right Hand.png"
-dest_files=["res://.godot/imported/Right Hand.png-4798c8a7f261094ba75a991ee3fed53f.ctex"]
+dest_files=["res://.godot/imported/Right Hand.png-4798c8a7f261094ba75a991ee3fed53f.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

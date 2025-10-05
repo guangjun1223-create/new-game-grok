@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cq5rdko76l8xs"
-path="res://.godot/imported/Left Arm.png-036fd21ec757460a290bd40379df8a26.ctex"
+path.s3tc="res://.godot/imported/Left Arm.png-036fd21ec757460a290bd40379df8a26.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Zombie/Left Arm.png"
-dest_files=["res://.godot/imported/Left Arm.png-036fd21ec757460a290bd40379df8a26.ctex"]
+dest_files=["res://.godot/imported/Left Arm.png-036fd21ec757460a290bd40379df8a26.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

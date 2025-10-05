@@ -98,33 +98,36 @@ func _set_skill_icon():
 
 func _update_upgrade_button_state(current_level: int, max_level: int):
 	# --- BƯỚC 1: KIỂM TRA ĐIỀU KIỆN CƠ BẢN ---
-	var hero_level = _hero_ref.level
+	var hero_level = _hero_ref.hero_stats.level 
 	var required_level = _skill_data.get("unlock_level", 1)
 
-	# Ẩn nút và dừng lại nếu: skill đã max level HOẶC hero chưa đủ cấp độ
-	if current_level >= max_level or hero_level < required_level:
-		upgrade_button.visible = false
+	if current_level >= max_level:
+		upgrade_button.disabled = true
+		upgrade_button.text = "Đã đạt cấp tối đa"
 		return
-	
-	# --- BƯỚC 2: HIỂN THỊ NÚT VÀ KIỂM TRA ĐIỂM ---
-	upgrade_button.visible = true
-	var cost_array = _skill_data.get("skill_point_cost", [])
 
-	if current_level < cost_array.size():
-		var cost = cost_array[current_level]
-		
-		# Đặt lại Text cho nút
-		if current_level == 0:
-			upgrade_button.text = "Học (%dđ)" % cost
-		else:
-			upgrade_button.text = "Nâng Cấp (%dđ)" % cost
-		
-		# Vô hiệu hóa nút nếu không đủ điểm kỹ năng
-		upgrade_button.disabled = _hero_ref.skill_points < cost
+	if hero_level < required_level:
+		upgrade_button.disabled = true
+		upgrade_button.text = "Cần Cấp %d" % required_level
+		return
+
+	# --- BƯỚC 2: KIỂM TRA ĐIỂM KỸ NĂNG ---
+	var cost_array = _skill_data.get("skill_point_cost", [])
+	if current_level >= cost_array.size():
+		upgrade_button.disabled = true
+		upgrade_button.text = "Lỗi Dữ Liệu Skill"
+		return
+
+	var required_points = cost_array[current_level]
+	# Sửa lỗi: Lấy 'skill_points' từ component hero_skills
+	var current_points = _hero_ref.hero_skills.skill_points 
+
+	if current_points >= required_points:
+		upgrade_button.disabled = false
+		upgrade_button.text = "Nâng Cấp (%d SP)" % required_points
 	else:
-		# Lỗi dữ liệu: số cấp độ nhiều hơn số giá tiền -> Ẩn nút cho an toàn
-		upgrade_button.visible = false
-		push_warning("Lỗi dữ liệu skill '%s': Thiếu giá tiền cho cấp %d" % [_skill_id, current_level + 1])
+		upgrade_button.disabled = true
+		upgrade_button.text = "Thiếu %d SP" % (required_points - current_points)
 
 func _update_equip_button_state(current_level: int):
 	# --- BƯỚC 1: Kiểm tra các điều kiện cơ bản (giống code của bạn) ---

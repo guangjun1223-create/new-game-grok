@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dn1bsxa6naqj4"
-path="res://.godot/imported/Face 03.png-ff8ac2bf7b5bdbaeef447c67993c790a.ctex"
+path.s3tc="res://.godot/imported/Face 03.png-ff8ac2bf7b5bdbaeef447c67993c790a.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Orc/Face 03.png"
-dest_files=["res://.godot/imported/Face 03.png-ff8ac2bf7b5bdbaeef447c67993c790a.ctex"]
+dest_files=["res://.godot/imported/Face 03.png-ff8ac2bf7b5bdbaeef447c67993c790a.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

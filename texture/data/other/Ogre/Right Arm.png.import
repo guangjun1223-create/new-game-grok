@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c07djvdqr8fb5"
-path="res://.godot/imported/Right Arm.png-c299bac5ef9534db7d45f3f6f4d51a5c.ctex"
+path.s3tc="res://.godot/imported/Right Arm.png-c299bac5ef9534db7d45f3f6f4d51a5c.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Ogre/Right Arm.png"
-dest_files=["res://.godot/imported/Right Arm.png-c299bac5ef9534db7d45f3f6f4d51a5c.ctex"]
+dest_files=["res://.godot/imported/Right Arm.png-c299bac5ef9534db7d45f3f6f4d51a5c.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

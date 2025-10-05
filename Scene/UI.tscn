@@ -327,6 +327,7 @@ patch_margin_left = 7
 patch_margin_right = 7
 
 [node name="HP_Label" type="Label" parent="SelectedHeroPanel/VBoxContainer/HPBar"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -376,6 +377,7 @@ patch_margin_left = 7
 patch_margin_right = 7
 
 [node name="SP_Label" type="Label" parent="SelectedHeroPanel/VBoxContainer/SP"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -426,6 +428,7 @@ patch_margin_left = 7
 patch_margin_right = 6
 
 [node name="Exp_Label" type="Label" parent="SelectedHeroPanel/VBoxContainer/ExpBar"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -531,7 +534,6 @@ theme_override_styles/hover = ExtResource("4_f6k66")
 text = "Quay lại"
 
 [node name="ShopListPanel" type="PanelContainer" parent="."]
-visible = false
 custom_minimum_size = Vector2(100, 0)
 layout_direction = 1
 anchors_preset = 6
@@ -1035,6 +1037,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="InventoryPanel" type="PanelContainer" parent="." groups=["panel"]]
+visible = false
 custom_minimum_size = Vector2(450, 250)
 anchors_preset = 8
 anchor_left = 0.5
@@ -1445,6 +1448,12 @@ offset_bottom = 183.0
 [connection signal="pressed" from="HBoxContainer/SummonButton" to="." method="_on_summon_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/WarehouseButton" to="." method="_on_warehouse_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/SettingButton" to="." method="_on_setting_button_pressed"]
+[connection signal="mouse_entered" from="SelectedHeroPanel/VBoxContainer/HPBar" to="." method="_on_hp_bar_mouse_entered"]
+[connection signal="mouse_exited" from="SelectedHeroPanel/VBoxContainer/HPBar" to="." method="_on_hp_bar_mouse_exited"]
+[connection signal="mouse_entered" from="SelectedHeroPanel/VBoxContainer/SP" to="." method="_on_sp_bar_mouse_entered"]
+[connection signal="mouse_exited" from="SelectedHeroPanel/VBoxContainer/SP" to="." method="_on_sp_bar_mouse_exited"]
+[connection signal="mouse_entered" from="SelectedHeroPanel/VBoxContainer/ExpBar" to="." method="_on_exp_bar_mouse_entered"]
+[connection signal="mouse_exited" from="SelectedHeroPanel/VBoxContainer/ExpBar" to="." method="_on_exp_bar_mouse_exited"]
 [connection signal="pressed" from="SelectedHeroPanel/VBoxContainer/HBoxContainer/InfoButton" to="." method="_on_info_button_pressed"]
 [connection signal="pressed" from="SelectedHeroPanel/VBoxContainer/HBoxContainer/InventoryButton" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="MovementButtons/VBox/GoToVillageButton" to="." method="_on_go_to_village_button_pressed"]
@@ -1455,7 +1464,7 @@ offset_bottom = 183.0
 [connection signal="pressed" from="ShopListPanel/VBox/RestButton" to="." method="_on_rest_button_pressed"]
 [connection signal="pressed" from="ShopListPanel/VBox/SellItemsShopButton" to="." method="_on_sell_items_shop_button_pressed"]
 [connection signal="pressed" from="ShopListPanel/VBox/PotionShopButton" to="." method="_on_potion_shop_button_pressed"]
-[connection signal="pressed" from="ShopListPanel/VBox/EquipShopButton" to="." method="_on_go_to_equipment_shop_button_pressed"]
+[connection signal="pressed" from="ShopListPanel/VBox/EquipShopButton" to="." method="_on_equipment_shop_button_pressed"]
 [connection signal="pressed" from="ShopListPanel/VBox/BackToMainMenuButton2" to="." method="_on_back_to_main_menu_button_pressed"]
 [connection signal="pressed" from="MainCommandMenu/VBox/MoveButton" to="." method="_on_move_button_pressed"]
 [connection signal="pressed" from="MainCommandMenu/VBox/ShopButton" to="." method="_on_shop_button_pressed"]
@@ -1465,6 +1474,6 @@ offset_bottom = 183.0
 [connection signal="pressed" from="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button4" to="." method="_on_int_button_pressed"]
 [connection signal="pressed" from="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button5" to="." method="_on_dex_button_pressed"]
 [connection signal="pressed" from="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer2/Button6" to="." method="_on_luk_button_pressed"]
-[connection signal="pressed" from="HeroInfoPanel/HeroInfoPanel/Thông tin/FunctionButtons/CloseButton" to="." method="_on_close_info_button_pressed"]
-[connection signal="pressed" from="HeroInfoPanel/Button" to="." method="_on_close_info_button_pressed"]
+[connection signal="pressed" from="HeroInfoPanel/HeroInfoPanel/Thông tin/FunctionButtons/CloseButton" to="." method="_on_close_hero_info_button_pressed"]
+[connection signal="pressed" from="HeroInfoPanel/Button" to="." method="_on_close_hero_info_button_pressed"]
 [connection signal="pressed" from="InventoryPanel/Button" to="." method="_on_button_pressed"]

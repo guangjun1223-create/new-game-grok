@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dgafoy5f8jmwg"
-path="res://.godot/imported/Sword.png-64d9c9e47807582b3ebbd0efe9ccd08b.ctex"
+path.s3tc="res://.godot/imported/Sword.png-64d9c9e47807582b3ebbd0efe9ccd08b.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Shamans_3/Sword.png"
-dest_files=["res://.godot/imported/Sword.png-64d9c9e47807582b3ebbd0efe9ccd08b.ctex"]
+dest_files=["res://.godot/imported/Sword.png-64d9c9e47807582b3ebbd0efe9ccd08b.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

@@ -20,9 +20,9 @@ func get_all_faces() -> Array:
 	return [] # Trả về mảng rỗng nếu không có
 
 # Hàm trả về toàn bộ danh sách mũ/tóc
-func get_all_helmets() -> Array:
-	if _appearance_data.has("helmets"):
-		return _appearance_data.helmets
+func get_all_head() -> Array:
+	if _appearance_data.has("head"):
+		return _appearance_data.head
 	return []
 
 # Hàm trả về toàn bộ danh sách bộ giáp
@@ -41,11 +41,11 @@ func get_random_face() -> String:
 	return ""
 
 # Hàm lấy một chiếc mũ ngẫu nhiên
-func get_random_helmet() -> String:
-	if _appearance_data.has("helmets") and not _appearance_data.helmets.is_empty():
-		var random_helmet_data: Dictionary = _appearance_data.helmets.pick_random()
+func get_random_head() -> String:
+	if _appearance_data.has("head") and not _appearance_data.heads.is_empty():
+		var random_head_data: Dictionary = _appearance_data.head.pick_random()
 		# SỬA LỖI: Lấy "path" từ random_helmet_data
-		return random_helmet_data.get("path", "")
+		return random_head_data.get("path", "")
 	return ""
 
 

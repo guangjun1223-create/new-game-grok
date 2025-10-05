@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dk24edethi62"
-path="res://.godot/imported/Left Leg.png-1dd9dd6a45c18961c21b6d66291d365e.ctex"
+path.s3tc="res://.godot/imported/Left Leg.png-1dd9dd6a45c18961c21b6d66291d365e.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Goblin/Left Leg.png"
-dest_files=["res://.godot/imported/Left Leg.png-1dd9dd6a45c18961c21b6d66291d365e.ctex"]
+dest_files=["res://.godot/imported/Left Leg.png-1dd9dd6a45c18961c21b6d66291d365e.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

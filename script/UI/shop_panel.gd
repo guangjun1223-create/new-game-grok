@@ -103,12 +103,18 @@ func _on_purchase_quantity_confirmed(hero: Hero, item_id: String, quantity: int)
 	var item_data = ItemDatabase.get_item_data(item_id)
 	var total_cost = item_data.get("price", 0) * quantity
 
-	# Kiểm tra xem hero có đủ tiền không
-	if hero.gold >= total_cost:
-		hero.gold -= total_cost
+	# SỬA LỖI: Kiểm tra xem hero có đủ tiền không, lấy gold từ component
+	if hero.hero_inventory.gold >= total_cost:
+		# SỬA LỖI: Trừ tiền của hero, thao tác trên gold của component
+		hero.hero_inventory.gold -= total_cost
+		
+		# Các hàm ủy thác này đã đúng, chúng sẽ tự gọi đến component tương ứng
 		hero.add_item(item_id, quantity)
-		# (Tùy chọn) Có thể trừ vật phẩm khỏi kho người chơi ở đây
-		PlayerStats.remove_item_from_warehouse(item_id, quantity)
+		
+		# (Tùy chọn) Có thể trừ vật phẩm khỏi kho của người bán ở đây nếu cần
+		# Ví dụ: PlayerStats.remove_item_from_shop_stock(item_id, quantity)
+		
+		# Cập nhật lại giao diện cửa hàng
 		_populate_shop_by_category(_shop_type)
 	else:
 		print("Hero '%s' không đủ tiền!" % hero.hero_name)

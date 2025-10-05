@@ -61,3 +61,16 @@ func get_skills_for_job(job_key: String) -> Array:
 	# Trả về danh sách đã được nhóm sẵn, cực kỳ nhanh!
 	# Nếu không có skill nào cho nghề đó, trả về một mảng rỗng.
 	return _skills_by_job.get(job_key, [])
+	
+func get_skill_tree_for_job(job_key: String) -> Array:
+	# Kiểm tra xem dữ liệu đã được tải và có chứa "SKILL_TREES" không
+	if _skill_data.has("SKILL_TREES"):
+		var all_skill_trees = _skill_data["SKILL_TREES"]
+		# Kiểm tra xem có cây kỹ năng cho nghề này không
+		if all_skill_trees.has(job_key):
+			# Trả về mảng các skill ID
+			return all_skill_trees[job_key]
+	
+	# Nếu không tìm thấy, trả về một mảng rỗng để tránh lỗi
+	push_warning("SkillDatabase: Không tìm thấy cây kỹ năng cho nghề '%s'" % job_key)
+	return []

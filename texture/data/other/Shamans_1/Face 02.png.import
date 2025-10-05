@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://crbquoyj5rg14"
-path="res://.godot/imported/Face 02.png-d3391334ef9d0ff4d95f5cb04b8070bf.ctex"
+path.s3tc="res://.godot/imported/Face 02.png-d3391334ef9d0ff4d95f5cb04b8070bf.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://texture/data/other/Shamans_1/Face 02.png"
-dest_files=["res://.godot/imported/Face 02.png-d3391334ef9d0ff4d95f5cb04b8070bf.ctex"]
+dest_files=["res://.godot/imported/Face 02.png-d3391334ef9d0ff4d95f5cb04b8070bf.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
