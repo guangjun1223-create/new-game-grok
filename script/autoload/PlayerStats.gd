@@ -241,8 +241,7 @@ func _tao_mot_hero_moi() -> Hero:
 	stats_component.dex_tang_truong = du_lieu_nghe.get("dex_growth", 0.0) + mod_tang_truong
 	stats_component.luk_tang_truong = du_lieu_nghe.get("luk_growth", 0.0) + mod_tang_truong
 	stats_component.job_key = job_key
-	# Gán nghề
-	stats_component.initialize_stats()
+
 	
 	# 4. Cập nhật HP/SP cho "Nhạc trưởng"
 	new_hero.current_hp = stats_component.max_hp

@@ -62,6 +62,7 @@ enum State {
 @onready var skeleton_2d: Skeleton2D = $Skeleton2D
 @onready var face_sprite: Sprite2D = $Skeleton2D/HipBone/Than_Minh/Head_Bone/Face_Sprite
 @onready var armor_sprite: Sprite2D = $Skeleton2D/HipBone/Than_Minh/ArmorSprite
+@onready var head_sprite: Sprite2D = $Skeleton2D/HipBone/Than_Minh/Head_Bone/Head_Sprite
 @onready var helmet_sprite: Sprite2D = $Skeleton2D/HipBone/Than_Minh/Head_Bone/helmet_sprite
 @onready var gloves_l_sprite: Sprite2D = $Skeleton2D/HipBone/Than_Minh/Tay_trai/Arm_L_Bone/Arm_L_Sprite
 @onready var gloves_r_sprite: Sprite2D = $Skeleton2D/HipBone/Than_Minh/Tay_Phai/Arm_R_Bone/Arm_R_Sprite
@@ -114,7 +115,6 @@ var _ui_controller: Node
 func _ready() -> void:
 	hero_stats.stats_updated.connect(_on_stats_updated)
 	hero_inventory.equipment_changed.connect(_on_equipment_changed)
-	
 	nav_agent.navigation_finished.connect(_on_navigation_finished)
 	state_timer.timeout.connect(_on_state_timer_timeout)
 	respawn_timer.timeout.connect(_on_respawn_timer_timeout)
@@ -126,6 +126,8 @@ func _ready() -> void:
 	else:
 		name_label.text = hero_name; hero_stats.initialize_stats(); heal_to_full()
 		doi_trang_thai(State.IDLE)
+		
+	hero_stats.initialize_stats()
 
 func _physics_process(delta: float) -> void:
 	if _current_state in [State.IN_BARRACKS, State.RESTING]:
@@ -503,121 +505,128 @@ func _update_hp_display():
 func _update_sp_display(): sp_changed.emit(current_sp, max_sp)
 	
 func _update_equipment_visuals():
-	# Phần 1: Áp dụng ngoại hình cơ bản (áo, mũ, mặt...)
+	print("\n--- [DEBUG] Bắt đầu _update_equipment_visuals() cho hero '", hero_name, "' ---")
 	_apply_base_appearance()
-	
-	# Phần 2: Xử lý các trang bị khác (khiên, giáp...)
-	# (Phần code xử lý khiên và các trang bị khác của bạn giữ nguyên ở đây)
-	# Ví dụ:
-	var visual_map: Dictionary = {
-		"HelmetSprite": helmet_sprite, "ArmorSprite": armor_sprite, "GlovesLSprite": gloves_l_sprite,
-		"GlovesRSprite": gloves_r_sprite, "BootsLSprite": boots_l_sprite, "BootsRSprite": boots_r_sprite,
+	if is_instance_valid(helmet_sprite): helmet_sprite.visible = false
+
+	var visual_sprites_map: Dictionary = {
+		"HelmetSprite": helmet_sprite, "ArmorSprite": armor_sprite,
+		"GlovesLSprite": gloves_l_sprite, "GlovesRSprite": gloves_r_sprite,
+		"BootsLSprite": boots_l_sprite, "BootsRSprite": boots_r_sprite,
 	}
+	print("[DEBUG] Trang bị hiện tại: ", hero_inventory.equipment)
+
+	if is_instance_valid(weapon_container):
+		for weapon_node in weapon_container.get_children():
+			if weapon_node is Sprite2D: weapon_node.visible = false
+		# SỬA LỖI: Truy cập equipment thông qua hero_inventory
+		var weapon_id = hero_inventory.equipment.get("MAIN_HAND")
+		if typeof(weapon_id) == TYPE_STRING and not weapon_id.is_empty():
+			var weapon_data = ItemDatabase.get_item_data(weapon_id)
+			if not weapon_data.is_empty():
+				var weapon_type = weapon_data.get("weapon_type", "SWORD")
+				var target_sprite_name = ""
+				match weapon_type:
+					"SWORD": target_sprite_name = "SwordSprite"
+					"BOW": target_sprite_name = "BowSprite"
+					"STAFF": target_sprite_name = "StaffSprite"
+					"DAGGER": target_sprite_name = "DaggerSprite"
+					_: target_sprite_name = "SwordSprite"
+				if not target_sprite_name.is_empty():
+					var target_sprite = weapon_container.get_node_or_null(target_sprite_name)
+					if is_instance_valid(target_sprite):
+						var icon_path = weapon_data.get("icon_path", "")
+						if not icon_path.is_empty() and FileAccess.file_exists(icon_path): target_sprite.texture = load(icon_path)
+						else: target_sprite.texture = null
+						target_sprite.visible = true
+	
 	if is_instance_valid(offhand_sprite):
 		offhand_sprite.visible = false
 		var shield_id = hero_inventory.equipment.get("OFF_HAND")
 		if typeof(shield_id) == TYPE_STRING and not shield_id.is_empty():
-			var data = ItemDatabase.get_item_data(shield_id)
-			if data.get("equip_slot") == "OFF_HAND":
-				var icon_path = data.get("icon_path", "")
-				if not icon_path.is_empty() and FileAccess.file_exists(icon_path): offhand_sprite.texture = load(icon_path)
-				offhand_sprite.visible = true
-	for slot in ["HELMET", "ARMOR", "GLOVES", "BOOTS", "PANTS"]:
-		var item_id = hero_inventory.equipment.get(slot)
+			var shield_data = ItemDatabase.get_item_data(shield_id)
+			if shield_data.get("equip_slot") == "OFF_HAND":
+				var icon_path = shield_data.get("icon_path", "")
+				if not icon_path.is_empty() and FileAccess.file_exists(icon_path):
+					offhand_sprite.texture = load(icon_path); offhand_sprite.visible = true
+
+	var slots_to_check = ["HELMET", "ARMOR", "GLOVES", "BOOTS", "PANTS"]
+	for slot_key in slots_to_check:
+		var item_id = hero_inventory.equipment.get(slot_key)
 		if typeof(item_id) == TYPE_STRING and not item_id.is_empty():
-			var data = ItemDatabase.get_item_data(item_id)
-			if data.has("visuals"):
-				var visuals = data.get("visuals")
+			print("[DEBUG] Đang xử lý slot '", slot_key, "' với item '", item_id, "'")
+			var item_data = ItemDatabase.get_item_data(item_id)
+			if item_data.has("visuals"):
+				print("[DEBUG] Item '", item_id, "' có dữ liệu 'visuals'.")
+				var visuals = item_data.get("visuals")
 				if visuals is Array:
-					for part in visuals: _apply_visual_data(part, visual_map)
-				elif visuals is Dictionary: _apply_visual_data(visuals, visual_map)
+					for visual_part in visuals: _apply_visual_data(visual_part, visual_sprites_map)
+				elif visuals is Dictionary:
+					_apply_visual_data(visuals, visual_sprites_map)
+			else:
+				print("[DEBUG] CẢNH BÁO: Item '", item_id, "' không có dữ liệu 'visuals' trong item_data.json.")
+			if slot_key == "HELMET" and item_data.get("hide_hair", false):
+				if is_instance_valid(head_sprite): head_sprite.visible = false
 
 
-	# --- PHẦN 3: XỬ LÝ VŨ KHÍ (ĐÃ VIẾT LẠI HOÀN TOÀN) ---
-	if not is_instance_valid(weapon_container): return
-
-	# 3.1. Luôn ẩn tất cả các sprite vũ khí trước
-	for child in weapon_container.get_children():
-		if child is Sprite2D:
-			child.visible = false
-	
-	# 3.2. Lấy dữ liệu vũ khí đang trang bị
-	var weapon_id = hero_inventory.equipment.get("MAIN_HAND")
-	
-	# 3.3. Nếu không trang bị vũ khí
-	if not weapon_id:
-		_current_attack_animation_name = "Attack" # Dùng animation mặc định
-		return # Kết thúc hàm
-
-	var weapon_data = ItemDatabase.get_item_data(weapon_id)
-	if weapon_data.is_empty():
-		_current_attack_animation_name = "Attack"
-		return
-		
-	var weapon_type = weapon_data.get("weapon_type", "SWORD")
-	var icon_path = weapon_data.get("icon_path", "")
-
-	# 3.4. Dùng `match` để xử lý từng loại vũ khí, hiển thị sprite và gán animation
-	match weapon_type:
-		"SWORD":
-			var sprite = weapon_container.get_node_or_null("SwordSprite")
-			if is_instance_valid(sprite) and not icon_path.is_empty():
-				sprite.texture = load(icon_path)
-				sprite.visible = true
-			_current_attack_animation_name = "Attack" # Sửa thành tên animation kiếm của bạn
-
-		"BOW":
-			var sprite = weapon_container.get_node_or_null("BowSprite")
-			if is_instance_valid(sprite) and not icon_path.is_empty():
-				sprite.texture = load(icon_path)
-				sprite.visible = true
-			_current_attack_animation_name = "Shooting" # Sửa thành tên animation bắn cung của bạn
-			
-		"STAFF":
-			var sprite = weapon_container.get_node_or_null("StaffSprite")
-			if is_instance_valid(sprite) and not icon_path.is_empty():
-				sprite.texture = load(icon_path)
-				sprite.visible = true
-			_current_attack_animation_name = "Attack" # Sửa thành tên animation dùng gậy của bạn
-
-		"DAGGER":
-			var sprite = weapon_container.get_node_or_null("DaggerSprite")
-			if is_instance_valid(sprite) and not icon_path.is_empty():
-				sprite.texture = load(icon_path)
-				sprite.visible = true
-			_current_attack_animation_name = "Attack" # Sửa thành tên animation dao găm của bạn
-		
-		_: # Trường hợp mặc định nếu không khớp
-			_current_attack_animation_name = "Attack"
-
-func _apply_visual_data(data: Dictionary, map: Dictionary):
-	var s_name = data.get("target_sprite", ""); var path = data.get("texture_path", "")
-	if map.has(s_name):
-		var node = map[s_name]
-		if is_instance_valid(node):
-			if not path.is_empty() and FileAccess.file_exists(path):
-				node.texture = load(path); node.visible = true
-			else: node.visible = false
+func _apply_visual_data(visual_data: Dictionary, visual_sprites_map: Dictionary):
+	# Lấy thông tin từ data
+	var target_sprite_name = visual_data.get("target_sprite", "")
+	var texture_path = visual_data.get("texture_path", "")
+	print("[DEBUG] Hàm _apply_visual_data nhận được: target='", target_sprite_name, "', path='", texture_path, "'")
+	# Kiểm tra xem tên sprite có trong bản đồ của chúng ta không
+	if visual_sprites_map.has(target_sprite_name):
+		var target_sprite_node = visual_sprites_map[target_sprite_name]
+		if is_instance_valid(target_sprite_node):
+			if not texture_path.is_empty() and FileAccess.file_exists(texture_path):
+				print("[DEBUG] THÀNH CÔNG: Đang gán texture '", texture_path, "' cho node '", target_sprite_name, "'")
+				target_sprite_node.texture = load(texture_path)
+				target_sprite_node.visible = true
+			else:
+				print("[DEBUG] LỖI: Đường dẫn texture rỗng hoặc file '", texture_path, "' không tồn tại.")
+				target_sprite_node.visible = false
+				push_warning("Không tìm thấy texture tại: %s" % texture_path)
+		else:
+			print("[DEBUG] LỖI: Node '", target_sprite_name, "' không hợp lệ (is_instance_valid = false).")
+			push_warning("Tên target_sprite '%s' trong JSON không khớp với bất kỳ Node nào trong visual_sprites_map." % target_sprite_name)
+	else:
+		print("[DEBUG] LỖI: Tên target_sprite '", target_sprite_name, "' không có trong visual_sprites_map.")
 
 func _apply_base_appearance():
-	var face = base_appearance.get("face", "")
-	if is_instance_valid(face_sprite) and not face.is_empty(): face_sprite.texture = load(face)
-	var helmet = base_appearance.get("helmet", "")
-	if is_instance_valid(helmet_sprite):
-		if not helmet.is_empty() and FileAccess.file_exists(helmet): helmet_sprite.texture = load(helmet); helmet_sprite.visible = true
-		else: helmet_sprite.visible = false
-	var armor = base_appearance.get("armor_set", {})
-	if not armor.is_empty():
-		var p = armor.get("armor_sprite", "")
-		if not p.is_empty() and is_instance_valid(armor_sprite): armor_sprite.texture = load(p)
-		p = armor.get("gloves_l_sprite", "")
-		if not p.is_empty() and is_instance_valid(gloves_l_sprite): gloves_l_sprite.texture = load(p)
-		p = armor.get("gloves_r_sprite", "")
-		if not p.is_empty() and is_instance_valid(gloves_r_sprite): gloves_r_sprite.texture = load(p)
-		p = armor.get("boots_l_sprite", "")
-		if not p.is_empty() and is_instance_valid(boots_l_sprite): boots_l_sprite.texture = load(p)
-		p = armor.get("boots_r_sprite", "")
-		if not p.is_empty() and is_instance_valid(boots_r_sprite): boots_r_sprite.texture = load(p)
+	# --- 1. ÁP DỤNG KHUÔN MẶT ---
+	var face_path = base_appearance.get("face", "")
+	if is_instance_valid(face_sprite) and not face_path.is_empty() and FileAccess.file_exists(face_path):
+		face_sprite.texture = load(face_path)
+	# --- 2. ÁP DỤNG TÓC/ĐẦU GỐC ---
+	var head_path = base_appearance.get("head", "") # Đọc đường dẫn từ key "head"
+	if is_instance_valid(head_sprite):
+		# Kiểm tra xem đường dẫn có tồn tại và file có thực sự ở đó không
+		if not head_path.is_empty() and FileAccess.file_exists(head_path):
+			
+			head_sprite.texture = load(head_path)
+			head_sprite.visible = true
+		else:
+			if head_path.is_empty():
+				print("[DEBUG] Lý do: Không tìm thấy key 'head' trong dictionary base_appearance.")
+			else:
+				print("[DEBUG] Lý do: FileAccess.file_exists() trả về 'false'. Vui lòng kiểm tra lại đường dẫn trong file appearance_data.json có chính xác không.")
+			# --- KẾT THÚC GỠ LỖI ---
+			
+			head_sprite.visible = false
+
+	# --- 3. ÁP DỤNG BỘ GIÁP GỐC (Giữ nguyên) ---
+	var armor_set = base_appearance.get("armor_set", {})
+	if not armor_set.is_empty():
+		var armor_path = armor_set.get("armor_sprite", "")
+		if is_instance_valid(armor_sprite) and not armor_path.is_empty(): armor_sprite.texture = load(armor_path)
+		var glove_l_path = armor_set.get("gloves_l_sprite", "")
+		if is_instance_valid(gloves_l_sprite) and not glove_l_path.is_empty(): gloves_l_sprite.texture = load(glove_l_path)
+		var glove_r_path = armor_set.get("gloves_r_sprite", "")
+		if is_instance_valid(gloves_r_sprite) and not glove_r_path.is_empty(): gloves_r_sprite.texture = load(glove_r_path)
+		var boot_l_path = armor_set.get("boots_l_sprite", "")
+		if is_instance_valid(boots_l_sprite) and not boot_l_path.is_empty(): boots_l_sprite.texture = load(boot_l_path)
+		var boot_r_path = armor_set.get("boots_r_sprite", "")
+		if is_instance_valid(boots_r_sprite) and not boot_r_path.is_empty(): boots_r_sprite.texture = load(boot_r_path)
 
 func _update_animation():
 	if _is_attacking: return

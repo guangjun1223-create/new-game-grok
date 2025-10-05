@@ -44,6 +44,9 @@ var bonus_def: float = 0.0; var bonus_mdef: float = 0.0
 var bonus_hit: float = 0.0; var bonus_flee: float = 0.0
 var bonus_crit_rate: float = 0.0; var bonus_crit_dame: float = 0.0
 var bonus_attack_range: float = 0.0; var attack_speed_mod: float = 0.0
+const ATTACK_RANGE: float = 200.0
+var speed: float = 150.0
+var bonus_aspd_flat: float = 0.0
 
 func _ready():
 	hero = get_parent()
@@ -60,53 +63,94 @@ func initialize_stats():
 	update_secondary_stats()
 
 func update_secondary_stats():
+	# --- PHẦN 0: RESET BONUS STATS ---
 	_reset_bonus_stats()
-	if is_instance_valid(hero):
-		var inventory_component = hero.get_node_or_null("HeroInventory")
-		if is_instance_valid(inventory_component):
-			inventory_component.apply_equipment_stats(self)
+	hero.hero_inventory.apply_equipment_stats(self)
+	hero.hero_skills.apply_passive_skill_bonuses(self)
 
-		var skills_component = hero.get_node_or_null("HeroSkills")
-		if is_instance_valid(skills_component):
-			skills_component.apply_passive_skill_bonuses(self)
-
-	var total_str = float(STR + bonus_str); var total_agi = float(AGI + bonus_agi)
-	var total_vit = float(VIT + bonus_vit); var total_intel = float(INTEL + bonus_intel)
-	var total_dex = float(DEX + bonus_dex); var total_luk = float(LUK + bonus_luk)
+	# --- PHẦN 1: TÍNH TỔNG CHỈ SỐ CƠ BẢN ---
+	var total_str = STR + bonus_str
+	var total_agi = AGI + bonus_agi
+	var total_vit = VIT + bonus_vit
+	var total_intel = INTEL + bonus_intel
+	var total_dex = DEX + bonus_dex
+	var total_luk = LUK + bonus_luk
 	
-	# --- TÍNH TOÁN LẠI TOÀN BỘ CHỈ SỐ PHỤ CHO CHÍNH XÁC ---
+	# --- PHẦN 3: ÁP DỤNG CÁC CÔNG THỨC TÍNH TOÁN CHI TIẾT ---
 	
-	var weapon_data = {}
-	if is_instance_valid(hero):
-		var inv_comp = hero.get_node_or_null("HeroInventory")
-		if is_instance_valid(inv_comp):
-			weapon_data = inv_comp.get_current_weapon_data()
+	# Lấy thông tin vũ khí để dùng cho nhiều công thức
+	var weapon_data: Dictionary = hero.hero_inventory.get_current_weapon_data()
+	var weapon_type: String = weapon_data.get("weapon_type", "")
+		
+	# -- 3.1: SINH TỒN & PHÒNG THỦ --
+	var base_hp = (level * 10.0) + (total_vit * 5.0)
+	if weapon_type == "SWORD":
+		base_hp += total_str * 0.5
+	max_hp = base_hp * (1.0 + total_vit * 0.01) + bonus_max_hp
 	
-	# -- SINH TỒN & PHÒNG THỦ --
-	max_hp = (level * 10.0) + (total_vit * 5.0) + bonus_max_hp
-	max_sp = (level * 5.0) + (total_intel * 3.0) + bonus_max_sp
-	def = total_vit + (total_agi / 5.0) + bonus_def
-	mdef = total_intel + (total_vit / 5.0) + bonus_mdef
+	var base_sp = (level * 5.0) + (total_intel * 3.0)
+	max_sp = base_sp * (1.0 + total_intel * 0.01) + bonus_max_sp
+	
+	def = (total_vit / 2.0) + bonus_def
+	mdef = total_intel + (total_vit / 5.0) + (total_dex / 5.0) + (level / 4.0) + bonus_mdef
+	
+	# -- 3.2: CHÍNH XÁC & NÉ TRÁNH --
 	hit = level + total_dex + bonus_hit
-	flee = level + total_agi + (total_luk / 5.0) + bonus_flee
-	crit_rate = (total_luk / 3.0) + bonus_crit_rate
-	crit_damage = 1.5 + bonus_crit_dame
-
-	# -- SÁT THƯƠNG VẬT LÝ (MIN/MAX ATK) --
-	var base_atk = total_str + (total_dex / 4.0) + (total_luk / 5.0)
-	var bien_do = clamp(1.0 - (total_dex / 200.0), 0.7, 0.95) # Biến động sát thương
-	min_atk = (base_atk + bonus_atk) * bien_do
-	max_atk = (base_atk + bonus_atk)
+	flee = level + total_agi + bonus_flee
 	
-	# -- SÁT THƯƠNG PHÉP (MIN/MAX MATK) --
-	var base_matk = total_intel + (total_intel / 2.0) + (total_dex / 5.0)
-	min_matk = (base_matk + bonus_matk) * bien_do
-	max_matk = (base_matk + bonus_matk)
+	# -- 3.3: SÁT THƯƠNG VẬT LÝ --
+	var base_max_atk = 0.0
+	match weapon_type:
+		"SWORD": base_max_atk = (total_str * 1.5) + (total_dex * 0.3)
+		"DAGGER": base_max_atk = (total_str * 1.0) + (total_dex * 0.2) + (total_agi * 0.2)
+		"BOW": base_max_atk = (total_dex * 1.2) + (total_str * 0.3)
+		"STAFF": base_max_atk = total_str * 0.5
+		_: base_max_atk = total_str # Tay không và các loại khác
 
-	# -- TỐC ĐỘ ĐÁNH & TẦM ĐÁNH --
-	var attack_speed_calculated = clamp(2.0 - (total_agi + total_dex) * 0.005, 0.2, 5.0) * (1.0 - attack_speed_mod)
-	attack_time = attack_speed_calculated
-	attack_range_calculated = 150.0 + bonus_attack_range
+	var bonus_atk_from_stats = pow(int(total_str / 10), 2) - 1 + (total_dex / 5) + (total_luk / 5)
+	max_atk = base_max_atk + bonus_atk_from_stats + bonus_atk
+	min_atk = max_atk * (1.0 - (total_dex / 200.0))
+	
+	# -- 3.4: SÁT THƯƠNG PHÉP --
+	var base_min_matk = total_intel + pow(int(total_intel / 7), 2)
+	var base_max_matk = total_intel + pow(int(total_intel / 5), 2)
+	
+	if weapon_type == "STAFF":
+		base_min_matk *= 1.5
+		base_max_matk *= 1.5
+	else:
+		base_min_matk = total_intel / 2.9
+		base_max_matk = total_intel / 2.0
+
+	var bonus_matk_from_stats = pow(int(total_intel / 10), 2) - 1
+	min_matk = base_min_matk + bonus_matk_from_stats + bonus_matk
+	max_matk = base_max_matk + bonus_matk_from_stats + bonus_matk
+	
+	# -- 3.5: TẤN CÔNG PHỤ --
+	crit_rate = (total_luk * 0.3) + bonus_crit_rate
+	crit_damage = 1.5 + (total_agi / 500.0) + (total_luk / 200.0) + bonus_crit_dame
+	
+	# -- 3.6: TỐC ĐỘ & THỜI GIAN --
+	var weapon_penalty = weapon_data.get("aspd_penalty", 0.0)
+	var shield_id = hero.hero_inventory.equipment.get("OFF_HAND")
+	if typeof(shield_id) == TYPE_STRING and not shield_id.is_empty():
+		weapon_penalty += ItemDatabase.get_item_data(shield_id).get("aspd_penalty", 0.0)
+	
+	var stat_bonus_aspd = sqrt( (total_dex*total_dex / 80.0) + (total_agi*total_agi / 32.0) )
+	var aspd = round(156 + stat_bonus_aspd - weapon_penalty + bonus_aspd_flat)
+	aspd = clamp(aspd, 0, 193)
+	
+	attack_time = 0.2
+	if (200.0 - aspd) > 0:
+		var attacks_per_second = 50.0 / (200.0 - aspd)
+		attack_time = (1.0 / attacks_per_second)
+
+	attack_range_calculated = ATTACK_RANGE + bonus_attack_range
+	
+	# -- 3.7: CẬP NHẬT TRẠNG THÁI CUỐI CÙNG --
+	if is_instance_valid(hero):
+		hero.current_hp = min(hero.current_hp, max_hp)
+		hero.current_sp = min(hero.current_sp, max_sp)
 	
 	stats_updated.emit()
 
