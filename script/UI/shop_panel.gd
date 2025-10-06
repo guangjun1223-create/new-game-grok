@@ -101,21 +101,40 @@ func _on_buy_item_pressed(item_info: Dictionary):
 # Khi người chơi xác nhận số lượng mua
 func _on_purchase_quantity_confirmed(hero: Hero, item_id: String, quantity: int):
 	var item_data = ItemDatabase.get_item_data(item_id)
+	if item_data.is_empty():
+		print("Lỗi: Không tìm thấy dữ liệu cho item '%s'" % item_id)
+		return
+
 	var total_cost = item_data.get("price", 0) * quantity
 
-	# SỬA LỖI: Kiểm tra xem hero có đủ tiền không, lấy gold từ component
-	if hero.hero_inventory.gold >= total_cost:
-		# SỬA LỖI: Trừ tiền của hero, thao tác trên gold của component
-		hero.hero_inventory.gold -= total_cost
-		
-		# Các hàm ủy thác này đã đúng, chúng sẽ tự gọi đến component tương ứng
-		hero.add_item(item_id, quantity)
-		
-		# (Tùy chọn) Có thể trừ vật phẩm khỏi kho của người bán ở đây nếu cần
-		# Ví dụ: PlayerStats.remove_item_from_shop_stock(item_id, quantity)
-		
-		# Cập nhật lại giao diện cửa hàng
-		_populate_shop_by_category(_shop_type)
-	else:
+	# --- BƯỚC 1: KIỂM TRA ĐIỀU KIỆN GIAO DỊCH ---
+	# Kiểm tra xem hero có đủ tiền không
+	if hero.hero_inventory.gold < total_cost:
 		print("Hero '%s' không đủ tiền!" % hero.hero_name)
+		# (Tùy chọn) Hiển thị thông báo cho người chơi
+		return
+
+	# --- BƯỚC 2: THỰC HIỆN GIAO DỊCH ---
+	# Cố gắng trừ vật phẩm khỏi kho của người chơi TRƯỚC TIÊN
+	var remove_success = PlayerStats.remove_item_from_warehouse(item_id, quantity)
+
+	# Chỉ tiếp tục nếu việc xóa vật phẩm khỏi kho thành công
+	if remove_success:
+		# Trừ tiền của hero
+		hero.hero_inventory.add_gold(-total_cost)
+
+		# Cộng tiền cho người chơi (vào kho bạc)
+		PlayerStats.add_gold_to_player(total_cost)
+		
+		# Thêm vật phẩm vào túi đồ của hero
+		hero.add_item(item_id, quantity)
+
+		print("Giao dịch thành công: Hero '%s' đã mua %d x '%s'" % [hero.name, quantity, item_id])
+	else:
+		# Trường hợp này hiếm khi xảy ra nếu logic đúng, nhưng để phòng ngừa
+		print("Lỗi hệ thống: Không thể bán vật phẩm không có trong kho!")
+
+	# --- BƯỚC 3: CẬP NHẬT GIAO DIỆN ---
+	# Cập nhật lại giao diện cửa hàng để hiển thị số lượng mới
+	_populate_shop_by_category(_shop_type)
 		

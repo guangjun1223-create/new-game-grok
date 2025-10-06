@@ -45,6 +45,7 @@ var inn_ref: Node = null
 var potion_seller_ref: Node = null
 var job_changer_ref: Node = null
 var equipment_seller_ref: Node = null
+var enhancement_npc_ref: Node = null # Biến để lưu tham chiếu
 
 var gate_connections: Array[GateConnection] = []
 var hero_container: Node
@@ -66,23 +67,14 @@ func register_gate_connections(connections: Array[GateConnection]):
 	gate_connections = connections
 
 func _ready():
+	# Chỉ nạp sẵn scene hero và khởi tạo các giá trị ban đầu
 	hero_scene = load("res://Scene/hero.tscn")
-	# Chờ một frame để đảm bảo tất cả các node con (như UI) đã sẵn sàng
-	await get_tree().process_frame
-	
-	# Khởi tạo các tham chiếu như cũ
-	PlayerStats.register_gate_connections(gate_connections)
-	
-	# === PHẦN MỚI THÊM VÀO ===
-	# Kiểm tra xem có lệnh "tải game" đang chờ không
-	if PlayerStats.should_load_on_enter:
-		PlayerStats.load_game()
-		# Reset lại cờ hiệu sau khi đã thực hiện xong
-		PlayerStats.should_load_on_enter = false 
 	
 	if warehouse.is_empty():
 		print("PlayerStats: Khoi tao Nha kho lan dau.")
 		warehouse.resize(WAREHOUSE_SIZE)
+		add_item_to_warehouse("weapon_upgrade_stone", 10000)
+		add_item_to_warehouse("armor_upgrade_stone", 10000)
 		
 	
 func initialize_world_references():
@@ -141,7 +133,7 @@ func trieu_hoi_hero():
 		# Thêm hero vào game và lưu lại
 		hero_roster.append(new_hero)
 		deploy_hero(new_hero)
-		save_game()
+		_save_game_after_one_frame()
 		
 		print(">>> Triệu hồi thành công hero: %s" % new_hero.name)
 	else:
@@ -212,9 +204,9 @@ func _tao_mot_hero_moi() -> Hero:
 	
 	var new_hero_appearance = {
 		"face": chosen_face_data.get("path"),
-		"head": chosen_head_data.get("path"),
+		"head": chosen_head_data.get("path"), # <--- SỬA LẠI THÀNH "head"
 		"armor_set": chosen_armor_set_data
-	}
+		}
 	
 	# ======================================================================
 	# === PHẦN SỬA LỖI QUAN TRỌNG: GÁN DỮ LIỆU VÀO ĐÚNG COMPONENT CON ===
@@ -241,7 +233,6 @@ func _tao_mot_hero_moi() -> Hero:
 	stats_component.dex_tang_truong = du_lieu_nghe.get("dex_growth", 0.0) + mod_tang_truong
 	stats_component.luk_tang_truong = du_lieu_nghe.get("luk_growth", 0.0) + mod_tang_truong
 	stats_component.job_key = job_key
-
 	
 	# 4. Cập nhật HP/SP cho "Nhạc trưởng"
 	new_hero.current_hp = stats_component.max_hp
@@ -249,7 +240,7 @@ func _tao_mot_hero_moi() -> Hero:
 	
 	# 5. Yêu cầu component HeroInventory thiết lập đồ và vàng
 	var starting_items = [{"id": "simple_sword", "quantity": 1}, {"id": "magic_staff", "quantity": 1}, {"id": "long_bow", "quantity": 1}]
-	var starting_gold = 50
+	var starting_gold = 50000
 	inventory_component.setup(starting_items, starting_gold)
 	
 	return new_hero
@@ -386,7 +377,7 @@ func load_game():
 		var new_hero = hero_scene.instantiate()
 		new_hero.world_node = world_node
 		new_hero.gate_connections = gate_connections
-		new_hero._ui_controller = ui_controller_ref
+		#new_hero._ui_controller = ui_controller_ref
 		
 		# Nạp dữ liệu vào đối tượng Hero
 		new_hero.load_data(hero_data)
@@ -908,3 +899,17 @@ func spend_player_diamonds(amount: int) -> bool:
 		player_stats_changed.emit()
 		return true
 	return false
+	
+func _save_game_after_one_frame():
+	await get_tree().process_frame
+	save_game()
+	
+func register_enhancement_npc(npc_node: Node):
+	enhancement_npc_ref = npc_node
+	print(">>> PlayerStats: Da dang ky EnhancementNPC (Thợ Rèn) thanh cong!")
+
+# (Tùy chọn) Hàm để hero tìm đường đến
+func get_enhancement_npc_position() -> Vector2:
+	if is_instance_valid(enhancement_npc_ref):
+		return enhancement_npc_ref.global_position
+	return Vector2.ZERO

@@ -52,6 +52,7 @@ label_settings = SubResource("LabelSettings_230m4")
 
 [node name="InteractionPromptButton" type="Button" parent="."]
 visible = false
+modulate = Color(1, 1, 1, 0.49803922)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -64,8 +65,9 @@ offset_bottom = -115.00003
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.7, 0.7)
-theme_override_font_sizes/font_size = 32
-text = "Chào mừng bạn đến mua sắm"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "....."
 icon = ExtResource("3_fwatj")
 flat = true
 text_overrun_behavior = 2

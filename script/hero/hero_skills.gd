@@ -47,6 +47,7 @@ func learn_or_upgrade_skill(skill_id: String):
 		skill_points -= cost; learned_skills[skill_id] = current_level + 1
 		if skill_data.get("usage_type") == "PASSIVE": hero.hero_stats.update_secondary_stats()
 		skill_tree_changed.emit()
+		PlayerStats.save_game()
 
 func is_skill_equipped(skill_id: String) -> bool: return skill_id in equipped_skills
 
@@ -54,10 +55,12 @@ func equip_skill(skill_id: String):
 	if is_skill_equipped(skill_id): return
 	var empty_slot = equipped_skills.find(null)
 	if empty_slot != -1: equipped_skills[empty_slot] = skill_id; skill_tree_changed.emit()
+	PlayerStats.save_game()
 
 func unequip_skill(skill_id: String):
 	var slot = equipped_skills.find(skill_id)
 	if slot != -1: equipped_skills[slot] = null; skill_tree_changed.emit()
+	PlayerStats.save_game()
 
 func update_cooldowns(delta: float):
 	for skill_id in _skill_cooldowns:

@@ -257,7 +257,6 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="SelectedHeroPanel" type="Panel" parent="." groups=["panel"]]
-visible = false
 custom_minimum_size = Vector2(250, 130)
 offset_left = 8.0
 offset_top = 51.0
@@ -464,7 +463,6 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="JobChangeButton" type="Button" parent="SelectedHeroPanel/VBoxContainer/HBoxContainer"]
-visible = false
 layout_mode = 2
 text = "Chuyển Job"
 
@@ -589,6 +587,10 @@ theme_override_styles/hover = ExtResource("4_f6k66")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pcf3q")
 text = "Tiệm trang bị"
 expand_icon = true
+
+[node name="EnhancementButton" type="Button" parent="ShopListPanel/VBox"]
+layout_mode = 2
+text = "Tiệm rèn"
 
 [node name="BackToMainMenuButton2" type="Button" parent="ShopListPanel/VBox"]
 layout_mode = 2
@@ -836,6 +838,7 @@ layout_mode = 2
 theme_override_constants/separation = 4
 
 [node name="Info_StrLabel" type="RichTextLabel" parent="HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer"]
+unique_name_in_owner = true
 clip_contents = false
 custom_minimum_size = Vector2(200, 25)
 layout_mode = 2
@@ -1465,6 +1468,7 @@ offset_bottom = 183.0
 [connection signal="pressed" from="ShopListPanel/VBox/SellItemsShopButton" to="." method="_on_sell_items_shop_button_pressed"]
 [connection signal="pressed" from="ShopListPanel/VBox/PotionShopButton" to="." method="_on_potion_shop_button_pressed"]
 [connection signal="pressed" from="ShopListPanel/VBox/EquipShopButton" to="." method="_on_equipment_shop_button_pressed"]
+[connection signal="pressed" from="ShopListPanel/VBox/EnhancementButton" to="." method="_on_enhancement_button_pressed"]
 [connection signal="pressed" from="ShopListPanel/VBox/BackToMainMenuButton2" to="." method="_on_back_to_main_menu_button_pressed"]
 [connection signal="pressed" from="MainCommandMenu/VBox/MoveButton" to="." method="_on_move_button_pressed"]
 [connection signal="pressed" from="MainCommandMenu/VBox/ShopButton" to="." method="_on_shop_button_pressed"]

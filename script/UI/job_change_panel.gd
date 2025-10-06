@@ -8,6 +8,7 @@ var current_hero: Hero = null
 # Kết nối các node giao diện từ Editor
 @onready var title_label: Label = $PanelContainer/VBoxContainer/TitleLabel
 @onready var description_label: Label = $PanelContainer/VBoxContainer/DescriptionLabel
+@onready var requirements_label: RichTextLabel = $PanelContainer/VBoxContainer/RequirementsLabel
 @onready var swordsman_button: Button = $PanelContainer/VBoxContainer/HBoxContainer/SwordsmanButton
 @onready var mage_button: Button = $PanelContainer/VBoxContainer/HBoxContainer/MageButton
 @onready var archer_button: Button = $PanelContainer/VBoxContainer/HBoxContainer/ArcherButton
@@ -28,23 +29,40 @@ func _ready():
 
 # Hàm này sẽ được gọi từ script UI chính để mở bảng chọn
 func open_panel(hero_to_change: Hero):
+	print("[JobChangePanel] Hàm open_panel() đã được gọi. Đang hiển thị panel...")
 	current_hero = hero_to_change
 	
-	# Cập nhật các dòng chữ để hiển thị đúng thông tin của Hero
 	title_label.text = "Con Đường Mới cho %s" % current_hero.hero_name
-	description_label.text = "Cấp %d %s. Hãy chọn một nhánh nghề để phát triển sức mạnh." % [current_hero.level, current_hero.job_key]
 	
-	show() # Hiện bảng chọn lên
+	var stats_component = current_hero.hero_stats
+	description_label.text = "Cấp %d %s. Hãy chọn một nhánh nghề để phát triển sức mạnh." % [stats_component.level, stats_component.job_key]
+	
+	# Hiển thị các yêu cầu
+	var requirements = GameDataManager.get_job_change_requirements()
+	var req_text = "[b]Yêu cầu:[/b]\n"
+	req_text += "- Vàng: [color=gold]%d[/color]\n" % requirements.get("gold_cost", 0)
+	for item in requirements.get("items", []):
+		var item_data = ItemDatabase.get_item_data(item["id"])
+		req_text += "- %s: x%d\n" % [item_data.get("name", item["id"]), item["quantity"]]
+	requirements_label.text = req_text
+	
+	show()
+	
 
-# Hàm xử lý chung khi bất kỳ nút chọn nghề nào được nhấn
 func _on_job_button_pressed(new_job_key: String):
-	# Kiểm tra lại để chắc chắn có một Hero đang được chọn
 	if not is_instance_valid(current_hero):
 		push_error("Lỗi Panel: Không có Hero nào để chuyển nghề!")
 		return
 		
+	# Kiểm tra lại một lần nữa trước khi trừ tiền
+	if not current_hero.can_change_job():
+		FloatingTextManager.show_text("Không đủ điều kiện!", Color.RED, get_viewport().get_mouse_position())
+		return
+	
+	# Trừ chi phí
+	current_hero.consume_job_change_costs()
+	
 	# Ra lệnh cho Hero thực hiện việc chuyển nghề
 	current_hero.change_job(new_job_key)
 	
-	# Sau khi chuyển xong, ẩn bảng chọn đi
 	hide()

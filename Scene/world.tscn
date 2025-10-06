@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://bx8fpvmwk3tk6"]
+[gd_scene load_steps=47 format=4 uid="uid://bx8fpvmwk3tk6"]
 
 [ext_resource type="Texture2D" uid="uid://cgwod6qxoj6g0" path="res://texture/tiles/TX Tileset Grass.png" id="1_dlwip"]
 [ext_resource type="Script" uid="uid://cr35svkbgb5l3" path="res://script/world.gd" id="1_h7cfj"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cv77f613cljcc" path="res://Scene/NPC/JobChangerNPC.tscn" id="14_s81y4"]
 [ext_resource type="PackedScene" uid="uid://bymbjv0u8elhm" path="res://Scene/NPC/potion_seller_npc.tscn" id="15_bfvnh"]
 [ext_resource type="PackedScene" uid="uid://b4blj0d0k6ca4" path="res://Scene/NPC/equipment_seller_npc.tscn" id="16_o8j5v"]
+[ext_resource type="PackedScene" uid="uid://ho60y6yudae6" path="res://Scene/NPC/enhancement.tscn" id="17_opfkj"]
 
 [sub_resource type="Resource" id="Resource_y56vo"]
 script = ExtResource("2_y56vo")
@@ -2415,6 +2416,9 @@ position = Vector2(516, -5002)
 [node name="equipmentsellernpc" parent="Village_Boundary" instance=ExtResource("16_o8j5v")]
 position = Vector2(130, -5012)
 
+[node name="Enhancement" parent="Village_Boundary" instance=ExtResource("17_opfkj")]
+position = Vector2(-1340, -5444)
+
 [node name="Forest_Boundary" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 0
@@ -2552,9 +2556,13 @@ debug_color = Color(0.656742, 0.148075, 0, 0.42)
 [node name="nav_forest02" type="NavigationRegion2D" parent="Forest2_Boundary"]
 navigation_polygon = SubResource("NavigationPolygon_nka0b")
 
-[node name="Ui" parent="." node_paths=PackedStringArray("blacksmith_npc", "alchemist_npc", "village_boundary", "forest_boundary", "forest2_boundary", "forest3_boundary", "shop_npc") instance=ExtResource("10_y56vo")]
+[node name="Ui" parent="." node_paths=PackedStringArray("blacksmith_npc", "alchemist_npc", "potion_seller_npc", "equipment_seller_npc", "job_changer_npc", "enhancement_npc", "village_boundary", "forest_boundary", "forest2_boundary", "forest3_boundary", "shop_npc") instance=ExtResource("10_y56vo")]
 blacksmith_npc = NodePath("../Village_Boundary/BlacksmithNPC")
 alchemist_npc = NodePath("../Village_Boundary/AlchemistNPC")
+potion_seller_npc = NodePath("../Village_Boundary/PotionSellerNPC")
+equipment_seller_npc = NodePath("../Village_Boundary/equipmentsellernpc")
+job_changer_npc = NodePath("../Village_Boundary/JobChangerNpc")
+enhancement_npc = NodePath("../Village_Boundary/Enhancement")
 village_boundary = NodePath("../Village_Boundary")
 forest_boundary = NodePath("../Forest_Boundary")
 forest2_boundary = NodePath("../Forest1_Boundary")

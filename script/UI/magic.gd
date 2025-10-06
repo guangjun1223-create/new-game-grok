@@ -42,10 +42,12 @@ func _on_body_entered(body):
 	if body.is_in_group("monsters") and not body.is_dead:
 		is_hitting = true
 		if is_instance_valid(attacker):
-			# Gây sát thương dựa trên loại đã được lưu (thay vì luôn là 'true')
-			attacker.execute_attack_on(body, self.is_magic)
+			# SỬA LẠI: Thêm tham số thứ 3 (skill_multiplier) là 1.0 cho đòn đánh thường
+			attacker.execute_attack_on(body, self.is_magic, 1.0)
 		animated_sprite.play("hit")
-
+		
 func _on_animation_finished():
+	# Kiểm tra xem animation vừa kết thúc có phải là "hit" không
 	if animated_sprite.animation == "hit":
+		# Nếu đúng, tự hủy đối tượng quả cầu phép
 		queue_free()

@@ -2,13 +2,11 @@
 extends Node
 
 var _skill_data: Dictionary = {}
-# BIẾN MỚI: Dùng để lưu trữ các skill đã được nhóm theo nghề.
 var _skills_by_job: Dictionary = {}
 
 
 func _ready():
 	_load_skill_data()
-
 
 func _load_skill_data():
 	var file_path = "res://Data/skill_data.json"
@@ -28,49 +26,25 @@ func _load_skill_data():
 	_skill_data = parse_result
 	print("SkillDatabase: Đã tải %d kỹ năng từ JSON." % _skill_data.size())
 	
-	# === PHẦN BỔ SUNG QUAN TRỌNG ===
-	# Sau khi tải xong, gọi hàm xử lý để nhóm các skill lại.
 	_process_and_group_skills()
-	# =================================
 
-# HÀM MỚI: Chạy 1 lần duy nhất để sắp xếp skill vào từng "ngăn" theo nghề.
 func _process_and_group_skills():
-	# Lặp qua tất cả skill_id trong dữ liệu gốc
+	_skills_by_job.clear() # Xóa dữ liệu cũ phòng trường hợp load lại
 	for skill_id in _skill_data:
 		var skill_info: Dictionary = _skill_data[skill_id]
-		# Lấy ra job_key của skill đó (Lưu ý: trong file json của bạn là "job")
 		var job_key: String = skill_info.get("job")
 
-		# Nếu chưa có "ngăn" cho nghề này, tạo một Array mới
 		if not _skills_by_job.has(job_key):
 			_skills_by_job[job_key] = []
 
-		# Thêm ID của skill này vào đúng "ngăn" của nó
 		_skills_by_job[job_key].append(skill_id)
 		
 	print("SkillDatabase: Đã nhóm skill cho %d nghề." % _skills_by_job.size())
-
 
 # Hàm lấy thông tin 1 skill (giữ nguyên)
 func get_skill_data(skill_id: String) -> Dictionary:
 	return _skill_data.get(skill_id, {})
 
-# === HÀM BỊ THIẾU MÀ CHÚNG TA THÊM VÀO ===
-# Hàm này sẽ trả về một Array chứa ID của tất cả các skill thuộc về một nghề.
+# HÀM DUY NHẤT VÀ CHÍNH XÁC ĐỂ LẤY SKILL THEO NGHỀ
 func get_skills_for_job(job_key: String) -> Array:
-	# Trả về danh sách đã được nhóm sẵn, cực kỳ nhanh!
-	# Nếu không có skill nào cho nghề đó, trả về một mảng rỗng.
 	return _skills_by_job.get(job_key, [])
-	
-func get_skill_tree_for_job(job_key: String) -> Array:
-	# Kiểm tra xem dữ liệu đã được tải và có chứa "SKILL_TREES" không
-	if _skill_data.has("SKILL_TREES"):
-		var all_skill_trees = _skill_data["SKILL_TREES"]
-		# Kiểm tra xem có cây kỹ năng cho nghề này không
-		if all_skill_trees.has(job_key):
-			# Trả về mảng các skill ID
-			return all_skill_trees[job_key]
-	
-	# Nếu không tìm thấy, trả về một mảng rỗng để tránh lỗi
-	push_warning("SkillDatabase: Không tìm thấy cây kỹ năng cho nghề '%s'" % job_key)
-	return []

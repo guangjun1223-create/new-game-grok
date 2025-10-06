@@ -3,6 +3,7 @@ extends Node
 # Hai biến để lưu trữ hai loại dữ liệu riêng biệt
 var _game_data: Dictionary = {}      # Sẽ chứa dữ liệu từ game_data.json
 var _crafting_data: Dictionary = {}  # Sẽ chứa dữ liệu từ crafting.json
+var _job_change_data: Dictionary = {}
 enum ItemQuality { BI_HONG, KEM, THUONG, TOT, RAT_TOT, HIEM }
 
 func _ready():
@@ -10,6 +11,7 @@ func _ready():
 	_load_json_file("res://Data/game_data.json", "_game_data")
 	# Tải file dữ liệu chế tác
 	_load_json_file("res://Data/crafting.json", "_crafting_data")
+	_load_job_change_data()
 
 # Hàm phụ trợ để tải và kiểm tra lỗi cho file JSON
 func _load_json_file(path: String, target_variable_name: String):
@@ -29,7 +31,6 @@ func _load_json_file(path: String, target_variable_name: String):
 		push_error("GameDataManager: Loi khi doc file JSON: %s" % path)
 
 
-# --- CÁC HÀM LẤY DỮ LIỆU TỪ _game_data ---
 
 func get_hero_definition(job_key: String) -> Dictionary:
 	if _game_data.has("heroes") and _game_data["heroes"].has(job_key):
@@ -135,3 +136,64 @@ static func create_equipment_instance(base_item_id: String) -> Dictionary:
 
 	print("Đã tạo ra trang bị: %s [%s]" % [base_item_id, quality_name])
 	return new_item_instance
+	
+func get_job_change_requirements() -> Dictionary:
+	# Lấy yêu cầu cụ thể cho việc chuyển từ nghề "Novice"
+	if _job_change_data.has("Novice"):
+		return _job_change_data["Novice"]
+	
+	# Nếu không tìm thấy, trả về một dictionary rỗng để tránh lỗi
+	push_warning("GameDataManager: Không tìm thấy yêu cầu chuyển nghề cho 'Novice' trong job_change.json.")
+	return {}
+	
+func _load_job_change_data():
+	var file_path = "res://Data/job_change.json"
+	if not FileAccess.file_exists(file_path):
+		push_error("LỖI: Không tìm thấy file job_change.json tại: %s" % file_path)
+		return
+
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var json_string = file.get_as_text()
+	file.close()
+
+	var parse_result = JSON.parse_string(json_string)
+	if parse_result == null:
+		push_error("LỖI: Dữ liệu trong job_change.json bị lỗi!")
+		return
+	_job_change_data = parse_result
+	
+func get_max_upgrade_level() -> int:
+	return 20
+
+func get_upgrade_gold_cost(current_level: int) -> int:
+	if current_level <= 9: # Từ +0 -> +9 (để lên +1 đến +10)
+		return 10000
+	else: # Từ +10 -> +19 (để lên +11 đến +20)
+		return 20000
+
+func get_upgrade_stone_cost(current_level: int) -> int:
+	# Chi phí đá = cấp độ tiếp theo
+	return current_level + 1
+
+# Hàm này tính toán tỉ lệ và hình phạt dựa trên cấp độ hiện tại của trang bị
+func get_upgrade_info(current_level: int) -> Dictionary:
+	var success_rate = 0.0
+	var penalty = "none"
+
+	if current_level <= 4: # Lên +1 đến +5
+		success_rate = 100.0
+		penalty = "none"
+	elif current_level <= 14: # Lên +6 đến +15
+		# Tỉ lệ giảm từ 90% ở +5 xuống 10% ở +14
+		success_rate = 90.0 - (current_level - 5) * 8.0 
+		penalty = "lose_materials"
+	elif current_level <= 19: # Lên +16 đến +20
+		# Tỉ lệ giảm từ 10% ở +15 xuống 1% ở +19
+		success_rate = 10.0 - (current_level - 15) * 2.25
+		penalty = "destroy_item"
+
+	return {
+		"success_rate": clamp(success_rate, 1.0, 100.0), # Đảm bảo tỉ lệ không bao giờ dưới 1%
+		"penalty_on_fail": penalty
+	}
+	

@@ -11,6 +11,8 @@ const BuybackQuantityPanelScene = preload("res://Scene/UI/buyback_quantity_panel
 const ShopPanelScene = preload("res://Scene/UI/shop_panel.tscn")
 const HeroBarracksPanelScene = preload("res://Scene/UI/hero_barracks_panel.tscn")
 const CraftingQuantityPanelScene = preload("res://Scene/UI/crafting_quantity_panel.tscn")
+const UpgradeChoiceDialogScene = preload("res://Scene/UI/upgrade_choice_dialog.tscn")
+const UpgradePanelScene = preload("res://Scene/UI/upgrade_panel.tscn")
 const VillageUpgradePanelScene = preload("res://Scene/UI/village_upgrade_panel.tscn")
 const JobSkillPanelScene = preload("res://Scene/UI/job_skill_panel.tscn") # <-- THAY ĐÚNG ĐƯỜNG DẪN
 const SkillSlotScene = preload("res://Scene/UI/skill_slot.tscn")
@@ -29,12 +31,6 @@ var _main_camera: Camera2D
 var _active_respawn_bars: Dictionary = {}
 const MAX_SKILL_SLOTS = 4
 var equipped_skills: Array = []
-
-var _potion_cooldowns: Dictionary = {
-	"POTION_1": 0.0,
-	"POTION_2": 0.0,
-	"POTION_3": 0.0
-}
 
 # --- CÁC PANEL CHÍNH ---
 @onready var selected_hero_panel: Panel = $SelectedHeroPanel
@@ -76,7 +72,7 @@ var _potion_cooldowns: Dictionary = {
 @onready var info_exp_label: Label = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/Info_ExpLabel"
 @onready var info_hp_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/Info_HPLabel"
 @onready var info_sp_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/Info_SPLabel"
-@onready var info_str_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer/Info_StrLabel"
+@onready var info_str_label: RichTextLabel = %Info_StrLabel
 @onready var info_agi_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer/Info_AgiLabel"
 @onready var info_vit_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer/Info_VitLabel"
 @onready var info_int_label: RichTextLabel = $"HeroInfoPanel/HeroInfoPanel/Thông tin/VBoxContainer/HBoxContainer/HBoxContainer8/VBoxContainer/Info_IntLabel"
@@ -152,11 +148,14 @@ var _potion_cooldowns: Dictionary = {
 @export var alchemist_npc: StaticBody2D
 @export var potion_seller_npc: StaticBody2D
 @export var equipment_seller_npc: StaticBody2D
+@export var job_changer_npc: CharacterBody2D
+@export var enhancement_npc: StaticBody2D
 
 var hero_hien_tai: Hero
 
 var current_open_panel: Control = null
 var village_upgrade_panel_instance = null
+var _hero_for_upgrade: Hero = null
 
 var backpack_slots: Array[Button] = []
 var warehouse_slots: Array[Button] = []
@@ -309,13 +308,11 @@ func _connect_button_signals():
 	bottom_bar_container.gui_input.connect(_on_panel_gui_input)
 	movement_buttons.gui_input.connect(_on_panel_gui_input)
 	barracks_button.pressed.connect(_on_barracks_button_pressed)
-	job_change_button.pressed.connect(_on_open_job_change_panel)
+	job_change_button.pressed.connect(_on_job_changer_button_pressed)
 	village_upgrade_button.pressed.connect(_on_village_upgrade_button_pressed)
 	close_warehouse_button.pressed.connect(_on_close_button_pressed)
 	close_buyback_button.pressed.connect(_on_close_buyback_button_pressed)
 	sa_thai_button.pressed.connect(_on_sa_thai_button_pressed)
-	
-	var job_changer_npc = get_tree().get_root().get_node("World/Village_Boundary/JobChangerNpc")
 	
 	if is_instance_valid(blacksmith_npc):
 		blacksmith_npc.blacksmith_panel_requested.connect(_on_blacksmith_panel_requested)
@@ -326,9 +323,10 @@ func _connect_button_signals():
 	else:
 		push_warning("UI CHƯA ĐƯỢC KẾT NỐI VỚI ALCHEMIST NPC!")
 	if is_instance_valid(job_changer_npc):
-		job_changer_npc.open_job_change_panel.connect(_on_open_job_change_panel)
-	else:
-		push_warning("Không tìm thấy NPC chuyển nghề trong World")
+		if not job_changer_npc.open_job_change_panel.is_connected(_on_open_job_change_panel):
+			job_changer_npc.open_job_change_panel.connect(_on_open_job_change_panel)
+	if is_instance_valid(enhancement_npc):
+		enhancement_npc.upgrade_panel_requested.connect(_on_upgrade_panel_requested)
 	
 func _close_all_main_panels():
 	get_tree().call_group("panels", "hide")
@@ -487,7 +485,6 @@ func _update_backpack_display() -> void:
 			slot_node.display_item(null, 0)
 		return
 
-	# SỬA LỖI: Lấy 'inventory' từ component hero_inventory
 	var inv: Array = _current_hero.hero_inventory.inventory
 	var inv_size: int = inv.size()
 
@@ -495,12 +492,25 @@ func _update_backpack_display() -> void:
 		var slot_node = backpack_slots[i]
 		var item_info = inv[i] if i < inv_size else null
 
-		if item_info != null and item_info.has("id"):
-			var item_id: String = item_info["id"]
-			var quantity: int = item_info.get("quantity", 1)
-			var new_icon = ItemDatabase.get_item_icon(item_id)
-			slot_node.display_item(new_icon, quantity)
+		# --- LOGIC SỬA LỖI NẰM Ở ĐÂY ---
+		if item_info is Dictionary:
+			var item_id = ""
+			var quantity = 1
+			var upgrade_level = 0
+			
+			if item_info.has("base_id"): # Xử lý TRANG BỊ (cấu trúc mới)
+				item_id = item_info.base_id
+				upgrade_level = item_info.upgrade_level
+				# Hiển thị cấp + cho trang bị
+				slot_node.display_item(ItemDatabase.get_item_icon(item_id), upgrade_level)
+			elif item_info.has("id"): # Xử lý VẬT PHẨM THƯỜNG (cấu trúc cũ)
+				item_id = item_info.id
+				quantity = item_info.get("quantity", 1)
+				slot_node.display_item(ItemDatabase.get_item_icon(item_id), quantity)
+			else:
+				slot_node.display_item(null, 0)
 		else:
+			# Nếu ô trống (null)
 			slot_node.display_item(null, 0)
 
 func _update_equipment_display(new_equipment: Dictionary = {}):
@@ -820,24 +830,30 @@ func _on_skill_unequip_requested_static(skill_id: String):
 func _build_skill_tree_panel():
 	if not is_instance_valid(_hero_in_view): return
 	
-	# Xóa các slot skill cũ
+	# Xóa các panel kỹ năng cũ
 	for child in skill_list_container.get_children():
 		child.queue_free()
 
-	# --- PHẦN SỬA LỖI ---
-	# Lấy dữ liệu từ các component tương ứng
-	var learned_skills = _hero_in_view.hero_skills.learned_skills
-	var job_key = _hero_in_view.hero_stats.job_key
+	# --- LOGIC MỚI: DỰA VÀO LỊCH SỬ CỦA HERO ---
 	
-	var skill_tree = SkillDatabase.get_skill_tree_for_job(job_key)
-	if skill_tree.is_empty():
-		return
-
-	for skill_id in skill_tree:
-		var new_slot = JobSkillPanelScene.instantiate()
-		# Truyền hero vào để slot con có thể lấy mọi thông tin cần thiết
-		new_slot.set_skill_data(skill_id, _hero_in_view) 
-		skill_list_container.add_child(new_slot)
+	# 1. Lấy ra lịch sử các nghề mà hero đã học từ component HeroStats
+	var hero_job_history = _hero_in_view.hero_stats.job_history
+	
+	# 2. Lặp qua từng nghề trong lịch sử đó
+	for job_key in hero_job_history:
+		# Tạo một Bảng kỹ năng (JobSkillPanel) cho từng nghề
+		var job_panel = JobSkillPanelScene.instantiate()
+		
+		# Thêm bảng kỹ năng này vào VBoxContainer
+		skill_list_container.add_child(job_panel)
+		
+		# Ra lệnh cho bảng kỹ năng đó tự xây dựng danh sách skill của nghề tương ứng
+		job_panel.build_for_job(job_key, _hero_in_view)
+		
+		# Kết nối các tín hiệu như cũ
+		job_panel.upgrade_requested.connect(_on_skill_upgrade_requested)
+		job_panel.equip_requested.connect(_on_skill_equip_requested)
+		job_panel.unequip_requested.connect(_on_skill_unequip_requested)
 
 func _on_close_hero_info_button_pressed():
 	if is_instance_valid(_hero_in_view):
@@ -928,11 +944,6 @@ func _on_backpack_slot_pressed(slot_index: int):
 	if is_instance_valid(_current_hero):
 		print("UI: Ra lenh cho Hero trang bi item tu o so %d" % slot_index)
 		_current_hero.equip_from_inventory(slot_index)
-
-	# Ra lệnh cho hero đang được chọn tự trang bị vật phẩm từ ô túi đồ này
-	_current_hero.equip_from_inventory(slot_index)
-
-
 
 func _on_equipment_slot_pressed(slot_key: String):
 	if not is_instance_valid(_current_hero):
@@ -1206,9 +1217,13 @@ func _on_inn_panel_closed(hero):
 		
 func _on_backpack_slot_mouse_entered(slot_index: int):
 	if is_instance_valid(_current_hero):
+		# Lấy thông tin item từ túi đồ của hero
 		var item_info = _current_hero.hero_inventory.inventory[slot_index]
-		if item_info:
-			# SỬA LẠI: Gọi thẳng tới tooltip và gửi cả dictionary
+		
+		# Chỉ hiển thị tooltip nếu ô đó có vật phẩm
+		if item_info is Dictionary:
+			# Gửi cả dictionary thông tin item vào cho tooltip
+			# Hàm update_tooltip của bạn sẽ cần xử lý cả hai loại cấu trúc
 			item_tooltip.update_tooltip(item_info)
 			item_tooltip.popup(Rect2(get_viewport().get_mouse_position(), item_tooltip.size))
 
@@ -1261,6 +1276,12 @@ func _on_purchase_confirmed(hero: Hero, item_id: String, quantity: int):
 	_update_buyback_panel()
 
 func _on_open_job_change_panel(hero_to_change: Hero):
+	print("[UI] Đã nhận được tín hiệu 'open_job_change_panel'. Chuẩn bị mở panel...")
+	# Kiểm tra xem node job_change_panel có hợp lệ không
+	if not is_instance_valid(job_change_panel):
+		push_error("LỖI UI: Tham chiếu đến 'job_change_panel' không hợp lệ!")
+		return
+		
 	# Khi nhận được tín hiệu, ra lệnh cho panel mở ra và truyền Hero vào
 	job_change_panel.open_panel(hero_to_change)
 	
@@ -1344,12 +1365,14 @@ func _on_hero_potion_cooldown_started(slot_key: String, duration: float):
 
 func _on_job_changer_button_pressed():
 	if not is_instance_valid(_current_hero): return
+	
 	var target_pos = PlayerStats.get_job_changer_position()
+	
 	if target_pos != Vector2.ZERO:
-		# Sửa lỗi: Đổi tên hàm thành move_to_location_by_player
+		print("UI: Ra lệnh cho Hero '%s' di chuyển đến NPC Chuyển Nghề." % _current_hero.name)
 		_current_hero.move_to_location_by_player(target_pos)
-		shop_list_panel.hide()
-		main_command_menu.show()
+	else:
+		push_warning("UI: Không tìm thấy vị trí của JobChangerNPC.")
 		
 func _on_equipment_shop_button_pressed():
 	if not is_instance_valid(_current_hero): return
@@ -1368,6 +1391,47 @@ func _on_hero_arrived_at_equipment_shop(hero: Hero):
 	add_child(shop_panel)
 	# Gọi setup với type là "equipment"
 	shop_panel.setup("equipment", hero)
+	
+func _on_enhancement_button_pressed() -> void:
+	if not is_instance_valid(_current_hero): return
+	
+	# Sửa lại tên biến và tên hàm
+	var target_pos = PlayerStats.get_enhancement_npc_position() # Tên hàm đúng
+	if target_pos != Vector2.ZERO:
+		_current_hero.move_to_location_by_player(target_pos) # Dùng target_pos
+		if is_instance_valid(shop_list_panel): shop_list_panel.hide()
+		if is_instance_valid(main_command_menu): main_command_menu.show()
+		
+func _on_upgrade_panel_requested(hero: Hero):
+	# 1. Lưu lại hero đang tương tác để dùng cho bước sau
+	_hero_for_upgrade = hero
+	
+	# 2. Tạo ra bảng lựa chọn nhỏ
+	var choice_dialog = UpgradeChoiceDialogScene.instantiate()
+	
+	# 3. Lắng nghe xem người chơi sẽ chọn gì từ bảng đó
+	choice_dialog.choice_made.connect(_on_upgrade_choice_made)
+	
+	# 4. Thêm bảng lựa chọn vào game và hiển thị nó
+	add_child(choice_dialog)
+	choice_dialog.global_position = get_viewport().get_mouse_position()
+
+# Hàm này được gọi sau khi người chơi đã chọn "Vũ khí" hoặc "Trang bị"
+func _on_upgrade_choice_made(upgrade_type: String):
+	# Kiểm tra an toàn
+	if not is_instance_valid(_hero_for_upgrade): return
+	
+	# 1. Tạo ra bảng nâng cấp chính
+	var panel = UpgradePanelScene.instantiate()
+	
+	# 2. Thêm vào game
+	add_child(panel)
+	
+	# 3. Thiết lập cho bảng nâng cấp với hero và loại trang bị đã chọn
+	panel.setup(_hero_for_upgrade, upgrade_type)
+	
+	# 4. Dọn dẹp biến tạm
+	_hero_for_upgrade = null
 
 func _on_village_upgrade_button_pressed():
 	if is_instance_valid(village_upgrade_panel_instance):
@@ -1401,7 +1465,7 @@ func _update_hero_count_display(_new_level = 0):
 
 func _on_barracks_button_pressed():
 	var barracks_panel = HeroBarracksPanelScene.instantiate()
-	barracks_panel.add_to_group("panel")
+	barracks_panel.add_to_group("panels")
 	
 	_close_all_main_panels()
 		# Kết nối tín hiệu mới từ panel kho hero

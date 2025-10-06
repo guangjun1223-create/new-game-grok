@@ -35,6 +35,6 @@ func _physics_process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("monsters") and not body.is_dead:
 		if is_instance_valid(attacker):
-			# Gây sát thương dựa trên loại đã được lưu (thay vì luôn là 'false')
-			attacker.execute_attack_on(body, self.is_magic) 
+			# SỬA LẠI: Thêm tham số thứ 3 (skill_multiplier) là 1.0 cho đòn đánh thường
+			attacker.execute_attack_on(body, self.is_magic, 1.0) 
 		queue_free()

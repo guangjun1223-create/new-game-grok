@@ -21,6 +21,7 @@ signal potion_cooldown_started(slot_key, duration)
 # ============================================================================
 const VFX_Scene = preload("res://Scene/VFX/vfx_player.tscn")
 const magic_ball = preload("res://Data/items/magic.tscn")
+const arrow_scene = preload("res://Data/items/arow.tscn")
 var _current_attack_animation_name: String = "Attack"
 const GATE_ARRIVAL_RADIUS: float = 30.0
 
@@ -61,9 +62,9 @@ enum State {
 @onready var hp_label: Label = $VBoxContainer/HPBar/HPLabel
 @onready var skeleton_2d: Skeleton2D = $Skeleton2D
 @onready var face_sprite: Sprite2D = $Skeleton2D/HipBone/Than_Minh/Head_Bone/Face_Sprite
-@onready var armor_sprite: Sprite2D = $Skeleton2D/HipBone/Than_Minh/ArmorSprite
 @onready var head_sprite: Sprite2D = $Skeleton2D/HipBone/Than_Minh/Head_Bone/Head_Sprite
 @onready var helmet_sprite: Sprite2D = $Skeleton2D/HipBone/Than_Minh/Head_Bone/helmet_sprite
+@onready var armor_sprite: Sprite2D = $Skeleton2D/HipBone/Than_Minh/ArmorSprite
 @onready var gloves_l_sprite: Sprite2D = $Skeleton2D/HipBone/Than_Minh/Tay_trai/Arm_L_Bone/Arm_L_Sprite
 @onready var gloves_r_sprite: Sprite2D = $Skeleton2D/HipBone/Than_Minh/Tay_Phai/Arm_R_Bone/Arm_R_Sprite
 @onready var boots_l_sprite: Sprite2D = $Skeleton2D/HipBone/Chan_trai/Leg_L_Bone/BootsLSprite
@@ -107,7 +108,6 @@ var gate_connections: Array = []
 var hero_name: String = "Tan Binh"
 var base_appearance: Dictionary = {}
 var staged_data: Dictionary = {}
-var _ui_controller: Node
 
 # ============================================================================
 # VÒNG ĐỜI GODOT (LIFECYCLE FUNCTIONS)
@@ -115,6 +115,7 @@ var _ui_controller: Node
 func _ready() -> void:
 	hero_stats.stats_updated.connect(_on_stats_updated)
 	hero_inventory.equipment_changed.connect(_on_equipment_changed)
+	
 	nav_agent.navigation_finished.connect(_on_navigation_finished)
 	state_timer.timeout.connect(_on_state_timer_timeout)
 	respawn_timer.timeout.connect(_on_respawn_timer_timeout)
@@ -126,8 +127,6 @@ func _ready() -> void:
 	else:
 		name_label.text = hero_name; hero_stats.initialize_stats(); heal_to_full()
 		doi_trang_thai(State.IDLE)
-		
-	hero_stats.initialize_stats()
 
 func _physics_process(delta: float) -> void:
 	if _current_state in [State.IN_BARRACKS, State.RESTING]:
@@ -149,11 +148,19 @@ func _physics_process(delta: float) -> void:
 					velocity = global_position.direction_to(nav_agent.get_next_path_position()) * speed
 			else: velocity = Vector2.ZERO
 		State.WANDER:
-			nav_agent.target_position = global_position + wander_direction * 1000
+			if nav_agent.is_navigation_finished() or nav_agent.is_target_reached():
+				# Nếu đã đi đến nơi hoặc chưa có mục tiêu, tìm một điểm mới TRONG KHU VỰC HIỆN TẠI
+				if is_instance_valid(_boundary_shape):
+					var rect = _boundary_shape.get_rect()
+					var random_point_local = Vector2(randf_range(rect.position.x, rect.end.x), randf_range(rect.position.y, rect.end.y))
+					var random_point_global = _boundary_transform * random_point_local
+					nav_agent.target_position = random_point_global
+				else:
+					# Nếu không có ranh giới, tạm thời đứng yên để tránh lỗi
+					doi_trang_thai(State.IDLE)
 			if not nav_agent.is_navigation_finished():
 				velocity = global_position.direction_to(nav_agent.get_next_path_position()) * speed
-			if velocity.length() < 10 or nav_agent.is_target_reached():
-				wander_direction = Vector2.RIGHT.rotated(randf_range(0, TAU))
+			
 		State.IDLE, State.TRADING: pass
 		_:
 			if not nav_agent.is_navigation_finished():
@@ -225,15 +232,22 @@ func stop_and_interact_with_npc(npc):
 	if npc.has_method("open_shop_panel"): npc.open_shop_panel(self)
 
 func _on_navigation_finished():
+	# === SỬA PHẦN NÀY ===
 	if _current_state == State.PLAYER_COMMAND:
-		if player_command_target_area == null:
-			player_command_target_position = Vector2.ZERO; doi_trang_thai(State.IDLE)
+		# Bất kể mệnh lệnh là gì, khi di chuyển đã kết thúc, hãy hủy mệnh lệnh
+		# và để cho hero tự quyết định hành động tiếp theo.
+		player_command_target_area = null
+		player_command_target_position = Vector2.ZERO
+		doi_trang_thai(State.IDLE) # Chuyển về IDLE để nó tự quét tìm quái hoặc đi lang thang
 		return
+	# === KẾT THÚC PHẦN SỬA ===
+
 	if _current_state in [State.RESTING, State.TRADING]: return
 	if _current_state == State.GHOST:
 		visible = false; respawn_timer.start(60.0); GameEvents.respawn_started.emit(self); return
 	if _current_state == State.NAVIGATING and is_instance_valid(_current_navigation_gate):
-		_khi_den_cong(); return
+		_khi_den_cong();
+		return
 	doi_trang_thai(State.IDLE)
 
 func _khi_den_cong():
@@ -274,33 +288,48 @@ func tim_duong_di(start: Area2D, end: Area2D) -> Array:
 	return []
 
 func di_den_khu_vuc(target_area: Area2D):
+	# Điều kiện an toàn: không di chuyển nếu đã ở đó hoặc khu vực không hợp lệ
 	if not is_instance_valid(target_area) or movement_area == target_area:
 		return
 
-	# Tìm một điểm hợp lệ bên trong khu vực đích để bắt đầu di chuyển
-	var target_shape: Shape2D = null
-	var target_transform: Transform2D
-	for child in target_area.get_children():
-		if child is CollisionShape2D and is_instance_valid(child.shape):
-			target_shape = child.shape
-			target_transform = child.global_transform
-			break
-	
-	if target_shape == null:
-		push_error("Hero '%s' không tìm thấy ranh giới (CollisionShape2D) trong khu vực đích '%s'" % [name, target_area.name])
-		return
-	
-	# Tạo một điểm ngẫu nhiên bên trong hình dạng ranh giới
-	var rect = target_shape.get_rect()
-	var random_point_local = Vector2(randf_range(rect.position.x, rect.end.x), randf_range(rect.position.y, rect.end.y))
-	var random_point_global = target_transform * random_point_local
-	
-	# Tìm điểm trên lưới navigation gần nhất với điểm ngẫu nhiên
-	var valid_nav_point = NavigationServer2D.map_get_closest_point(get_world_2d().navigation_map, random_point_global)
+	# BƯỚC 1: Sử dụng hệ thống tìm đường đã có để tìm lộ trình qua các cổng
+	var path = tim_duong_di(movement_area, target_area)
 
-	# Gọi hàm ra lệnh tổng, truyền cả vị trí và khu vực đích
-	# Đây là mấu chốt để hero biết nhiệm vụ sẽ hoàn thành khi nó bước vào khu vực mới
-	issue_player_command(valid_nav_point, target_area)
+	# BƯỚC 2: Kiểm tra xem có tìm thấy đường đi không
+	if not path.is_empty():
+		# Nếu có đường đi qua các cổng:
+		print("Hero '%s' đã tìm thấy lộ trình đến '%s'. Bắt đầu di chuyển." % [name, target_area.name])
+		
+		# Lưu lại lộ trình và khu vực đích
+		_current_route = path
+		player_command_target_area = target_area
+		player_command_target_position = Vector2.ZERO # Không cần điểm đến cụ thể nữa
+
+		# Bắt đầu di chuyển đến cổng đầu tiên trong lộ trình
+		bat_dau_buoc_di_chuyen_tiep()
+	else:
+		# Nếu không có đường đi (ví dụ: di chuyển trong cùng một khu vực lớn)
+		# thì quay lại cách cũ là đi tới một điểm ngẫu nhiên
+		push_warning("Không tìm thấy lộ trình cổng cho '%s' đến '%s'. Di chuyển đến điểm ngẫu nhiên." % [name, target_area.name])
+		
+		var target_shape: Shape2D = null
+		var target_transform: Transform2D
+		for child in target_area.get_children():
+			if child is CollisionShape2D and is_instance_valid(child.shape):
+				target_shape = child.shape
+				target_transform = child.global_transform
+				break
+		
+		if target_shape == null:
+			push_error("Hero '%s' không tìm thấy ranh giới (CollisionShape2D) trong khu vực đích '%s'" % [name, target_area.name])
+			return
+
+		var rect = target_shape.get_rect()
+		var random_point_local = Vector2(randf_range(rect.position.x, rect.end.x), randf_range(rect.position.y, rect.end.y))
+		var random_point_global = target_transform * random_point_local
+		var valid_nav_point = NavigationServer2D.map_get_closest_point(get_world_2d().navigation_map, random_point_global)
+		
+		issue_player_command(valid_nav_point, target_area)
 
 func move_to_location_by_player(target_position: Vector2):
 	if is_dead or _current_state in [State.RESTING, State.IN_BARRACKS]:
@@ -314,6 +343,10 @@ func move_to_location_by_player(target_position: Vector2):
 # ============================================================================
 func find_new_target_in_radius():
 	if is_in_village_area(): doi_trang_thai(State.IDLE); return
+	if not is_instance_valid(movement_area):
+		doi_trang_thai(State.IDLE)
+		return
+	
 	attackers = attackers.filter(func(m): return is_instance_valid(m) and not m.is_dead)
 	if not attackers.is_empty():
 		target_monster = attackers.pop_front(); doi_trang_thai(State.COMBAT); return
@@ -342,13 +375,25 @@ func _on_attack_timer_timeout():
 		# Sửa lỗi: Sử dụng biến để gọi animation, thay vì một tên cố định
 		animation_player.play(_current_attack_animation_name)
 		
+func _on_cast_animation_fire():
+	if _is_attacking and is_instance_valid(target_monster):
+		# Gọi hàm bắn đạn, truyền vào scene quả cầu phép
+		_shoot_projectile(magic_ball, true)
+		
 func execute_attack_on(target_node, use_magic: bool, skill_multiplier: float = 1.0):
 	if not is_instance_valid(target_node) or target_node.is_dead: return
-	var result = CombatUtils.hero_tan_cong_quai(self, target_node, use_magic, skill_multiplier)
+	
+	# === THAY ĐỔI QUAN TRỌNG TẠI ĐÂY ===
+	# Truyền "hero_stats" thay vì "self" vào hàm tính toán.
+	# Điều này đảm bảo hàm CombatUtils nhận được đúng đối tượng chứa chỉ số ATK, STR, v.v.
+	var result = CombatUtils.hero_tan_cong_quai(self.hero_stats, target_node, use_magic, skill_multiplier)
+	# ==================================
+
 	var text_pos = target_node.global_position - Vector2(0, 150)
 	if result.is_miss: FloatingTextManager.show_text("MISS!!", Color.GRAY, text_pos)
 	else:
-		var text = str(result.damage); var color = Color.WHITE
+		var text = str(result.damage);
+		var color = Color.WHITE
 		if skill_multiplier > 1.0: color = Color.ORANGE_RED
 		if result.is_crit: color = Color.YELLOW; text += "!!"
 		FloatingTextManager.show_text(text, color, text_pos, result.is_crit)
@@ -379,7 +424,7 @@ func add_item(id: String, q: int = 1) -> bool: return hero_inventory.add_item(id
 func remove_item_from_inventory(id: String, q: int) -> bool: return hero_inventory.remove_item_from_inventory(id, q)
 func add_gold(amount: int): hero_inventory.add_gold(amount)
 func change_job(key: String): hero_stats.change_job(key)
-func nang_cap_chi_so(name: String): hero_stats.nang_cap_chi_so(name)
+func nang_cap_chi_so(stat_name: String): hero_stats.nang_cap_chi_so(stat_name)
 func equip_from_inventory(index: int): hero_inventory.equip_from_inventory(index)
 func unequip_item(key: String): hero_inventory.unequip_item(key)
 func learn_or_upgrade_skill(id: String): hero_skills.learn_or_upgrade_skill(id)
@@ -389,6 +434,7 @@ func get_skill_level(id: String) -> int: return hero_skills.get_skill_level(id)
 func is_skill_equipped(id: String) -> bool: return hero_skills.is_skill_equipped(id)
 func check_skill_requirements(id: String) -> Dictionary: return hero_skills.check_skill_requirements(id)
 func get_current_weapon_type() -> String: return hero_inventory.get_current_weapon_type()
+
 
 # ============================================================================
 # HÀM XỬ LÝ TÍN HIỆU & GIAO TIẾP
@@ -430,7 +476,16 @@ func save_data() -> Dictionary:
 func load_data(data: Dictionary): staged_data = data
 
 func _apply_loaded_data(data: Dictionary):
-	name = data.get("name", "Hero"); hero_name = data.get("hero_name", "Tan Binh")
+	self.name = data.get("name", "Hero")
+	if self.name.contains("("):
+		# Tìm vị trí dấu ngoặc đơn
+		var end_pos = self.name.find("(")
+		# Lấy chuỗi ký tự từ đầu cho đến trước dấu ngoặc đơn (cắt bỏ phần rarity)
+		self.hero_name = self.name.substr(0, end_pos).strip_edges()
+	else:
+		# Nếu không có dấu ngoặc, thì tên Node chính là tên hero
+		self.hero_name = self.name
+
 	base_appearance = data.get("base_appearance", {})
 	
 	hero_stats.load_data(data.get("stats_data", {})); hero_inventory.load_data(data.get("inventory_data", {}))
@@ -441,6 +496,7 @@ func _apply_loaded_data(data: Dictionary):
 	_current_state = data.get("_current_state", State.IDLE)
 	
 	var area_name = data.get("current_area_name", "")
+	name_label.text = hero_name
 	if not area_name.is_empty() and is_instance_valid(world_node):
 		movement_area = world_node.find_child(area_name, true, false)
 	_update_hp_display(); _update_sp_display()
@@ -450,8 +506,8 @@ func _apply_loaded_data(data: Dictionary):
 # ============================================================================
 func _handle_passive_regeneration(delta: float):
 	if is_dead or _current_state == State.COMBAT or not is_instance_valid(hero_stats): return
-	var heal_r = (hero_stats.max_hp / 200.0) + (hero_stats.VIT / 5.0)
-	var sp_r = (hero_stats.max_sp / 100.0) + (hero_stats.INTEL / 6.0)
+	var heal_r = (hero_stats.max_hp / 200.0) + (hero_stats.VIT / 9.0)
+	var sp_r = (hero_stats.max_sp / 100.0) + (hero_stats.INTEL / 9.0)
 	if current_hp < max_hp: current_hp = min(current_hp + heal_r * delta, max_hp); _update_hp_display()
 	if current_sp < max_sp: current_sp = min(current_sp + sp_r * delta, max_sp); _update_sp_display()
 
@@ -505,100 +561,113 @@ func _update_hp_display():
 func _update_sp_display(): sp_changed.emit(current_sp, max_sp)
 	
 func _update_equipment_visuals():
-	print("\n--- [DEBUG] Bắt đầu _update_equipment_visuals() cho hero '", hero_name, "' ---")
+	# Phần 1: Áp dụng ngoại hình cơ bản (áo, mũ, mặt...)
 	_apply_base_appearance()
-	if is_instance_valid(helmet_sprite): helmet_sprite.visible = false
-
-	var visual_sprites_map: Dictionary = {
-		"HelmetSprite": helmet_sprite, "ArmorSprite": armor_sprite,
-		"GlovesLSprite": gloves_l_sprite, "GlovesRSprite": gloves_r_sprite,
-		"BootsLSprite": boots_l_sprite, "BootsRSprite": boots_r_sprite,
-	}
-	print("[DEBUG] Trang bị hiện tại: ", hero_inventory.equipment)
-
-	if is_instance_valid(weapon_container):
-		for weapon_node in weapon_container.get_children():
-			if weapon_node is Sprite2D: weapon_node.visible = false
-		# SỬA LỖI: Truy cập equipment thông qua hero_inventory
-		var weapon_id = hero_inventory.equipment.get("MAIN_HAND")
-		if typeof(weapon_id) == TYPE_STRING and not weapon_id.is_empty():
-			var weapon_data = ItemDatabase.get_item_data(weapon_id)
-			if not weapon_data.is_empty():
-				var weapon_type = weapon_data.get("weapon_type", "SWORD")
-				var target_sprite_name = ""
-				match weapon_type:
-					"SWORD": target_sprite_name = "SwordSprite"
-					"BOW": target_sprite_name = "BowSprite"
-					"STAFF": target_sprite_name = "StaffSprite"
-					"DAGGER": target_sprite_name = "DaggerSprite"
-					_: target_sprite_name = "SwordSprite"
-				if not target_sprite_name.is_empty():
-					var target_sprite = weapon_container.get_node_or_null(target_sprite_name)
-					if is_instance_valid(target_sprite):
-						var icon_path = weapon_data.get("icon_path", "")
-						if not icon_path.is_empty() and FileAccess.file_exists(icon_path): target_sprite.texture = load(icon_path)
-						else: target_sprite.texture = null
-						target_sprite.visible = true
 	
+	# Phần 2: Xử lý các trang bị khác (khiên, giáp...)
+	# (Phần code xử lý khiên và các trang bị khác của bạn giữ nguyên ở đây)
+	# Ví dụ:
+	var visual_map: Dictionary = {
+		"HelmetSprite": helmet_sprite, "ArmorSprite": armor_sprite, "GlovesLSprite": gloves_l_sprite,
+		"GlovesRSprite": gloves_r_sprite, "BootsLSprite": boots_l_sprite, "BootsRSprite": boots_r_sprite,
+	}
 	if is_instance_valid(offhand_sprite):
 		offhand_sprite.visible = false
 		var shield_id = hero_inventory.equipment.get("OFF_HAND")
 		if typeof(shield_id) == TYPE_STRING and not shield_id.is_empty():
-			var shield_data = ItemDatabase.get_item_data(shield_id)
-			if shield_data.get("equip_slot") == "OFF_HAND":
-				var icon_path = shield_data.get("icon_path", "")
-				if not icon_path.is_empty() and FileAccess.file_exists(icon_path):
-					offhand_sprite.texture = load(icon_path); offhand_sprite.visible = true
-
-	var slots_to_check = ["HELMET", "ARMOR", "GLOVES", "BOOTS", "PANTS"]
-	for slot_key in slots_to_check:
-		var item_id = hero_inventory.equipment.get(slot_key)
+			var data = ItemDatabase.get_item_data(shield_id)
+			if data.get("equip_slot") == "OFF_HAND":
+				var shield_icon_path = data.get("icon_path", "")
+				if not shield_icon_path.is_empty() and FileAccess.file_exists(shield_icon_path):
+					offhand_sprite.texture = load(shield_icon_path)
+				offhand_sprite.visible = true
+	for slot in ["HELMET", "ARMOR", "GLOVES", "BOOTS", "PANTS"]:
+		var item_id = hero_inventory.equipment.get(slot)
 		if typeof(item_id) == TYPE_STRING and not item_id.is_empty():
-			print("[DEBUG] Đang xử lý slot '", slot_key, "' với item '", item_id, "'")
-			var item_data = ItemDatabase.get_item_data(item_id)
-			if item_data.has("visuals"):
-				print("[DEBUG] Item '", item_id, "' có dữ liệu 'visuals'.")
-				var visuals = item_data.get("visuals")
+			var data = ItemDatabase.get_item_data(item_id)
+			if data.has("visuals"):
+				var visuals = data.get("visuals")
 				if visuals is Array:
-					for visual_part in visuals: _apply_visual_data(visual_part, visual_sprites_map)
-				elif visuals is Dictionary:
-					_apply_visual_data(visuals, visual_sprites_map)
-			else:
-				print("[DEBUG] CẢNH BÁO: Item '", item_id, "' không có dữ liệu 'visuals' trong item_data.json.")
-			if slot_key == "HELMET" and item_data.get("hide_hair", false):
-				if is_instance_valid(head_sprite): head_sprite.visible = false
+					for part in visuals: _apply_visual_data(part, visual_map)
+				elif visuals is Dictionary: _apply_visual_data(visuals, visual_map)
 
 
-func _apply_visual_data(visual_data: Dictionary, visual_sprites_map: Dictionary):
-	# Lấy thông tin từ data
-	var target_sprite_name = visual_data.get("target_sprite", "")
-	var texture_path = visual_data.get("texture_path", "")
-	print("[DEBUG] Hàm _apply_visual_data nhận được: target='", target_sprite_name, "', path='", texture_path, "'")
-	# Kiểm tra xem tên sprite có trong bản đồ của chúng ta không
-	if visual_sprites_map.has(target_sprite_name):
-		var target_sprite_node = visual_sprites_map[target_sprite_name]
-		if is_instance_valid(target_sprite_node):
-			if not texture_path.is_empty() and FileAccess.file_exists(texture_path):
-				print("[DEBUG] THÀNH CÔNG: Đang gán texture '", texture_path, "' cho node '", target_sprite_name, "'")
-				target_sprite_node.texture = load(texture_path)
-				target_sprite_node.visible = true
-			else:
-				print("[DEBUG] LỖI: Đường dẫn texture rỗng hoặc file '", texture_path, "' không tồn tại.")
-				target_sprite_node.visible = false
-				push_warning("Không tìm thấy texture tại: %s" % texture_path)
-		else:
-			print("[DEBUG] LỖI: Node '", target_sprite_name, "' không hợp lệ (is_instance_valid = false).")
-			push_warning("Tên target_sprite '%s' trong JSON không khớp với bất kỳ Node nào trong visual_sprites_map." % target_sprite_name)
-	else:
-		print("[DEBUG] LỖI: Tên target_sprite '", target_sprite_name, "' không có trong visual_sprites_map.")
+	# --- PHẦN 3: XỬ LÝ VŨ KHÍ (ĐÃ VIẾT LẠI HOÀN TOÀN) ---
+	if not is_instance_valid(weapon_container): return
+
+	# 3.1. Luôn ẩn tất cả các sprite vũ khí trước
+	for child in weapon_container.get_children():
+		if child is Sprite2D:
+			child.visible = false
+	
+	# 3.2. Lấy dữ liệu vũ khí đang trang bị
+	var weapon_id = hero_inventory.equipment.get("MAIN_HAND")
+	
+	# 3.3. Nếu không trang bị vũ khí
+	if not weapon_id:
+		_current_attack_animation_name = "Attack" # Dùng animation mặc định
+		return # Kết thúc hàm
+
+	var weapon_data = ItemDatabase.get_item_data(weapon_id)
+	if weapon_data.is_empty():
+		_current_attack_animation_name = "Attack"
+		return
+		
+	var weapon_type = weapon_data.get("weapon_type", "SWORD")
+	var icon_path = weapon_data.get("icon_path", "")
+
+	# 3.4. Dùng `match` để xử lý từng loại vũ khí, hiển thị sprite và gán animation
+	match weapon_type:
+		"SWORD":
+			var sprite = weapon_container.get_node_or_null("SwordSprite")
+			if is_instance_valid(sprite) and not icon_path.is_empty():
+				sprite.texture = load(icon_path)
+				sprite.visible = true
+			_current_attack_animation_name = "Attack" # Sửa thành tên animation kiếm của bạn
+
+		"BOW":
+			var sprite = weapon_container.get_node_or_null("BowSprite")
+			if is_instance_valid(sprite) and not icon_path.is_empty():
+				sprite.texture = load(icon_path)
+				sprite.visible = true
+			_current_attack_animation_name = "Shooting" # Sửa thành tên animation bắn cung của bạn
+			
+		"STAFF":
+			var sprite = weapon_container.get_node_or_null("StaffSprite")
+			if is_instance_valid(sprite) and not icon_path.is_empty():
+				sprite.texture = load(icon_path)
+				sprite.visible = true
+			_current_attack_animation_name = "Cast" # Sửa thành tên animation dùng gậy của bạn
+
+		"DAGGER":
+			var sprite = weapon_container.get_node_or_null("DaggerSprite")
+			if is_instance_valid(sprite) and not icon_path.is_empty():
+				sprite.texture = load(icon_path)
+				sprite.visible = true
+			_current_attack_animation_name = "Attack" # Sửa thành tên animation dao găm của bạn
+		
+		_: # Trường hợp mặc định nếu không khớp
+			_current_attack_animation_name = "Attack"
+
+func _apply_visual_data(data: Dictionary, map: Dictionary):
+	var s_name = data.get("target_sprite", ""); var path = data.get("texture_path", "")
+	if map.has(s_name):
+		var node = map[s_name]
+		if is_instance_valid(node):
+			if not path.is_empty() and FileAccess.file_exists(path):
+				node.texture = load(path); node.visible = true
+			else: node.visible = false
 
 func _apply_base_appearance():
+
 	# --- 1. ÁP DỤNG KHUÔN MẶT ---
 	var face_path = base_appearance.get("face", "")
 	if is_instance_valid(face_sprite) and not face_path.is_empty() and FileAccess.file_exists(face_path):
 		face_sprite.texture = load(face_path)
+
 	# --- 2. ÁP DỤNG TÓC/ĐẦU GỐC ---
 	var head_path = base_appearance.get("head", "") # Đọc đường dẫn từ key "head"
+
 	if is_instance_valid(head_sprite):
 		# Kiểm tra xem đường dẫn có tồn tại và file có thực sự ở đó không
 		if not head_path.is_empty() and FileAccess.file_exists(head_path):
@@ -708,6 +777,19 @@ func _shoot_projectile(projectile_scene: PackedScene, is_magic: bool = false):
 	if p.has_method("start"):
 		p.start(global_position, target_monster, self, 1000.0, is_magic)
 		
+func _on_shoot_animation_fire():
+	# Kiểm tra an toàn, chỉ bắn khi đang tấn công và có mục tiêu
+	if _is_attacking and is_instance_valid(target_monster):
+		# Gọi hàm bắn đạn chính, truyền vào scene mũi tên đã được preload
+		_shoot_projectile(arrow_scene, false)
+
+# HÀM NÀY SẼ ĐƯỢỢC GỌI TỪ ANIMATIONPLAYER "ATTACK"
+func _on_attack_animation_hit():
+	# Chỉ gây sát thương nếu đang thực sự tấn công và có mục tiêu hợp lệ
+	if _is_attacking and is_instance_valid(target_monster):
+		# Gọi hàm gây sát thương chính với các tham số cho đòn đánh thường
+		execute_attack_on(target_monster, false, 1.0)
+		
 func _spawn_vfx(animation_name: String, offset_y: float = -60.0, p_scale: Vector2 = Vector2.ONE):
 	# Kiểm tra xem VFX_Scene đã được preload chưa
 	if not VFX_Scene: return
@@ -718,3 +800,53 @@ func _spawn_vfx(animation_name: String, offset_y: float = -60.0, p_scale: Vector
 	vfx_instance.scale = p_scale
 	vfx_instance.position.y = offset_y
 	vfx_instance.play_effect(animation_name)
+
+func can_change_job() -> bool:
+	print("\n--- BẮT ĐẦU KIỂM TRA ĐIỀU KIỆN CHUYỂN NGHỀ CHO HERO: %s ---" % hero_name)
+	print("Kiểm tra Nghề và Cấp độ...")
+	print(" - Nghề hiện tại: ", hero_stats.job_key, " | Yêu cầu: Novice")
+	print(" - Cấp hiện tại: ", hero_stats.level, " | Yêu cầu: >= 10")
+	# Điều kiện 1: Phải là Novice và đạt cấp 10
+	if hero_stats.job_key != "Novice" or hero_stats.level < 10:
+		print(">>> THẤT BẠI: Không đạt yêu cầu về Nghề hoặc Cấp độ.")
+		return false
+	
+	# Điều kiện 2: Kiểm tra vật phẩm và vàng (lấy từ GameDataManager)
+	print("Kiểm tra Vàng và Vật phẩm...")
+	var requirements = GameDataManager.get_job_change_requirements()
+	var required_gold = requirements.get("gold_cost", 999999)
+	var required_items = requirements.get("items", [])
+	print(" - Vàng hiện có: ", hero_inventory.gold, " | Yêu cầu: ", required_gold)
+	
+	if hero_inventory.gold < required_gold:
+		print(">>> THẤT BẠI: Không đủ vàng.")
+		return false
+		
+	for item in required_items:
+		var item_id = item["id"]
+		var required_quantity = item["quantity"]
+		print(" - Kiểm tra vật phẩm: '%s' | Yêu cầu: %d" % [item_id, required_quantity])
+		
+		# Lấy số lượng vật phẩm hero đang có
+		var current_quantity = hero_inventory.get_item_quantity(item_id)
+		
+		if current_quantity < required_quantity:
+			print(">>> THẤT BẠI: Không đủ vật phẩm '%s'." % item_id)
+			return false
+			
+	# Nếu qua được tất cả các bài kiểm tra
+	print(">>> THÀNH CÔNG: Hero đủ mọi điều kiện để chuyển nghề!")
+	return true
+
+# HÀM MỚI: Trừ các chi phí sau khi xác nhận chuyển nghề
+func consume_job_change_costs():
+	var requirements = GameDataManager.get_job_change_requirements()
+	var required_gold = requirements.get("gold_cost", 0)
+	var required_items = requirements.get("items", [])
+	
+	# Trừ vàng
+	hero_inventory.add_gold(-required_gold)
+	
+	# Trừ vật phẩm
+	for item in required_items:
+		hero_inventory.remove_item_from_inventory(item["id"], item["quantity"])
