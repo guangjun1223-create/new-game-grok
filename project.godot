@@ -28,6 +28,7 @@ EnchantmentUtils="*res://script/autoload/EnchantmentUtils.gd"
 AppearanceDatabase="*res://script/autoload/AppearanceDatabase.gd"
 MonsterDataManager="*res://Data/MonsterDataManager.gd"
 SkillDatabase="*res://script/autoload/SkillDatabase.gd"
+Utils="*res://script/utils.gd"
 
 [display]
 

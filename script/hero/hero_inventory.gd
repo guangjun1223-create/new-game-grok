@@ -144,73 +144,101 @@ func _is_weapon_compatible(job_key: String, item_data: Dictionary) -> bool:
 
 func equip_from_inventory(inventory_slot_index: int):
 	if inventory_slot_index < 0 or inventory_slot_index >= inventory.size(): return
-	var item_package_to_equip = inventory[inventory_slot_index]; if not item_package_to_equip: return
+	var item_package_to_equip = inventory[inventory_slot_index]
+	if not item_package_to_equip: return
 	
-	var item_id_to_equip = item_package_to_equip.get("id"); var item_data = ItemDatabase.get_item_data(item_id_to_equip)
+	# --- PHẦN SỬA LỖI QUAN TRỌNG ---
+	var item_id_to_equip: String
+	var is_equipment = false
+	
+	if item_package_to_equip.has("base_id"):
+		# Đây là một trang bị (có cấu trúc mới)
+		item_id_to_equip = item_package_to_equip.get("base_id")
+		is_equipment = true
+	elif item_package_to_equip.has("id"):
+		# Đây là vật phẩm thường (cấu trúc cũ)
+		item_id_to_equip = item_package_to_equip.get("id")
+	else:
+		# Dữ liệu vật phẩm không hợp lệ, thoát sớm để tránh lỗi
+		push_error("Lỗi equip: Dữ liệu vật phẩm trong túi đồ không có 'id' hoặc 'base_id'.")
+		return
+	# --- KẾT THÚC PHẦN SỬA LỖI ---
+		
+	var item_data = ItemDatabase.get_item_data(item_id_to_equip)
 	var item_type = item_data.get("item_type")
 	
 	if not _is_weapon_compatible(hero.hero_stats.job_key, item_data):
 		print("Không thể trang bị '%s'. Không phù hợp với nghề '%s'." % [item_data.get("name", item_id_to_equip), hero.hero_stats.job_key])
 		FloatingTextManager.show_text("Không thể trang bị!", Color.RED, hero.global_position - Vector2(0, 150))
-		return # Dừng hàm tại đây
+		return
 	
 	if item_type == "EQUIPMENT":
-		var slot_key = item_data.get("equip_slot");
+		var slot_key = item_data.get("equip_slot")
 		if not equipment.has(slot_key): return
-		var old_equipped_item_id = equipment.get(slot_key)
-		if old_equipped_item_id and not slot_key.begins_with("POTION"):
-			var swapped = false
-			for i in range(inventory.size()):
-				if inventory[i] == null:
-					inventory[i] = {"id": old_equipped_item_id, "quantity": 1};
-					swapped = true
-					break
-			if not swapped: return
-		equipment[slot_key] = item_id_to_equip; inventory[inventory_slot_index] = null
+		
+		# Lấy món đồ cũ ra
+		var old_equipped_item_package = equipment.get(slot_key)
+		
+		# Trang bị món đồ mới vào
+		equipment[slot_key] = item_package_to_equip
+		
+		# Bỏ món đồ cũ vào vị trí trống trong túi đồ
+		inventory[inventory_slot_index] = old_equipped_item_package
+		
 	elif item_type == "CONSUMABLE":
 		var quantity_to_add = item_package_to_equip.get("quantity", 1)
 		for slot_key in ["POTION_1", "POTION_2", "POTION_3"]:
 			var existing_package = equipment.get(slot_key)
 			if existing_package != null and existing_package.get("id") == item_id_to_equip:
-				existing_package["quantity"] += quantity_to_add; inventory[inventory_slot_index] = null
-				equipment_changed.emit(equipment); inventory_changed.emit()
-				# ======================================================
-				# SỬA LỖI: Báo cho hero vẽ lại hình ảnh
+				existing_package["quantity"] += quantity_to_add
+				inventory[inventory_slot_index] = null
+				equipment_changed.emit(equipment)
+				inventory_changed.emit()
 				if is_instance_valid(hero): hero._update_equipment_visuals()
-				# ======================================================
 				return
 		for slot_key in ["POTION_1", "POTION_2", "POTION_3"]:
 			if equipment.get(slot_key) == null:
-				equipment[slot_key] = item_package_to_equip; inventory[inventory_slot_index] = null
-				equipment_changed.emit(equipment); inventory_changed.emit()
-				# ======================================================
-				# SỬA LỖI: Báo cho hero vẽ lại hình ảnh
+				equipment[slot_key] = item_package_to_equip
+				inventory[inventory_slot_index] = null
+				equipment_changed.emit(equipment)
+				inventory_changed.emit()
 				if is_instance_valid(hero): hero._update_equipment_visuals()
-				# ======================================================
 				return
 		return
 	else: return
-	equipment_changed.emit(equipment); inventory_changed.emit()
-	# ======================================================
-	# SỬA LỖI: Báo cho hero vẽ lại hình ảnh sau khi mặc đồ
+	
+	equipment_changed.emit(equipment)
+	inventory_changed.emit()
 	if is_instance_valid(hero):
 		hero._update_equipment_visuals()
-	# ======================================================
 	PlayerStats.save_game()
 
 func unequip_item(slot_key: String):
-	var item_to_unequip = equipment.get(slot_key); if not item_to_unequip: return
+	# Lấy cả "gói" dữ liệu của vật phẩm cần tháo ra
+	var item_package_to_unequip = equipment.get(slot_key)
+	if not item_package_to_unequip: return
+
+	# --- PHẦN SỬA LỖI ---
+	# Thay vì gọi add_item, chúng ta sẽ tìm một ô trống và đặt thẳng gói dữ liệu vào
 	var success = false
-	if item_to_unequip is Dictionary: success = add_item(item_to_unequip["id"], item_to_unequip["quantity"])
-	elif item_to_unequip is String: success = add_item(item_to_unequip, 1)
+	for i in range(inventory.size()):
+		if inventory[i] == null:
+			inventory[i] = item_package_to_unequip
+			success = true
+			break # Đã tìm thấy chỗ, thoát vòng lặp
+	# --- KẾT THÚC SỬA LỖI ---
+	
 	if success:
 		equipment[slot_key] = null
-		equipment_changed.emit(equipment); inventory_changed.emit()
-		# ======================================================
-		# SỬA LỖI: Báo cho hero vẽ lại hình ảnh sau khi tháo đồ
+		equipment_changed.emit(equipment)
+		inventory_changed.emit()
 		if is_instance_valid(hero):
 			hero._update_equipment_visuals()
-		# ======================================================
+		PlayerStats.save_game()
+	else:
+		# (Tùy chọn) Thông báo cho người chơi biết túi đồ đã đầy
+		FloatingTextManager.show_text("Túi đồ đầy!", Color.ORANGE, hero.global_position - Vector2(0, 150))
+		print("Không thể tháo trang bị: Túi đồ đã đầy.")
 	PlayerStats.save_game()
 
 func unequip_invalid_items_after_job_change():
@@ -235,17 +263,39 @@ func unequip_invalid_items_after_job_change():
 
 func apply_equipment_stats(stats_component: HeroStats):
 	for slot in equipment:
-		var item_id = equipment[slot]
-		if typeof(item_id) == TYPE_STRING and not item_id.is_empty():
-			stats_component.apply_item_stats(item_id)
+		var item_package = equipment[slot]
+		
+		# SỬA LỖI: Kiểm tra xem có phải là một Dictionary hợp lệ không
+		if item_package is Dictionary:
+			# Lấy ID từ key "base_id" thay vì "id"
+			var item_id = item_package.get("base_id")
+			
+			# Kiểm tra xem item_id có phải là một String hợp lệ không
+			if item_id is String and not item_id.is_empty():
+				stats_component.apply_item_stats(item_id)
 
 
 func get_current_weapon_type() -> String:
-	var weapon_id = equipment.get("MAIN_HAND")
-	if not (weapon_id is String and not weapon_id.is_empty()): return "UNARMED"
+	# Lấy ra "gói dữ liệu" của vũ khí, không phải ID
+	var weapon_package = equipment.get("MAIN_HAND")
+	
+	# Nếu không có vũ khí, hoặc dữ liệu không phải Dictionary, trả về UNARMED
+	if not (weapon_package is Dictionary):
+		return "UNARMED"
+	
+	# Trích xuất ID từ gói dữ liệu
+	var weapon_id = weapon_package.get("base_id")
+	
+	# Nếu không có base_id, trả về UNARMED
+	if not (weapon_id is String and not weapon_id.is_empty()):
+		return "UNARMED"
+	
+	# Dùng ID để lấy dữ liệu gốc và trả về loại vũ khí
 	var data = ItemDatabase.get_item_data(weapon_id)
-	if data.is_empty(): return "UNARMED"
-	return data.get("weapon_type", "SWORD")
+	if data.is_empty():
+		return "UNARMED"
+		
+	return data.get("weapon_type", "SWORD") # Trả về "SWORD" làm mặc định an toànRD")
 	
 func get_current_weapon_data() -> Dictionary:
 	var weapon_id = equipment.get("MAIN_HAND")

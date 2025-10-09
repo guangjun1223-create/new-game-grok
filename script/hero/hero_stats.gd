@@ -178,13 +178,31 @@ func gain_exp(amount: int):
 func _check_level_up():
 	var has_leveled_up = false
 	while current_exp >= exp_to_next_level and level < 100:
-		has_leveled_up = true; current_exp -= exp_to_next_level; level += 1; free_points += 5
+		has_leveled_up = true
+		current_exp -= exp_to_next_level
+		level += 1
+		free_points += 5
 		exp_to_next_level = int(100 * pow(level, 1.5))
-		STR += roundi(str_tang_truong); AGI += roundi(agi_tang_truong); VIT += roundi(vit_tang_truong)
+
+		# hưởng cho hero 1 điểm kỹ năng mỗi khi lên cấp [cite: 43]
+		if is_instance_valid(hero) and hero.has_node("HeroSkills"):
+			hero.hero_skills.skill_points += 1
+
+		# Cộng chỉ số tăng trưởng theo nghề 
+		STR += roundi(str_tang_truong); AGI += roundi(agi_tang_truong)
+		VIT += roundi(vit_tang_truong)
 		INTEL += roundi(int_tang_truong); DEX += roundi(dex_tang_truong); LUK += roundi(luk_tang_truong)
+		
 	if has_leveled_up:
-		hero.heal_to_full(); free_points_changed.emit()
-	exp_changed.emit(current_exp, exp_to_next_level); update_secondary_stats()
+		hero.heal_to_full()
+		free_points_changed.emit()
+		
+		# Báo cho UI biết rằng số điểm kỹ năng đã thay đổi để cập nhật hiển thị 
+		if is_instance_valid(hero) and hero.has_node("HeroSkills"):
+			hero.hero_skills.skill_tree_changed.emit()
+
+	exp_changed.emit(current_exp, exp_to_next_level)
+	update_secondary_stats()
 
 func nang_cap_chi_so(stat_name: String):
 	if free_points <= 0: 

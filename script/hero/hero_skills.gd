@@ -14,24 +14,15 @@ var equipped_skills: Array = []
 var _skill_cooldowns: Dictionary = {}
 
 func _ready():
-	# ĐỢI cho đến khi node cha (Hero) phát ra tín hiệu "ready" của chính nó.
-	# Dòng này đảm bảo tất cả các @onready var của cha đã được khởi tạo an toàn.
 	await owner.ready
 	
-	# Bây giờ, chúng ta có thể an toàn truy cập vào các component khác thông qua owner (chính là cha)
 	hero = owner
 	
-	# Kết nối các tín hiệu một cách an toàn
-	# Lúc này hero.hero_stats chắc chắn không còn là Nil nữa.
-	hero.hero_stats.free_points_changed.connect(func(): skill_points += 1)
 	hero.hero_stats.job_changed.connect(func(): 
 		skill_points = 0
-		learned_skills.clear()
-		equipped_skills.fill(null)
 		skill_tree_changed.emit()
 	)
 	
-	# Các khởi tạo khác của HeroSkills
 	equipped_skills.resize(MAX_SKILL_SLOTS)
 	equipped_skills.fill(null)
 
@@ -66,16 +57,35 @@ func update_cooldowns(delta: float):
 	for skill_id in _skill_cooldowns:
 		if _skill_cooldowns[skill_id] > 0: _skill_cooldowns[skill_id] -= delta
 
-func try_activate_random_skill():
-	if not is_instance_valid(hero.target_monster): return
+func get_ready_skill_to_activate() -> String:
+	# Nếu không có mục tiêu thì không dùng skill
+	if not is_instance_valid(hero.target_monster): return ""
+
 	var usable_skills: Array = []
 	for skill_id in equipped_skills:
 		if skill_id != null:
-			var data = SkillDatabase.get_skill_data(skill_id); var level = get_skill_level(skill_id)
+			var data = SkillDatabase.get_skill_data(skill_id)
+			var level = get_skill_level(skill_id)
+			if level == 0: continue # Bỏ qua nếu skill chưa học
+
+			# --- KIỂM TRA CÁC ĐIỀU KIỆN ---
 			var sp_cost = data.get("sp_cost_per_level", [])[level - 1]
 			var on_cooldown = _skill_cooldowns.get(skill_id, 0.0) > 0
-			if not on_cooldown and hero.current_sp >= sp_cost: usable_skills.append(skill_id)
-	if not usable_skills.is_empty(): _activate_skill(usable_skills.pick_random())
+			var in_range = true # Mặc định là trong tầm
+			if data.has("max_range"):
+				var distance = hero.global_position.distance_to(hero.target_monster.global_position)
+				in_range = distance <= data.get("max_range")
+			
+			# Nếu skill thỏa mãn mọi điều kiện: hết cooldown, đủ SP, trong tầm đánh
+			if not on_cooldown and hero.current_sp >= sp_cost and in_range:
+				usable_skills.append(skill_id)
+
+	# Nếu có danh sách skill có thể dùng, chọn ngẫu nhiên một skill và trả về ID
+	if not usable_skills.is_empty():
+		return usable_skills.pick_random()
+	
+	# Nếu không có skill nào, trả về chuỗi rỗng
+	return ""
 
 func _activate_skill(skill_id: String):
 	var data = SkillDatabase.get_skill_data(skill_id); var level = get_skill_level(skill_id)
@@ -122,3 +132,6 @@ func load_data(data: Dictionary):
 	skill_points = data.get("skill_points", 0)
 	learned_skills = data.get("learned_skills", {}).duplicate(true)
 	equipped_skills = data.get("equipped_skills", []).duplicate(true)
+	
+	if equipped_skills.size() < MAX_SKILL_SLOTS:
+		equipped_skills.resize(MAX_SKILL_SLOTS)

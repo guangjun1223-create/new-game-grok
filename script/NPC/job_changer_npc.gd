@@ -20,8 +20,6 @@ var hero_in_range: Hero = null
 
 func _ready():
 	# Kết nối các tín hiệu cần thiết
-	interaction_area.body_entered.connect(_on_interaction_area_body_entered)
-	interaction_area.body_exited.connect(_on_interaction_area_body_exited)
 	interaction_prompt_button.pressed.connect(_on_interaction_prompt_button_pressed)
 	animation_timer.timeout.connect(_on_animation_timer_timeout)
 	animated_sprite.animation_finished.connect(_on_animation_finished)
@@ -29,9 +27,10 @@ func _ready():
 	PlayerStats.register_job_changer_npc(self)
 	_check_activation(PlayerStats.village_level)
 	PlayerStats.village_level_changed.connect(_check_activation)
+	animation_timer.start(randf_range(3.0, 6.0))
 	
 func _check_activation(current_village_level: int):
-	if current_village_level >= 4:
+	if current_village_level >= 1:
 		set_active(true)
 	else:
 		set_active(false)
@@ -43,7 +42,7 @@ func set_active(active: bool):
 		interaction_prompt_button.visible = false
 		
 func _on_interaction_area_body_entered(body):
-	if is_active and body is Hero:
+	if is_active and body.is_in_group("heroes"):
 		hero_in_range = body
 		interaction_prompt_button.visible = true
 

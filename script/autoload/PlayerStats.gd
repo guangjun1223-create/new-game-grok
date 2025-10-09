@@ -69,6 +69,7 @@ func register_gate_connections(connections: Array[GateConnection]):
 func _ready():
 	# Chỉ nạp sẵn scene hero và khởi tạo các giá trị ban đầu
 	hero_scene = load("res://Scene/hero.tscn")
+	village_level_changed.connect(func(_level): update_hero_deployment())
 	
 	if warehouse.is_empty():
 		print("PlayerStats: Khoi tao Nha kho lan dau.")
@@ -100,53 +101,47 @@ func initialize_world_references():
 
 # THAY THẾ TOÀN BỘ HÀM CŨ BẰNG PHIÊN BẢN NÀY
 func trieu_hoi_hero():
-	# --- BƯỚC 1: KIỂM TRA ĐIỀU KIỆN CHUNG ---
-	# Luôn kiểm tra chỗ trống trong doanh trại trước tiên.
-	if hero_roster.size() >= BARRACKS_SIZE + get_max_heroes():
-		print("Doanh trại và nhà chính đã đầy! Không thể triệu hồi.")
-		# Thông báo cho UI biết là không thể triệu hồi (tùy chọn)
-		# get_tree().call_group("ui_elements", "show_notification", "Doanh trại đầy!")
+	# Kiểm tra sức chứa tối đa của toàn bộ danh sách hero
+	if hero_roster.size() >= BARRACKS_SIZE:
+		print("Doanh trại đã đầy! Không thể triệu hồi.")
 		return
 
-	# --- BƯỚC 2: KIỂM TRA TÀI NGUYÊN VÀ TRIỆU HỒI ---
+	# Kiểm tra tài nguyên (Cuộn giấy hoặc Kim cương)
 	var summon_success = false
-	
-	# Ưu tiên 1: Kiểm tra Cuộn Giấy Triệu Hồi
 	if get_item_quantity_in_warehouse("summon_scroll") > 0:
-		print(">>> Sử dụng Cuộn Giấy Triệu Hồi...")
 		remove_item_from_warehouse("summon_scroll", 1)
 		summon_success = true
+	elif spend_player_diamonds(DIAMOND_COST_FOR_SUMMON):
+		summon_success = true
 	
-	# Ưu tiên 2: Nếu không có cuộn giấy, kiểm tra Kim Cương
-	elif player_diamonds >= DIAMOND_COST_FOR_SUMMON:
-		print(">>> Hết cuộn giấy, sử dụng %d Kim Cương..." % DIAMOND_COST_FOR_SUMMON)
-		# Hàm spend_player_diamonds sẽ trừ tiền và trả về true nếu thành công
-		if spend_player_diamonds(DIAMOND_COST_FOR_SUMMON):
-			summon_success = true
-	
-	# --- BƯỚC 3: XỬ LÝ KẾT QUẢ ---
 	if summon_success:
-		# Nếu một trong hai tài nguyên trên được sử dụng thành công
-		# thì mới bắt đầu tạo hero.
+		# 1. Tạo ra một hero mới với chỉ số ngẫu nhiên
 		var new_hero = _tao_mot_hero_moi()
-		
-		# Thêm hero vào game và lưu lại
-		hero_roster.append(new_hero)
-		deploy_hero(new_hero)
-		_save_game_after_one_frame()
-		
 		print(">>> Triệu hồi thành công hero: %s" % new_hero.name)
+		
+		# 2. Luôn thêm hero vào danh sách quản lý chung (roster)
+		hero_roster.append(new_hero)
+		
+		# 3. Luôn đặt trạng thái ban đầu là ở trong doanh trại
+		new_hero.doi_trang_thai(Hero.State.IN_BARRACKS)
+		print("    -> Hero '%s' đã được đưa vào Doanh trại." % new_hero.name)
+		
+		# 4. Gọi "Người Quản lý" để kiểm tra và tự động triển khai nếu còn chỗ
+		update_hero_deployment()
+		
+		_save_game_after_one_frame()
 	else:
-		# Nếu không có bất kỳ tài nguyên nào đủ
 		print(">>> Không đủ Cuộn Giấy Triệu Hồi hoặc Kim Cương.")
-		# Thông báo cho UI biết là không đủ tài nguyên (tùy chọn)
-		# get_tree().call_group("ui_elements", "show_notification", "Không đủ tài nguyên!")
 
 func _tao_mot_hero_moi() -> Hero:
 	var new_hero = hero_scene.instantiate()
-	var stats_component: HeroStats = new_hero.get_node("HeroStats")
-	var inventory_component: HeroInventory = new_hero.get_node("HeroInventory")
-	var skills_component: HeroSkills = new_hero.get_node("HeroSkills")
+	new_hero.hero_stats = new_hero.get_node("HeroStats")
+	new_hero.hero_inventory = new_hero.get_node("HeroInventory")
+	new_hero.hero_skills = new_hero.get_node("HeroSkills")
+	
+	var stats_component: HeroStats = new_hero.hero_stats
+	var inventory_component: HeroInventory = new_hero.hero_inventory
+	var skills_component: HeroSkills = new_hero.hero_skills
 	
 	stats_component.hero = new_hero
 	inventory_component.hero = new_hero
@@ -233,6 +228,7 @@ func _tao_mot_hero_moi() -> Hero:
 	stats_component.dex_tang_truong = du_lieu_nghe.get("dex_growth", 0.0) + mod_tang_truong
 	stats_component.luk_tang_truong = du_lieu_nghe.get("luk_growth", 0.0) + mod_tang_truong
 	stats_component.job_key = job_key
+	stats_component.initialize_stats()
 	
 	# 4. Cập nhật HP/SP cho "Nhạc trưởng"
 	new_hero.current_hp = stats_component.max_hp
@@ -240,7 +236,7 @@ func _tao_mot_hero_moi() -> Hero:
 	
 	# 5. Yêu cầu component HeroInventory thiết lập đồ và vàng
 	var starting_items = [{"id": "simple_sword", "quantity": 1}, {"id": "magic_staff", "quantity": 1}, {"id": "long_bow", "quantity": 1}]
-	var starting_gold = 50000
+	var starting_gold = 5000000
 	inventory_component.setup(starting_items, starting_gold)
 	
 	return new_hero
@@ -806,39 +802,23 @@ func recall_hero(hero: Hero):
 	
 func sa_thai_hero(hero_can_xoa: Hero):
 	if not is_instance_valid(hero_can_xoa):
-		print("Loi: Khong the sa thai hero khong hop le.")
+		print("Lỗi: Không thể sa thải hero không hợp lệ.")
 		return
 
-	# Lưu lại trạng thái của hero TRƯỚC KHI xóa
 	var was_in_world = hero_can_xoa.is_inside_tree()
 
-	# 1. Xóa khỏi danh sách chính (roster)
+	# Xóa hero khỏi danh sách quản lý
 	if hero_can_xoa in hero_roster:
 		hero_roster.erase(hero_can_xoa)
-		print("Da xoa '%s' khoi danh sach roster." % hero_can_xoa.name)
+		print("Đã sa thải '%s' khỏi danh sách roster." % hero_can_xoa.name)
 	
-	# 2. Nếu hero đang ở ngoài world, xóa node của nó khỏi game
+	# Nếu hero đang ở trên world, xóa node của nó khỏi game
 	if was_in_world:
 		hero_can_xoa.queue_free()
 
-	# === LOGIC MỚI: TỰ ĐỘNG TRIỂN KHAI HERO THAY THẾ ===
-	# 3. Chỉ thực hiện khi hero bị sa thải là hero ngoài world
-	if was_in_world:
-		# Tìm một hero đang rảnh rỗi trong sảnh
-		var next_hero_in_barracks = _find_hero_in_barracks()
-		
-		# Nếu tìm thấy một hero
-		if is_instance_valid(next_hero_in_barracks):
-			print("Một hero trong sảnh sẽ được triển khai để thay thế.")
-			# Gọi hàm triển khai đã có sẵn
-			deploy_hero(next_hero_in_barracks)
-		else:
-			# Nếu không tìm thấy hero nào trong sảnh
-			print("Sảnh trống, không có hero nào để thay thế.")
-	# =================================================
-
-	# 4. Phát tín hiệu để UI cập nhật lại số lượng hero
+	# Sau khi sa thải, gọi "Người Quản lý" để kiểm tra và lấp chỗ trống (nếu có)
 	update_hero_deployment()
+	
 	save_game()
 
 func _find_hero_in_barracks() -> Hero:
@@ -867,20 +847,18 @@ func _check_and_deploy_barracks_heroes():
 	hero_count_changed.emit()
 
 func update_hero_deployment():
-	# Vòng lặp: Tiếp tục chạy chừng nào số hero trên world vẫn ít hơn giới hạn
+	# Tiếp tục lấp đầy chừng nào world vẫn còn chỗ VÀ barracks vẫn còn hero
 	while get_current_hero_count() < get_max_heroes():
-		# Tìm một hero đang rảnh rỗi trong sảnh
 		var hero_to_deploy = _find_hero_in_barracks()
 		
-		# Nếu tìm thấy...
 		if is_instance_valid(hero_to_deploy):
 			deploy_hero(hero_to_deploy)
+			if is_instance_valid(ui_controller_ref) and not is_instance_valid(ui_controller_ref._current_hero):
+				GameEvents.hero_selected.emit(hero_to_deploy)
 		else:
-			# Nếu không còn hero nào trong sảnh, thoát khỏi vòng lặp
 			break
-	
-	# Sau khi lấp đầy tất cả các chỗ có thể, phát tín hiệu MỘT LẦN DUY NHẤT
-	# để UI cập nhật lại lần cuối cho chính xác.
+
+	# Phát tín hiệu một lần duy nhất để UI cập nhật lại con số cuối cùng
 	hero_count_changed.emit()
 
 func can_summon() -> bool:

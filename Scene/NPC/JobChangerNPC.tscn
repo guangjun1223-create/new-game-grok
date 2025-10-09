@@ -30,6 +30,7 @@ position = Vector2(1, -78)
 shape = SubResource("CapsuleShape2D_ivg8e")
 
 [node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
@@ -71,4 +72,5 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[connection signal="body_entered" from="InteractionArea" to="." method="_on_hero_entered"]
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]

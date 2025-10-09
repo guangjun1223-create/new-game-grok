@@ -178,6 +178,7 @@ var _hero_for_buyback: Hero = null
 func _ready() -> void:
 	await get_tree().process_frame
 	
+	PlayerStats.initialize_world_references()
 	PlayerStats.register_ui_controller(self)
 	_main_camera = get_tree().root.get_camera_2d()
 	
@@ -514,37 +515,34 @@ func _update_backpack_display() -> void:
 			slot_node.display_item(null, 0)
 
 func _update_equipment_display(new_equipment: Dictionary = {}):
-	if not is_instance_valid(_current_hero.hero_inventory):
+	if not is_instance_valid(_current_hero) or not is_instance_valid(_current_hero.hero_inventory):
 		for slot_key in equipment_slots:
 			equipment_slots[slot_key].display_item(null, 0)
 		return
 
-	# SỬA LỖI: Lấy 'equipment' từ component hero_inventory
 	var hero_equipment = _current_hero.hero_inventory.equipment
-	
-	# Dòng này giữ nguyên, dùng để preview trang bị khi cần
 	if not new_equipment.is_empty():
 		hero_equipment = new_equipment
 
-	# Lặp qua từng ô trang bị trên UI
 	for slot_key in equipment_slots:
 		var slot_node = equipment_slots[slot_key]
-		var equipped_item = hero_equipment.get(slot_key)
+		var equipped_item_pkg = hero_equipment.get(slot_key)
 
-		if not equipped_item:
+		if not equipped_item_pkg:
 			slot_node.display_item(null, 0)
 			continue
 
 		var item_id = ""
-		var quantity = 1 # Mặc định là 1 cho trang bị thường
+		var quantity = 0 # Sử dụng 0 cho trang bị để hiển thị cấp độ, > 1 cho vật phẩm
 
-		# Nếu là Potion, dữ liệu sẽ là Dictionary
-		if equipped_item is Dictionary:
-			item_id = equipped_item.get("id", "")
-			quantity = equipped_item.get("quantity", 1)
-		# Nếu là trang bị thường, dữ liệu là String
-		elif equipped_item is String:
-			item_id = equipped_item
+		if equipped_item_pkg is Dictionary:
+			if equipped_item_pkg.has("base_id"): # Ưu tiên kiểm tra trang bị trước
+				item_id = equipped_item_pkg.base_id
+				# Lấy cấp độ nâng cấp để hiển thị thay cho số lượng
+				quantity = equipped_item_pkg.get("upgrade_level", 0)
+			elif equipped_item_pkg.has("id"): # Sau đó mới kiểm tra vật phẩm thường
+				item_id = equipped_item_pkg.id
+				quantity = equipped_item_pkg.get("quantity", 1)
 
 		if not item_id.is_empty():
 			var new_icon = ItemDatabase.get_item_icon(item_id)
@@ -622,13 +620,13 @@ func _on_summon_button_pressed():
 		
 func _update_hp_bar(current_hp, max_hp):
 	var percentage = 0.0
-	if max_hp > 0: percentage = float(current_hp) / float(max_hp)
+	if max_hp > 0: percentage = clamp(float(current_hp) / float(max_hp), 0.0, 1.0)
 	hp_bar_fill.size.x = hp_bar_bg.size.x * percentage
 	hp_label.text = "%d/%d HP" % [int(current_hp), int(max_hp)]
 
 func _update_sp_bar(current_sp, max_sp):
 	var percentage = 0.0
-	if max_sp > 0: percentage = float(current_sp) / float(max_sp)
+	if max_sp > 0: percentage = clamp(float(current_sp) / float(max_sp), 0.0, 1.0)
 	sp_bar_fill.size.x = sp_bar_bg.size.x * percentage
 	sp_label.text = "%d/%d SP" % [int(current_sp), int(max_sp)]
 

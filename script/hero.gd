@@ -49,7 +49,6 @@ enum State {
 @onready var state_timer: Timer = $StateTimer
 @onready var attack_timer: Timer = $AttackTimer
 @onready var respawn_timer: Timer = $RespawnTimer
-@onready var skill_timer: Timer = $SkillTimer
 @onready var scan_timer: Timer = $ScanTimer
 @onready var detection_area: Area2D = $DetectionRadius
 @onready var attack_area: Area2D = $AttackArea
@@ -115,18 +114,18 @@ var staged_data: Dictionary = {}
 func _ready() -> void:
 	hero_stats.stats_updated.connect(_on_stats_updated)
 	hero_inventory.equipment_changed.connect(_on_equipment_changed)
-	
 	nav_agent.navigation_finished.connect(_on_navigation_finished)
 	state_timer.timeout.connect(_on_state_timer_timeout)
 	respawn_timer.timeout.connect(_on_respawn_timer_timeout)
-	skill_timer.timeout.connect(_on_skill_timer_timeout)
 	scan_timer.timeout.connect(_on_scan_timer_timeout)
 	GameEvents.inn_room_chosen.connect(_on_inn_room_chosen)
 	
 	if not staged_data.is_empty(): _apply_loaded_data(staged_data)
 	else:
-		name_label.text = hero_name; hero_stats.initialize_stats(); heal_to_full()
+		if is_instance_valid(name_label): name_label.text = hero_name
+		heal_to_full()
 		doi_trang_thai(State.IDLE)
+		_update_equipment_visuals()
 
 func _physics_process(delta: float) -> void:
 	if _current_state in [State.IN_BARRACKS, State.RESTING]:
@@ -139,6 +138,7 @@ func _physics_process(delta: float) -> void:
 	velocity = Vector2.ZERO
 	match _current_state:
 		State.COMBAT:
+			_handle_skill_activation()
 			if not is_instance_valid(target_monster) or target_monster.is_dead:
 				find_new_target_in_radius(); return
 			var distance = global_position.distance_to(target_monster.global_position)
@@ -182,7 +182,6 @@ func _exit_state(state: State):
 	match state:
 		State.COMBAT:
 			if is_instance_valid(attack_timer): attack_timer.stop()
-			if is_instance_valid(skill_timer): skill_timer.stop()
 			_is_attacking = false
 		State.WANDER: scan_timer.stop()
 
@@ -202,8 +201,6 @@ func _enter_state(state: State):
 		State.COMBAT:
 			state_timer.stop(); scan_timer.stop()
 			if is_instance_valid(attack_timer): attack_timer.start()
-			if is_instance_valid(skill_timer) and skill_timer.is_stopped():
-				skill_timer.start(randf_range(1.5, 3.0))
 
 func _on_state_timer_timeout():
 	if not is_dead and _current_state == State.IDLE: find_new_target_in_radius()
@@ -211,9 +208,6 @@ func _on_state_timer_timeout():
 func _on_scan_timer_timeout():
 	if _current_state == State.WANDER: find_new_target_in_radius()
 
-func _on_skill_timer_timeout():
-	if _current_state == State.COMBAT and is_instance_valid(target_monster):
-		hero_skills.try_activate_random_skill()
 
 # ============================================================================
 # MỆNH LỆNH NGƯỜI CHƠI & DI CHUYỂN
@@ -411,7 +405,6 @@ func die():
 	is_dead = true; target_monster = null; velocity = Vector2.ZERO
 	if is_instance_valid(attack_timer): attack_timer.stop()
 	if is_instance_valid(state_timer): state_timer.stop()
-	if is_instance_valid(skill_timer): skill_timer.stop()
 	doi_trang_thai(State.DEAD); collision_shape.set_deferred("disabled", true)
 	animation_player.play("Death"); death_timer = 2.0
 		
@@ -488,6 +481,9 @@ func _apply_loaded_data(data: Dictionary):
 
 	base_appearance = data.get("base_appearance", {})
 	
+	hero_inventory.load_data(data.get("inventory_data", {}))
+	hero_stats.load_data(data.get("stats_data", {}))
+	
 	hero_stats.load_data(data.get("stats_data", {})); hero_inventory.load_data(data.get("inventory_data", {}))
 	hero_skills.load_data(data.get("skills_data", {}))
 	
@@ -500,6 +496,7 @@ func _apply_loaded_data(data: Dictionary):
 	if not area_name.is_empty() and is_instance_valid(world_node):
 		movement_area = world_node.find_child(area_name, true, false)
 	_update_hp_display(); _update_sp_display()
+	_update_equipment_visuals()
 
 # ============================================================================
 # CÁC HÀM HỖ TRỢ & HÀNH VI CŨ
@@ -553,10 +550,26 @@ func _update_potion_cooldowns(delta: float):
 		if _potion_cooldowns[key] > 0: _potion_cooldowns[key] -= delta
 	
 func _update_hp_display():
-	if is_instance_valid(hp_bar): 
-		hp_bar.max_value = self.max_hp; hp_bar.value = self.current_hp
-	if is_instance_valid(hp_label): hp_label.text = "%d/%d" % [roundi(current_hp), roundi(max_hp)]
-	hp_changed.emit(current_hp, max_hp)
+	# Thêm chốt an toàn để tránh lỗi nếu component hero_stats chưa sẵn sàng
+	if not is_instance_valid(hero_stats):
+		return
+
+	# Lấy giá trị max_hp trực tiếp từ component HeroStats để đảm bảo luôn đúng
+	var true_max_hp = hero_stats.max_hp
+
+	# Cập nhật thanh HP nhỏ phía trên đầu hero (nếu có)
+	if is_instance_valid(hp_bar):
+		# Sử dụng giá trị max_hp chính xác
+		hp_bar.max_value = true_max_hp
+		hp_bar.value = self.current_hp
+	
+	# Cập nhật label text của thanh HP nhỏ (nếu có)
+	if is_instance_valid(hp_label):
+		# Sử dụng giá trị max_hp chính xác cho label
+		hp_label.text = "%d/%d" % [roundi(current_hp), roundi(true_max_hp)]
+	
+	# Phát tín hiệu ra ngoài (cho UI chính) với các giá trị chính xác
+	hp_changed.emit(current_hp, true_max_hp)
 	
 func _update_sp_display(): sp_changed.emit(current_sp, max_sp)
 	
@@ -565,25 +578,26 @@ func _update_equipment_visuals():
 	_apply_base_appearance()
 	
 	# Phần 2: Xử lý các trang bị khác (khiên, giáp...)
-	# (Phần code xử lý khiên và các trang bị khác của bạn giữ nguyên ở đây)
-	# Ví dụ:
 	var visual_map: Dictionary = {
 		"HelmetSprite": helmet_sprite, "ArmorSprite": armor_sprite, "GlovesLSprite": gloves_l_sprite,
 		"GlovesRSprite": gloves_r_sprite, "BootsLSprite": boots_l_sprite, "BootsRSprite": boots_r_sprite,
 	}
 	if is_instance_valid(offhand_sprite):
 		offhand_sprite.visible = false
-		var shield_id = hero_inventory.equipment.get("OFF_HAND")
-		if typeof(shield_id) == TYPE_STRING and not shield_id.is_empty():
+		var shield_package = hero_inventory.equipment.get("OFF_HAND")
+		if shield_package is Dictionary and shield_package.has("base_id"):
+			var shield_id = shield_package.get("base_id")
 			var data = ItemDatabase.get_item_data(shield_id)
 			if data.get("equip_slot") == "OFF_HAND":
 				var shield_icon_path = data.get("icon_path", "")
 				if not shield_icon_path.is_empty() and FileAccess.file_exists(shield_icon_path):
 					offhand_sprite.texture = load(shield_icon_path)
 				offhand_sprite.visible = true
+				
 	for slot in ["HELMET", "ARMOR", "GLOVES", "BOOTS", "PANTS"]:
-		var item_id = hero_inventory.equipment.get(slot)
-		if typeof(item_id) == TYPE_STRING and not item_id.is_empty():
+		var item_package = hero_inventory.equipment.get(slot)
+		if item_package is Dictionary and item_package.has("base_id"):
+			var item_id = item_package.get("base_id")
 			var data = ItemDatabase.get_item_data(item_id)
 			if data.has("visuals"):
 				var visuals = data.get("visuals")
@@ -600,51 +614,60 @@ func _update_equipment_visuals():
 		if child is Sprite2D:
 			child.visible = false
 	
-	# 3.2. Lấy dữ liệu vũ khí đang trang bị
-	var weapon_id = hero_inventory.equipment.get("MAIN_HAND")
+	# --- SỬA LỖI TỪ ĐÂY ---
+	# 3.2. Lấy toàn bộ "gói dữ liệu" của vũ khí, không phải chỉ ID
+	var weapon_package = hero_inventory.equipment.get("MAIN_HAND")
 	
-	# 3.3. Nếu không trang bị vũ khí
-	if not weapon_id:
+	# 3.3. Nếu không trang bị vũ khí (package là null)
+	if not weapon_package:
 		_current_attack_animation_name = "Attack" # Dùng animation mặc định
 		return # Kết thúc hàm
 
+	# 3.4. Trích xuất ID từ gói dữ liệu
+	var weapon_id = weapon_package.get("base_id")
+	if not weapon_id: # Kiểm tra an toàn nếu gói dữ liệu bị lỗi
+		_current_attack_animation_name = "Attack"
+		return
+
+	# 3.5. Dùng ID đã trích xuất để lấy dữ liệu gốc từ ItemDatabase
 	var weapon_data = ItemDatabase.get_item_data(weapon_id)
 	if weapon_data.is_empty():
 		_current_attack_animation_name = "Attack"
 		return
+	# --- KẾT THÚC SỬA LỖI ---
 		
 	var weapon_type = weapon_data.get("weapon_type", "SWORD")
 	var icon_path = weapon_data.get("icon_path", "")
 
-	# 3.4. Dùng `match` để xử lý từng loại vũ khí, hiển thị sprite và gán animation
+	# 3.6. Dùng `match` để xử lý từng loại vũ khí, hiển thị sprite và gán animation
 	match weapon_type:
 		"SWORD":
 			var sprite = weapon_container.get_node_or_null("SwordSprite")
 			if is_instance_valid(sprite) and not icon_path.is_empty():
 				sprite.texture = load(icon_path)
 				sprite.visible = true
-			_current_attack_animation_name = "Attack" # Sửa thành tên animation kiếm của bạn
+			_current_attack_animation_name = "Attack"
 
 		"BOW":
 			var sprite = weapon_container.get_node_or_null("BowSprite")
 			if is_instance_valid(sprite) and not icon_path.is_empty():
 				sprite.texture = load(icon_path)
 				sprite.visible = true
-			_current_attack_animation_name = "Shooting" # Sửa thành tên animation bắn cung của bạn
+			_current_attack_animation_name = "Shooting"
 			
 		"STAFF":
 			var sprite = weapon_container.get_node_or_null("StaffSprite")
 			if is_instance_valid(sprite) and not icon_path.is_empty():
 				sprite.texture = load(icon_path)
 				sprite.visible = true
-			_current_attack_animation_name = "Cast" # Sửa thành tên animation dùng gậy của bạn
+			_current_attack_animation_name = "Cast"
 
 		"DAGGER":
 			var sprite = weapon_container.get_node_or_null("DaggerSprite")
 			if is_instance_valid(sprite) and not icon_path.is_empty():
 				sprite.texture = load(icon_path)
 				sprite.visible = true
-			_current_attack_animation_name = "Attack" # Sửa thành tên animation dao găm của bạn
+			_current_attack_animation_name = "Attack"
 		
 		_: # Trường hợp mặc định nếu không khớp
 			_current_attack_animation_name = "Attack"
@@ -698,10 +721,20 @@ func _apply_base_appearance():
 		if is_instance_valid(boots_r_sprite) and not boot_r_path.is_empty(): boots_r_sprite.texture = load(boot_r_path)
 
 func _update_animation():
+	# --- SỬA LỖI: THÊM "CHỐT AN TOÀN" ---
+	# Nếu animation_player chưa sẵn sàng (ví dụ: hero đang ở trong barracks),
+	# thì không làm gì cả để tránh bị crash.
+	if not is_instance_valid(animation_player):
+		return
+	# ------------------------------------
+
 	if _is_attacking: return
+	
 	var anim = "Idle"
 	if velocity.length() > 5.0: anim = "Walk"
-	if animation_player.current_animation != anim: animation_player.play(anim)
+	
+	if animation_player.current_animation != anim:
+		animation_player.play(anim)
 
 func _update_flip_direction():
 	var x = abs(skeleton_2d.scale.x)
@@ -802,40 +835,41 @@ func _spawn_vfx(animation_name: String, offset_y: float = -60.0, p_scale: Vector
 	vfx_instance.play_effect(animation_name)
 
 func can_change_job() -> bool:
-	print("\n--- BẮT ĐẦU KIỂM TRA ĐIỀU KIỆN CHUYỂN NGHỀ CHO HERO: %s ---" % hero_name)
-	print("Kiểm tra Nghề và Cấp độ...")
-	print(" - Nghề hiện tại: ", hero_stats.job_key, " | Yêu cầu: Novice")
-	print(" - Cấp hiện tại: ", hero_stats.level, " | Yêu cầu: >= 10")
+	print("\n--- KIỂM TRA ĐIỀU KIỆN CHUYỂN NGHỀ CHO HERO: %s ---" % hero_name)
+	
 	# Điều kiện 1: Phải là Novice và đạt cấp 10
 	if hero_stats.job_key != "Novice" or hero_stats.level < 10:
-		print(">>> THẤT BẠI: Không đạt yêu cầu về Nghề hoặc Cấp độ.")
+		print(">>> THẤT BẠI: Không đạt yêu cầu về Nghề ('%s') hoặc Cấp độ (%d)." % [hero_stats.job_key, hero_stats.level])
 		return false
 	
-	# Điều kiện 2: Kiểm tra vật phẩm và vàng (lấy từ GameDataManager)
-	print("Kiểm tra Vàng và Vật phẩm...")
+	# Điều kiện 2: Kiểm tra vật phẩm và vàng
 	var requirements = GameDataManager.get_job_change_requirements()
-	var required_gold = requirements.get("gold_cost", 999999)
+	var required_gold = requirements.get("gold_cost", 9999999)
 	var required_items = requirements.get("items", [])
-	print(" - Vàng hiện có: ", hero_inventory.gold, " | Yêu cầu: ", required_gold)
 	
+	# Kiểm tra vàng của HERO
+	print("Kiểm tra Vàng của Hero...")
+	print(" - Vàng hiện có: ", hero_inventory.gold, " | Yêu cầu: ", required_gold)
 	if hero_inventory.gold < required_gold:
-		print(">>> THẤT BẠI: Không đủ vàng.")
+		print(">>> THẤT BẠI: Hero không đủ vàng.")
 		return false
 		
+	# THAY ĐỔI Ở ĐÂY: Kiểm tra vật phẩm trong KHO CỦA NGƯỜI CHƠI
+	print("Kiểm tra Vật phẩm trong Kho Người Chơi...")
 	for item in required_items:
 		var item_id = item["id"]
 		var required_quantity = item["quantity"]
-		print(" - Kiểm tra vật phẩm: '%s' | Yêu cầu: %d" % [item_id, required_quantity])
 		
-		# Lấy số lượng vật phẩm hero đang có
-		var current_quantity = hero_inventory.get_item_quantity(item_id)
+		# Lấy số lượng vật phẩm người chơi đang có trong kho
+		var current_quantity_in_warehouse = PlayerStats.get_item_quantity_in_warehouse(item_id)
 		
-		if current_quantity < required_quantity:
-			print(">>> THẤT BẠI: Không đủ vật phẩm '%s'." % item_id)
+		print(" - Vật phẩm '%s': Có %d | Cần %d" % [item_id, current_quantity_in_warehouse, required_quantity])
+		if current_quantity_in_warehouse < required_quantity:
+			print(">>> THẤT BẠI: Kho không đủ vật phẩm '%s'." % item_id)
 			return false
 			
 	# Nếu qua được tất cả các bài kiểm tra
-	print(">>> THÀNH CÔNG: Hero đủ mọi điều kiện để chuyển nghề!")
+	print(">>> THÀNH CÔNG: Đủ mọi điều kiện để chuyển nghề!")
 	return true
 
 # HÀM MỚI: Trừ các chi phí sau khi xác nhận chuyển nghề
@@ -844,9 +878,27 @@ func consume_job_change_costs():
 	var required_gold = requirements.get("gold_cost", 0)
 	var required_items = requirements.get("items", [])
 	
-	# Trừ vàng
+	# --- LOGIC MỚI ---
+	# 1. Trừ vàng của Hero
 	hero_inventory.add_gold(-required_gold)
+	print("Hero '%s' đã trả %d vàng." % [hero_name, required_gold])
 	
-	# Trừ vật phẩm
+	# 2. Chuyển số vàng đó vào kho của Người chơi
+	PlayerStats.add_gold_to_player(required_gold)
+	print("Kho người chơi đã nhận được %d vàng." % required_gold)
+	
+	# 3. Trừ vật phẩm từ kho của Người chơi
 	for item in required_items:
-		hero_inventory.remove_item_from_inventory(item["id"], item["quantity"])
+		PlayerStats.remove_item_from_warehouse(item["id"], item["quantity"])
+		print("Kho người chơi đã bị trừ %d '%s'." % [item["quantity"], item["id"]])
+		
+func _handle_skill_activation():
+	# Chỉ xử lý khi đang tấn công và có mục tiêu
+	if not _is_attacking or not is_instance_valid(target_monster): return
+
+	# Hỏi component HeroSkills xem có skill nào sẵn sàng không
+	var skill_to_use = hero_skills.get_ready_skill_to_activate()
+
+	# Nếu có, ra lệnh cho component kích hoạt skill đó
+	if not skill_to_use.is_empty():
+		hero_skills._activate_skill(skill_to_use)

@@ -4,7 +4,7 @@ class_name DroppedItem
 var item_id: String
 var quantity: int = 1
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var icon_rect: TextureRect = $TextureRect
 
 # Biến cho hiệu ứng hút vật phẩm
 var target_hero: Hero = null
@@ -17,7 +17,7 @@ func _ready():
 
 	var item_icon = ItemDatabase.get_item_icon(item_id)
 	if item_icon:
-		sprite.texture = item_icon
+		icon_rect.texture = item_icon
 	else:
 		print("Không tìm thấy icon cho item: ", item_id)
 
