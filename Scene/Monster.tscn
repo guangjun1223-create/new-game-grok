@@ -1,37 +1,196 @@
-[gd_scene load_steps=6 format=3 uid="uid://da330t0vkq6jc"]
+[gd_scene load_steps=16 format=3 uid="uid://cw0e3ia74y4rd"]
 
-[ext_resource type="Script" uid="uid://di6exn0e1fc5b" path="res://script/monster.gd" id="1_iia3d"]
-[ext_resource type="SpriteFrames" uid="uid://ckpv1vl3vaduk" path="res://Data/Slime.tres" id="2_iia3d"]
+[ext_resource type="Script" uid="uid://cngkan8xu6in6" path="res://script/monster.gd" id="1_h68k5"]
+[ext_resource type="AnimationLibrary" uid="uid://lqkfqnjiwfni" path="res://Data/monster.res" id="2_ro6xh"]
+[ext_resource type="Texture2D" uid="uid://2p435uh0bgl6" path="res://texture/data/monster/Skeleton/Left Leg.png" id="3_h68k5"]
+[ext_resource type="Texture2D" uid="uid://drhlvpxto0yds" path="res://texture/data/monster/Skeleton/Right Leg.png" id="4_ro6xh"]
+[ext_resource type="Texture2D" uid="uid://dgbudkomwqssg" path="res://texture/data/monster/Skeleton/Left Hand.png" id="5_4dehv"]
+[ext_resource type="Texture2D" uid="uid://jhdnc6lp6emd" path="res://texture/data/monster/Skeleton/Sword.png" id="6_3rvrv"]
+[ext_resource type="Texture2D" uid="uid://camx47fy7jtgr" path="res://texture/data/monster/Skeleton/Left Arm.png" id="7_t7hk2"]
+[ext_resource type="Texture2D" uid="uid://2fcbnyup1xox" path="res://texture/data/monster/Skeleton/Body.png" id="8_tc0wp"]
+[ext_resource type="Texture2D" uid="uid://0c6nda77wdar" path="res://texture/data/monster/Skeleton/Head.png" id="9_5wsf0"]
+[ext_resource type="Texture2D" uid="uid://c0skik62mion7" path="res://texture/data/monster/Skeleton/Face 01.png" id="10_wk51q"]
+[ext_resource type="Texture2D" uid="uid://bwqla6fnraoso" path="res://texture/data/monster/Skeleton/Right Arm.png" id="11_g7e0f"]
+[ext_resource type="Texture2D" uid="uid://bm4ww6p36n87w" path="res://texture/data/monster/Skeleton/Right Hand.png" id="12_d5jv2"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iia3d"]
-radius = 40.0
-height = 80.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_qheve"]
+radius = 335.18054
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qheve"]
 bg_color = Color(0.980392, 0, 0, 1)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qheve"]
-radius = 500.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iia3d"]
+radius = 37.0
+height = 74.0
 
 [node name="Monster" type="CharacterBody2D" groups=["monsters"]]
 y_sort_enabled = true
 collision_layer = 4
 collision_mask = 2
-script = ExtResource("1_iia3d")
-monster_id = null
-stopping_distance = null
-respawn_radius = null
+script = ExtResource("1_h68k5")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 50.0
+avoidance_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"monster": ExtResource("2_ro6xh")
+}
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+scale = Vector2(0.3, 0.3)
+
+[node name="HipBone" type="Bone2D" parent="Skeleton2D"]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="Chan_trai" type="Bone2D" parent="Skeleton2D/HipBone"]
+position = Vector2(51.000004, 3)
+scale = Vector2(0.99996865, 0.99996865)
+rest = Transform2D(0.99996865, 0, 0, 0.99996865, 39, 3.0000002)
+
+[node name="Leg_L_Bone" type="Bone2D" parent="Skeleton2D/HipBone/Chan_trai"]
+position = Vector2(5.0001574, 49.001526)
+rotation = -0.060513955
+rest = Transform2D(0.9981696, -0.06047703, 0.06047703, 0.9981696, 5.0001574, 49.001526)
+auto_calculate_length_and_angle = false
+length = 17.634
+bone_angle = 5.847997
+
+[node name="BootsLSprite" type="Sprite2D" parent="Skeleton2D/HipBone/Chan_trai/Leg_L_Bone"]
+position = Vector2(-0.5449068, -24.077784)
+texture = ExtResource("3_h68k5")
+
+[node name="Chan_Phai" type="Bone2D" parent="Skeleton2D/HipBone"]
+position = Vector2(-52.999996, 2.0000005)
+rotation = -0.053576626
+scale = Vector2(0.99999875, 0.99999875)
+rest = Transform2D(0.9985639, -0.053550933, 0.053550933, 0.9985639, -41.999992, 6)
+auto_calculate_length_and_angle = false
+length = 55.21128
+bone_angle = 100.494675
+
+[node name="Leg_R_Bone" type="Bone2D" parent="Skeleton2D/HipBone/Chan_Phai"]
+position = Vector2(-0.8946172, 54.029686)
+rest = Transform2D(1, 0, 0, 1, -0.8946172, 54.029686)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
+
+[node name="BootsRSprite" type="Sprite2D" parent="Skeleton2D/HipBone/Chan_Phai/Leg_R_Bone"]
+position = Vector2(-2.7625961, -23.181232)
+texture = ExtResource("4_ro6xh")
+
+[node name="Than_Minh" type="Bone2D" parent="Skeleton2D/HipBone"]
+position = Vector2(1, -136)
+rotation = -0.060730528
+scale = Vector2(0.99999976, 0.99999976)
+rest = Transform2D(0.99999976, 0, 0, 0.99999976, -4, -135.99998)
+
+[node name="Tay_trai" type="Bone2D" parent="Skeleton2D/HipBone/Than_Minh"]
+position = Vector2(50.000004, 6.000003)
+rotation = -1.4388261
+scale = Vector2(0.99999934, 0.99999934)
+rest = Transform2D(0.82261145, -0.56860334, 0.56860334, 0.82261145, 50.000004, 6.000003)
+
+[node name="Arm_L_Bone" type="Bone2D" parent="Skeleton2D/HipBone/Than_Minh/Tay_trai"]
+z_index = -1
+position = Vector2(44.49752, 40.112244)
+rotation = -0.071303375
+rest = Transform2D(0.997459, -0.07124297, 0.07124297, 0.997459, 44.49752, 40.112244)
+
+[node name="Hand_L_Bone" type="Bone2D" parent="Skeleton2D/HipBone/Than_Minh/Tay_trai/Arm_L_Bone"]
+position = Vector2(36.10653, 22.188492)
+rotation = 0.07707966
+scale = Vector2(0.9999922, 0.9999922)
+rest = Transform2D(0.99702305, 0.07700276, -0.07700276, 0.99702305, 36.10653, 22.188492)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 2.617771
+
+[node name="Hand_L_Sprite" type="Sprite2D" parent="Skeleton2D/HipBone/Than_Minh/Tay_trai/Arm_L_Bone/Hand_L_Bone"]
+position = Vector2(-13.902557, -9.36615)
+rotation = -0.9185309
+texture = ExtResource("5_4dehv")
+
+[node name="WeaponContainer" type="Node2D" parent="Skeleton2D/HipBone/Than_Minh/Tay_trai/Arm_L_Bone/Hand_L_Bone"]
+
+[node name="weapon" type="Sprite2D" parent="Skeleton2D/HipBone/Than_Minh/Tay_trai/Arm_L_Bone/Hand_L_Bone/WeaponContainer"]
+position = Vector2(63.218422, -100.83222)
+rotation = -0.9477547
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("6_3rvrv")
+
+[node name="Arm_L_Sprite" type="Sprite2D" parent="Skeleton2D/HipBone/Than_Minh/Tay_trai/Arm_L_Bone"]
+position = Vector2(-30.334808, -23.017548)
+rotation = -0.6926041
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("7_t7hk2")
+
+[node name="ArmorSprite" type="Sprite2D" parent="Skeleton2D/HipBone/Than_Minh"]
 y_sort_enabled = true
-position = Vector2(0, -33)
-scale = Vector2(5, 5)
-sprite_frames = ExtResource("2_iia3d")
-animation = &"Attack"
+position = Vector2(-13, 64)
+texture = ExtResource("8_tc0wp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -33)
-shape = SubResource("CapsuleShape2D_iia3d")
+[node name="Head_Bone" type="Bone2D" parent="Skeleton2D/HipBone/Than_Minh"]
+position = Vector2(-3, -70)
+rotation = -0.15049538
+scale = Vector2(0.99999243, 0.99999243)
+rest = Transform2D(0.99999315, 0, 0, 0.99999315, -3, -70)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = -1.0440055
+
+[node name="Head_Sprite" type="Sprite2D" parent="Skeleton2D/HipBone/Than_Minh/Head_Bone"]
+position = Vector2(-27.914003, -87.02203)
+rotation = 0.05088306
+texture = ExtResource("9_5wsf0")
+
+[node name="Face_Sprite" type="Sprite2D" parent="Skeleton2D/HipBone/Than_Minh/Head_Bone"]
+position = Vector2(8.95015, -20.2459)
+rotation = 0.10153863
+texture = ExtResource("10_wk51q")
+
+[node name="Tay_Phai" type="Bone2D" parent="Skeleton2D/HipBone/Than_Minh"]
+position = Vector2(-69.93821, 29.81018)
+rotation = -0.2830469
+scale = Vector2(0.9999809, 0.9999809)
+rest = Transform2D(-0.47447744, -0.8802464, 0.8802464, -0.47447744, -67.00001, 19.999985)
+
+[node name="Arm_R_Bone" type="Bone2D" parent="Skeleton2D/HipBone/Than_Minh/Tay_Phai"]
+position = Vector2(-28.674408, 58.46307)
+rest = Transform2D(1, 0, 0, 1, -28.674408, 58.46307)
+
+[node name="Arm_R_Sprite" type="Sprite2D" parent="Skeleton2D/HipBone/Than_Minh/Tay_Phai/Arm_R_Bone"]
+position = Vector2(15.673996, -34.049614)
+rotation = 0.31762427
+scale = Vector2(1.0000001, 1.0000001)
+texture = ExtResource("11_g7e0f")
+
+[node name="Hand_R_Bone" type="Bone2D" parent="Skeleton2D/HipBone/Than_Minh/Tay_Phai/Arm_R_Bone"]
+position = Vector2(-12.304148, 25.64443)
+rest = Transform2D(1, 0, 0, 1, -12.304148, 25.64443)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
+
+[node name="Hand_R_Sprite" type="Sprite2D" parent="Skeleton2D/HipBone/Than_Minh/Tay_Phai/Arm_R_Bone/Hand_R_Bone"]
+position = Vector2(0.10582733, -4.121811)
+rotation = 1.2202797
+texture = ExtResource("12_d5jv2")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(-1, -6)
+shape = SubResource("CircleShape2D_qheve")
+debug_color = Color(0.901961, 0.0235294, 0, 0.419608)
+
+[node name="StateTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
 
 [node name="HPBar" type="ProgressBar" parent="."]
 anchors_preset = 8
@@ -49,26 +208,24 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 12
 theme_override_styles/fill = SubResource("StyleBoxFlat_qheve")
+show_percentage = false
 
-[node name="StateTimer" type="Timer" parent="."]
+[node name="NameLabel" type="Label" parent="HPBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -16)
+shape = SubResource("CapsuleShape2D_iia3d")
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-target_desired_distance = 50.0
-path_max_distance = 1000.0
-avoidance_enabled = true
-
-[node name="DetectionRadius" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRadius"]
-position = Vector2(-1, -6)
-shape = SubResource("CircleShape2D_qheve")
-debug_color = Color(0.901961, 0.0235294, 0, 0.419608)
 
 [node name="InitTimer" type="Timer" parent="."]
 one_shot = true
@@ -77,5 +234,6 @@ one_shot = true
 wait_time = 5.0
 one_shot = true
 
-[connection signal="body_entered" from="DetectionRadius" to="." method="_on_hero_entered"]
-[connection signal="body_exited" from="DetectionRadius" to="." method="_on_hero_exited"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_nav_agent_velocity_computed"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_hero_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_hero_exited"]

@@ -3,7 +3,7 @@
 		"simple_sword": {
 			"item_name": "Kiếm Gỗ",
 			"description": "Một thanh kiếm gỗ cơ bản, dùng để luyện tập.",
-			"icon_path": "res://texture/data/other/Weapon/Sword_1/1.png",
+			"icon_path": "res://texture/Item/Weapon/Sword_1/1.png",
 			"item_type": "EQUIPMENT",
 			"is_stackable": false,
 			"category": "equipment",
@@ -16,7 +16,7 @@
 		"short_sword": {
 			"item_name": "Kiếm Ngắn",
 			"description": "Tốc độ cực nhanh, tầm đánh gần, sát thương thấp.",
-			"icon_path": "res://texture/data/other/Weapon/Dagger_1/1.png",
+			"icon_path": "res://texture/Item/Weapon/Dagger_1/1.png",
 			"item_type": "EQUIPMENT",
 			"is_stackable": false,
 			"category": "equipment",
@@ -29,7 +29,7 @@
 		"magic_staff": {
 			"item_name": "Gậy Phép",
 			"description": "Tầm đánh xa, sát thương phép cao nhưng tốc độ chậm.",
-			"icon_path": "res://texture/data/other/Weapon/Staves_1/1.png",
+			"icon_path": "res://texture/Item/Weaponn/Staves_1/1.png",
 			"projectile_scene": "res://Data/items/magic.tscn",
 			"item_type": "EQUIPMENT",
 			"is_stackable": false,
@@ -43,7 +43,7 @@
 		"long_bow": {
 			"item_name": "Cung Dài",
 			"description": "Tầm đánh xa nhất, tốc độ khá.",
-			"icon_path": "res://texture/data/other/Weapon/Bow_1/1.png",
+			"icon_path": "res://texture/Item/Weapon/Bow_1/1.png",
 			"projectile_scene": "res://Data/items/arow.tscn",
 			"item_type": "EQUIPMENT",
 			"is_stackable": false,
@@ -59,11 +59,11 @@
 		"simple_helmet": {
 			"item_name": "Mũ Sắt",
 			"description": "Một chiếc mũ sắt cơ bản.",
-			"icon_path": "res://texture/data/other/Helmet/00001.png",
+			"icon_path": "res://texture/Item/Helmet/00001.png",
 			"is_stackable": false,
 			"visuals": {
 		"target_sprite": "HelmetSprite",
-		"texture_path": "res://texture/data/other/Helmet/00001.png"
+		"texture_path": "res://texture/Item/Helmet/00001.png"
 	},
 			"item_type": "EQUIPMENT",
 			"category": "equipment",
@@ -105,7 +105,7 @@
 		"wooden_shield": {
 			"item_name": "Khiên Gỗ",
 			"description": "Một chiếc khiên gỗ.",
-			"icon_path": "res://texture/data/other/OffHand/Shield_1/1.png",
+			"icon_path": "res://texture/Item/OffHand/Shield_1/1.png",
 			"is_stackable": false,
 			"item_type": "EQUIPMENT",
 			"is_shield": true,
@@ -119,7 +119,7 @@
 		"healing_potion_small": {
 			"item_name": "Bình Máu Nhỏ",
 			"description": "Một bình thuốc nhỏ do bọn trẻ con pha chế thành, uống vào cũng đỡ khát. Hồi phục 100 HP.",
-			"icon_path": "res://texture/data/other/Potion/8.png",
+			"icon_path": "res://texture/Item/Potion/8.png",
 			"category": "potion",
 			"item_type": "CONSUMABLE",
 			"is_stackable": true,
@@ -130,7 +130,7 @@
 		"sp_potion_small": {
 			"item_name": "Miếng thịt nhỏ",
 			"description": "Một miếng thịt không biết để bao lâu nhưng vẫn dùng tốt, ăn vẫn chống đói. Hồi phục 50 SP.",
-			"icon_path": "res://texture/data/other/Potion/7.png",
+			"icon_path": "res://texture/Item/Potion/7.png",
 			"category": "potion",
 			"item_type": "CONSUMABLE",
 			"is_stackable": true,
@@ -141,7 +141,7 @@
 		"summon_scroll": {
 			"item_name": "Cuộn giấy triệu hồi",
 			"description": "Dùng để triệu hồi anh hùng.",
-			"icon_path": "res://texture/data/other/scroll/1.png",
+			"icon_path": "res://texture/Item/scroll/1.png",
 			"item_type": "CONSUMABLE",
 			"is_stackable": true,
 			"max_stack_size": 99999
@@ -151,7 +151,7 @@
 		"wood": {
 			"item_name": "Gỗ",
 			"description": "Nguyên liệu chế tác cơ bản.",
-			"icon_path": "res://texture/data/other/Craft Resources/27.png",
+			"icon_path": "res://texture/Item/Craft Resources//27.png",
 			"item_type": "MATERIAL",
 			"is_stackable": true,
 			"max_stack_size": 999999,
@@ -160,7 +160,7 @@
 		"stone": {
 			"item_name": "Đá",
 			"description": "Nguyên liệu chế tác cơ bản.",
-			"icon_path": "res://texture/data/other/Craft Resources/12.png",
+			"icon_path": "res://texture/Item/Craft Resources//12.png",
 			"item_type": "MATERIAL",
 			"is_stackable": true,
 			"max_stack_size": 999999,
@@ -169,7 +169,7 @@
 		"small_crystal": {
 			"item_name": "Tinh Thể Nhỏ",
 			"description": "Một tinh thể lấp lánh năng lượng.",
-			"icon_path": "res://texture/data/other/Craft Resources/14.png",
+			"icon_path": "res://texture/Item/Craft Resources/s/14.png",
 			"item_type": "MATERIAL",
 			"is_stackable": true,
 			"max_stack_size": 999999,
@@ -178,7 +178,7 @@
 		"thread": {
 			"item_name": "Chỉ",
 			"description": "Dùng để may vá.",
-			"icon_path": "res://texture/data/other/Craft Resources/48.png",
+			"icon_path": "res://texture/Item/Craft Resources//48.png",
 			"item_type": "MATERIAL",
 			"is_stackable": true,
 			"max_stack_size": 999999,
@@ -187,7 +187,7 @@
 		"cloth": {
 			"item_name": "Vải",
 			"description": "Dùng để chế tạo quần áo và giáp nhẹ.",
-			"icon_path": "res://texture/data/other/Craft Resources/43.png",
+			"icon_path": "res://texture/Item/Craft Resources//43.png",
 			"item_type": "MATERIAL",
 			"is_stackable": true,
 			"max_stack_size": 999999,
@@ -196,7 +196,7 @@
 		"leather": {
 			"item_name": "Da Thú",
 			"description": "Dùng để chế tạo giáp da.",
-			"icon_path": "es://texture/data/other/Craft Resources/40.png",
+			"icon_path": "res://texture/Item/Craft Resources/40.png",
 			"item_type": "MATERIAL",
 			"is_stackable": true,
 			"max_stack_size": 999999,
@@ -205,7 +205,7 @@
 		"herb": {
 			"item_name": "Thảo Dược",
 			"description": "Nguyên liệu để chế tạo thuốc.",
-			"icon_path": "res://texture/data/other/Craft Resources/45.png",
+			"icon_path": "res://texture/Item/Craft Resources/45.png",
 			"item_type": "MATERIAL",
 			"is_stackable": true,
 			"max_stack_size": 999999,
@@ -214,7 +214,7 @@
 		"spring_water": {
 			"item_name": "Nước Suối",
 			"description": "Nước tinh khiết từ trong núi.",
-			"icon_path": "res://texture/data/other/Craft Resources/50.png",
+			"icon_path": "res://texture/Item/Craft Resources/50.png",
 			"item_type": "MATERIAL",
 			"is_stackable": true,
 			"max_stack_size": 999999,
@@ -223,7 +223,7 @@
 		"empty_bottle": {
 			"item_name": "Miếng thủy tinh",
 			"description": "Dùng để tạo chai nước.",
-			"icon_path": "res://texture/data/other/Craft Resources/4.png",
+			"icon_path": "res://texture/Item/Craft Resources/4.png",
 			"item_type": "MATERIAL",
 			"is_stackable": true,
 			"max_stack_size": 999999,
@@ -232,7 +232,7 @@
 		"weapon_upgrade_stone": {
 			"item_name": "Đá cường hóa vũ khí",
 			"description": "Một loại đá chắc chắn rất tốt làm vũ khí",
-			"icon_path": "res://texture/data/other/Craft Resources/8.png",
+			"icon_path": "res://texture/Item/Craft Resources/8.png",
 			"item_type": "MATERIAL",
 			"is_stackable": true,
 			"max_stack_size": 999999
@@ -240,7 +240,7 @@
 		"armor_upgrade_stone": {
 			"item_name": "Đá cường hóa trang bị",
 			"description": "Một loại đá dẻo dai nhưng chắc chắn",
-			"icon_path": "res://texture/data/other/Craft Resources/9.png",
+			"icon_path": "res://texture/Item/Craft Resources/9.png",
 			"item_type": "MATERIAL",
 			"is_stackable": true,
 			"max_stack_size": 999999

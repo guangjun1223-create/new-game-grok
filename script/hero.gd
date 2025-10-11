@@ -139,8 +139,9 @@ func _physics_process(delta: float) -> void:
 	match _current_state:
 		State.COMBAT:
 			_handle_skill_activation()
-			if not is_instance_valid(target_monster) or target_monster.is_dead:
-				find_new_target_in_radius(); return
+			if not is_instance_valid(target_monster) or target_monster.current_state == target_monster.State.DEAD:
+				find_new_target_in_radius()
+				return # Thoát khỏi hàm sau khi tìm mục tiêu mới
 			var distance = global_position.distance_to(target_monster.global_position)
 			if distance > hero_stats.attack_range_calculated:
 				_is_attacking = false; nav_agent.target_position = target_monster.global_position
@@ -347,15 +348,23 @@ func find_new_target_in_radius():
 	var bodies = detection_area.get_overlapping_bodies()
 	var closest = null; var min_dist = INF
 	for body in bodies:
-		if body.is_in_group("monsters") and not body.is_dead:
+		if body.is_in_group("monsters") and body.current_state != body.State.DEAD:
 			var dist = global_position.distance_to(body.global_position)
-			if dist < min_dist: min_dist = dist; closest = body
-	if is_instance_valid(closest): target_monster = closest; doi_trang_thai(State.COMBAT)
-	else: doi_trang_thai(State.WANDER)
+			if dist < min_dist:
+				min_dist = dist
+				closest = body
+	if is_instance_valid(closest):
+		target_monster = closest
+		doi_trang_thai(State.COMBAT)
+	else:
+		doi_trang_thai(State.WANDER)
 
 func _on_detection_radius_body_entered(body):
 	if _current_state in [State.COMBAT, State.PLAYER_COMMAND, State.TRADING] or is_dead or is_in_village_area(): return
-	if body.is_in_group("monsters") and not body.is_dead: find_new_target_in_radius()
+	
+	# --- SỬA LẠI ĐIỀU KIỆN KIỂM TRA Ở ĐÂY ---
+	if body.is_in_group("monsters") and body.current_state != body.State.DEAD:
+		find_new_target_in_radius()
 	
 func _on_detection_radius_body_exited(body):
 	if body == target_monster:

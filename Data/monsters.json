@@ -1,10 +1,13 @@
-{
-  "slime_normal_01": {
-	"name": "Slime",
-	"type": "NORMAL",
+{  
+"skeleton": {
+	"name": "skeleton",
 	"level": 1,
-	"sprite_frames_path": "res://Data/Slime.tres",
+	"ai_type": "PASSIVE",
+	"move_speed": 80,
+	"patrol_radius": 1000,
+	"respawn_time": 20.0,
 	"base_stats": {
+		"HP": 50,
 	  "STR": 8,
 	  "AGI": 5,
 	  "VIT": 10,
@@ -12,31 +15,207 @@
 	  "DEX": 10,
 	  "LUK": 5
 	},
-	"exp_reward": 1000,
-	"gold_drop": [5, 10],
-	"respawn_time": 20.0,
-	"loot_table": [
-		{"item_id": "herb", "chance": 0.15, "quantity": [1,1]}
-	]
-  },
-  "slime_blue_01": {
-	"name": "Slime Xanh",
-	"type": "ELITE",
-	"level": 5,
-	"sprite_frames_path": "res://Data/Slime_01.tres",
-	"base_stats": {
-	  "STR": 15,
-	  "AGI": 8,
-	  "VIT": 25,
-	  "INTEL": 5,
-	  "DEX": 18,
-	  "LUK": 10
-	},
-	"exp_reward": 3500,
-	"gold_drop": [20, 50],
-	"respawn_time": 60.0,
+	"exp_reward": 50,
+	"gold_drop": [15, 20],
 	"loot_table": [
 		{"item_id": "small_crystal", "chance": 0.1, "quantity":[1,1]}
-	]
-  }
+	],
+	"appearance": {
+		"ArmorSprite": "res://texture/data/monster/Skeleton/Body.png",
+		"Head_Sprite": "res://texture/data/monster/Skeleton/Head.png",
+		"Face_Sprite": "res://texture/data/monster/Skeleton/Face 01.png",
+		"BootsLSprite": "res://texture/data/monster/Skeleton/Left Leg.png",
+		"BootsRSprite": "res://texture/data/monster/Skeleton/Right Leg.png",
+		"Arm_L_Sprite": "res://texture/data/monster/Skeleton/Left Arm.png",
+		"Hand_L_Sprite": "res://texture/data/monster/Skeleton/Left Hand.png",
+		"weapon": "res://texture/data/monster/Skeleton/Sword.png",
+		"Arm_R_Sprite": "res://texture/data/monster/Skeleton/Right Arm.png",
+		"Hand_R_Sprite": "res://texture/data/monster/Skeleton/Right Hand.png"
+	}
+  },
+"zomble": {
+	"name": "zomble",
+	"level": 5,
+	"ai_type": "AGGRESSIVE",
+	"patrol_radius": 2500,
+	"move_speed": 80,
+	"respawn_time": 60.0,
+	"base_stats": {
+		"HP": 100,
+	  "STR": 1,
+	  "AGI": 5,
+	  "VIT": 5,
+	  "INTEL": 5,
+	  "DEX": 10,
+	  "LUK": 5
+	},
+	"exp_reward": 50,
+	"gold_drop": [20, 50],
+	"loot_table": [
+		{"item_id": "small_crystal", "chance": 0.1, "quantity":[1,1]}
+	],
+	"appearance": {
+		"ArmorSprite": "res://texture/data/monster/Zombie/Body.png",
+		"Head_Sprite": "res://texture/data/monster/Zombie/Head.png",
+		"Face_Sprite": "res://texture/data/monster/Zombie/Face 01.png",
+		"BootsLSprite": "res://texture/data/monster/Zombie/Left Leg.png",
+		"BootsRSprite": "res://texture/data/monster/Zombie/Right Leg.png",
+		"Arm_L_Sprite": "res://texture/data/monster/Zombie/Left Arm.png",
+		"Hand_L_Sprite": "res://texture/data/monster/Zombie/Left Hand.png",
+		"weapon": "res://texture/data/monster/Zombie/Sword.png",
+		"Arm_R_Sprite": "res://texture/data/monster/Zombie/Right Arm.png",
+		"Hand_R_Sprite": "res://texture/data/monster/Zombie/Right Hand.png"
+	}
+  },
+"Vampire": {
+	"name": "Vampire",
+	"level": 5,
+	"ai_type": "AGGRESSIVE",
+	"patrol_radius": 2500,
+	"move_speed": 80,
+	"respawn_time": 60.0,
+	"base_stats": {
+		"HP": 250,
+	  "STR": 1,
+	  "AGI": 36,
+	  "VIT": 6,
+	  "INTEL": 0,
+	  "DEX": 11,
+	  "LUK": 80
+	},
+	"exp_reward": 500,
+	"gold_drop": [20, 50],
+	"loot_table": [
+		{"item_id": "small_crystal", "chance": 0.1, "quantity":[1,1]}
+	],
+	"appearance": {
+		"ArmorSprite": "res://texture/data/monster/Vampire/Body.png",
+		"Head_Sprite": "res://texture/data/monster/Vampire/Head.png",
+		"Face_Sprite": "res://texture/data/monster/Vampire/Face 01.png",
+		"BootsLSprite": "res://texture/data/monster/Vampire/Left Leg.png",
+		"BootsRSprite": "res://texture/data/monster/Vampire/Right Leg.png",
+		"Arm_L_Sprite": "res://texture/data/monster/Vampire/Left Arm.png",
+		"Hand_L_Sprite": "res://texture/data/monster/Vampire/Left Hand.png",
+		"weapon": "res://texture/data/monster/Vampire/Sword.png",
+		"Arm_R_Sprite": "res://texture/data/monster/Vampire/Right Arm.png",
+		"Hand_R_Sprite": "res://texture/data/monster/Vampire/Right Hand.png"
+	}
+  },
+  "goblin": {
+	"name": "Goblin",
+	"level": 5,
+	"ai_type": "PASSIVE",
+	"patrol_radius": 1000, 
+	"move_speed": 80,
+	"respawn_time": 20.0,
+	"base_stats": {
+		"HP": 100,
+	  "STR": 1,
+	  "AGI": 15,
+	  "VIT": 10,
+	  "INTEL": 5,
+	  "DEX": 23,
+	  "LUK": 5
+	},
+	"exp_reward": 10,
+	"gold_drop": [5, 10],
+	"loot_table": [
+		{"item_id": "herb", "chance": 0.15, "quantity": [1,1]}
+	],
+	"appearance": {
+		"ArmorSprite": "res://texture/data/monster/Goblin/Body.png",
+		"Head_Sprite": "res://texture/data/monster/Goblin/Head.png",
+		"Face_Sprite": "res://texture/data/monster/Goblin/Face 01.png",
+		"BootsLSprite": "res://texture/data/monster/Goblin/Left Leg.png",
+		"BootsRSprite": "res://texture/data/monster/Goblin/Right Leg.png",
+		"Arm_L_Sprite": "res://texture/data/monster/Goblin/Left Arm.png",
+		"Hand_L_Sprite": "res://texture/data/monster/Goblin/Left Hand.png",
+		"weapon": "res://texture/data/monster/Goblin/Sword.png",
+		"Arm_R_Sprite": "res://texture/data/monster/Goblin/Right Arm.png",
+		"Hand_R_Sprite": "res://texture/data/monster/Goblin/Right Hand.png"
+	}
+  },
+
+"ogre": {
+	"name": "ogre",
+	"level": 5,
+	"ai_type": "AGGRESSIVE",
+	"patrol_radius": 2500,
+	"move_speed": 80,
+	"respawn_time": 60.0,
+	"base_stats": {
+		"HP": 200,
+	  "STR": 1,
+	  "AGI": 40,
+	  "VIT": 16,
+	  "INTEL": 15,
+	  "DEX": 16,
+	  "LUK": 55
+	},
+	"exp_reward": 500,
+	"gold_drop": [20, 50],
+	"loot_table": [
+		{"item_id": "small_crystal", "chance": 0.1, "quantity":[1,1]}
+	],
+	"appearance": {
+		"ArmorSprite": "res://texture/data/monster/Ogre/Body.png",
+		"Head_Sprite": "res://texture/data/monster/Ogre/Head.png",
+		"Face_Sprite": "res://texture/data/monster/Ogre/Face 01.png",
+		"BootsLSprite": "res://texture/data/monster/Ogre/Left Leg.png",
+		"BootsRSprite": "res://texture/data/monster/Ogre/Right Leg.png",
+		"Arm_L_Sprite": "res://texture/data/monster/Ogre/Left Arm.png",
+		"Hand_L_Sprite": "res://texture/data/monster/Ogre/Left Hand.png",
+		"weapon": "res://texture/data/monster/Ogre/Sword.png",
+		"Arm_R_Sprite": "res://texture/data/monster/Ogre/Right Arm.png",
+		"Hand_R_Sprite": "res://texture/data/monster/Ogre/Right Hand.png"
+	}
+  },
+"orc": {
+	"name": "orc",
+	"level": 5,
+	"ai_type": "PASSIVE",
+	"patrol_radius": 2500,
+	"move_speed": 80,
+	"respawn_time": 60.0,
+	"base_stats": {
+		"HP": 500,
+	  "STR": 77,
+	  "AGI": 28,
+	  "VIT": 26,
+	  "INTEL": 30,
+	  "DEX": 53,
+	  "LUK": 40
+	},
+	"exp_reward": 500,
+	"gold_drop": [20, 50],
+	"loot_table": [
+		{"item_id": "small_crystal", "chance": 0.1, "quantity":[1,1]}
+	],
+	"appearance": {
+		"ArmorSprite": "res://texture/data/monster/Orc/Body.png",
+		"Head_Sprite": "res://texture/data/monster/Orc/Head.png",
+		"Face_Sprite": "res://texture/data/monster/Orc/Face 01.png",
+		"BootsLSprite": "res://texture/data/monster/Orc/Left Leg.png",
+		"BootsRSprite": "res://texture/data/monster/Orc/Right Leg.png",
+		"Arm_L_Sprite": "res://texture/data/monster/Orc/Left Arm.png",
+		"Hand_L_Sprite": "res://texture/data/monster/Orc/Left Hand.png",
+		"weapon": "res://texture/data/monster/Orc/Sword.png",
+		"Arm_R_Sprite": "res://texture/data/monster/Orc/Right Arm.png",
+		"Hand_R_Sprite": "res://texture/data/monster/Orc/Right Hand.png"
+	}
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

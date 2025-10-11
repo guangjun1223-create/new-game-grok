@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://crpy2j8a8opq6" path="res://script/camera_controller.gd" id="8_ddf65"]
 [ext_resource type="Texture2D" uid="uid://bqpb5lqbubgc1" path="res://texture/tiles/TX Struct.png" id="8_nka0b"]
 [ext_resource type="PackedScene" uid="uid://dafvr7jnkb1u7" path="res://Scene/NPC/shop_npc.tscn" id="10_0gfnl"]
-[ext_resource type="PackedScene" uid="uid://da330t0vkq6jc" path="res://Scene/Monster.tscn" id="10_nka0b"]
 [ext_resource type="PackedScene" uid="uid://dckfidqhq07y" path="res://Scene/UI.tscn" id="10_y56vo"]
 [ext_resource type="PackedScene" uid="uid://dh00d4k8mlef6" path="res://Scene/NPC/inn.tscn" id="11_0gfnl"]
 [ext_resource type="PackedScene" uid="uid://cmd1mbirnhdi7" path="res://Scene/NPC/blacksmith.tscn" id="12_a6mvv"]
@@ -19,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bymbjv0u8elhm" path="res://Scene/NPC/potion_seller_npc.tscn" id="15_bfvnh"]
 [ext_resource type="PackedScene" uid="uid://b4blj0d0k6ca4" path="res://Scene/NPC/equipment_seller_npc.tscn" id="16_o8j5v"]
 [ext_resource type="PackedScene" uid="uid://ho60y6yudae6" path="res://Scene/NPC/enhancement.tscn" id="17_opfkj"]
+[ext_resource type="Script" uid="uid://dnmgfeyynkqym" path="res://script/monster_spawner.gd" id="19_opfkj"]
 
 [sub_resource type="Resource" id="Resource_y56vo"]
 script = ExtResource("2_y56vo")
@@ -2368,7 +2368,7 @@ y_sort_enabled = true
 position = Vector2(6, -1125)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-2636, -6606)
+position = Vector2(-2396, -6318)
 limit_left = -3743
 limit_top = -7359
 limit_right = 13287
@@ -2431,106 +2431,6 @@ debug_color = Color(0.837335, 0.190428, 0.821615, 0.42)
 [node name="nav_forest" type="NavigationRegion2D" parent="Forest_Boundary"]
 position = Vector2(-6, 4)
 navigation_polygon = SubResource("NavigationPolygon_0gfnl")
-
-[node name="Monster" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(-239, -3214)
-monster_id = "slime_normal_01"
-
-[node name="Monster2" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(638, -3320)
-monster_id = "slime_normal_01"
-
-[node name="Monster3" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(-1227, -3356)
-monster_id = "slime_normal_01"
-
-[node name="Monster4" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(1525, -3288)
-monster_id = "slime_normal_01"
-
-[node name="Monster5" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(-2046, -3381)
-monster_id = "slime_normal_01"
-
-[node name="Monster6" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(963, -2647)
-monster_id = "slime_normal_01"
-
-[node name="Monster7" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(106, -2574)
-monster_id = "slime_normal_01"
-
-[node name="Monster8" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(-901, -2556)
-monster_id = "slime_normal_01"
-
-[node name="Monster9" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(-1794, -2562)
-monster_id = "slime_normal_01"
-
-[node name="Monster10" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(1759, -2513)
-monster_id = "slime_normal_01"
-
-[node name="Monster11" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(-497, -1944)
-monster_id = "slime_blue_01"
-
-[node name="Monster12" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(445, -1937)
-monster_id = "slime_normal_01"
-
-[node name="Monster13" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(1279, -1843)
-monster_id = "slime_normal_01"
-
-[node name="Monster14" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(1959, -1500)
-monster_id = "slime_normal_01"
-
-[node name="Monster15" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(-1324, -1836)
-monster_id = "slime_normal_01"
-
-[node name="Monster16" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(-1991, -1439)
-monster_id = "slime_normal_01"
-
-[node name="Monster17" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(8, -1204)
-monster_id = "slime_normal_01"
-
-[node name="Monster18" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(835, -1096)
-monster_id = "slime_normal_01"
-
-[node name="Monster19" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(1575, -921)
-monster_id = "slime_normal_01"
-
-[node name="Monster20" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(-766, -1082)
-monster_id = "slime_normal_01"
-
-[node name="Monster21" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(-1593, -618)
-monster_id = "slime_normal_01"
-
-[node name="Monster22" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(-2077, 75)
-monster_id = "slime_normal_01"
-
-[node name="Monster23" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(-1095, 109)
-monster_id = "slime_blue_01"
-
-[node name="Monster24" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(-328, -227)
-monster_id = "slime_blue_01"
-
-[node name="Monster25" parent="Forest_Boundary" instance=ExtResource("10_nka0b")]
-position = Vector2(587, -288)
-monster_id = "slime_blue_01"
 
 [node name="Forest1_Boundary" type="Area2D" parent="."]
 collision_layer = 8
@@ -2595,6 +2495,9 @@ end_position = Vector2(-41, -3)
 position = Vector2(12217, -2837)
 start_position = Vector2(2, -66)
 end_position = Vector2(-1, 68)
+
+[node name="MonsterSpawner" type="Node2D" parent="."]
+script = ExtResource("19_opfkj")
 
 [connection signal="body_entered" from="Village_Boundary" to="." method="_on_village_boundary_body_entered"]
 [connection signal="body_exited" from="Village_Boundary" to="." method="_on_village_boundary_body_exited"]
